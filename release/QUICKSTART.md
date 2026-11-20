@@ -318,7 +318,7 @@ error with the paper's numbers.
 CUDA_VISIBLE_DEVICES="" uv run --frozen pytest -q tests/release
 ```
 
-**GPU run.** Set the four variables that the README's "Host paths" section lists for the GPU example
+**GPU run.** Set the four variables that the README's "Installation" section lists for the GPU example
 (`FASTDO_CONDA_BASE`, `FASTDO_SAM3D_PYTHON`, `FASTDO_HAWOR_ROOT=$HAWOR`, and `FASTDO_GPU_MEM_GB=32`), with your MANO
 files copied into `$HAWOR` (step 3). `FASTDO_GPU_MEM_GB=32` is required: the default 12 GiB cap is below the default
 config's stage budgets and SAM 3D's 19 GiB. On an A100, H100 or H200 the `sam3d` env must also have flash_attn (step
@@ -516,7 +516,7 @@ legal advice.
 
 ## Environment variables
 
-README "Host paths" lists the path variables. These are the others. None is required: flash_attn goes into the
+`docs/installation.md`, "Host paths", lists the path variables. These are the others. None is required: flash_attn goes into the
 `sam3d` env itself (step 2), not through `FASTDO_SAM3D_PYTHONPATH`.
 
 | variable | default | effect |

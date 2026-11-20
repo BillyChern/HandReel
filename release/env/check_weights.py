@@ -6,7 +6,7 @@ with --sha256, the listed digest), plus the two torch.hub code directories. Read
     python release/env/check_weights.py --sha256sum-list [--only mano] | sha256sum -c -
 
 Paths expand `$HF_HOME` (default `~/.cache/huggingface`), `$TORCH_HOME` (default `~/.cache/torch`) and the `FASTDO_*`
-variables of README "Host paths"; an unset `FASTDO_*` variable is a failure, never a guess. Hands23 is opt-in (the
+variables of docs/installation.md, "Host paths"; an unset `FASTDO_*` variable is a failure, never a guess. Hands23 is opt-in (the
 internet-video prompt stage only). A torch.hub code directory is OK only when its `fastdo.model_pins.CODE_PIN_FILE`
 (written by `scripts/fetch_weights.py`) names the pinned commit and its files are unchanged; without that file it is
 UNVERIFIED (a cached `facebookresearch_dinov2_main` holds whatever `main` was), which does not fail the run; another

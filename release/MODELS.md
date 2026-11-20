@@ -17,7 +17,7 @@ reported UNVERIFIED, which is a warning and not a failure. Four model loaders (S
 the source revisions and SHA-256 values listed below. MANO is never downloaded for you.
 
 Path variables: `$HF_HOME` (default `~/.cache/huggingface`), `$TORCH_HOME` (default `~/.cache/torch`), and the
-`FASTDO_*` variables of README.md, "Host paths".
+`FASTDO_*` variables of docs/installation.md, "Host paths".
 
 **Outputs are bound too.** What the pipeline writes (meshes, poses, hand parameters, robot trajectories) is produced
 by these models, so their licences (non-commercial, NoDerivatives, MANO's) also govern what you may do with the
