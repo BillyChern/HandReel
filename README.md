@@ -338,22 +338,21 @@ the physics code on MuJoCo and MuJoCo-Warp; `THIRD_PARTY_LICENSES.md` credits ea
 
 ## Known gaps
 
-- The reference output (`release/reference/v2d_t3_ep011_cam_a/`) comes from a run with CoTracker3 at its pinned
-  commit and a `sam3d` env completed by `release/QUICKSTART.md` step 2's flash_attn and `sam3d_objects` commands, but
-  its `hawor` env, weights and MANO were the development host's. An independent run on envs built from nothing by
-  `scripts/setup_all.sh` reproduced its stage artifacts, timing fields excluded, but with SAM 3D weights and MANO files copied
-  from an existing host: the gated SAM 3D download itself has not been tested.
-- No acceptance rule fitted for new video ships, so the qc and retarget stages (and so retargeting to a robot hand)
-  cannot run from this release as is; there is no shipped path from an engine clip directory to a physics run.
-  `reproduce/heldout/qc_rule_constants.json` holds the constants of the QC rule the held-out test registered, as a
-  record of that test. The authors fitted it on 71 DexYCB development clips with ground-truth template meshes, and
-  its five-fold cross-validated area under the curve on those clips was 0.4904, where 0.5 is chance (the supplement,
-  Limitations). It is not a usable acceptance rule for new video.
-- This release is a later commit of the code than both the tree frozen for the held-out test and the tree timed in
-  the Ego4D timing studies; this release shows no comparison of its outputs with either.
-- No script in this release reruns a paper experiment; [`docs/paper_exhibits.md`](docs/paper_exhibits.md) says what this release holds toward
-  each exhibit, and [`reproduce/README.md`](reproduce/README.md) lists the gaps.
-- No container image.
+- **The gated SAM 3D download is untested.** The reference output (`release/reference/v2d_t3_ep011_cam_a/`) was made
+  on the authors' machine. A second run, on environments that `scripts/setup_all.sh` built from nothing, reproduced
+  its stage artifacts (timing fields aside), but that run copied the SAM 3D weights and MANO files from an existing
+  machine.
+- **The quality check and the robot-hand retargeting do not run from this release.** No acceptance rule for new
+  video ships, and there is no path from a reconstruction to a physics run.
+  `reproduce/heldout/qc_rule_constants.json` records the rule that the held-out test used. The authors fitted it on
+  71 DexYCB development clips, where its five-fold cross-validated area under the curve was 0.4904 (0.5 is chance;
+  the supplement, Limitations), so do not use it on new video.
+- **This code is newer than the code the paper ran.** It is a later commit than the tree frozen for the held-out
+  test and the tree timed in the Ego4D timing studies, and this release shows no comparison of its outputs with
+  either.
+- **No script here reruns a paper experiment.** [`docs/paper_exhibits.md`](docs/paper_exhibits.md) says what this
+  release holds toward each table and figure, and [`reproduce/README.md`](reproduce/README.md) lists what is missing.
+- **No container image.**
 
 ## Licence
 
