@@ -41,7 +41,7 @@ h1 { font: 600 clamp(30px, 2.65vw, 38px)/1.16 var(--sans); letter-spacing: -0.01
 .authors { margin: 12px 0 0; font-size: 20px; line-height: 1.4; color: var(--ink-2); }
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0 0; }
 .lbtn { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 999px; background: var(--pill); color: #fff; font: 500 15px/1 var(--sans); cursor: default; white-space: nowrap; }
-.authors a { color: hsl(204, 86%, 53%); text-decoration: none; }
+.authors a { color: hsl(204, 86%, 38%); text-decoration: none; }   
 .authors a:hover, .affil a:hover { text-decoration: underline; }
 .authors .au, .affil .af { display: inline-block; margin: 0 5px; }
 .authors sup, .affil sup { font-size: 0.7em; }
@@ -51,8 +51,8 @@ a.lbtn { text-decoration: none; cursor: pointer; }
 a.lbtn:hover { background: #292929; }
 .lbtn svg { width: 17px; height: 17px; margin-right: 8px; fill: currentColor; flex: none; }
 a.lbtn, a.lbtn:hover, a.lbtn:focus { text-decoration: none; color: #fff; }
-.tagline { margin: 10px auto 0; max-width: 46em; font: 500 18px/1.45 var(--sans); color: var(--ink); }
-.vx { margin: 16px 0 0; outline: none; }
+.tagline { margin: 10px auto 0; max-width: 46em; font: 400 18px/1.45 var(--sans); color: var(--ink); }   
+.vx { margin: 8px 0 0; outline: none; }
 .btn { font: 500 14px/1 var(--sans); border: 1px solid var(--rule-2); background: var(--page); color: var(--ink-2); border-radius: 999px; min-height: 32px; padding: 0 13px; cursor: pointer; }
 .btn:hover { border-color: var(--ours); color: var(--ours); }
 .btn[hidden] { display: none; }

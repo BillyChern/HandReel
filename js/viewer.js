@@ -1,10 +1,10 @@
 /* Embedded 3D viewer (#viewer), one clip (figure data-seq).
    Layout, both modes: page controls on top (Play/Pause, Replay, a frame slider with one step per displayed frame,
-   keyboard-operable, a text readout "frame NNN, T.TT s into the clip": the dataset's frame number and the time from the excerpt's
+   keyboard-operable, a text readout "frame NNN, T.TT s into this excerpt": the dataset's frame number and the time from the excerpt's
    first frame, which the readout names as such; no source time stamp is shown or claimed),
    then the input frame in its own panel (left; first on phones) beside the 3D. The excerpt starts by itself when the
    viewer comes into view and loops, muted (the video has no audio track): after the last frame's own duration it
-   starts again from the first frame with no added hold (the caption says "at recorded speed"), until the visitor pauses, scrubs or switches the view. With reduced motion it neither starts by
+   starts again from the first frame with no added hold, until the visitor pauses, scrubs or switches the view. With reduced motion it neither starts by
    itself nor loops. Live, the meshes are drawn in the site's palette (PAPER, from the figure's data-obj / data-hand:
    reconstructed object dark purple, reconstructed hand light lilac); the pre-rendered videos and posters are rendered
    with the same palette (pipeline/viser_fallback.py); the recordings keep the colours they were recorded with.
@@ -21,7 +21,7 @@
    range, distance limits, no panning, slower rotation), WASD/QE camera keys are blocked, Reset view restores the start
    camera without reloading (play state and time are kept). On touch screens a layer over the client lets a vertical
    swipe scroll the page, turns a one-finger horizontal swipe into orbit and a two-finger pinch into zoom (clamped).
-   Round 6: away from the start view the camera backs off so the billboard stays inside the canvas; a toggle switches
+   Away from the start view the camera backs off so the billboard stays inside the canvas; a toggle switches
    between the live 3D view and the pre-rendered video (both ways); the viewer's notes sit under the controls.
    Loading: the client is given time while its page is still arriving or its recording download makes progress (a
    status line says it is loading); a recording answered with an error status, an error page, a client whose internals
@@ -33,7 +33,7 @@
    pipeline/video_marks.py), draws that picture and shows the input frame and the read-out of the same frame in the
    same task. The browser's video clocks are not trusted for this: requestVideoFrameCallback's mediaTime ran two
    frames ahead of the picture in WebKit's Linux build and its callback one screen refresh ahead in Firefox, and
-   currentTime is coarse in Firefox (retest of 2026-11-18). Only when no mark can be read (no marks file, a decoder
+   currentTime is coarse in Firefox. Only when no mark can be read (no marks file, a decoder
    that draws nothing readable) does the page fall back to a clock: mediaTime where it agrees with currentTime, else
    currentTime, through frameAt, the one time-to-frame function of both modes. Without JS, or without the input
    index: the plain video with its own controls; the page controls and Reset view stay hidden.
@@ -54,7 +54,7 @@
    viewer, no note, no Try anyway). */
 (() => {
 const boot = () => {
-  // Round 19: sequence selector. Each example is a link "?clip=KEY#viewer" (works without JS, and from file://).
+  // Sequence selector. Each example is a link "?clip=KEY#viewer" (works without JS, and from file://).
   // The default clip's figure is #viewer; every other served clip's figure waits, hidden, in a .vx-alt holder. Before
   // anything else reads the page, the requested clip's figure takes #viewer's place, so the rest of this file drives
   // exactly one figure, as before. An unknown key leaves the default clip.
@@ -83,7 +83,7 @@ const boot = () => {
   const key = root.dataset.seq;
   const stage = root.querySelector(".vx-stage");
   const incap = root.querySelector(".vx-incap");
-  const outcap = root.querySelector(".vx-outcap");   // round 18: an HTML frame/time label under the 3D panel
+  const outcap = root.querySelector(".vx-outcap");   // an HTML frame/time label under the 3D panel
   const video = stage.querySelector("video.vx-fallback");
   const box = root.querySelector(".vx-img");
   const note = root.querySelector(".vx-note");
@@ -100,7 +100,7 @@ const boot = () => {
   const labelLive = root.querySelector(".vx-label-live");
   const subFb = root.querySelector(".vx-sub-fb");          // one-line notes under the 3D (side view / orbited view)
   const subLive = root.querySelector(".vx-sub-live");
-  // round 13: the live note ("Orbited, ...") shows only while the view is actually orbited (liveTick), never at the start view
+  // the live note ("Orbited, ...") shows only while the view is actually orbited (liveTick), never at the start view
   const setSub = (live) => { if (subFb) subFb.hidden = live; if (subLive) subLive.hidden = true; };
   const playBtn = root.querySelector(".vx-play");
   const replayBtn = root.querySelector(".vx-replay");
@@ -113,7 +113,7 @@ const boot = () => {
   const MISMATCH_MS = 8000;     // a client internal still missing this long after its playback bar appeared: refuse it
   const FIT_MARGIN = 0.05;
   // radians, distance factors; fit: away from the start view the camera backs off (distance at least
-  // start * (1 + fit * angle)) so that the input frame's billboard stays inside the canvas when orbited (round 6, B8)
+  // start * (1 + fit * angle)) so that the input frame's billboard stays inside the canvas when orbited
   const ORBIT = { az: 0.45, polar: 0.3, near: 0.6, far: 1.6, speed: 0.5, fit: 1.2 };
   const NOTES = {
     failed: "The 3D viewer could not start here, so the page shows a pre-rendered video of the same frames.",
@@ -153,7 +153,7 @@ const boot = () => {
   const label = (i) => {           // the caption strip's own numbering: dataset frame id and excerpt time
     const t = input.frames[i].t.toFixed(2);
     const id = String(input.frames[i].frame).padStart(3, "0");
-    return { text: `frame ${id}, ${t} s into the clip`, aria: `input frame ${id}, ${t} seconds into the clip` };
+    return { text: `frame ${id}, ${t} s into this excerpt`, aria: `input frame ${id}, ${t} seconds into this excerpt` };
   };
   const paintInput = (i) => {
     if (!input) return;
@@ -186,7 +186,7 @@ const boot = () => {
 
   /* ---- players: one interface for the client and the video ---- */
   let player = null;   // {time(), playing(), play(), pause(), seek(t)}
-  let carry = null;    // round 12: the frame index the Video / 3D view switch keeps (null: start at the first frame)
+  let carry = null;    // the frame index the Video / 3D view switch keeps (null: start at the first frame)
   let carryPlay = false;   // ... and whether the excerpt was playing: the new view goes on playing from that frame
   // Taken when the visitor switches the view. While an earlier switch is still loading (its frame not yet applied),
   // that frame and play state are kept: the view that never came up has no frame of its own.
@@ -265,7 +265,7 @@ const boot = () => {
     syncButtons();
   };
   root.addEventListener("keydown", onSpace);
-  // round 19 (WEB-R8J-COLD): Space toggles playback only while focus is inside the viewer; elsewhere it scrolls the page.
+  // Space toggles playback only while focus is inside the viewer; elsewhere it scrolls the page.
   root.tabIndex = -1;
 
   // Start playing (and looping) when the viewer first comes into view (not with reduced motion).
@@ -501,7 +501,7 @@ const boot = () => {
   // A pause settles on the frame that is on screen: the page seeks to that frame's middle (also when currentTime is
   // already there, so that a seek and its repaint always follow), which makes the video present exactly it. After a
   // pause, a seek or the end the page keeps painting for a moment (lively), because the decoder can deliver the
-  // seeked picture a few screen refreshes after the event (round-4 trace review m1).
+  // seeked picture a few screen refreshes after the event.
   let lively = 0;
   const settleLater = () => { lively = performance.now() + 700; };
   ["pause", "ended"].forEach((ev) => video.addEventListener(ev, () => {
@@ -770,7 +770,7 @@ const boot = () => {
       ctx.mutable.current.requestRender();
     }, { capture: true, passive: false });
     // middle-button drag dollies through the page, clamped before the next draw like Ctrl + wheel: the client's own
-    // drag dolly eased past the distance limit for a few frames before the per-frame clamp caught it (round-4 m2)
+    // drag dolly eased past the distance limit for a few frames before the per-frame clamp caught it
     let dragY = null;
     const dolly = (dy) => {
       const lim = live.limits;
@@ -840,7 +840,7 @@ const boot = () => {
     opacityBtn.disabled = false;
     root.classList.add("vx-drawn");
     player.pause();
-    player.seek(mid(carry !== null ? carry : 0));   // round 12: Video -> 3D view keeps the frame
+    player.seek(mid(carry !== null ? carry : 0));   // Video -> 3D view keeps the frame
     // ... and goes on playing if the excerpt was playing (the client settles on the frame first, as at autoplay);
     // loopTimer is set meanwhile, so the button reads "Pause" and a pause or a scrub cancels it
     if (carry !== null && carryPlay && !reduced) {
@@ -1176,28 +1176,26 @@ const boot = () => {
       start(); playBtn.focus();
     });
   }
-  tryBtn.addEventListener("click", () => {   // round 17: keeps the shown frame, like the Video / 3D view switch
+  tryBtn.addEventListener("click", () => {   // keeps the shown frame, like the Video / 3D view switch
     if (offline || liveOff) return;
     started = true;
     handOver();
     start(); playBtn.focus();
   });
-  // round 12: below 600 px the input frame is a small inset in the stage (compare without scrolling); the same element,
+  // below 600 px the input frame is a small inset in the stage (compare without scrolling); the same element,
   // so its frame stays in sync; moved back into the grid on wider screens
   const vin = root.querySelector(".vx-in");
   const vgrid = root.querySelector(".vx-grid");
   const phone = window.matchMedia("(max-width: 599px)");
   const placeInput = () => {
     if (!vin || !vgrid) return;
-    // round 14: below the stage, not over it (it covered the "camera view" label and part of the 3D)
-    // round 16: above the stage, so in the pre-rendered video it sits right next to the camera view (below, it was
-    // ~1,000 px away under the side view)
+    // above the stage, not over it, so in the pre-rendered video it sits right next to the camera view
     if (phone.matches) { if (vin.nextElementSibling !== stage) stage.before(vin); root.classList.add("in-inset"); }
     else if (vin.parentElement !== vgrid) { vgrid.insertBefore(vin, vgrid.firstChild); root.classList.remove("in-inset"); }
   };
   placeInput();
   phone.addEventListener("change", placeInput);
-  // round 19 (lead E): on phones (<= 760 px) Play, Replay and the slider sit above the 3D panel (CSS order); the
+  // on phones (<= 760 px) Play, Replay and the slider sit above the 3D panel (CSS order); the
   // readout and the secondary toggles move to a second row under the stage, so the stage still starts on the first
   // screen. They move back on wider screens.
   const phoneCtl = window.matchMedia("(max-width: 760px)");

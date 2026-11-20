@@ -12,7 +12,7 @@
 <meta property="og:title" content="HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling">
 <meta property="og:description" content="For each window of a monocular video, HandReel outputs one object mesh, its pose in every processed frame and the right hand where the hand estimator returns one.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/site.css?v=f9dc3e0ede">
+<link rel="stylesheet" href="css/site.css?v=73de60394b">
 
 <script src="js/viewer.js"></script>
 </head>
@@ -24,7 +24,8 @@
     <h1>HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling</h1>
     <p class="authors"><span class="au"><a href="https://shichen.world/">Shi Chen</a><sup>1,2</sup>,</span><span class="au"><a href="https://ichnow.ski/">Jeffrey Ichnowski</a><sup>1</sup></span></p>
     <p class="affil"><span class="af"><sup>1</sup><a href="https://www.ri.cmu.edu/">Robotics Institute, Carnegie Mellon University</a>,</span><span class="af"><sup>2</sup><a href="https://intuition.dev/">Intuition</a></span></p>
-    <p class="links"><a class="lbtn" href="#" aria-disabled="true" title="The arXiv link is coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.8423 0a1.0037 1.0037 0 0 0-.922.6078c-.1536.3687-.0438.6275.2938 1.1113l6.9185 8.3597-1.0223 1.1058a1.0393 1.0393 0 0 0 .003 1.4229l1.2292 1.3135-5.4391 6.4444c-.2803.299-.4538.823-.2971 1.1986a1.0253 1.0253 0 0 0 .9585.635.9133.9133 0 0 0 .6891-.3405l5.783-6.126 7.4902 8.0051a.8527.8527 0 0 0 .6835.2597.9575.9575 0 0 0 .8777-.6138c.1577-.377-.017-.7502-.306-1.1407l-7.0518-8.3418 1.0632-1.13a.9626.9626 0 0 0 .0089-1.3165L4.6336.4639s-.3733-.4535-.768-.463zm0 .272h.0166c.2179.0052.4874.2715.5644.3639l.005.006.0052.0055 10.169 10.9905a.6915.6915 0 0 1-.0072.945l-1.0666 1.133-1.4982-1.7724-8.5994-10.39c-.3286-.472-.352-.6183-.2592-.841a.7307.7307 0 0 1 .6704-.4401Zm14.341 1.5701a.877.877 0 0 0-.6554.2418l-5.6962 6.1584 1.6944 1.8319 5.3089-6.5138c.3251-.4335.479-.6603.3247-1.0292a1.1205 1.1205 0 0 0-.9763-.689zm-7.6557 12.2823 1.3186 1.4135-5.7864 6.1295a.6494.6494 0 0 1-.4959.26.7516.7516 0 0 1-.706-.4669c-.1119-.2682.0359-.6864.2442-.9083l.0051-.0055.0047-.0055z"/></svg>arXiv (coming soon)</a> <a class="lbtn" href="https://github.com/BillyChern/HandReel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a></p>
+    <p class="links"><span class="lbtn" role="link" aria-disabled="true" title="The arXiv link is coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.8423 0a1.0037 1.0037 0 0 0-.922.6078c-.1536.3687-.0438.6275.2938 1.1113l6.9185 8.3597-1.0223 1.1058a1.0393 1.0393 0 0 0 .003 1.4229l1.2292 1.3135-5.4391 6.4444c-.2803.299-.4538.823-.2971 1.1986a1.0253 1.0253 0 0 0 .9585.635.9133.9133 0 0 0 .6891-.3405l5.783-6.126 7.4902 8.0051a.8527.8527 0 0 0 .6835.2597.9575.9575 0 0 0 .8777-.6138c.1577-.377-.017-.7502-.306-1.1407l-7.0518-8.3418 1.0632-1.13a.9626.9626 0 0 0 .0089-1.3165L4.6336.4639s-.3733-.4535-.768-.463zm0 .272h.0166c.2179.0052.4874.2715.5644.3639l.005.006.0052.0055 10.169 10.9905a.6915.6915 0 0 1-.0072.945l-1.0666 1.133-1.4982-1.7724-8.5994-10.39c-.3286-.472-.352-.6183-.2592-.841a.7307.7307 0 0 1 .6704-.4401Zm14.341 1.5701a.877.877 0 0 0-.6554.2418l-5.6962 6.1584 1.6944 1.8319 5.3089-6.5138c.3251-.4335.479-.6603.3247-1.0292a1.1205 1.1205 0 0 0-.9763-.689zm-7.6557 12.2823 1.3186 1.4135-5.7864 6.1295a.6494.6494 0 0 1-.4959.26.7516.7516 0 0 1-.706-.4669c-.1119-.2682.0359-.6864.2442-.9083l.0051-.0055.0047-.0055z"/></svg>arXiv (coming soon)</span> <a class="lbtn" href="https://github.com/BillyChern/HandReel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a></p>
+    <p class="tagline">HandReel turns a video of a hand moving an object into one 3D mesh of the object and its position and rotation over time. On 20 Ego4D windows, one at a time, <a href="https://arxiv.org/abs/2606.19333">DO AS I DO</a>'s reconstruction stage took about 30&times; as long as HandReel, and HandReel's held-out object-centre error was within a preset margin.</p>
   </div>
 
   <div class="wrap hero-viewer">
@@ -34,7 +35,7 @@
         <button type="button" class="btn vx-play">Play</button>
         <button type="button" class="btn vx-replay">Replay</button>
         <input class="vx-seek" type="range" min="0" max="11" step="1" value="0" aria-label="Frame">
-        <span class="vx-readout" data-numreg="generated">frame 036, 0.00 s into the clip</span>
+        <span class="vx-readout" data-numreg="generated">frame 036, 0.00 s into this excerpt</span>
         <button type="button" class="btn vx-opacity" aria-pressed="false" hidden>See-through meshes</button>
         <button type="button" class="btn vx-reset" hidden>Reset view</button>
         <button type="button" class="btn vx-mode" hidden>Pre-rendered video</button>
@@ -60,14 +61,11 @@
           </div>
         </div>
       </div>
-      <figcaption class="vx-cap">HandReel's 3D reconstruction of a DexYCB clip from the development set: the object and the hand. The viewer plays every third frame of the video at real-time speed. We marked the object in the first frame with the dataset's mask.</figcaption>
+      <figcaption class="vx-cap">An excerpt of a DexYCB clip from the development set: HandReel's object mesh and HaWoR's hand. The viewer plays every third frame of the video at real-time speed. We marked the object with the dataset's mask in the clip's first frame, before this excerpt.</figcaption>
     </figure>
 
   </div>
 
-  <div class="wrap hero-text">
-    <p class="tagline">HandReel turns a video of a hand moving an object into one 3D mesh of the object and its position and rotation over time.</p>
-  </div>
 </header>
 
 <section class="block" id="abstract">
@@ -115,7 +113,7 @@
 <text x="86" y="72" text-anchor="end" class="pl-lab">HandReel</text>
 <rect x="96" y="56" width="15.7" height="22" class="pl-bar-ours"/>
 <text x="119.7" y="72" class="pl-val">66 s</text>
-<text x="0" y="108" class="pl-group">Baseline restarts for every window (9 windows)</text>
+<text x="0" y="108" class="pl-group">Baseline restarts for every window (9 of 19 attempted windows that both completed)</text>
 <text x="86" y="136" text-anchor="end" class="pl-lab">Baseline</text>
 <rect x="96" y="120" width="500.0" height="22" class="pl-bar-them"/>
 <text x="604.0" y="136" class="pl-val">2,100 s</text>
@@ -123,7 +121,7 @@
 <rect x="96" y="148" width="4.0" height="22" class="pl-bar-ours"/>
 <text x="108.0" y="164" class="pl-val">17 s per-window share</text>
 </svg>
-<svg class="plot plot-narrow" viewBox="0 0 300 230" role="img" aria-labelledby="time-plot-n">
+<svg class="plot plot-narrow" viewBox="0 0 300 248" role="img" aria-labelledby="time-plot-n">
 <title id="time-plot-n">Reconstruction time per Ego4D window, in seconds, as bars for the baseline (DO AS I DO's reconstruction stage) and for HandReel: both one window at a time; and the baseline restarting for every window against HandReel's per-window share of batched runs.</title>
 <text x="0" y="14" class="pl-group">One window at a time (20 windows)</text>
 <text x="0" y="34" class="pl-lab">Baseline</text>
@@ -133,13 +131,14 @@
 <rect x="0" y="80" width="7.0" height="18" class="pl-bar-ours"/>
 <text x="13.0" y="94" class="pl-val">66 s</text>
 <text x="0" y="120" class="pl-group">Baseline restarts for every window</text>
-<text x="0" y="138" class="pl-group">(9 windows)</text>
-<text x="0" y="158" class="pl-lab">Baseline</text>
-<rect x="0" y="164" width="222.0" height="18" class="pl-bar-them"/>
-<text x="228.0" y="178" class="pl-val">2,100 s</text>
-<text x="0" y="198" class="pl-lab">HandReel</text>
-<rect x="0" y="204" width="2.0" height="18" class="pl-bar-ours"/>
-<text x="8.0" y="218" class="pl-val">17 s per-window share</text>
+<text x="0" y="138" class="pl-group">(9 of 19 attempted windows</text>
+<text x="0" y="156" class="pl-group">that both completed)</text>
+<text x="0" y="176" class="pl-lab">Baseline</text>
+<rect x="0" y="182" width="222.0" height="18" class="pl-bar-them"/>
+<text x="228.0" y="196" class="pl-val">2,100 s</text>
+<text x="0" y="216" class="pl-lab">HandReel</text>
+<rect x="0" y="222" width="2.0" height="18" class="pl-bar-ours"/>
+<text x="8.0" y="236" class="pl-val">17 s per-window share</text>
 </svg>
 
       <figcaption>Seconds per Ego4D window on one H100 GPU. Ego4D has no ground-truth object poses, so it measures speed only. The paper gives the full protocol.</figcaption>
@@ -150,7 +149,7 @@
 <section class="block" id="applications">
   <div class="wrap narrow">
     <h2>Applications</h2>
-    <p>DO AS I DO is a pipeline that turns a video of a person handling an object into a robot motion, and reconstruction is its first stage. With HandReel in that stage, DO AS I DO's full pipeline would take about 3&times; as long per window with its own reconstruction as with HandReel's. We added up stage times that we measured separately and did not time a full run. When one retargeting policy serves many videos, every video still pays for reconstruction.</p>
+    <p>DO AS I DO turns a video of a person handling an object into a robot motion, and reconstruction is its first stage. By stage times that we measured separately on Ego4D, its full pipeline would take about 3&times; as long per window with its own reconstruction as with HandReel's: 2,100 + 75 + 894 = 3,069 s against 17 + 80 + 894 = 991 s. The 2,100 s is DO AS I DO restarting for every window, the 17 s is HandReel's per-window share of batched runs, the 894 s of physics was measured at 2 perturbation samples (default 4), and we did not time a full run. When one retargeting policy serves many videos, every video still pays for reconstruction.</p>
   </div>
 </section>
 

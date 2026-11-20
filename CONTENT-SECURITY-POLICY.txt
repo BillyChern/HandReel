@@ -10,9 +10,11 @@ pattern. Its rules do not overlap: the page's policy is on the two exact paths /
 client's on /viewer/client/*, and no path matches two rules. A host that applies every matching rule
 and joins their headers would otherwise enforce both policies on the client, and the page's policy
 refuses the client's inline scripts. Files other than the two documents get no policy header; a policy
-acts on documents only. No real host has served this build: how Cloudflare Pages, Netlify or any other
-host reads this file is untested, and the tests here use a local server that sends these headers. On
-another server, send the first policy with the page and only the second with viewer/client/index.html.
+acts on documents only. GitHub Pages ignores _headers and sends no policy header: served from there,
+the page's meta tag below is the page's only policy, and the viewer client runs with none.
+How Cloudflare Pages or Netlify reads this file is untested; the tests here use a local server that
+sends these headers. On another server, send the first policy with the page and only the second with
+viewer/client/index.html.
 
 1. The page (/ and /index.html). It also carries this policy as a meta tag.
 
