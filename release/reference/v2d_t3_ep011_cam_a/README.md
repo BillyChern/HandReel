@@ -20,7 +20,7 @@ step 4, "The camera, and what we did about it").
   pre-release source commit, which is not part of the public history. The reference came from that archived source.
   Since then the example checks its input file more strictly (whole-number frames and sizes, a keyframe on the
   decoded grid); the pinned input passes those checks. No run of the current tree is claimed: a run of the same
-  command from a clean extract of an earlier release tar reproduced the listed outputs and fields, timings excluded,
+  command from a clean extract of an earlier `git archive` reproduced the listed outputs and fields, timings excluded,
   and so did an independent run on envs built from nothing; the comparison and its exclusions are listed below.
 - Setup, from that extract: `bash scripts/fetch_baseline.sh` (DO AS I DO at `824591b8`, every submodule verified);
   the main env from `uv sync --frozen --python 3.12 --extra dev --extra frontend --extra viser`; CoTracker3 (code at
@@ -64,7 +64,7 @@ step 4, "The camera, and what we did about it").
   release/reference/v2d_t3_ep011_cam_a --video <the clip> --out expected_projection.png`.
 
 **The compared reconstruction outputs matched on this clip.** The files and fields listed here, as this run wrote them and before packaging, match the previous
-reference run (2026-11-15, an earlier release candidate, the host's `sam3d` interpreter with a flash_attn on its
+reference run (2026-11-15, from an earlier pre-release source, the host's `sam3d` interpreter with a flash_attn on its
 `PYTHONPATH`, CoTracker3's cached `main` code, eight cards listed): `solve.npz` (every array except its `seconds`),
 `intrinsics.npz` (including `focal_scale` 1.10404), `hands.npz` (all arrays; the full file's sha256 is the same,
 below; the comparison was made on the run's file, before any array was removed), `mesh.obj`, `source_domain.json` and `ATTRIBUTION.txt`, and `shape.json` and `solve.json` apart from their

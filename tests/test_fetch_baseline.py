@@ -1,7 +1,8 @@
-"""scripts/fetch_baseline.sh: the DO AS I DO baseline for a copy of the repository without git metadata (the release
-tar), whose third_party/do-as-i-do is an empty directory that `git submodule update` cannot fill.
+"""scripts/fetch_baseline.sh: the DO AS I DO baseline at its pinned commit, in a git clone that records no submodule
+commit for third_party/do-as-i-do (the public repository), in a copy without git metadata (an archive), and in a
+checkout that records the submodule commit.
 
-These tests run the script in a scratch copy of the repository root and never touch the network: the dry run, the
+These tests run the script in a scratch copy of the repository root and never touch the network: the dry runs, the
 refusals, and the check of a checkout at the wrong commit. The real clone is checked by
 `test_fetches_and_verifies_the_pinned_baseline`, which needs network access and runs only with FASTDO_TEST_NETWORK=1.
 """
@@ -28,7 +29,7 @@ def _env() -> dict[str, str]:
 
 
 def _root(tmp_path: Path) -> Path:
-    """A scratch repository root as the tar unpacks it: root files, the scripts, an empty baseline directory."""
+    """A scratch repository root as an archive unpacks it: root files, the scripts, an empty baseline directory."""
     root = tmp_path / "handreel"
     (root / "scripts").mkdir(parents=True)
     (root / "third_party" / "do-as-i-do").mkdir(parents=True)
@@ -51,9 +52,11 @@ def test_the_pin_is_the_submodule_commit_the_readme_and_gitmodules_name() -> Non
 
 def test_the_pin_is_the_gitlink_of_this_commit() -> None:
     if not (REPO / ".git").exists():
-        pytest.skip("not a git checkout (the release tar): there is no gitlink to compare with")
+        pytest.skip("not a git checkout (an archive): there is no gitlink to compare with")
     out = subprocess.run(["git", "ls-tree", "HEAD", "third_party/do-as-i-do"], cwd=REPO, env=_env(),
                          capture_output=True, text=True, check=True).stdout.split()
+    if not out:
+        pytest.skip("this commit records no submodule commit for third_party/do-as-i-do (the public repository)")
     assert out[:3] == ["160000", "commit", PIN]
 
 
@@ -75,12 +78,32 @@ def test_a_mirror_url_replaces_the_clone_url_only(tmp_path: Path) -> None:
     assert f"checkout --detach {PIN}" in r.stdout
 
 
-def test_a_git_clone_is_sent_to_git_submodule_update(tmp_path: Path) -> None:
+def _git(root: Path, *args: str) -> None:
+    subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@example.invalid", "-C", str(root), *args],
+                   env=_env(), capture_output=True, text=True, check=True)
+
+
+def test_a_git_clone_without_the_gitlink_clones_the_baseline(tmp_path: Path) -> None:
     root = _root(tmp_path)
-    (root / ".git").mkdir()
+    (root / "third_party" / "do-as-i-do").rmdir()          # git keeps no empty directory
+    _git(root, "init", "-q")
+    _git(root, "add", "-A")
+    _git(root, "commit", "-q", "-m", "x")
     r = _run(root, "--dry-run")
-    assert r.returncode == 2
-    assert "git submodule update --init --recursive" in r.stderr
+    assert r.returncode == 0, r.stderr
+    assert f"+ git clone --no-checkout {URL} third_party/do-as-i-do" in r.stdout
+    assert f"+ git -C third_party/do-as-i-do checkout --detach {PIN}" in r.stdout
+
+
+def test_a_git_checkout_with_the_gitlink_updates_the_submodule(tmp_path: Path) -> None:
+    root = _root(tmp_path)
+    _git(root, "init", "-q")
+    _git(root, "add", "-A")
+    _git(root, "update-index", "--add", "--cacheinfo", f"160000,{PIN},third_party/do-as-i-do")
+    r = _run(root, "--dry-run")
+    assert r.returncode == 0, r.stderr
+    assert "+ git submodule update --init --recursive -- third_party/do-as-i-do" in r.stdout
+    assert "git clone" not in r.stdout
 
 
 def test_outside_the_repository_root_it_stops(tmp_path: Path) -> None:

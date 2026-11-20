@@ -120,7 +120,7 @@ def test_out_must_be_empty_and_outside_the_source(tmp_path: Path) -> None:
 def test_shipped_manifest_pins_the_generator_every_record_and_the_main_tables() -> None:
     m = json.loads((ROOT / "reproduce" / "manifest.json").read_text())
     assert len(m["generator"]["sha256"]) == 64 and m["paper_revision"]
-    assert all(len(r["sha256"]) == 64 and r["release"].startswith(("NOT RELEASED", "PROPOSED FOR RELEASE"))
+    assert all(len(r["sha256"]) == 64 and r["release"].startswith(("NOT RELEASED", "RELEASED"))
                for r in m["records"])
     files = {o["file"]: o for o in m["outputs"]}
     assert {"tables/main.tex", "tables/bench.tex", "e1_results.tex"} <= set(files)
@@ -144,10 +144,10 @@ def test_repin_is_one_command_and_the_new_pins_then_check(tmp_path: Path) -> Non
 
 
 def _shipped(m: dict) -> list[dict]:
-    return [r for r in m["records"] if r["release"].startswith("PROPOSED FOR RELEASE")]
+    return [r for r in m["records"] if r["release"].startswith("RELEASED")]
 
 
-def test_the_shipped_records_are_exactly_the_proposed_ones_and_feed_the_released_tables() -> None:
+def test_the_shipped_records_are_exactly_the_released_ones_and_feed_the_released_tables() -> None:
     m = json.loads((ROOT / "reproduce" / "manifest.json").read_text())
     shipped = _shipped(m)
     on_disk = sorted(p.relative_to(ROOT / "reproduce").as_posix() for p in (ROOT / "reproduce" / "records").rglob("*")

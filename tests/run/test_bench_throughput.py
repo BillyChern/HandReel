@@ -949,7 +949,7 @@ def test_a_missing_baseline_submodule_names_the_command_that_fetches_it(tmp_path
     instead of a bare FileNotFoundError on the layout file."""
     cfg = _cfg(tmp_path, "bench.doh_root=null", "bench.whisking_copies=1")       # demo_root: an empty tmp path
     clips = bench.build_clips(cfg, _REPO)
-    with pytest.raises(FileNotFoundError, match=r"git submodule update --init --recursive") as info:
+    with pytest.raises(FileNotFoundError, match=r"bash scripts/fetch_baseline\.sh") as info:
         bench.prepare_artifacts(cfg, _REPO, clips, tmp_path / "engine", write_inputs=True)
     assert "layout_camera_frame_optimized.json" in str(info.value)
 

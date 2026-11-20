@@ -93,8 +93,7 @@ licence of the code; each follows the terms of what it was derived from:
   names the two corpora and contains no individual sequence, view or window identifiers.
 - `reproduce/heldout/qc_rule_constants.json`: the QC rule's fitted constants, fitted on DexYCB (CC BY-NC 4.0)
   development clips; non-commercial use only.
-- These four files are proposed for release. The authors' decisions on them remain open
-  (`reproduce/heldout/README.md`).
+- These four files are part of this release; `reproduce/heldout/README.md` gives their sources and sha256.
 - `release/reference/v2d_t3_ep011_cam_a/`: derived from a CC BY 4.0 clip (V2D Challenge Track 3, NVIDIA; credit in
   its `ATTRIBUTION.txt`, and the frames in `expected_projection.png`) and produced by the pipeline's models. Its hand
   arrays (MANO pose, shape and translation, and joints) are HaWoR outputs on the MANO model: they follow HaWoR's

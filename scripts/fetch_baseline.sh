@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
-# Put the DO AS I DO baseline at its pinned commit into third_party/do-as-i-do, for a copy of this repository that
-# has no git metadata (the release tar). A git clone does not need this script: there,
-# `git submodule update --init --recursive` does the same from .gitmodules.
+# Put the DO AS I DO baseline at its pinned commit into third_party/do-as-i-do.
 #
 #   bash scripts/fetch_baseline.sh [--dry-run] [--check]
 #
-# It clones the baseline into the empty third_party/do-as-i-do, checks out commit
-# 824591b808c342b20079c3b4198a8c2bdf88c74e, fetches the baseline's own submodules at the commits that commit records
-# (sam-3d-objects and HaWoR live there), then verifies the checkout. --check only verifies an existing checkout.
-# --dry-run prints the commands and runs none. FASTDO_BASELINE_URL replaces the clone URL (for a mirror); the commit
-# is fixed. Needs git and network access to GitHub (and GitLab, for a submodule of HaWoR). Run from the repository root.
-# Exit codes: 0 verified; 1 a check failed or a command failed; 2 wrong directory, a git clone, or a usage error.
+# In a git clone of HandReel (github.com/BillyChern/HandReel) and in a copy without git metadata (an archive), the
+# repository records no submodule commit for third_party/do-as-i-do, so the script clones the baseline there, checks
+# out commit 824591b808c342b20079c3b4198a8c2bdf88c74e, fetches the baseline's own submodules at the commits that
+# commit records (sam-3d-objects and HaWoR live there), then verifies the checkout. In a git checkout that does record
+# the submodule commit, it runs `git submodule update --init --recursive` for that path instead, then verifies.
+# --check only verifies an existing checkout. --dry-run prints the commands and runs none. FASTDO_BASELINE_URL
+# replaces the clone URL (for a mirror); the commit is fixed. Needs git and network access to GitHub (and GitLab, for
+# a submodule of HaWoR). Run from the repository root.
+# Exit codes: 0 verified; 1 a check failed or a command failed; 2 wrong directory or a usage error.
 set -uo pipefail
 
 PIN=824591b808c342b20079c3b4198a8c2bdf88c74e
@@ -53,11 +54,18 @@ verify() {
 }
 
 { [ -f pyproject.toml ] && [ -f scripts/setup_all.sh ]; } || { echo "run from the repository root" >&2; exit 2; }
-if [ -e .git ]; then
-  echo "this is a git clone: run git submodule update --init --recursive instead" >&2
-  exit 2
-fi
 command -v git >/dev/null || { echo "git not found" >&2; exit 2; }
+
+# A submodule commit (gitlink) is recorded only when this directory is the top of a git checkout whose index holds
+# third_party/do-as-i-do as a submodule entry (mode 160000). A plain clone of the public repository has none.
+GITLINK=0
+if [ -e .git ]; then
+  top=$(git rev-parse --show-toplevel 2>/dev/null) || top=""
+  if [ -n "$top" ] && [ "$(cd "$top" && pwd -P)" = "$(pwd -P)" ] &&
+     git ls-files --stage -- "$DEST" 2>/dev/null | grep -q '^160000 '; then
+    GITLINK=1
+  fi
+fi
 
 if [ "$CHECK" -eq 1 ]; then
   verify
@@ -70,6 +78,16 @@ if [ -d "$DEST" ] && [ -n "$(ls -A "$DEST")" ]; then
     exit 0
   fi
   fail "$DEST is not empty and not a git checkout; move it aside first"
+fi
+
+if [ "$GITLINK" -eq 1 ]; then
+  run git submodule update --init --recursive -- "$DEST"
+  if [ "$DRY" -eq 1 ]; then
+    echo "(dry run: nothing was fetched or verified)"
+    exit 0
+  fi
+  verify
+  exit 0
 fi
 
 run git clone --no-checkout "$URL" "$DEST"

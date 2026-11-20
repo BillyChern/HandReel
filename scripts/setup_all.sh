@@ -5,13 +5,12 @@
 #   bash scripts/setup_all.sh [--dry-run] [--hawor DIR] [--hands23 DIR] [--replace-envs]
 #
 # --dry-run prints every command and runs none. It also runs the preflight checks (repository root, DO AS I DO
-# submodule, conda), reports each result, and exits 2 after the plan when one fails. Needs uv, conda
+# baseline, conda), reports each result, and exits 2 after the plan when one fails. Needs uv, conda
 # (FASTDO_CONDA_BASE, or conda on PATH), git, network access, a CUDA 12.8 toolkit for the source builds, and the
-# DO AS I DO submodule (git submodule update --init --recursive in a git clone; bash scripts/fetch_baseline.sh in the
-# release tar). TORCH_CUDA_ARCH_LIST defaults to 9.0 (H100); set
-# it for your GPU. Run from the repository root. It refuses to start when a conda env named sam3d or hawor already
-# exists, because `conda create -y` would replace it; --replace-envs allows that. A cold build needs about 60 GB of
-# disk, package caches included.
+# DO AS I DO baseline in third_party/do-as-i-do (run bash scripts/fetch_baseline.sh first). TORCH_CUDA_ARCH_LIST
+# defaults to 9.0 (H100); set it for your GPU. Run from the repository root. It refuses to start when a conda env
+# named sam3d or hawor already exists, because `conda create -y` would replace it; --replace-envs allows that. A cold
+# build needs about 60 GB of disk, package caches included.
 set -euo pipefail
 
 DRY=0
@@ -24,7 +23,7 @@ while [ $# -gt 0 ]; do
     --hawor) HAWOR="$2"; shift ;;
     --hands23) H23="$2"; shift ;;
     --replace-envs) REPLACE=1 ;;
-    -h|--help) sed -n '2,14p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,13p' "$0"; exit 0 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
   esac
   shift
@@ -55,7 +54,7 @@ preflight_fail() {
 }
 { [ -f pyproject.toml ] && [ -f uv.lock ]; } || preflight_fail "run from the repository root"
 [ -d third_party/do-as-i-do/reconstruction/modules/sam-3d-objects ] ||
-  preflight_fail "the DO AS I DO submodule is missing: git submodule update --init --recursive (a git clone), or bash scripts/fetch_baseline.sh (the release tar)"
+  preflight_fail "the DO AS I DO baseline is missing from third_party/do-as-i-do: run bash scripts/fetch_baseline.sh first"
 if [ -n "${FASTDO_CONDA_BASE:-}" ]; then export PATH="$FASTDO_CONDA_BASE/bin:$PATH"; fi
 command -v conda >/dev/null || preflight_fail "conda not found: set FASTDO_CONDA_BASE or put conda on PATH"
 conda_env_names() {                       # the names conda lists, one per line; fails when conda cannot list them
@@ -76,9 +75,9 @@ if command -v conda >/dev/null && [ "$REPLACE" -eq 0 ]; then
 fi
 if [ "$DRY" -eq 1 ] && [ "$PREFLIGHT_FAILED" -eq 0 ]; then
   if [ "$REPLACE" -eq 1 ]; then
-    echo "preflight: ok (repository root, DO AS I DO submodule, conda; --replace-envs: existing sam3d and hawor envs are replaced)"
+    echo "preflight: ok (repository root, DO AS I DO baseline, conda; --replace-envs: existing sam3d and hawor envs are replaced)"
   else
-    echo "preflight: ok (repository root, DO AS I DO submodule, conda, no existing sam3d or hawor env)"
+    echo "preflight: ok (repository root, DO AS I DO baseline, conda, no existing sam3d or hawor env)"
   fi
 fi
 

@@ -25,6 +25,7 @@ you use (SAM 2, SAM 3D, MoGe-2, CoTracker3, HaWoR, WiLoR, MANO, Hands23).
 @misc{chen2026handreel,
   title  = {{HandReel}: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling},
   author = {Chen, Shi and Ichnowski, Jeffrey},
+  howpublished = {arXiv (coming soon)},
   year   = {2026}
 }
 ```
@@ -49,11 +50,12 @@ The fastest check needs no GPU and no model weights. A full run needs the instal
 
 ### Try it on CPU, no weights
 
-The shipped reference reconstruction of the clip above opens in your browser, in 3D over the video's frames. It needs
-no GPU, model weights or MANO. Unpack the release archive and work from its `handreel/` directory:
+The shipped reference reconstruction of the example clip opens in your browser, in 3D over the video's frames. The
+example clip is a public V2D Challenge Track 3 video; it is not one of the six clips in the picture at the top. This
+needs no GPU, model weights or MANO. Clone the repository and work from its root:
 
 ```bash
-tar -xzf handreel-release-*.tar.gz && cd handreel
+git clone https://github.com/BillyChern/HandReel && cd HandReel
 uv sync --frozen --python 3.12 --extra dev --extra frontend --extra viser
 uv run --frozen hf download nvidia/video_to_data_challenge \
   track_3/public/videos/chunk-000/observation.images.ego_cam_a/episode_000011.mp4 \
@@ -77,11 +79,16 @@ on `PATH`. The model stages need an NVIDIA GPU with at least 24 GB of memory; th
 with CUDA 12.8 wheels, and only that build was tested. A cold build needs about 60 GB of disk before the weights.
 
 ```bash
-cd handreel                              # the unpacked release archive
-bash scripts/fetch_baseline.sh           # DO AS I DO at the pinned commit, into third_party/
+git clone https://github.com/BillyChern/HandReel && cd HandReel   # skip if you cloned it above
+bash scripts/fetch_baseline.sh           # DO AS I DO at the pinned commit, into third_party/do-as-i-do
 bash scripts/setup_all.sh --dry-run      # prints every step of release/QUICKSTART.md step 2
 bash scripts/setup_all.sh                # builds them: the uv env, the sam3d and hawor conda envs, HaWoR
 ```
+
+`fetch_baseline.sh` clones DO AS I DO into `third_party/do-as-i-do`, checks out commit
+`824591b808c342b20079c3b4198a8c2bdf88c74e` with the baseline's own submodules, and verifies them. This repository
+records no submodule commit for that directory, so `git clone --recurse-submodules` and `git submodule update` leave
+it empty; use the script. It works the same in an archive without git metadata.
 
 `setup_all.sh` needs conda on `PATH`, or `FASTDO_CONDA_BASE` set to your conda or miniforge root. It clones HaWoR to
 `../hawor`, next to this checkout.
@@ -171,9 +178,11 @@ left out).
 
 ### Expected output
 
-On the example clip a successful run puts the object mesh on the beige cup and the hand points on the hands. The
-picture at the top of this page is the shipped reference output at decode rows 0, 34 and 68, drawn over the clip's
-frames (CC BY 4.0, V2D Challenge Track 3, NVIDIA) by `scripts/render_reference_png.py`. The PNG projects the solve poses. The interactive viewer uses contact-refined poses when available. To draw the same picture for your own run, after the clip has been downloaded:
+On the example clip a successful run puts the object mesh on the beige cup and the hand points on the hands.
+`release/reference/v2d_t3_ep011_cam_a/expected_projection.png` shows the shipped reference output at decode rows 0,
+34 and 68, drawn over the clip's frames (CC BY 4.0, V2D Challenge Track 3, NVIDIA) by
+`scripts/render_reference_png.py`. The picture at the top of this page is a different one: six clips from DexYCB and
+HOI4D. The PNG projects the solve poses. The interactive viewer uses contact-refined poses when available. To draw the same picture for your own run, after the clip has been downloaded:
 
 ```bash
 uv run --frozen python scripts/render_reference_png.py outputs/example/engine/v2d_t3_ep011_cam_a --out my_run.png
@@ -236,8 +245,10 @@ uv run --frozen --extra viser python scripts/view_clip.py release/reference/v2d_
 
 Open the printed URL (default <http://127.0.0.1:8080>; `--port N` changes it); Ctrl-C stops the server. To show the source frames in the
 viewer, supply the matching clip with `--video` (download command in
-`release/reference/v2d_t3_ep011_cam_a/README.md`). The PNG preview includes three source stills. Its hands are drawn as their 21 joints (right green, left
-orange, as in the picture above), because the MANO mesh arrays (vertices and faces) are not shipped. Your own GPU run has `decode.npz` and the full hand arrays, so the viewer
+`release/reference/v2d_t3_ep011_cam_a/README.md`); `expected_projection.png` in that directory holds three source
+stills with the reconstruction drawn over them. For the reference output, the viewer draws the hands as their 21
+joints (right green, left orange, as in `expected_projection.png`), because the MANO mesh arrays (vertices and faces)
+are not shipped. Your own GPU run has `decode.npz` and the full hand arrays, so the viewer
 shows its frames and hand meshes. The frame slider counts decode rows from 0, as the rest of this page does:
 
 ```bash
@@ -256,8 +267,8 @@ uv run --frozen --extra viser python scripts/view_clip.py outputs/example/engine
 Ego4D has no ground-truth object poses, so the two timing rows measure speed only. The DexYCB error ratio is
 less certain than the HOI4D one (see the linked page). HandReel is not the most
 accurate method in the paper's comparisons: on HO3D-v3, five published methods (HOLD, MagicHOI, AGILE, Open-CHOIR
-and 4D-HOF) list a lower Chamfer distance than the paper measured for HandReel, and on the DexYCB views of objects
-without symmetry HandReel had the higher median rotation error.
+and 4D-HOF) report a lower Chamfer distance than the paper measured for HandReel, and on the 13 DexYCB views of
+objects without symmetry HandReel's rotation error was higher than DO AS I DO's.
 
 [`docs/results.md`](docs/results.md) states each result in full, with its conditions, and
 [`docs/paper_exhibits.md`](docs/paper_exhibits.md) maps each number to its table, figure or section. This release
@@ -268,8 +279,8 @@ cannot rerun these studies.
 Most of the paper's records are not in this release, and no script here reruns a paper experiment. Two checks run
 from this release:
 
-- `python3 reproduce/regenerate_tables.py --out <new or empty dir>` checks all 14 aggregate-only records in
-  `reproduce/records/`, which are proposed for release and await the authors' decision. It uses ten of them to
+- `python3 reproduce/regenerate_tables.py --out <new or empty dir>` checks all 14 aggregate-only records that this
+  release includes in `reproduce/records/`. It uses ten of them to
   write four tables of the paper source's table generator and writes a fifth from settings in the generator. It
   compares the five outputs with that generator's output at a pinned paper-source revision, ignoring comment lines. None of
   the five is a table of the submitted main paper, whose Tables 1 to 5 the paper source writes by hand.
@@ -321,16 +332,15 @@ src/fastdo/        the package
 packages/          alongray and nullaudit, standalone packages with their own LICENSE and NOTICE (uv sync: nullaudit only)
 release/           pinned worker-environment locks, the weights manifest, a one-clip example and its reference output
 reproduce/         the table regeneration check and its records; the held-out test's protocol, unit IDs and verdict check
-scripts/           setup_all.sh, fetch_baseline.sh, fetch_weights.py, view_clip.py, render_reference_png.py, dependency_licences.py,
-                   check_paper_quotes.py (cited paper numbers and wording patterns against the main PDF; not a claim check)
+scripts/           setup_all.sh, fetch_baseline.sh, fetch_weights.py, view_clip.py, render_reference_png.py, dependency_licences.py
 docs/              the audit tool, the timing protocol, the paper exhibits and the record names
 licenses/          licence texts of the third-party code adapted here
-third_party/       DO AS I DO official code as an unmodified git submodule (empty in the release tar)
+third_party/       DO AS I DO official code, unmodified; scripts/fetch_baseline.sh clones it here at the pinned commit
 tests/             pytest suite
 ```
 
-`VERSION` reads `$Format:%H %cs$` in a git clone. Only `git archive` exports, such as the release tar, fill it in with
-the commit and its date (`.gitattributes`: `export-subst`); in a clone, `git rev-parse HEAD` gives the commit.
+`VERSION` holds the release version and its date. It names no commit: for that, run `git rev-parse HEAD` in your
+clone, or see the commit on GitHub that your copy came from.
 
 ## Acknowledgements
 

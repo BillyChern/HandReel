@@ -13,8 +13,8 @@ defaults to `9.0`, the H100 the authors tested, and passes the value to both wor
 was tested.
 
 ```bash
-cd handreel                              # the unpacked release archive
-bash scripts/fetch_baseline.sh           # DO AS I DO at the pinned commit, into third_party/
+git clone https://github.com/BillyChern/HandReel && cd HandReel
+bash scripts/fetch_baseline.sh           # DO AS I DO at the pinned commit, into third_party/do-as-i-do
 bash scripts/setup_all.sh --dry-run      # prints every step of release/QUICKSTART.md step 2
 bash scripts/setup_all.sh                # builds them: the uv env, the sam3d and hawor conda envs, HaWoR
 ```
@@ -31,15 +31,16 @@ then uses `$FASTDO_CONDA_BASE/bin/conda`). Without either, even `--dry-run` prin
 (`conda create -y` would replace it) unless you pass `--replace-envs`. A cold build needs about 60 GB of disk before
 the weights (envs plus the conda and uv package caches; `release/QUICKSTART.md` step 0).
 
-The release is distributed as an archive without git metadata. `scripts/fetch_baseline.sh` fetches DO AS I DO at commit
-`824591b808c342b20079c3b4198a8c2bdf88c74e` (MIT), including its demo clip; the SAM 3D and HaWoR code the pipeline runs
-lives there.
+`scripts/fetch_baseline.sh` clones DO AS I DO at commit `824591b808c342b20079c3b4198a8c2bdf88c74e` (MIT), including
+its demo clip, into `third_party/do-as-i-do`; the SAM 3D and HaWoR code the pipeline runs lives there. The repository
+records no submodule commit for that directory, so `git submodule update` leaves it empty; the script works the same
+in a git clone and in an archive without git metadata.
 
 For a CPU-only look, `uv sync --frozen --python 3.12 --extra dev --extra frontend --extra viser` builds only the
 main environment (it installs exactly what `uv.lock` pins; the torch wheel also runs without a GPU; the `viser` extra
 is the 3D viewer of "Interactive viewer").
 `release/QUICKSTART.md` walks through every step by hand and says which commands were run for this release. Its
-"Notes" cover installing from the release tar (no git metadata), the expected pip `ERROR:` line of the `sam3d` step,
+"Notes" cover installing from an archive without git metadata, the expected pip `ERROR:` line of the `sam3d` step,
 uv's harmless decord reinstall message and the optional alongray package.
 
 The pipeline runs in one uv environment plus conda environments, because several models pin incompatible stacks:

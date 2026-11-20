@@ -481,9 +481,9 @@ def gpu_info(proc: Path = NVIDIA_PROC) -> dict[str, str]:
 
 
 def git_commit(repo: Path = REPO) -> str:
-    """The checkout's commit; in a release archive, zip or tar (no `.git` of its own, maybe unpacked inside someone else's
-    repository), the `VERSION` file's content instead. `git archive` writes the commit and its date into `VERSION`
-    (`export-subst` in `.gitattributes`); an unsubstituted `$Format:...$` placeholder counts as no VERSION file."""
+    """The checkout's commit; in an archive, zip or tar (no `.git` of its own, maybe unpacked inside someone else's
+    repository), the `VERSION` file's content instead: the release version and its date. A `$Format:...$` placeholder
+    (an unfilled `git archive` substitution) counts as no VERSION file."""
     if (repo / ".git").exists():                  # a directory, or a file in a linked worktree
         try:
             return subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], check=True, capture_output=True,

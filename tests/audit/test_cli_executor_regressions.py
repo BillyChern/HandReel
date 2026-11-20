@@ -451,7 +451,7 @@ def test_cli_refuses_a_partial_stored_trace(tmp_path: Path, dropped: str, capsys
 
 def test_cli_accepts_a_scene_free_frame_grid_reference_with_its_sim_dt(tmp_path: Path,
                                                                      capsys: pytest.CaptureFixture[str]) -> None:
-    """A3 #10793: `frames` with `ref_dt`, `sim_dt` and `n_rows` is a supported reference without a scene, and
+    """`frames` with `ref_dt`, `sim_dt` and `n_rows` is a supported reference without a scene, and
     `sim_dt` is read there. With `reference` given instead, a scene-free `sim_dt` is still refused, and so is a
     scene-free `hand_away` under --removal pairs, which only the simulated removal reads."""
     m = S.carry_model()
@@ -472,7 +472,7 @@ def test_cli_accepts_a_scene_free_frame_grid_reference_with_its_sim_dt(tmp_path:
 @pytest.mark.parametrize("extra", ["frames", "ref_dt", "n_rows"])
 def test_cli_refuses_two_encodings_of_the_reference(tmp_path: Path, extra: str,
                                                     capsys: pytest.CaptureFixture[str]) -> None:
-    """A3 #10813: with `reference` present the frame-grid fields would be recognised and never read."""
+    """With `reference` present the frame-grid fields would be recognised and never read."""
     m = S.carry_model()
     run = _carry_run(m, S.masks(m)[0])
     base = {"reference": run["ref"], "warmup_rows": np.int64(W), "required_rows": np.int64(N)}
@@ -492,7 +492,7 @@ def test_cli_refuses_two_encodings_of_the_reference(tmp_path: Path, extra: str,
 ])
 def test_cli_refuses_an_impossible_frame_grid_before_building_it(tmp_path: Path, field: str, bad: float, says: str,
                                                                  capsys: pytest.CaptureFixture[str]) -> None:
-    """A3 #10845, #10847: a zero, negative or non-finite step, or an impossible row count, is refused as bad input
+    """A zero, negative or non-finite step, or an impossible row count, is refused as bad input
     (exit 2) with one message; none reaches the interpolation, where it would give a grid or an internal error."""
     m = S.carry_model()
     run = _carry_run(m, S.masks(m)[0])

@@ -3,7 +3,7 @@
     python reproduce/regenerate_tables.py --out <new or empty dir>
     python reproduce/regenerate_tables.py --paper-src <paper source dir> --out <new or empty dir>
 
-Without `--paper-src` (the released check) it uses only this folder: every record marked "PROPOSED FOR RELEASE" in
+Without `--paper-src` (the released check) it uses only this folder: every record marked "RELEASED" in
 `reproduce/manifest.json` must be in `reproduce/records/` with its pinned sha256 (under its `release_path`, a
 descriptive name, when the manifest gives one; `path` is always the paper source's name), `reproduce/make_released_tables.py`
 regenerates the five tables those records support into `<out>/tables/`, and each is compared with the paper
@@ -74,7 +74,7 @@ def sha256_content(path: Path) -> str:
 
 def released_check(out: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     """The released check (module docstring): the shipped records, then the tables they support."""
-    shipped = [r for r in manifest["records"] if r["release"].startswith("PROPOSED FOR RELEASE")]
+    shipped = [r for r in manifest["records"] if r["release"].startswith("RELEASED")]
     inputs = []
     for r in shipped:
         f = HERE / r.get("release_path", r["path"])

@@ -15,7 +15,7 @@ def _run(*args: str, cwd: Path, path: str = "/usr/bin:/bin") -> subprocess.Compl
 
 
 def _fake_root(tmp_path: Path) -> tuple[Path, str]:
-    """A directory that passes the preflight: the root files, the submodule directory and a `conda` on PATH."""
+    """A directory that passes the preflight: the root files, the baseline directory and a `conda` on PATH."""
     root, bin_dir = tmp_path / "root", tmp_path / "bin"
     (root / "third_party/do-as-i-do/reconstruction/modules/sam-3d-objects").mkdir(parents=True)
     (root / "pyproject.toml").write_text("")
@@ -101,9 +101,9 @@ def test_without_hands23_the_optional_venv_is_skipped(tmp_path: Path) -> None:
 
 
 def test_dry_run_reports_every_failed_preflight_check_and_still_prints_the_plan(tmp_path: Path) -> None:
-    r = _run("--dry-run", cwd=tmp_path)                                  # no root files, no submodule, no conda
+    r = _run("--dry-run", cwd=tmp_path)                                  # no root files, no baseline, no conda
     assert r.returncode == 2, r.stdout + r.stderr
-    for msg in ("run from the repository root", "the DO AS I DO submodule is missing", "conda not found"):
+    for msg in ("run from the repository root", "the DO AS I DO baseline is missing", "conda not found"):
         assert f"preflight: FAIL: {msg}" in r.stdout and msg in r.stderr, msg
     assert "uv sync --frozen --python 3.12" in r.stdout and "setup.py install" in r.stdout
     assert "done. Next" not in r.stdout and list(tmp_path.iterdir()) == []

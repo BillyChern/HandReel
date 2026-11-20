@@ -110,7 +110,7 @@ def test_a_bad_own_spec_exits_with_one_line(tmp_path: Path, changes: dict, match
 
 
 def test_the_keyframe_must_be_a_decoded_frame_and_the_message_names_the_nearest() -> None:
-    """A3 #10867: the mask is made on the source keyframe and attached to a decoded row; off the grid those are two
+    """The mask is made on the source keyframe and attached to a decoded row; off the grid those are two
     frames. At 30 fps the stride is 3, so frame 100 of a window from 0 is refused and 99 and 102 are offered."""
     rows = list(range(0, 300, 3))
     for ok in (0, 3, 99, 297):

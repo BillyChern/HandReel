@@ -266,7 +266,7 @@ def pool_splits(splits: Sequence[EParSplit], unit_scale: float = 1.0) -> dict[st
         undefined = {k: f"{bare} of {len(splits)} units carry no first moments (z1, a1); this share needs them "
                         "from every unit" for k in FIRST_MOMENT_SHARES if not math.isfinite(share[k])}
         if undefined:
-            # A3 #10777: a component that does not exist for the cohort is named with its reason, never a bare null
+            # A component that does not exist for the cohort is named with its reason, never a bare null
             share.update(dict.fromkeys(undefined))
             out["pooled_share_undefined"] = undefined
         out["pooled_share"] = share

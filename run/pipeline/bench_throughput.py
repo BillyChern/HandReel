@@ -56,9 +56,9 @@ import json
 import logging
 import os
 import shutil
+from collections import Counter
 from collections.abc import Callable, Mapping, Sequence
 from datetime import UTC, datetime
-from collections import Counter
 from pathlib import Path
 from typing import Any, cast
 
@@ -87,15 +87,20 @@ from fastdo.bench.bench_clips import (
     windowed_clips_from_inventory,
     write_camera_json,
 )
-from fastdo.bench.bench_stages import NOT_REGISTERED, build_stage_fns, driftqc_enabled, source_profile_config
+from fastdo.bench.bench_stages import (
+    NOT_REGISTERED,
+    build_stage_fns,
+    driftqc_enabled,
+    source_profile_config,
+)
+from fastdo.bench.bench_stages import resolve_path as _resolve
+from fastdo.bench.bench_stages import whisking_paths as _whisking_paths
+from fastdo.bench.gpu_budget import apply_cpu_budget, apply_gpu_budget
 from fastdo.bench.hoi4d_bench import SOURCE as HOI4D_SOURCE
 from fastdo.bench.hoi4d_bench import HOI4DWindow, hoi4d_clips, hoi4d_prompt, load_windows
 from fastdo.bench.oakink2_bench import SOURCES as OAKINK2_SOURCES
 from fastdo.bench.oakink2_bench import OakInk2Window, oakink2_clips
 from fastdo.bench.oakink2_bench import load_windows as load_oakink2_windows
-from fastdo.bench.bench_stages import resolve_path as _resolve
-from fastdo.bench.bench_stages import whisking_paths as _whisking_paths
-from fastdo.bench.gpu_budget import apply_cpu_budget, apply_gpu_budget
 from fastdo.bench.yield_report import (
     GATE_UNBUILT,
     clip_rate_agreement,
@@ -116,17 +121,26 @@ from fastdo.engine import (
 )
 from fastdo.engine.batched_runner import BatchRunReport, applied_cap_gb, run_manifest_batched
 from fastdo.engine.batched_stages import BatchedStage, HandsBatchStage
-from fastdo.engine.source_domain import DOMAIN_FILE, SourceDomain, read_domain_record, write_domain_record
-from fastdo.engine.source_profile import check_run_profile
-from fastdo.engine.workers_solve import SolveStageConfig
-from fastdo.engine.workers_contact import ContactStageConfig, with_contact
-from fastdo.io.datasets.hoi4d import HOI4DReader
-from fastdo.io.datasets.oakink2 import OakInk2Reader
-from fastdo.engine.workers_prompt import PromptStageConfig, with_prompt
 from fastdo.engine.decode_index import write_index_audit
+from fastdo.engine.source_domain import (
+    DOMAIN_FILE,
+    SourceDomain,
+    read_domain_record,
+    write_domain_record,
+)
+from fastdo.engine.source_profile import check_run_profile
+from fastdo.engine.workers_contact import ContactStageConfig, with_contact
 from fastdo.engine.workers_frames import timebase_flags
 from fastdo.engine.workers_gate import GATE_REJECTED_PREFIX, gate_outcome_counts
-from fastdo.engine.workers_prompt import PROMPT_REFUSED_PREFIX, prompt_outcome_counts
+from fastdo.engine.workers_prompt import (
+    PROMPT_REFUSED_PREFIX,
+    PromptStageConfig,
+    prompt_outcome_counts,
+    with_prompt,
+)
+from fastdo.engine.workers_solve import SolveStageConfig
+from fastdo.io.datasets.hoi4d import HOI4DReader
+from fastdo.io.datasets.oakink2 import OakInk2Reader
 from fastdo.io.video import count_decoded_frames, screened_frame_count
 
 logger = logging.getLogger(__name__)
@@ -135,8 +149,8 @@ MANIFEST_FILE = "manifest.parquet"
 REPORT_FILE = "yield_report.json"
 INJECTED = "injected"
 EXCLUDED = "excluded (bench.stages)"
-SUBMODULE_HINT = ("the whisking demo ships in the DO AS I DO submodule (third_party/do-as-i-do): run "
-                  "`git submodule update --init --recursive` in this checkout, or set whisking.demo_root to a DO AS I "
+SUBMODULE_HINT = ("the whisking demo ships in the DO AS I DO baseline (third_party/do-as-i-do): run "
+                  "`bash scripts/fetch_baseline.sh` in this checkout, or set whisking.demo_root to a DO AS I "
                   "DO checkout's reconstruction/whisking")
 GATE_BUILT = "built"
 GATE_COST_ONLY = "gate-cost only (contact-centred 100DOH train clips; not S2)"

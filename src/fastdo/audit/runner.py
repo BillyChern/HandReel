@@ -169,7 +169,7 @@ def _check_pose_rows(name: str, p7: np.ndarray, tol: float | None) -> tuple[int,
 
 
 def _array(name: str, x: Any, shape: tuple[int | None, ...]) -> np.ndarray:
-    """`x` as a finite float array of `shape` (None = any length); refused otherwise."""
+    """`x` as a finite float array of `shape` (None = any size along that axis); refused otherwise."""
     try:
         a = np.asarray(x, np.float64)
     except (TypeError, ValueError) as e:

@@ -1,6 +1,6 @@
 # Copyright 2026 The alongray authors
 # SPDX-License-Identifier: Apache-2.0
-"""Inconsistent moments and stored splits are refused, not clamped (alongray.pool, A3).
+"""Inconsistent moments and stored splits are refused, not clamped (alongray.pool).
 
 Moments of real numbers obey Cauchy-Schwarz (``pz^2 <= pp zz``, ``z1^2 <= zz``, ``a1^2 <= pp``); a negative squared
 term in the split means the moments are not moments of any trajectory. Rounding may push an exact zero slightly

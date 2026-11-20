@@ -48,7 +48,7 @@ def test_the_pixel_claim_is_scoped() -> None:
 
 
 def test_no_fixture_claims_to_reproduce_a_paper_figure() -> None:
-    """A2: the shipped fixtures are synthetic known answers; they reproduce no figure of the accompanying papers,
+    """The shipped fixtures are synthetic known answers; they reproduce no figure of the accompanying papers,
     and the pooled error split is not the per-window radial share of a solve change."""
     for p in (README, KNOWN):
         t = _flat(p)

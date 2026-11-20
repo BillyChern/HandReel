@@ -217,11 +217,11 @@ def test_flash_attn_status_reports_the_import_error() -> None:
 
 
 def test_the_sam3d_rule_matches_sam3d_objects() -> None:
-    """The card list is SAM 3D's own (skips without the DO AS I DO submodule)."""
+    """The card list is SAM 3D's own (skips without the DO AS I DO baseline)."""
     src = (REPO / "third_party/do-as-i-do/reconstruction/modules/sam-3d-objects/sam3d_objects/pipeline/"
            "inference_pipeline.py")
     if not src.exists():
-        pytest.skip("the DO AS I DO submodule is not checked out")
+        pytest.skip("the DO AS I DO baseline is not in third_party/do-as-i-do (bash scripts/fetch_baseline.sh)")
     text = src.read_text()
     assert all(f'"{card}" in gpu_name' in text for card in FA.FLASH_ATTN_CARDS)
     assert 'os.environ["ATTN_BACKEND"] = "flash_attn"' in text

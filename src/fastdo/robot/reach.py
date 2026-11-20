@@ -56,7 +56,8 @@ violation wins, so the search always returns the least-bad placement and the pac
    every `coarse_stride`-th task row with the collision-aware IK (`collider`; without it the first C1 search
    put the hand 9-19 cm in front of the torso, where the body then blocked it: 65 of 70 rows out of reach).
 2. Local: pattern search from the `top_coarse` best distinct rotations over (x, y, table_z, yaw, symmetry angle),
-   steps halved down to `min_step_xy`, same rows; the starts advance together, one batch of neighbours per round.
+   each step half the previous, down to `min_step_xy`, same rows; the starts advance together, one batch of
+   neighbours per round.
 3. Final: the `top_final` best distinct candidates on EVERY task row with the collision-aware IK (robot body and
    table); the best by the objective is the choice.
 Every evaluated candidate is returned (`SearchResult.records`) and written into the package.

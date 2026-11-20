@@ -22,7 +22,8 @@ maps each number to its table, figure or section; some rest on the paper's prose
   is not the time of one window alone. It is a 17 s per-window share: the mean wall time of batched runs, which the
   paper splits among windows in proportion to their stage seconds. Each batched run loaded its models once, and the
   timing includes that load. The ratio is 130x, with a 95% confidence interval of 97 to 170, on the 9 of 19
-  attempted windows that both pipelines completed, which is below the registered minimum of 10.
+  attempted windows that both pipelines completed. The supplement adds that nine is below the registered minimum
+  of 10.
 - **Reconstruction time, both in batched runs, where the paper models the baseline (Table 2, row 3).** The
   baseline's seconds in this row are a modelled value, about 1,600 s per window: the paper models two instances of
   DO AS I DO that run at once, with the 1.2x throughput gain that two instances showed on three window pairs.
@@ -31,15 +32,16 @@ maps each number to its table, figure or section; some rest on the paper's prose
 - **One video through the full pipeline (Table 5).** By a sum of separately measured stage times, DO AS I DO's full
   pipeline would take about 3x as long per window with its own reconstruction as with HandReel's: 3,069 s against
   991 s. This comparison times neither pipeline end to end. The reconstruction terms of the sums are the 2,100 s
-  and the 17 s per-window share of Table 2, row 2. HandReel's sum also holds 2.63 CPU core-seconds for the
-  certificate check. Both sums share one 894 s physics time and neither holds a gravity term. The 894 s is the median
-  elapsed time of one planner arm, which the authors measured only after HandReel's reconstruction, at 2 perturbation
-  samples (default 4), while two planner arms ran at once on the same GPU. It is not a time for one arm alone on the
-  GPU. With HandReel reconstruction, physics is the largest term in the stage sum.
+  and the 17 s per-window share of Table 2, row 2. Both sums share one 894 s physics time, which the authors
+  measured after HandReel's reconstruction, at 2 perturbation samples (default 4). With HandReel
+  reconstruction, physics is the largest term in the stage sum. The supplement adds that HandReel's sum also holds
+  2.63 CPU core-seconds for the certificate check, that neither sum holds a gravity term, and that the 894 s is the
+  median elapsed time of one planner arm, measured while two planner arms ran at once on the same GPU, so it is not
+  a time for one arm alone on the GPU.
 
-- **Orientation (Sec. 5.2).** Object-centre error ignores orientation. Both pipelines delivered 13 of the 25
-  evaluated DexYCB views of objects without symmetry. On those 13 views, HandReel had the higher median rotation
-  error.
+- **Orientation (Sec. 5.2).** Object-centre error ignores orientation. HandReel's rotation error was higher than DO AS
+  I DO's on the 13 DexYCB views of objects without symmetry. The supplement gives the evaluated views and the median
+  errors.
 - **Published methods on HO3D-v3 (Table 3).** Table 3 lists published timings for six methods beside the
   measured Ego4D times. AGILE reports the times for HOLD and MagicHOI. AGILE reports HOLD and MagicHOI accuracy on
   successful sequences (100.0% and 83.3% succeeded, respectively). Each published timing uses its source's own

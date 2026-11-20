@@ -274,7 +274,7 @@ def test_the_derivation_script_rebuilds_the_copy_from_a_rule_with_full_provenanc
 
 
 def test_a_corpus_with_no_unit_delivered_by_both_names_what_does_not_exist(tmp_path: Path) -> None:
-    """A3 #10861: every unit runs, HandReel delivers the even units and DO AS I DO the odd ones, so no unit has
+    """Every unit runs, HandReel delivers the even units and DO AS I DO the odd ones, so no unit has
     both. The registered failure-rule ratio still exists; the complete-case cells are named unavailable, with no
     crash, no NaN and no LaTeX placeholder."""
     rows = []
@@ -303,7 +303,7 @@ def test_an_interval_end_past_the_float_range_is_named() -> None:
 
 def test_an_unregistered_input_is_never_written_or_reported_as_the_registered_rule(tmp_path: Path,
                                                                                 capsys: pytest.CaptureFixture[str]) -> None:
-    """A3 #10856: with --allow-unregistered the output must say what it is. The written file carries no registered
+    """With --allow-unregistered the output must say what it is. The written file carries no registered
     prefix and names the input's sha256; the check prints that a match is about the constants only."""
     spec = importlib.util.spec_from_file_location("derive_qc", HELDOUT / "derive_qc_rule_constants.py")
     mod = importlib.util.module_from_spec(spec)

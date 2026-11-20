@@ -1,6 +1,6 @@
 # Copyright 2026 The alongray authors
 # SPDX-License-Identifier: Apache-2.0
-"""Cohort denominators and the failure policy of alongray.pool (A1).
+"""Cohort denominators and the failure policy of alongray.pool.
 
 A pooled number over the units a method delivered says nothing about the units it failed on. Every group therefore
 reports how many units were assigned, scored, failed, excluded (with their reasons) and missing (assigned but with no

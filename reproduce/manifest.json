@@ -41,7 +41,7 @@
    "path": "records/2026-10-31-412-cost-gap.json",
    "sha256": "1a432df542e7cca844601a46f10ad51e79879fbb8fd76521a3135ef636a745ff",
    "bytes": 12709,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/2026-10-31-412-cost-gap.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/2026-10-31-412-cost-gap.json"
   },
   {
    "path": "records/2026-10-31-s405-cost-records.json",
@@ -59,14 +59,14 @@
    "path": "records/medians.json",
    "sha256": "c925dbcc24a2a97e0d916ddba42ad55c94906fdb20b20b8a03c6c573b10aa22a",
    "bytes": 3872,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/medians.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/medians.json"
   },
   {
    "path": "records/s281_analysis.json",
    "release_path": "records/solve_perframe_contrast.json",
    "sha256": "53db0fa5f59f8aeb7c003b04e5cebf45502d4704a59f2d79f5d05c0b00286faf",
    "bytes": 30878,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/solve_perframe_contrast.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/solve_perframe_contrast.json"
   },
   {
    "path": "records/s282_analysis.json",
@@ -97,14 +97,14 @@
    "release_path": "records/stride_safe_carry.json",
    "sha256": "fcca22904d2e8ac77f71910b2d20f51acb852e3989549ee7e9815a26c606c503",
    "bytes": 5240,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/stride_safe_carry.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/stride_safe_carry.json"
   },
   {
    "path": "records/s405_analysis_subset.json",
    "release_path": "records/timing_t1_analysis_subset.json",
    "sha256": "28a0b48956eec01bc2a000677764cbd4c74c0b0f34493101252e122dda0d4b05",
    "bytes": 2735,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/timing_t1_analysis_subset.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/timing_t1_analysis_subset.json"
   },
   {
    "path": "records/s432-analysis.json",
@@ -117,60 +117,60 @@
    "release_path": "records/hoi4d_rerun_descriptive.json",
    "sha256": "71364890104fb937f44e74d9433fe39b9048d84dfdc55848c57bf3c42db5c0ae",
    "bytes": 2841,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/hoi4d_rerun_descriptive.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/hoi4d_rerun_descriptive.json"
   },
   {
    "path": "records/s435_paired.json",
    "release_path": "records/lm_solve_paired.json",
    "sha256": "0d9422742c372797b64880ec4949ec260ff89c65a83318b07263fd51db7128cf",
    "bytes": 9178,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/lm_solve_paired.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/lm_solve_paired.json"
   },
   {
    "path": "records/s524_contrasts.json",
    "release_path": "records/solve_arms_contrasts.json",
    "sha256": "1848e64ea50a0431ce95bf194cf6ca2d2e92e47fb4be6b3197b5a10fe86601b9",
    "bytes": 8744,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/solve_arms_contrasts.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/solve_arms_contrasts.json"
   },
   {
    "path": "records/s524_levels.json",
    "release_path": "records/solve_arms_levels.json",
    "sha256": "0467b663e2a7ec4c9b4234b16c2c067653a1b7a58ee506f7ca01f99709c6761b",
    "bytes": 4307,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/solve_arms_levels.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/solve_arms_levels.json"
   },
   {
    "path": "records/s548_summary.json",
    "release_path": "records/solve_window_weighted.json",
    "sha256": "797204dc985ad2df75e4ec4e86d4b6f850f2c47cb357356c479c1de0252676ac",
    "bytes": 921,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/solve_window_weighted.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/solve_window_weighted.json"
   },
   {
    "path": "records/s566_summary.json",
    "release_path": "records/weak_rows_summary.json",
    "sha256": "5e9ec2f5f8dd20631b44bc5041fec7cce2bf8f75d6ab2f17e0d1c4e566a34e04",
    "bytes": 25509,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/weak_rows_summary.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/weak_rows_summary.json"
   },
   {
    "path": "records/summary_first_order.json",
    "sha256": "721ecc43a9f42d0c2205a4a0bf83ec285fa5a319bca32c81b909caaf896f491f",
    "bytes": 8110,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/summary_first_order.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/summary_first_order.json"
   },
   {
    "path": "records/summary_multistart.json",
    "sha256": "463f1651aa3ab0322a1b0bb1798fd6af6bbb7ff3b81cdf6f99aae22e16c6ab5d",
    "bytes": 8229,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/summary_multistart.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/summary_multistart.json"
   },
   {
    "path": "records/summary_second_order.json",
    "sha256": "927aeb62cd31482c3345c6e1b051d47465108ee48d00c2a4256e1816f6b9ceed",
    "bytes": 11459,
-   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/summary_second_order.json"
+   "release": "RELEASED: aggregate only; shipped as reproduce/records/summary_second_order.json"
   },
   {
    "path": "records/transcribed.json",

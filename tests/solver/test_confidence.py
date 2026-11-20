@@ -71,7 +71,7 @@ def test_frame_at_the_noise_floor_scores_e_minus_one() -> None:
 
 def test_statistic_is_support_invariant() -> None:
     """A frame whose 100 valid rows are padded to 1024 scores exactly like a frame holding the same distances tiled 10
-    times (and like the same frame with every row mass halved): the old sqrt(N w)-weighted RMS grew as
+    times (and like the same frame with every row mass cut by half): the old sqrt(N w)-weighted RMS grew as
     sqrt(N / N_valid) instead."""
     gen = torch.Generator().manual_seed(1)
     base, base_mass, base_valid = _frames(3, 1024, 0.002, gen)                # frames 0-2 fix the clip's floor

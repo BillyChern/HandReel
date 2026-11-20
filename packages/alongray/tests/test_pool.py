@@ -227,7 +227,7 @@ def _moment_row(unit: str, cluster: str, k: float, first: bool) -> dict:
 
 
 def test_a_component_without_first_moments_is_undefined_by_name_and_the_others_keep_their_intervals() -> None:
-    """A3 #10777: gauge and off-orbit shares exist for every unit; the shift components need z1 and a1. A unit
+    """Gauge and off-orbit shares exist for every unit; the shift components need z1 and a1. A unit
     without them makes the full-cohort shift undefined. That is stated per component with its reason, no interval
     is printed for it, and the defined components keep theirs."""
     from alongray.pool import pool_rows

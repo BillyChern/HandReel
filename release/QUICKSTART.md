@@ -44,16 +44,18 @@ only when the variable is unset; a value you exported stays).
 
 ## 1. Code and the DO AS I DO baseline
 
-Clone this repository with its submodules (`git clone --recurse-submodules`, README "Installation"), or run
-`git submodule update --init --recursive` in an existing clone: that puts the baseline at the pinned commit into
-`third_party/do-as-i-do`, with its own submodules (sam-3d-objects lives there).
-
-From the release tar, which has no git metadata, those two commands do not apply. Run this instead, from the
-unpacked `handreel/` directory; it clones the baseline at the same commit, fetches its submodules and verifies them:
+Clone this repository, then fetch the baseline from the repository root. `fetch_baseline.sh` clones DO AS I DO into
+`third_party/do-as-i-do` at the pinned commit, fetches its own submodules (sam-3d-objects lives there) and verifies
+them:
 
 ```bash
+git clone https://github.com/BillyChern/HandReel && cd HandReel
 bash scripts/fetch_baseline.sh
 ```
+
+This repository records no submodule commit for `third_party/do-as-i-do`, so `git clone --recurse-submodules` and
+`git submodule update` leave that directory empty; use the script. It works the same in an archive without git
+metadata.
 
 If the nested download stops after the baseline reaches commit `824591b808c342b20079c3b4198a8c2bdf88c74e`, run
 `git -C third_party/do-as-i-do submodule update --init --recursive`, then `bash scripts/fetch_baseline.sh --check`.
@@ -382,8 +384,8 @@ Notes on the table:
    `hands_hawor.npz`, `solve.json`, `source_profile.json`). `docs/output.md` gives the keys, shapes, frames and units.
 1. `pins`: the CoTracker3 hub ref, the Hugging Face revisions and the DINOv2 commit. `host`: the driver and the
    candidate devices of "Which card the report names" above (`none` when `CUDA_VISIBLE_DEVICES` is empty). `commit`:
-   the git commit, or in a tar or zip extract `release archive: <commit> <date>` from the `VERSION` file that
-   `git archive` filled in. `ledger_row`:
+   the git commit, or in a tar or zip extract without git metadata `release archive: <version> <date>` from the
+   `VERSION` file, which holds the release version and its date and names no commit. `ledger_row`:
    `{"file", "line"}`, relative to `--out`.
 2. The unit-row fields: `unit_id`, `method`, `corpus`, `assigned`, `run`, `analysed`, `delivered`,
    `exclusion_reason`, `seconds`, `frames`, `cluster`, `metrics`, `stage_seconds`, `clip_id`, `input_sha256`,
@@ -447,7 +449,8 @@ One run of the GPU command above, on 2026-11-16, is shipped in `release/referenc
 
 - source: a `git archive` extract of this release's code, made before the release was packaged and recorded in
   `example_report.json`. The example has since gained stricter checks of its input file, which the pinned input
-  passes (reference `README.md`). An earlier release tar reproduced the listed outputs and fields, timings excluded;
+  passes (reference `README.md`). A run from an earlier `git archive` extract reproduced the listed outputs and
+  fields, timings excluded;
   no run of the current tree is claimed;
 - host: one H100 80 GB HBM3, driver 595.91.07, card otherwise idle, `CUDA_DEVICE_ORDER=PCI_BUS_ID` and
   `CUDA_VISIBLE_DEVICES=0`; main env from `uv.lock` with the `viser` extra; CoTracker3 and DINOv2 code at their
@@ -473,7 +476,7 @@ This release ships no study-wide cost or evaluation ledger; those are withheld. 
 authors' cost-ledger unit rows; the paper table generator of this release does not read it (the example writer
 appends to it and the release smoke test parses its row). Most of the paper's records do not ship with this
 release. From this release alone, `python3 reproduce/regenerate_tables.py --out <new or empty dir>` checks all 14
-aggregate-only records in `reproduce/records/` (proposed for release). It uses ten of them to write four tables of
+aggregate-only records that this release includes in `reproduce/records/`. It uses ten of them to write four tables of
 the paper source's table generator, writes a fifth from settings in the generator, and compares the five outputs
 with that generator's output at a pinned paper-source revision, ignoring comment lines. None of the five is
 a table of the submitted main paper, whose tables the paper source writes by hand (README "Evaluation"). No command
@@ -499,9 +502,9 @@ legal advice.
 
 ## Notes
 
-- **From the release tar.** The tar has no git metadata, so `--recurse-submodules` and `git submodule update` cannot
-  fill its empty `third_party/do-as-i-do/`. Run `bash scripts/fetch_baseline.sh` instead (step 1; `--check` verifies an
-  existing copy). Every other command, here and in `README.md`, is the same for a clone and for the tar.
+- **From an archive without git metadata.** Run `bash scripts/fetch_baseline.sh` from its root, as in a clone (step 1;
+  `--check` verifies an existing copy). Every other command, here and in `README.md`, is the same for a clone and
+  for an archive.
 - **Expected output of the environment build.** The `sam3d` pip step prints one `ERROR:` line from pip's dependency
   resolver (ipykernel 7.1.0 asks for jupyter-client>=8, and the lock pins 7.4.9); the step still exits 0 and
   `release/env/verify.sh` passes, because nothing in the pipeline imports ipykernel. `conda run` holds back a step's
@@ -532,13 +535,13 @@ legal advice.
 
 ## Commands on this page
 
-Checked for this release in a fresh clone (and, for step 1, a clean extract of the release tar) on a Linux x86_64
+Checked for this release in a fresh clone on a Linux x86_64
 host with no GPU visible, no `FASTDO_*` variable set and a filled uv cache, except the GPU run of step 4 (note 2 below
 the table). Every other command is marked with what it needs.
 
 | step | command | status |
 |---|---|---|
-| 1 | `bash scripts/fetch_baseline.sh` (the release tar only) | run in a clean extract of the tar: exit 0, the baseline at `824591b8` with every submodule at its recorded commit |
+| 1 | `bash scripts/fetch_baseline.sh` | run in a fresh clone: exit 0, the baseline at `824591b8` with every submodule at its recorded commit. An earlier version of the script gave the same in a clean `git archive` extract |
 | 2 | `bash scripts/setup_all.sh --dry-run` (the whole step in one script) | run: prints every command of this step and runs none; note 1 |
 | 2 | `uv sync --frozen --python 3.12 --extra dev --extra frontend --extra viser` | run: exit 0 |
 | 2 | `conda create ...`, `conda run -n $env pip install ...`, `conda env config vars set ...` | not run: needs conda and network access to conda.anaconda.org, repo.anaconda.com, PyPI and the PyTorch index |
@@ -551,10 +554,10 @@ the table). Every other command is marked with what it needs.
 | 3 | `scripts/fetch_weights.py --yes --only ...` | not run: needs network access, the Hugging Face login and `--hawor-root` |
 | 3 | the manual DINOv2 pin (`curl ... unzip ...`) | not run: needs network access to GitHub |
 | 3 | `release/env/check_weights.py --sha256sum-list --only mano` | run with `FASTDO_MANO_DIR` unset: exits 1 with `set FASTDO_MANO_DIR first`. Listing needs `FASTDO_MANO_DIR`, `FASTDO_MANO_LEFT_DIR` and `FASTDO_HAWOR_ROOT`. Verifying the four registered copies also needs the files and `sha256sum -c -` (an independent run of the full pipeline with all four copies in place: 4x OK) |
-| 4 | `pytest -q tests/release` | run: all pass. In a git clone with the submodule: 92 passed. In a tar extract: 91 passed and 1 skipped after `fetch_baseline.sh` (a tracked-file check that needs git metadata), and 90 passed and 2 skipped before it (also the check against SAM 3D's own card list, which needs the DO AS I DO code). Each skip prints its reason |
+| 4 | `pytest -q tests/release` | run: all pass. In a fresh clone after `fetch_baseline.sh`: 101 passed. Before it: 100 passed and 1 skipped (the check against SAM 3D's own card list, which needs the DO AS I DO code). The skip prints its reason |
 | 4 | `FASTDO_GPU_MEM_GB=32 uv run ... release/example/run_example.py --out outputs/example --card dedicated` | run: exit 0, every stage done; note 2 |
 | 4 | `scripts/view_clip.py release/reference/v2d_t3_ep011_cam_a` (README "Interactive viewer") | run: serves on 127.0.0.1 and answers HTTP 200 (`tests/test_view_clip.py` does the same on a synthetic clip) |
-| 5 | `python3 reproduce/regenerate_tables.py --out <new or empty dir>` | run: exit 0; the 14 records proposed for release match their pins and the 5 tables match the paper generator's output at the pinned paper-source revision without their `%` comment lines |
+| 5 | `python3 reproduce/regenerate_tables.py --out <new or empty dir>` | run: exit 0; the 14 released records match their pins and the 5 tables match the paper generator's output at the pinned paper-source revision without their `%` comment lines |
 
 Notes on the table:
 
@@ -564,6 +567,6 @@ Notes on the table:
 2. The GPU example was run in a clean extract of the release source on one H100 80 GB, with a fresh copy of the
    development host's `sam3d` env completed by step 2's two `sam3d` commands (flash_attn, `sam3d_objects`), the
    host's `hawor` env, weights and MANO, and CoTracker3 at its pinned commit; the clip was downloaded and its sha256
-   matched ("Reference output"). It was run again from a clean extract of an earlier release tar, with the same
+   matched ("Reference output"). It was run again from a clean extract of an earlier `git archive`, with the same
    outputs and fields, timings excluded. It needs a GPU with at least 24 GB, the envs of step 2, the weights of step 3, MANO and the
    variables above. With a variable missing it stops before any download and names it (`tests/test_hostpaths_unset.py`).

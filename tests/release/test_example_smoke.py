@@ -398,7 +398,7 @@ def test_read_frame_keeps_every_source_frame(monkeypatch: pytest.MonkeyPatch) ->
 
 def test_commit_falls_back_to_the_zips_version_file(tmp_path: Path) -> None:
     assert E.git_commit(tmp_path).startswith("unknown")
-    (tmp_path / E.VERSION_FILE).write_text("$Format:%H %cs$\n")     # as committed, before git archive substitutes it
+    (tmp_path / E.VERSION_FILE).write_text("$Format:%H %cs$\n")     # an unfilled git archive placeholder
     assert E.git_commit(tmp_path).startswith("unknown")
     (tmp_path / E.VERSION_FILE).write_text("tree-sha256 " + "a" * 64 + "\n")
     assert E.git_commit(tmp_path) == "release archive: tree-sha256 " + "a" * 64
@@ -413,7 +413,7 @@ def test_no_generated_output_is_tracked() -> None:
     import subprocess
 
     if not (E.REPO / ".git").exists():
-        pytest.skip("not a git checkout (the release tar): no tracked-file list to read")
+        pytest.skip("not a git checkout (an archive): no tracked-file list to read")
     tracked = subprocess.run(["git", "-C", str(E.REPO), "ls-files", "release", "outputs", "data"], check=True,
                              capture_output=True, text=True).stdout.split()
     generated = (E.REPORT_FILE, E.LEDGER_FILE, E.ATTRIBUTION_FILE, ".mp4", ".npz", ".parquet")

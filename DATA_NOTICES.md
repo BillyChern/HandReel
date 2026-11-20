@@ -181,7 +181,7 @@ Files (6):
 
 Comments, docstrings, test messages and documents in these files quote aggregate figures (errors, rates, timings) measured on the datasets named beside them. They are derived statistics, quoted for context; the program does not read them.
 
-Files (64):
+Files (62):
 
 - `README.md`
 - `docs/audit.md`
@@ -194,7 +194,6 @@ Files (64):
 - `run/data/sources.yaml`
 - `run/pipeline/bench_sam2_variants.py`
 - `run/pipeline/eval_solver_dexycb.py`
-- `scripts/check_paper_quotes.py`
 - `src/fastdo/audit/census.py`
 - `src/fastdo/bench/bench_clips.py`
 - `src/fastdo/engine/batched_runner.py`
@@ -236,7 +235,6 @@ Files (64):
 - `tests/io/test_video_window.py`
 - `tests/policy/test_stage.py`
 - `tests/prompt/test_hands23_client.py`
-- `tests/reproduce/test_check_paper_quotes.py`
 - `tests/retarget/test_contact.py`
 - `tests/retarget/test_kinematic.py`
 - `tests/retarget/test_kinematic_fast.py`

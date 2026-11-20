@@ -2,7 +2,7 @@
 
 `baseline_path` returns the path inside this checkout when it exists, and otherwise the same path under the
 placeholder layout `/opt/fastdo/handreel`. A test that needs the file still skips with its own reason when neither
-exists (for example, a clone made without `--recurse-submodules`).
+exists (for example, a clone in which `scripts/fetch_baseline.sh` has not run).
 """
 
 from __future__ import annotations

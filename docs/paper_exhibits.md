@@ -8,20 +8,14 @@ paper (11 pages: Tables 1 to 5, Figs. 1 to 5, Algorithm 1, Secs. 1 to 7). Rechec
 The supplement's numbering is not final, so this page names its parts without numbers. This page quotes no sentence
 of the paper: it restates each condition and gives the place.
 
-**What the checker checks, and the manual audit.** `scripts/check_paper_quotes.py --main <main paper PDF>` checks
-five things: every cited exhibit number exists in the PDF with the caption or heading that this release declares for
-it; no document cites a supplement number; every passage in double quotes in the checked Markdown documents is the
-name of a section of this release's own documents, a passage that the script lists with its own non-paper source, or
-verbatim in the main paper; the title matches; and no document contains a wording from a finite, hand-written pattern
-list. Each check runs over the document lists that the script names (`DOCS`, `NUMBERS_ONLY`, `pattern_docs`), not
-over every file. It is not a semantic check, and a pass verifies neither a claim's full scope nor its meaning. It does not test whether a sentence says what its cited
-exhibit shows, and a paraphrase or a changed unit passes its patterns. A manual audit, made on 2026-11-17 for this
-candidate, therefore compared each results sentence of `docs/results.md`, and of this page with
-the words of the submitted main paper. Repeat that audit whenever a results sentence changes.
+**The manual audit.** A manual audit, made on 2026-11-17, compared each results sentence of `docs/results.md` and of
+this page with the words of the submitted main paper; the results sentences changed on 2026-11-20 were checked
+against the main paper in the same way. No script in this release checks what a sentence claims. Repeat that audit
+whenever a results sentence changes.
 
 **What this release reproduces.** No script in this release reruns an experiment of the paper. The release ships no
-benchmark video or image, no model weights and no per-unit benchmark score. This candidate does include the unit lists of the
-held-out test (`reproduce/heldout/`, proposed for release) and one runnable example that downloads its public input separately, with reference outputs under `release/reference/`. Two
+benchmark video or image, no model weights and no per-unit benchmark score. It does include the unit lists of the
+held-out test (`reproduce/heldout/`) and one runnable example that downloads its public input separately, with reference outputs under `release/reference/`. Two
 exhibits have a partial route:
 
 - Table 1: from per-unit errors that you regenerate with the datasets, `reproduce/e1_verdict_from_scores.py`
@@ -58,17 +52,17 @@ Each row restates one claim with the conditions that the paper attaches to it. T
 | On held-out DexYCB, HandReel's ratio was 0.85, 95% interval 0.58 to 1.00, which is non-inferior at the 1.15 margin | Table 1; Secs. 5.1 and 5.2 | 85 analysed views of 108. The paper marks this verdict: it is not robust if joint failures count against HandReel, and the authors partly used this subject in development. DO AS I DO delivered 69 views. HandReel delivered 58 after its quality check rejected 27 outputs. Among the 48 views both delivered, median error was 76.6 mm for HandReel and 112.5 mm for DO AS I DO | As Table 1 above |
 | On 31 fresh HOI4D windows, HandReel's median error ratio was below 1 under each of three configurations of DO AS I DO that vary its depth model and focal scale, from 0.46 to 0.65. The interval for the setting with HandReel's focal factor includes one | Table 4; Sec. 5.2 | Both pipelines used prompts derived from ground truth: the object mask for HandReel and three points for DO AS I DO. Both pipelines delivered every analysed window. A pre-registered rule excluded 2 of 33 windows before scoring | Not reproducible from this release |
 | One window at a time, DO AS I DO's reconstruction stage took about 30x as long as HandReel: about 2,000 s against 66 s per window | Table 2, row 1; Sec. 5.2 | Second Ego4D timing study: the paper timed both pipelines one window at a time. The study drew 74 windows, both pipelines completed 25, and the paper analyses 20 of them by a rule that the authors set after the study ended. The bracket 25 to 37 is an envelope | Not reproducible from this release |
-| When DO AS I DO restarted for every window, its reconstruction stage took 130x as long per window as HandReel's per-window share of batched runs: 2,100 s against a 17 s per-window share | Table 2, row 2; Sec. 5.2 | First Ego4D timing study, on the nine of 19 attempted windows that both pipelines completed, which is below the registered minimum of 10. 95% confidence interval 97 to 170. The paper timed the baseline's side. HandReel's 17 s is a share of batched runs, which the paper splits among windows in proportion to their stage seconds; it is not the time of one window alone (see "Timing boundaries") | Not reproducible from this release |
+| When DO AS I DO restarted for every window, its reconstruction stage took 130x as long per window as HandReel's per-window share of batched runs: 2,100 s against a 17 s per-window share | Table 2, row 2; Sec. 5.2 | First Ego4D timing study, on the nine of 19 attempted windows that both pipelines completed; the supplement adds that nine is below the registered minimum of 10. 95% confidence interval 97 to 170. The paper timed the baseline's side. HandReel's 17 s is a share of batched runs, which the paper splits among windows in proportion to their stage seconds; it is not the time of one window alone (see "Timing boundaries") | Not reproducible from this release |
 | With both in batched runs, where the paper models the baseline, DO AS I DO's reconstruction stage would take about 120x as long as HandReel's per-window share: a modelled value of about 1,600 s against a 14 s per-window share | Table 2, row 3; Sec. 5.2 | The baseline's seconds are a modelled value: two instances that run at once, with the throughput gain of 1.2 that two instances showed on three window pairs. HandReel's side is its per-window share of batched runs. The model uses the same 20 analysed windows as row 1. The bracket 87 to 150 is an envelope | Not reproducible from this release |
-| Application 1, one video to a robot trajectory: DO AS I DO's full pipeline would take about 3x as long per window with its own reconstruction as with HandReel's, 3,069 s against 991 s | Table 5; Fig. 5; Sec. 5.3 | A sum of separately measured stage times; the paper times no full run. Both sums share one 894 s physics time and neither holds a gravity term; HandReel's sum also holds 2.63 CPU core-seconds for the certificate check. The 894 s is the median elapsed time of one planner arm, which the authors measured after HandReel's reconstruction at 2 perturbation samples (the released default is 4), while two planner arms ran at once on the same GPU. With HandReel reconstruction, physics is the largest term in the stage sum | Not reproducible from this release |
+| Application 1, one video to a robot trajectory: DO AS I DO's full pipeline would take about 3x as long per window with its own reconstruction as with HandReel's, 3,069 s against 991 s | Table 5; Fig. 5; Sec. 5.3 | A sum of separately measured stage times; the paper times no full run. Both sums share one 894 s physics time, which the authors measured after HandReel's reconstruction at 2 perturbation samples (the released default is 4). With HandReel reconstruction, physics is the largest term in the stage sum. The supplement adds that neither sum holds a gravity term, that HandReel's sum also holds 2.63 CPU core-seconds for the certificate check, and that the 894 s is the median elapsed time of one planner arm, measured while two planner arms ran at once on the same GPU | Not reproducible from this release |
 | Application 2, many videos with one retargeting policy: every video still needs its own reconstruction, 2,100 s per window for DO AS I DO when it restarts for every window against HandReel's 17 s per-window share of batched runs | Sec. 5.4; Fig. 5(b); Table 2, row 2 | Reconstruction time only. The paper makes no end-to-end timing of this pairing and gives no retargeting quality for it | Not reproducible from this release |
 
 Ego4D has no ground-truth object poses, so the Ego4D studies measure speed only (Sec. 1); the error results in these
 rows come from the held-out test and the fresh HOI4D windows. The paper reports further error analyses on
 development data that these rows do not list. The paper also states limits that these rows do not repeat. Centre
-error ignores orientation. Both pipelines delivered 13 of the 25 evaluated DexYCB views of objects without symmetry.
-On those 13 views, HandReel had the higher median rotation error (Sec. 5.2). The experiments do not establish
-rotation tracking (Sec. 6).
+error ignores orientation. HandReel's rotation error was higher than DO AS I DO's on the 13 DexYCB views of objects
+without symmetry (Sec. 5.2); the supplement gives the evaluated views and the median errors. The experiments do not
+establish rotation tracking (Sec. 6).
 
 ## Timing boundaries
 
@@ -94,10 +88,11 @@ The submitted paper states these boundaries for its timings. Each line restates 
 - **The held-out log.** The held-out rows of Table 2 are not a timing study. They give ratios of mean logged
   seconds, and HandReel's seconds there sum two intrinsics settings, at its frame stride and a higher scheduling
   priority (Table 2, caption).
-- **GraG.** On seven of eight HO3D-v3 windows, the median per-window ratio of GraG time to HandReel time was 8.9. The
-  study's GPU-time cap ended it before the eighth window ran. Both methods processed the same 24 frames per window
-  and reloaded their models each time. GraG used its offline contact fallback. HandReel started from a ground-truth
-  mask and skipped prompt detection (Sec. 5.2; Table 2).
+- **GraG.** In a pre-registered timing study on seven HO3D-v3 windows, where both methods load every model for every
+  window, GraG without its Gemini contact stage took 8.9x as long as HandReel (Sec. 5.2; Table 2). The supplement
+  adds the rest: 8.9 is the median per-window ratio of GraG time to HandReel time; the study's GPU-time cap ended it
+  before an eighth window ran; both methods processed the same 24 frames per window; GraG used its offline contact
+  fallback; and HandReel started from a ground-truth mask and skipped prompt detection.
 - **Stage sums.** Table 5 sums stage times that the authors measured separately, and the sums time no full run
   (Table 5, caption; Sec. 5.3).
 - **Reported times.** The published rows of Table 3 use each source's own input, hardware and timing scope (AGILE

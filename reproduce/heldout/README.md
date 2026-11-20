@@ -14,10 +14,9 @@ registered: the freeze commit and its three tree ids that amendment A-F and the 
 authors' internal repository, not of this release's history), the file hashes, and the labels and branch names of
 internal records the rules cite (such as M341, s255, U-1 to U-8 or e1/unseal-prep), which are not released.
 
-This folder holds what the paper's held-out test against DO AS I DO (Table 1; Secs. 5.1 and 5.2 of the submitted
-main paper) proposes for release without dataset media or per-unit results: the registered protocol, the unit-ID
-lists, the thresholds that the analysis used and the QC rule's constants. These are materials proposed for release;
-the authors' decisions on them remain open. **This release contains no per-unit error derived
+This folder holds what this release includes from the paper's held-out test against DO AS I DO (Table 1; Secs. 5.1
+and 5.2 of the submitted main paper), without dataset media or per-unit results: the registered protocol, the unit-ID
+lists, the thresholds that the analysis used and the QC rule's constants. **This release contains no per-unit error derived
 from HOI4D or DexYCB ground truth.** Regenerate the errors after acquiring the datasets
 (`regenerate_unit_errors.py`, below); with that file, `reproduce/e1_verdict_from_scores.py` recomputes the error
 ratios, intervals and median errors that Table 1 prints. Nothing here is a dataset frame, mesh, mask, ground-truth
@@ -96,7 +95,7 @@ are not here.
 
 ## Provenance
 
-| file included in this candidate | made from | sha256 of the source |
+| file in this release | made from | sha256 of the source |
 |---|---|---|
 | `units_hoi4d_72.json`, `units_dexycb_s08_108.json` | the registered draw of held-out units, also pinned by the secondaries record | `72465b68c75d87b593bc4a67332963d0e38906bd62c89565b43c3b5d007524fb` |
 | `e1-power-size.json` | unchanged | `def45c58916f0e8bdebe2d9e49440beb4d4487614693443334b412e79d861a65` (this file) |
@@ -135,7 +134,7 @@ The protocol copies keep these statements as registered. The notes below say how
 The protocol copies keep their registered wording. This note records what happened to three of its items
 afterwards and which of two printings of one threshold decides. It separates validation or reporting that stayed
 incomplete from inputs that this release merely does not ship. The historical validation and outcomes records it cites are
-internal and are not in this release; the protocol and `e1-power-size.json`, cited below, are included in this candidate.
+internal and are not in this release; the protocol and `e1-power-size.json`, cited below, are in this release.
 
 - **Known answer KA-R on a HOI4D development window.** Section 7 of the protocol lists it as not yet run and as a
   condition of launch. It ran and passed on 2026-10-02, before the launch.
