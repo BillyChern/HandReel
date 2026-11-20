@@ -5,6 +5,7 @@
 
 <sup>1</sup>[Robotics Institute, Carnegie Mellon University](https://www.ri.cmu.edu/) &nbsp;&nbsp; <sup>2</sup>[Intuition](https://intuition.dev/)
 
+<a href='https://shichen.world/HandReel/'><img src='https://img.shields.io/badge/Project-Page-blue' alt='Project page'></a>
 <img src='https://img.shields.io/badge/arXiv-coming_soon-b31b1b' alt='arXiv: coming soon'>
 <a href='LICENSE'><img src='https://img.shields.io/badge/License-Apache_2.0-blue' alt='License: Apache 2.0'></a>
 
