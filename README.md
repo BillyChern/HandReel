@@ -82,8 +82,7 @@ bash scripts/setup_all.sh                # builds them: the uv env, the sam3d an
 ```
 
 `setup_all.sh` needs conda on `PATH`, or `FASTDO_CONDA_BASE` set to your conda or miniforge root. It clones HaWoR to
-`../hawor`, next to this checkout. On a GPU other than an H100, set `TORCH_CUDA_ARCH_LIST` first (for example `8.0`
-on an A100).
+`../hawor`, next to this checkout.
 
 The GPU example (`release/example/run_example.py`) needs exactly these four variables:
 
@@ -92,12 +91,9 @@ The GPU example (`release/example/run_example.py`) needs exactly these four vari
 - `FASTDO_SAM3D_PYTHON`;
 - `FASTDO_HAWOR_ROOT`.
 
-For a CPU-only look, `uv sync --frozen --python 3.12 --extra dev --extra frontend --extra viser` builds only the
-main environment.
-
-[`docs/installation.md`](docs/installation.md) has the rest: the environments and why there are several, every
-host path and environment variable, the flash_attn requirement on A100, H100 and H200 cards, and the notes on
-building by hand. `release/QUICKSTART.md` walks through every step and says which commands were run for this release.
+[`docs/installation.md`](docs/installation.md) has the rest: a CPU-only install, building for a GPU other than
+an H100, the environments and why there are several, every host path and environment variable, the flash_attn
+requirement on A100, H100 and H200 cards, and the notes on building by hand. `release/QUICKSTART.md` walks through every step and says which commands were run for this release.
 
 ### Weights
 
