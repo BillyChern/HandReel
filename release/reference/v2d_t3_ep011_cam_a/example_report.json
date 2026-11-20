@@ -1,0 +1,157 @@
+{
+ "schema": "fastdo.example.report/v2",
+ "clip_id": "v2d_t3_ep011_cam_a",
+ "stub": false,
+ "input": {
+  "file": "track_3/public/videos/chunk-000/observation.images.ego_cam_a/episode_000011.mp4",
+  "path": "episode_000011.mp4",
+  "sha256": "508a4fc94747741f35fd12780e6d5e6e7f78a233e2bf379202515cb9bff32585",
+  "sha256_matches_pin": true,
+  "own_spec": null,
+  "dataset": {
+   "name": "Video to Data (V2D) Challenge Dataset, Track 3 public split",
+   "hf_repo": "nvidia/video_to_data_challenge",
+   "repo_type": "dataset",
+   "revision": "5f68335f3acc802033d1e80728c1633197521de8",
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+   "attribution": "Video to Data (V2D) Challenge Dataset, NVIDIA, CC BY 4.0, https://huggingface.co/datasets/nvidia/video_to_data_challenge"
+  },
+  "object": "beige cup",
+  "box_xyxy": [
+   1225,
+   865,
+   1485,
+   1245
+  ],
+  "keyframe": 0
+ },
+ "camera": {
+  "stream": "ego_cam_a",
+  "hfov_deg": 108.0,
+  "rotation_deg_in_calibration": 180,
+  "distortion": "14-term OpenCV rational model in meta/camera_calibration.json (k1 8.53, k2 10.92, ...)",
+  "frames_rotated": false,
+  "frames_undistorted": false,
+  "intrinsics": "estimated per clip by MoGe-2 (the intrinsics stage), as for internet video; the factory K is not used",
+  "why": "the stored frames are upright (frame 0 viewed 2026-11-07: floor, table and hands at the bottom), so no rotation; Track 3 has no pinhole camera, and the repository has no undistortion step in its V2D path, so the frames go in as recorded",
+  "distortion_at_box_px": "1-44 (box centre 12-16); left and right image edges about 205-259"
+ },
+ "window": [
+  0,
+  137
+ ],
+ "stride": 2,
+ "stages": [
+  "decode",
+  "mask",
+  "shape",
+  "intrinsics",
+  "hands",
+  "geometry",
+  "tracks",
+  "solve"
+ ],
+ "stage_states": {
+  "decode": "done",
+  "mask": "done",
+  "shape": "done",
+  "intrinsics": "done",
+  "hands": "done",
+  "geometry": "done",
+  "tracks": "done",
+  "solve": "done"
+ },
+ "stage_seconds": {
+  "decode": 4.172315331,
+  "mask": 5.243012038,
+  "shape": 33.878066079,
+  "intrinsics": 4.071822659,
+  "hands": 1.438183338,
+  "geometry": 7.128727397,
+  "tracks": 1.30839515,
+  "solve": 3.016100245
+ },
+ "total_seconds": 60.256622237,
+ "delivered": null,
+ "errors": {},
+ "artifacts": [
+  "decode.npz",
+  "geometry.npz",
+  "hands.npz",
+  "hands_hawor.npz",
+  "intrinsics.npz",
+  "mask.npz",
+  "mask_prompt.npz",
+  "mesh.obj",
+  "profile.json",
+  "samples.npz",
+  "sdf.npz",
+  "shape.json",
+  "solve.json",
+  "solve.npz",
+  "source_domain.json",
+  "source_profile.json",
+  "tracks.npz"
+ ],
+ "execution": {
+  "execution": "batched",
+  "batch_log": "batches.jsonl",
+  "batch_run": {
+   "run_id": "20261116T003618Z-506471",
+   "batch_log": "batches.jsonl",
+   "n_batches": 8,
+   "n_retries": 0,
+   "wall_ns_per_stage": {
+    "decode": 4172315331,
+    "mask": 5243012038,
+    "shape": 33878066079,
+    "intrinsics": 4071822659,
+    "hands": 1438183338,
+    "geometry": 7128727397,
+    "tracks": 1308395150,
+    "solve": 3016100245
+   },
+   "overhead_ns": 127764306,
+   "solve_batched": true,
+   "overlapped_ns": 0
+  },
+  "apportionment": {
+   "unattributed_ns": {
+    "decode": 0,
+    "geometry": 0,
+    "hands": 0,
+    "intrinsics": 0,
+    "mask": 0,
+    "shape": 0,
+    "solve": 0,
+    "tracks": 0
+   }
+  },
+  "orchestration_overhead_seconds": 0.127764306
+ },
+ "pins": {
+  "FASTDO_COTRACKER_HUB_REF": "82e02e8029753ad4ef13cf06be7f4fc5facdda4d",
+  "hf_revisions": {
+   "facebook/sam2.1-hiera-large": "665f8e2ad61cf5f53d65644ff27c8ee525124610",
+   "facebook/sam-3d-objects": "2e73555018d2741ccd486e56c24fac41155a1dc6",
+   "Ruicheng/moge-2-vitl": "39c4d5e957afe587e04eec59dc2bcc3be5ecd968",
+   "Ruicheng/moge-vitl": "ad326bfb61facd6c52b5a825bc1e34d7c97d9672"
+  },
+  "dinov2_hub_commit": "7764ea0f912e53c92e82eb78a2a1631e92725fc8"
+ },
+ "host": {
+  "gpus": "NVIDIA H100 80GB HBM3",
+  "driver": "595.91.07",
+  "cuda_visible_devices": "0",
+  "cpu": "x86_64",
+  "python": "3.12.3"
+ },
+ "commit": "release archive: b5323699d092555417f7884ff46a3b5a954b1016 2026-11-16",
+ "created_utc": "2026-11-16T00:37:20Z",
+ "ledger_row": {
+  "file": "timing_ledger.jsonl",
+  "line": 1
+ },
+ "attribution": "ATTRIBUTION.txt"
+}

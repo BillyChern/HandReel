@@ -1,0 +1,97 @@
+{
+  "clip_id": "v2d_t3_ep011_cam_a",
+  "system": "fastdo_example",
+  "n_frames": 137,
+  "fps": 10.0,
+  "stages": [
+    {
+      "name": "decode",
+      "seconds": 4.172315331,
+      "peak_gpu_mem_gb": 0.0,
+      "meta": {
+        "batch_id": "20261116T003618Z-506471-decode-00000",
+        "batch_size": "1",
+        "frames": "137",
+        "attempts": "20261116T003618Z-506471-decode-00000"
+      }
+    },
+    {
+      "name": "mask",
+      "seconds": 5.243012038,
+      "peak_gpu_mem_gb": 0.0,
+      "meta": {
+        "batch_id": "20261116T003618Z-506471-mask-00000",
+        "batch_size": "1",
+        "frames": "69",
+        "attempts": "20261116T003618Z-506471-mask-00000"
+      }
+    },
+    {
+      "name": "shape",
+      "seconds": 33.878066079,
+      "peak_gpu_mem_gb": 0.0,
+      "meta": {
+        "batch_id": "20261116T003618Z-506471-shape-00000",
+        "batch_size": "1",
+        "frames": "69",
+        "attempts": "20261116T003618Z-506471-shape-00000"
+      }
+    },
+    {
+      "name": "intrinsics",
+      "seconds": 4.071822659,
+      "peak_gpu_mem_gb": 4.909487616,
+      "meta": {
+        "batch_id": "20261116T003618Z-506471-intrinsics-00000",
+        "batch_size": "1",
+        "frames": "69",
+        "attempts": "20261116T003618Z-506471-intrinsics-00000"
+      }
+    },
+    {
+      "name": "hands",
+      "seconds": 1.438183338,
+      "peak_gpu_mem_gb": 4.718958377838135,
+      "meta": {
+        "batch_id": "20261116T003618Z-506471-hands-00000",
+        "batch_size": "1",
+        "frames": "69",
+        "attempts": "20261116T003618Z-506471-hands-00000"
+      }
+    },
+    {
+      "name": "geometry",
+      "seconds": 7.128727397,
+      "peak_gpu_mem_gb": 0.0,
+      "meta": {
+        "batch_id": "20261116T003618Z-506471-geometry-00000",
+        "batch_size": "1",
+        "frames": "69",
+        "attempts": "20261116T003618Z-506471-geometry-00000"
+      }
+    },
+    {
+      "name": "tracks",
+      "seconds": 1.30839515,
+      "peak_gpu_mem_gb": 6.811693568,
+      "meta": {
+        "batch_id": "20261116T003618Z-506471-tracks-00000",
+        "batch_size": "1",
+        "frames": "69",
+        "attempts": "20261116T003618Z-506471-tracks-00000"
+      }
+    },
+    {
+      "name": "solve",
+      "seconds": 3.016100245,
+      "peak_gpu_mem_gb": 6.473286144,
+      "meta": {
+        "batch_id": "20261116T003618Z-506471-solve-00000",
+        "batch_size": "1",
+        "frames": "69",
+        "attempts": "20261116T003618Z-506471-solve-00000"
+      }
+    }
+  ],
+  "total_seconds": 60.256622237
+}

@@ -1,0 +1,11 @@
+Structural comparison of the held-out verdict record before and after paper commit 2759d3853.
+Original (the copy the secondaries record hashed): sha256 prefix 79001c891f60. Paper copy: sha256 prefix 8cc081ede8f8.
+Every differing leaf, as a JSON key path. Each is a string that was an absolute path and is now its repo-relative tail; no key, length or type differs.
+n_diffs 7
+/at_bookkeeping/events[3]/user_ruling/doc VAL old_is_abs=True new_endswith_same_tail=True
+/at_bookkeeping/events[4]/user_ruling/doc VAL old_is_abs=True new_endswith_same_tail=True
+/at_bookkeeping/infra_unresolved[0]/user_ruling/doc VAL old_is_abs=True new_endswith_same_tail=True
+/at_bookkeeping/infra_unresolved[1]/user_ruling/doc VAL old_is_abs=True new_endswith_same_tail=True
+/at_bookkeeping/user_ruling/doc VAL old_is_abs=True new_endswith_same_tail=True
+/infra_unresolved_listing[0]/user_ruling/doc VAL old_is_abs=True new_endswith_same_tail=True
+/infra_unresolved_listing[1]/user_ruling/doc VAL old_is_abs=True new_endswith_same_tail=True

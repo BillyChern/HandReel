@@ -1,0 +1,112 @@
+[project]
+name = "fastdo"
+version = "0.1.0"
+description = "HandReel: reconstruct a hand and the object it holds from monocular video as 3D trajectories"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.12"
+dependencies = [
+  "numpy>=2.0",
+  "scipy>=1.14",
+  "torch>=2.8,<2.10",
+  "hydra-core>=1.3",
+  "omegaconf>=2.3",
+  "pyyaml>=6",
+  "tqdm>=4.66",
+  "libigl>=2.6.3",
+  "opencv-python-headless>=5.0.0.93",
+  "trimesh>=5.1.0",
+  "yt-dlp>=2026.8.19",
+  "mujoco>=3.13.0",
+  "pillow>=12.3.0",
+  "decord>=0.6.0",
+  "sam-2",
+  "huggingface-hub>=1.31.0",
+  "threadpoolctl>=3.5",
+  "pyarrow>=18.0",
+  "nullaudit @ {root:uri}/packages/nullaudit",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "rtree>=1.4.1",
+]
+# Front-end adapters that need a package beyond the base install (video decoding,
+# SAM 2 mask propagation): fastdo.io.video, fastdo.shape.masks_sam2. Their imports are lazy
+# (inside the functions that need them), so `fastdo` and its base test suite work with only
+# `--extra dev`; install this extra too (`uv sync --extra dev --extra frontend`) to actually run
+# decode_frames/propagate_masks_sam2 against real data, or the frontend-dependent tests that are
+# otherwise skipped (see tests/shape/test_masks_sam2.py).
+# `moge`: the open MoGe-2 depth/pointmap model, `fastdo.geometry.moge_model.run_moge`.
+# No PyPI release exists for this package (verified: pypi.org/simple/moge/ 404s), so it is pinned
+# to a specific commit of the upstream repo via `[tool.uv.sources]` below -- the last commit before
+# the MoGe-3 rewrite added a hard `flex-gemm` (compiled CUDA extension) dependency and switched to
+# a cu130-only torch index, both undesirable here (this repo pins torch to cu128; see the note on
+# `[tool.uv.sources].torch` below and `fastdo.io.video`'s docstring for the same cu128/cu13 issue
+# with `torchcodec`). `fastdo.geometry.moge_model` imports `moge.model.v2` lazily, matching
+# `masks_sam2._load_predictor`'s pattern; the checkpoint is the open `Ruicheng/moge-2-vitl`.
+frontend = [
+    "decord>=0.6.0",
+    "sam-2",
+    "huggingface-hub>=1.31.0",
+    "moge",
+    "transformers>=5.17.0",
+]
+
+# The simulator backend for `fastdo.policy.env_warp.WarpEnv` (batched GPU physics). Imported lazily, so the
+# base suite runs without it (the Warp tests are skipped). mujoco-warp 3.13.0 is the PyPI release made with mujoco
+# 3.13.0 (its sources equal commit d1a55b6, tag v3.13.0, file for file) and warp-lang 1.15.0 the version its own lock
+# file tests. The baseline's commit 5d5a645 (warp-lang 1.10.1) fails on mujoco 3.13: put_data reads the removed
+# MjData.qM. A PyPI pin, not a `git` source or GitHub archive: uv merges a git dependency's own [tool.uv.sources]
+# (mujoco_warp routes mujoco to its nightly index, replacing the base mujoco 3.13.0 with a dev build), and GitHub
+# does not promise byte-stable archive tarballs for a locked hash.
+policy = ["mujoco-warp==3.13.0", "warp-lang==1.15.0"]
+# The local 3D viewer of one reconstructed clip, scripts/view_clip.py (a Viser server on 127.0.0.1). Only that script
+# imports it; `uv sync --extra viser` (with or without the other extras) installs it.
+viser = ["viser==1.1.1"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+# nullaudit is the in-repo package; a direct reference keeps a plain `pip install` from fetching a PyPI
+# package of that name.
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fastdo"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "timing: wall-clock assertions; contention-sensitive on the shared host, excluded from the merge gate and run separately",
+  "slow: long CPU runs of real data through external conda envs (the real CoACD scene build; also marked timing, so the default run skips it)",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+
+# torch is pinned to the CUDA 12.8 (cu128) wheel index: PyPI's default torch wheels moved to CUDA 13, which NVIDIA
+# drivers older than the 580 series cannot initialize (the code was developed on driver 570).
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+# fastdo.audit builds on the in-repo null-audit package (Apache-2.0, numpy only).
+nullaudit = { path = "packages/nullaudit", editable = true }
+sam-2 = { git = "https://github.com/facebookresearch/sam2.git" }
+# Pinned to the last pre-MoGe-3 commit (package version "2.0.0"): see the `frontend` extra comment
+# above for why (avoids a hard `flex-gemm` build dependency and a cu130-only torch index pin).
+moge = { git = "https://github.com/microsoft/MoGe.git", rev = "b942f00bdc2a2a23ebb474fbe034d487e6dcceec" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true

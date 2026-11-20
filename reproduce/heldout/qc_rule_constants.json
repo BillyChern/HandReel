@@ -1,0 +1,55 @@
+{
+ "format": "fastdo.qc.AcceptanceRule",
+ "version": 1,
+ "feature_names": [
+  "reprojection_iou",
+  "laplace_std_ok_frac",
+  "ot_residual_rms_frac",
+  "penetration_depth_m",
+  "track_inlier_ratio"
+ ],
+ "logistic_weights": [
+  0.23852339446443507,
+  0.661349924571286,
+  1.1402299458284597,
+  -0.23700081690998728,
+  -0.08245550071010022,
+  -0.7629798777104007
+ ],
+ "feature_mean": [
+  0.5670151953906605,
+  0.532037037037037,
+  0.10774753669567462,
+  0.013443621426842653,
+  0.5349172202093398
+ ],
+ "feature_std": [
+  0.1319760381741453,
+  0.4153477479350016,
+  0.024966176317220888,
+  0.011368816594907821,
+  0.1686285673200164
+ ],
+ "tau": 0.05,
+ "calibration": {
+  "threshold": 0.6907751134070998,
+  "alpha": 0.1,
+  "n_calibration": 19
+ },
+ "provenance": {
+  "copy": "Constants-only copy of the QC acceptance rule that the held-out test's protocol registered by sha256 (original prefix e564b52e92d3). Every key above is the original's value, unrounded. The original's provenance listed the development clip and sequence IDs it was fitted on, host paths and an internal commit; those are left out, so this file's sha256 differs from the registered one.",
+  "registered_sha256_prefix_of_original": "e564b52e92d3",
+  "n_clips": 71,
+  "n_skipped": 2,
+  "n_good": 39,
+  "n_bad": 32,
+  "alpha": 0.1,
+  "tau": 0.05,
+  "fit_fraction": 0.5,
+  "seed": 42,
+  "laplace_std_threshold": 0.01,
+  "coverage_guaranteed": true,
+  "shape_source": "template (GT YCB mesh)",
+  "label": "pose_error_m: mean per-frame translation error (m) of the solved poses in the GT YCB template's frame against DexYCB's GT object poses, over the solve rows whose GT pose is valid (confidence > 0)"
+ }
+}

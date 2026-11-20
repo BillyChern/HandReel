@@ -1,0 +1,582 @@
+{
+ "acceptance_calibration": {
+  "allow_unguaranteed": false,
+  "alpha": 0.1,
+  "artifact_root": "./outputs/calibration/engine",
+  "dexycb_sequences": [],
+  "features_out": "./outputs/qc/acceptance_calibration_features.json",
+  "fit_fraction": 0.5,
+  "out_path": "./outputs/qc/acceptance_rule.json",
+  "overwrite": false,
+  "seed": 42,
+  "tau": 0.05
+ },
+ "bench": {
+  "artifact_root": "./outputs/engine",
+  "batch_sizes": [
+   1,
+   2,
+   4,
+   8,
+   16
+  ],
+  "batched": {
+   "cap_gb": 32,
+   "card_admission": {
+    "max_wait_s": 300,
+    "min_free_gb": {
+     "geometry": 3.0,
+     "hawor_worker": 4.0,
+     "intrinsics": 3.0,
+     "mask": 4.5,
+     "sam3d_worker": 4.0,
+     "solve": 8.5,
+     "tracks": 8.0
+    },
+    "poll_s": 5
+   },
+   "enabled": true,
+   "max_clips_per_wave": 6,
+   "memory_ledger": {
+    "costs_gb": {
+     "geometry": 2.3,
+     "intrinsics": 2.0,
+     "mask": 3.9,
+     "prompt": 0.5,
+     "solve": 9.0,
+     "tracks": 9.0
+    },
+    "resident_gb": 7.0
+   },
+   "oom_retry": {
+    "backoff_s": [
+     10,
+     120
+    ],
+    "max_total_wait_s": 900
+   },
+   "pipeline_depth": 4,
+   "pipeline_resources": {
+    "geometry": "geom",
+    "hands": "hawor_worker",
+    "mask": "mask",
+    "prompt": "prompt",
+    "shape": "sam3d_worker"
+   },
+   "pipeline_waves": true,
+   "prefetch_decode": true,
+   "prewarm": [
+    "shape",
+    "hands"
+   ],
+   "retry_singly": true,
+   "stages": {
+    "encoder": {
+     "max_batch": 1,
+     "unmeasured": true
+    },
+    "geometry": {
+     "budget_gb": 7.27,
+     "fixed_cost_gb": 1.81,
+     "max_batch": 4
+    },
+    "hands": {
+     "budget_gb": 5.77,
+     "fixed_cost_gb": 0.96,
+     "max_batch": 6
+    },
+    "mask": {
+     "budget_gb": 4.38,
+     "fixed_cost_gb": 2.18,
+     "max_batch": 2
+    },
+    "solve": {
+     "budget_gb": 13.39,
+     "fixed_cost_gb": 2.23,
+     "max_batch": 6
+    },
+    "tracks": {
+     "budget_gb": 8.2,
+     "fixed_cost_gb": 4.09,
+     "max_batch": 2
+    }
+   }
+  },
+  "decode_local_probe": false,
+  "decode_packet_table": false,
+  "decode_scale_height": null,
+  "dexycb_sequences": [],
+  "dexycb_shape": "model",
+  "doh_root": null,
+  "fused_sinkhorn": false,
+  "hands_source": "batched",
+  "hoi4d_windows": null,
+  "mask_compile": "none",
+  "mask_variant": "large",
+  "n_frames": 25,
+  "n_surface": 1024,
+  "n_track_queries": 96,
+  "oakink2_windows": null,
+  "out_dir": "./outputs/bench",
+  "overwrite": true,
+  "repeats": 2,
+  "resume": false,
+  "seed": 200,
+  "shape": {
+   "backend": "sam3d",
+   "deterministic": null,
+   "fast_decimator_min_raw_faces": 250000,
+   "mesh_postprocess_impl": "fast",
+   "min_component_area_frac": 0.003,
+   "sam3d_cuda_graph_slat": true,
+   "sam3d_cuda_graph_ss": true,
+   "sam3d_expandable_segments": true,
+   "sam3d_pythonpath": null,
+   "sparse_structure_shortcut": false,
+   "sparse_structure_solver": null,
+   "spconv_kernel_pin": null,
+   "structured_latent_solver": "ab2r",
+   "structured_latent_steps": 12,
+   "wall_qc": "off",
+   "wall_qc_max_removed": 0.25,
+   "wall_qc_min_area_ratio": 1.4
+  },
+  "shape_cache_dir": null,
+  "shape_reuse": {
+   "donors": null
+  },
+  "stages": [
+   "decode",
+   "gate",
+   "mask",
+   "shape",
+   "intrinsics",
+   "hands",
+   "geometry",
+   "tracks",
+   "solve",
+   "qc",
+   "retarget"
+  ],
+  "stop_gb": 0,
+  "stride": 3,
+  "whisking_copies": 3,
+  "windows_frame_count": "decoded",
+  "windows_ids": null,
+  "windows_inventory": null,
+  "windows_max_per_video": null,
+  "windows_splits": null
+ },
+ "confidence_calibration": {
+  "error_threshold_m": 0.005,
+  "init_modes": [
+   "pnp",
+   "gt",
+   "gt_perturbed"
+  ],
+  "min_confidence": 0.5,
+  "out": "./outputs/eval/confidence_calibration.json",
+  "reports": [],
+  "synthetic": true,
+  "synthetic_occlusions": [
+   0.0,
+   0.5
+  ],
+  "synthetic_seeds": [
+   11,
+   12
+  ],
+  "target_coverage": 0.9
+ },
+ "contact_stage": {
+  "bias_free": false,
+  "cell": "prod",
+  "constants": null,
+  "enabled": false,
+  "geometric": true,
+  "grid_mm": [
+   -300.0,
+   300.0,
+   2.0
+  ],
+  "hands": "auto",
+  "hands_source": "hawor",
+  "touch_gate_mm": null
+ },
+ "defaults": [
+  "_self_"
+ ],
+ "device": "cuda:0",
+ "dexycb": {
+  "batch_size": 1,
+  "fused_sinkhorn": false,
+  "init": "pnp",
+  "mano_pca": "./data/mano/mano_pca.npz",
+  "max_frames": 100,
+  "max_sequences": 0,
+  "mode": "oracle",
+  "protocol_metrics": true,
+  "root": "./data/dexycb",
+  "ycb_models": "./data/dexycb/models"
+ },
+ "driftqc_stage": {
+  "constants_path": null,
+  "detector_path": null,
+  "enabled": false,
+  "trackweight_constants_path": null
+ },
+ "frame_idx": 0,
+ "gate_data": {
+  "contact_m": 0.015,
+  "crop": "letterbox",
+  "dexycb_allowed_subjects": [
+   "20200820-subject-03",
+   "20200903-subject-04",
+   "20200908-subject-05",
+   "20200918-subject-06"
+  ],
+  "dexycb_exclude_files": [],
+  "dexycb_ids_file": null,
+  "doh_root": null,
+  "free_m": 0.03,
+  "index_path": "./outputs/gate/index.json",
+  "min_negative_frames": 4,
+  "n_object_points": 2048,
+  "overwrite": false,
+  "still_m": 0.005,
+  "stride": 3,
+  "token_dir": "./outputs/gate/tokens",
+  "val_every": 5,
+  "val_subject": "20200918-subject-06",
+  "work_dir": "./outputs/gate/work"
+ },
+ "gate_stage": {
+  "model_path": null
+ },
+ "gate_train": {
+  "alpha": 0.05,
+  "batch_size": 64,
+  "bundle_path": "./outputs/gate/gate_bundle.pt",
+  "card_path": "./outputs/gate/gate_card.json",
+  "hidden": 128,
+  "index_path": "./outputs/gate/index.json",
+  "lr": 0.001,
+  "max_fpr": null,
+  "min_val_auroc": 0.9,
+  "overwrite": false,
+  "seed": 42,
+  "steps": 400,
+  "weight_decay": 0.01
+ },
+ "geometry_stage": {
+  "ego_motion": {
+   "enabled": false
+  },
+  "hand_depth_scale": null,
+  "hand_sides": "right",
+  "intrinsics_focal_scale": 1.1040399273866555,
+  "intrinsics_moge_num_tokens": null,
+  "moge_batch_size": 2,
+  "moge_cuda_graph": false,
+  "moge_num_tokens": null,
+  "moge_overlap": true,
+  "pointmap_storage": "masked",
+  "row_stride": 1
+ },
+ "hand": "right",
+ "hands": {
+  "backend": "hawor_batched",
+  "batch_invariant": true,
+  "bf16": true,
+  "clips_per_group": 8,
+  "crops_per_backbone_batch": 64,
+  "det_conf": 0.2,
+  "det_frames_per_batch": 16,
+  "deterministic": true,
+  "hawor_python": "/opt/fastdo/miniforge3/envs/hawor/bin/python",
+  "hawor_root": "./third_party/do-as-i-do/reconstruction/modules/HaWoR",
+  "mano_rows_per_batch": 512,
+  "max_clips_per_call": 256,
+  "max_crops_per_group": 4096,
+  "max_fill_gap": 120,
+  "temporal": "source_grid",
+  "timeout_s_base": 120.0,
+  "timeout_s_per_clip": 20.0,
+  "upload_frames_per_chunk": 256,
+  "warm_driver": true,
+  "windows_per_heads_batch": 16
+ },
+ "hands_parity": {
+  "both_detected_ranges": [
+   [
+    0,
+    120
+   ],
+   [
+    129,
+    137
+   ]
+  ],
+  "focal_px": 999.0292358398438,
+  "gap_frame_idx": [
+   123,
+   126
+  ],
+  "job_dir": "./outputs/whisking/hands_parity_job",
+  "n_copies": 4,
+  "notes_path": "./outputs/whisking/hands_parity_notes.md",
+  "reference_npz": "./third_party/do-as-i-do/reconstruction/whisking/whisking/all_hand_meshes.npz",
+  "report": "./outputs/whisking/hands_parity_report.json",
+  "stride": 3,
+  "video": "./third_party/do-as-i-do/reconstruction/whisking/whisking.mp4"
+ },
+ "hoi4d": {
+  "root": "./data/hoi4d"
+ },
+ "isolation": {
+  "arm": "theirs",
+  "arms": [
+   "theirs",
+   "ours",
+   "ours_clearance",
+   "ours_clearance_full",
+   "ours_clearance_10fps_inputs"
+  ],
+  "baseline_root": "/opt/fastdo/handreel/third_party/do-as-i-do/retargeting",
+  "conda_bin": "/opt/fastdo/miniforge3/bin/conda",
+  "conda_env": "retargeting",
+  "data_id": 0,
+  "demo_assets_dir": "/opt/fastdo/handreel/third_party/do-as-i-do/retargeting/outputs/assets",
+  "demo_keypoints_npz": "/opt/fastdo/handreel/third_party/do-as-i-do/retargeting/outputs/mano/right/whisking/0/trajectory_keypoints.npz",
+  "demo_scene_xml": "/opt/fastdo/handreel/third_party/do-as-i-do/retargeting/outputs/sharpa/right/whisking/0/scene.xml",
+  "demo_trajectory_kinematic_npz": "/opt/fastdo/handreel/third_party/do-as-i-do/retargeting/outputs/sharpa/right/whisking/0/trajectory_kinematic.npz",
+  "dry_run_poll_seconds": 5,
+  "dry_run_seconds": 90,
+  "embodiment_type": "right",
+  "engine_stride": 3,
+  "gpu_mem_cap_mib": 11000.0,
+  "mano_dir": "/opt/fastdo/HaWoR/_DATA/data/mano",
+  "mano_left_dir": "/opt/fastdo/HaWoR/_DATA/data_left/mano_left",
+  "mano_left_pkl": "/opt/fastdo/HaWoR/_DATA/data_left/mano_left/MANO_LEFT.pkl",
+  "mano_right_pkl": "/opt/fastdo/HaWoR/_DATA/data/mano/MANO_RIGHT.pkl",
+  "match_recorded_arm": "theirs",
+  "max_sim_steps": 0,
+  "mesh_scale": 0.18086324855404615,
+  "n_per_link_pen": 24,
+  "num_perturb_samples": 2,
+  "num_samples": null,
+  "our_arm": "ours_clearance",
+  "output_root": "/opt/fastdo/handreel/outputs/isolation",
+  "reference_rate": "full",
+  "robot_type": "sharpa",
+  "seed": 0,
+  "stage": "prepare",
+  "task_name": "whisking_c4",
+  "temp_dir": "/opt/fastdo/handreel/temp/tc4",
+  "whisk_obj": "/opt/fastdo/handreel/third_party/do-as-i-do/reconstruction/whisking/video_segmentation/masks/frame_000125_masks/whisk/whisk.obj"
+ },
+ "oakink2": {
+  "root": "./data/oakink2"
+ },
+ "object": "",
+ "paths": {
+  "baseline": "./third_party/do-as-i-do",
+  "conda_base": "/opt/fastdo/miniforge3",
+  "data": "./data",
+  "outputs": "./outputs",
+  "root": "."
+ },
+ "policy_hands": {
+  "dexycb_root": "./data/dexycb",
+  "exclude_subjects": [
+   "subject-07",
+   "subject-08"
+  ],
+  "force": false,
+  "hawor_python": "/opt/fastdo/miniforge3/envs/hawor/bin/python",
+  "hawor_root": "./third_party/do-as-i-do/reconstruction/modules/HaWoR",
+  "joint_tol_mm": 2.0,
+  "label_frac_min": 0.8,
+  "mano_left_pkl": "/opt/fastdo/HaWoR/_DATA/data_left/mano_left/MANO_LEFT.pkl",
+  "mano_pca": "./data/mano/mano_pca.npz",
+  "mano_right_pkl": "/opt/fastdo/HaWoR/_DATA/data/mano/MANO_RIGHT.pkl",
+  "max_seqs": 0,
+  "out_root": "./outputs/policy_refs",
+  "sequences": [],
+  "serial_index": 0,
+  "subjects": [],
+  "threads": 2,
+  "timeout_s": 600.0,
+  "validate_frames": 5
+ },
+ "policy_scenes": {
+  "add_ur3_arm": true,
+  "baseline_root": "/opt/fastdo/handreel/third_party/do-as-i-do/retargeting",
+  "coacd": {
+   "dilate": 0.002,
+   "max_ch_vertex": 256,
+   "max_convex_hull": 32,
+   "preprocess_resolution": 100,
+   "thicken": 0.002,
+   "threshold": 0.05
+  },
+  "dexycb_root": "./data/dexycb",
+  "force": false,
+  "friction_scale": 1.5,
+  "objects": [],
+  "out_root": "./outputs/policy_scenes",
+  "python": "/opt/fastdo/miniforge3/envs/retargeting/bin/python",
+  "sides": [
+   "right"
+  ],
+  "timeout_s": 7200.0
+ },
+ "profile_kinematic": {
+  "clips": [
+   "engine_whisking",
+   "engine_10s",
+   "full_whisking",
+   "full_10s"
+  ],
+  "cprofile_clips": [
+   "engine_whisking",
+   "engine_10s",
+   "full_whisking"
+  ],
+  "engine_stride": 3,
+  "label": "dev",
+  "legacy": false,
+  "repeats": 5,
+  "write_reference": ""
+ },
+ "prompt_stage": {
+  "area_frac": [
+   0.002,
+   0.4
+  ],
+  "candidate_stride": 5,
+  "detect_batch": 1,
+  "detect_prefetch": 2,
+  "device": "cuda",
+  "enabled": false,
+  "hand_score": 0.9,
+  "min_score": null,
+  "obj_score": 0.9,
+  "python": "/opt/fastdo/handreel/temp/hands23/env_hands23/bin/python",
+  "record_refusals": false,
+  "sam2_variant": "large",
+  "weights": "/opt/fastdo/handreel/temp/hands23/weights/model_hands23.pth"
+ },
+ "qc_stage": {
+  "interaction_screen": {
+   "enabled": false,
+   "feature": "touch_frac",
+   "min_value": null,
+   "touch_gate_mm": 56.0
+  },
+  "laplace_std_threshold": 0.01,
+  "rule_path": null,
+  "world_motion_screen": {
+   "enabled": false,
+   "feature": "obj_world_disp_mm",
+   "min_value": null
+  }
+ },
+ "retarget_stage": {
+  "enabled": false,
+  "mano_pkl_path": {
+   "left": "/opt/fastdo/HaWoR/_DATA/data_left/mano_left/MANO_LEFT.pkl",
+   "right": "/opt/fastdo/HaWoR/_DATA/data/mano/MANO_RIGHT.pkl"
+  },
+  "reference_frequency": null,
+  "retarget": {},
+  "scene_xml": "/opt/fastdo/handreel/third_party/do-as-i-do/retargeting/outputs/sharpa/right/whisking/0/scene.xml",
+  "scene_xml_left": "./outputs/retarget_scenes/retarget_placeholder/sharpa/left/retarget_placeholder/0/scene.xml",
+  "side": null,
+  "side_from_prompt": false,
+  "wrist_target": "ik_site"
+ },
+ "sam2_bench": {
+  "bf16": true,
+  "min_iou": 0.9,
+  "out_dir": "./outputs/whisking/sam2_variants",
+  "short_sides": [
+   720,
+   512
+  ],
+  "sizes": [
+   "large",
+   "base_plus",
+   "small",
+   "tiny"
+  ],
+  "warmup_frames": 8
+ },
+ "seed": 42,
+ "skip_retarget": false,
+ "solve_stage": {
+  "anchor_max_px": 2.0,
+  "branch_select": null,
+  "contact_ray_smoother": null,
+  "depth_anchor_gate": {
+   "band": 0.2,
+   "lam": 500.0,
+   "threshold": 0.25
+  },
+  "device": "cuda",
+  "fix_scale": false,
+  "fixed_scale": null,
+  "gate": {
+   "max_offset": 1.0,
+   "min_inliers": 6,
+   "min_points": 20
+  },
+  "grasp_ray_constant": null,
+  "n_anchor_surface": 16384,
+  "per_frame_reanchor": {
+   "band": 0.2,
+   "max_log_shift": 0.3,
+   "occluded_area_frac": 0.25,
+   "perp_k": 1.0,
+   "threshold": 0.25,
+   "vis_min": 5
+  },
+  "per_frame_reanchor_impl": "vectorized",
+  "pnp_min_inliers": 6,
+  "registration": {
+   "estimate_scale": false,
+   "n_iters": 50,
+   "n_mesh": 1024,
+   "n_obs": 512,
+   "scale_range": [
+    0.5,
+    2.0
+   ],
+   "scale_source": "auto"
+  },
+  "seed": 42,
+  "solver": {}
+ },
+ "source_profile": {
+  "domain": null,
+  "study_override": false
+ },
+ "tba_stage": null,
+ "video": "",
+ "whisking": {
+  "adapters_dir": "./outputs/whisking/adapters",
+  "demo_root": "./third_party/do-as-i-do/reconstruction/whisking",
+  "hand_npz": "whisking/all_hand_meshes.npz",
+  "hand_side": "right",
+  "keyframe_frame_idx": 125,
+  "layout_json": "obj_tracking_out/whisk/combined_visualization/layout_camera_frame_optimized.json",
+  "mesh_path": "video_segmentation/masks/frame_000125_masks/whisk/whisk.obj",
+  "n_frames_full": 138,
+  "n_track_queries": 96,
+  "notes_path": "./outputs/whisking/notes.md",
+  "out_dir": "./outputs/whisking",
+  "solver_warmup": false,
+  "stride": 3,
+  "video": "whisking.mp4"
+ }
+}

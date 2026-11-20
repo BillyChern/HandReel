@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/fair-reconstruction-attempt.schema.json",
+  "title": "Reconstruction timing attempt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "study_id",
+    "unit_id",
+    "cluster_id",
+    "arm",
+    "attempt_index",
+    "input_manifest_id",
+    "resource_config_id",
+    "boundary_contract_id",
+    "evidence_status",
+    "regime",
+    "start_utc",
+    "end_utc",
+    "wall_seconds",
+    "outcome",
+    "stages_included",
+    "quality"
+  ],
+  "properties": {
+    "study_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unit_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cluster_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "arm": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attempt_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "input_manifest_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resource_config_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "boundary_contract_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_status": {
+      "enum": [
+        "registered",
+        "descriptive",
+        "modelled"
+      ]
+    },
+    "pass_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "regime": {
+      "enum": [
+        "cold_latency",
+        "warm_latency",
+        "cold_throughput",
+        "warm_throughput"
+      ]
+    },
+    "start_utc": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "end_utc": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "wall_seconds": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "lock_wait_seconds": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "gpu_seconds": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "cpu_core_seconds": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "allocated_shared_seconds": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "shared_allocation_rule_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outcome": {
+      "enum": [
+        "delivered",
+        "failed",
+        "timeout",
+        "refused",
+        "not_run"
+      ]
+    },
+    "failure_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stages_included": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "source_frame_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "processed_frame_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "metric_id",
+        "value"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "scored",
+            "failed",
+            "missing",
+            "not_applicable"
+          ]
+        },
+        "metric_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "enum": [
+              "delivered",
+              "failed",
+              "timeout",
+              "refused"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "start_utc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_utc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "wall_seconds": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "quality": {
+            "properties": {
+              "status": {
+                "const": "scored"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quality": {
+            "properties": {
+              "metric_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

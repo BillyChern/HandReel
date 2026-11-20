@@ -1,0 +1,6 @@
+nullaudit
+Copyright 2026 The HandReel authors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+It contains no third-party code. It reproduces, from its published description, the object-tracking
+success test of DO AS I DO (arXiv:2606.19333); see README.md for the citation.

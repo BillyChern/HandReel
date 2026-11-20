@@ -1,0 +1,52 @@
+{
+ "design": "Bayes posterior mean; prior N(mu, sig^2); likelihood exp(-(C-Cmin)^2/(2 tau^2)) on c = a*delta + b",
+ "grid_mm": [
+  -300,
+  300,
+  2
+ ],
+ "tau_mm": 20.0,
+ "constants": {
+  "prod/hawor": {
+   "a": 0.6804615164552111,
+   "b_mm": -25.25297906790465,
+   "mu_mm": -40.223132429919296,
+   "sig_mm": 86.36277536120018,
+   "n_clips": 75,
+   "n_frames": 1660
+  },
+  "oraclescale/hawor": {
+   "a": 0.5900309477717235,
+   "b_mm": -8.818123995327616,
+   "mu_mm": -6.458000204240722,
+   "sig_mm": 59.06684980986262,
+   "n_clips": 87,
+   "n_frames": 1920
+  },
+  "prod/gt": {
+   "a": 0.7752582537267544,
+   "b_mm": -19.710767155425366,
+   "mu_mm": -39.867481752320984,
+   "sig_mm": 88.48011243793898,
+   "n_clips": 75,
+   "n_frames": 1614
+  },
+  "oraclescale/gt": {
+   "a": 0.7018387390560891,
+   "b_mm": -3.150511299100133,
+   "mu_mm": -7.361543733436667,
+   "sig_mm": 60.21650747459272,
+   "n_clips": 87,
+   "n_frames": 1865
+  }
+ },
+ "provenance": {
+  "promoted_by": "a held-out transfer test on 49 DexYCB clips (2026-09-17): the correction fitted on the 26 gauge clips transfers to held-out clips",
+  "fitted_on": "all 87 GT-labelled DexYCB clips: 26 gauge + 12 realdiag + 49 held-out (prod cell has 75, the 12 realdiag clips have no production-depth solves)",
+  "fitted_utc": "2026-09-17T18:29Z",
+  "fitter": "a one-off refit script of the four cells on all 87 clips (not shipped)",
+  "tau_mm_source": "fixed a priori at the measured HaWoR ruler-noise scale, never fitted",
+  "held_out_validation": "the held-out transfer test used the gauge-26 fit, NOT this one; this refit is calibration for production use",
+  "parity": "fastdo.contact reproduces the study scorer to 5.7e-14 mm on 3 held-out clips"
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "equal/two": {
+  "ratio_of_means": 25.257587775753308,
+  "median_of_ratios": 20.023238399756067,
+  "ratio_of_medians": 24.95268316663292,
+  "theirs_median_s": 3835.0,
+  "ours_median_s": 153.6908866429329
+ },
+ "equal/one": {
+  "ratio_of_means": 38.22924987203884,
+  "median_of_ratios": 30.31566313659623,
+  "ratio_of_medians": 38.68112971030125,
+  "theirs_median_s": 3835.0,
+  "ours_median_s": 99.14395026003321
+ },
+ "equal/two_H": {
+  "ratio_of_means": 30.342197978019573,
+  "median_of_ratios": 22.433771789087572,
+  "ratio_of_medians": 24.868245546584088,
+  "theirs_median_s": 4881.35,
+  "ours_median_s": 196.28847523063422
+ },
+ "equal/one_H": {
+  "ratio_of_means": 45.6751903001022,
+  "median_of_ratios": 33.863941221251,
+  "ratio_of_medians": 37.58613405753362,
+  "theirs_median_s": 4881.35,
+  "ours_median_s": 129.8710314960312
+ },
+ "equal/two_D": {
+  "ratio_of_means": 20.516043659732176,
+  "median_of_ratios": 16.7470140056403,
+  "ratio_of_medians": 17.311153708228684,
+  "theirs_median_s": 2410.4,
+  "ours_median_s": 139.23970872341343
+ },
+ "equal/one_D": {
+  "ratio_of_means": 31.211875955036678,
+  "median_of_ratios": 25.000939537214357,
+  "ratio_of_medians": 26.102811084672492,
+  "theirs_median_s": 2410.4,
+  "ours_median_s": 92.34254472367465
+ },
+ "source_frames/two": {
+  "ratio_of_means": 25.254606762444844,
+  "median_of_ratios": 19.90590949308964,
+  "ratio_of_medians": 24.89618595767161,
+  "theirs_median_s": 3835.0,
+  "ours_median_s": 154.03965918796763
+ },
+ "source_frames/one": {
+  "ratio_of_means": 38.22516083898453,
+  "median_of_ratios": 30.252649602693264,
+  "ratio_of_medians": 38.60127013220221,
+  "theirs_median_s": 3835.0,
+  "ours_median_s": 99.34906252736852
+ },
+ "source_frames/two_H": {
+  "ratio_of_means": 30.139069156843217,
+  "median_of_ratios": 22.262750289372388,
+  "ratio_of_medians": 24.665129268910096,
+  "theirs_median_s": 4881.35,
+  "ours_median_s": 197.9049023737672
+ },
+ "source_frames/one_H": {
+  "ratio_of_means": 45.40514725239876,
+  "median_of_ratios": 33.620815768487965,
+  "ratio_of_medians": 37.39411861104293,
+  "theirs_median_s": 4881.35,
+  "ours_median_s": 130.53790759915063
+ },
+ "source_frames/two_D": {
+  "ratio_of_means": 20.641063830280707,
+  "median_of_ratios": 16.86062874539541,
+  "ratio_of_medians": 17.4482639351595,
+  "theirs_median_s": 2410.4,
+  "ours_median_s": 138.14554897595696
+ },
+ "source_frames/one_D": {
+  "ratio_of_means": 31.381250208088325,
+  "median_of_ratios": 25.445689184051474,
+  "ratio_of_medians": 26.24172984499189,
+  "theirs_median_s": 2410.4,
+  "ours_median_s": 91.85370073688239
+ },
+ "own_seconds/two": {
+  "ratio_of_means": 25.240689236505848,
+  "median_of_ratios": 20.573229054639704,
+  "ratio_of_medians": 25.64499593615799,
+  "theirs_median_s": 3835.0,
+  "ours_median_s": 149.54184471493198
+ },
+ "own_seconds/one": {
+  "ratio_of_means": 38.192983001085864,
+  "median_of_ratios": 32.0633702601395,
+  "ratio_of_medians": 40.124263353791164,
+  "theirs_median_s": 3835.0,
+  "ours_median_s": 95.57807868484264
+ },
+ "own_seconds/two_H": {
+  "ratio_of_means": 30.253889839639346,
+  "median_of_ratios": 23.483124078709572,
+  "ratio_of_medians": 25.510371610915982,
+  "theirs_median_s": 4881.35,
+  "ours_median_s": 191.34766339159296
+ },
+ "own_seconds/one_H": {
+  "ratio_of_means": 45.55755504139748,
+  "median_of_ratios": 36.13883671044668,
+  "ratio_of_medians": 38.55037024147616,
+  "theirs_median_s": 4881.35,
+  "ours_median_s": 126.6226490024259
+ },
+ "own_seconds/two_D": {
+  "ratio_of_means": 20.545385332897435,
+  "median_of_ratios": 17.20210055124821,
+  "ratio_of_medians": 17.821910188770765,
+  "theirs_median_s": 2410.4,
+  "ours_median_s": 135.2492507519618
+ },
+ "own_seconds/one_D": {
+  "ratio_of_means": 31.230271242402637,
+  "median_of_ratios": 23.9632269846836,
+  "ratio_of_medians": 27.05679343244261,
+  "theirs_median_s": 2410.4,
+  "ours_median_s": 89.08668375720367
+ }
+}

@@ -1,0 +1,548 @@
+{
+ "paper_revision": "2b6e3f9348c6ae01d5516b761c8c2b344a40ff08",
+ "paper_revision_note": "the paper-source revision that generated the pinned tables; the frozen source of the submitted main paper holds the same generator and the same records, byte for byte",
+ "generator": {
+  "path": "tools/make_tables.py",
+  "sha256": "887a266cd73512cbf4e507c8b5d3d6fc69fd610d907a979237265ef1d1105d24"
+ },
+ "e1_verdict_record": "2026-10-26-e1-verdict.json",
+ "records": [
+  {
+   "path": "records/2026-10-26-e1-secondaries.json",
+   "sha256": "65f91846ec96d785119a0e9cf5a7d37f6892a421839c318b332fb31606d031cf",
+   "bytes": 88667,
+   "release": "NOT RELEASED: per-unit or dataset-derived rows (HOI4D and DexYCB unit identifiers with the sha256 of each unit's files)"
+  },
+  {
+   "path": "records/2026-10-26-e1-verdict.json",
+   "sha256": "8cc081ede8f82589376180d876aa9be63fb3edd5ed6a03b77c27c995b2f3ad80",
+   "bytes": 59038,
+   "release": "NOT RELEASED: per-unit or dataset-derived rows (DexYCB unit identifiers in its exclusion bookkeeping)"
+  },
+  {
+   "path": "records/2026-10-29-shrm-verdict.json",
+   "sha256": "0c89bf78e0c73f43170f15af443bf2578c85325ed88534cbaf98d57c1f8c5c68",
+   "bytes": 14907,
+   "release": "NOT RELEASED: per-unit or dataset-derived rows (Ego4D video identifiers)"
+  },
+  {
+   "path": "records/2026-10-29-stage-seconds-r0.json",
+   "sha256": "eca664f80896ccba28310c14f59867016c661c0ad132f0281e369c2d71a43cb8",
+   "bytes": 3956,
+   "release": "NOT RELEASED: aggregate only, but names internal file paths"
+  },
+  {
+   "path": "records/2026-10-31-408-speed-attribution.json",
+   "sha256": "4fb7ec8271b531f7803ffff0b79d6168ef3f0d7138d12d772b8dd65cd510d33e",
+   "bytes": 11881,
+   "release": "NOT RELEASED: aggregate only, but names internal file paths"
+  },
+  {
+   "path": "records/2026-10-31-412-cost-gap.json",
+   "sha256": "1a432df542e7cca844601a46f10ad51e79879fbb8fd76521a3135ef636a745ff",
+   "bytes": 12709,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/2026-10-31-412-cost-gap.json"
+  },
+  {
+   "path": "records/2026-10-31-s405-cost-records.json",
+   "sha256": "38fcb121de59bc470c704788fd6d557f80b9495038c03c84374bf637f4a65bb2",
+   "bytes": 3738,
+   "release": "NOT RELEASED: per-unit or dataset-derived rows (per-window rows keyed by Ego4D video identifiers, with timings)"
+  },
+  {
+   "path": "records/SOURCES.json",
+   "sha256": "984d62aab2bcad4547b2f5dcb501b98d5f8b8317dead757a527249a10b9b39ee",
+   "bytes": 8643,
+   "release": "NOT RELEASED: provenance index of the records; names internal file paths"
+  },
+  {
+   "path": "records/medians.json",
+   "sha256": "c925dbcc24a2a97e0d916ddba42ad55c94906fdb20b20b8a03c6c573b10aa22a",
+   "bytes": 3872,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/medians.json"
+  },
+  {
+   "path": "records/s281_analysis.json",
+   "release_path": "records/solve_perframe_contrast.json",
+   "sha256": "53db0fa5f59f8aeb7c003b04e5cebf45502d4704a59f2d79f5d05c0b00286faf",
+   "bytes": 30878,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/solve_perframe_contrast.json"
+  },
+  {
+   "path": "records/s282_analysis.json",
+   "sha256": "53e7e5ffee2be2a8fda11df3ccce9323a073559b8795e052d9c82c754b14725c",
+   "bytes": 32799,
+   "release": "NOT RELEASED: per-unit or dataset-derived rows (per-unit DexYCB rows and per-window Ego4D rows)"
+  },
+  {
+   "path": "records/s395_reported.json",
+   "sha256": "dd9eaf46751303f6283ab956da3327d238b3d0050a910cd4e6edc187364ebc9b",
+   "bytes": 1537,
+   "release": "NOT RELEASED: comparators' published values, with a note naming an internal script and commit"
+  },
+  {
+   "path": "records/s395_score_x1.json",
+   "sha256": "85cee8de94d2ef4ba98615399d255ebe9a221e357e57b3d04d868a599ea2a879",
+   "bytes": 20261,
+   "release": "NOT RELEASED: per-unit or dataset-derived rows (per-unit DexYCB scores)"
+  },
+  {
+   "path": "records/s395_score_x2.json",
+   "sha256": "fd03703bac578c05309b52fa5b97c194a83806187ec24ff2aa45885632772eca",
+   "bytes": 82952,
+   "release": "NOT RELEASED: per-unit or dataset-derived rows (per-window and per-sequence HO3D-v3 scores)"
+  },
+  {
+   "path": "records/s396_partA_safe.json",
+   "release_path": "records/stride_safe_carry.json",
+   "sha256": "fcca22904d2e8ac77f71910b2d20f51acb852e3989549ee7e9815a26c606c503",
+   "bytes": 5240,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/stride_safe_carry.json"
+  },
+  {
+   "path": "records/s405_analysis_subset.json",
+   "release_path": "records/timing_t1_analysis_subset.json",
+   "sha256": "28a0b48956eec01bc2a000677764cbd4c74c0b0f34493101252e122dda0d4b05",
+   "bytes": 2735,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/timing_t1_analysis_subset.json"
+  },
+  {
+   "path": "records/s432-analysis.json",
+   "sha256": "58bef342a8371306cc5e2956f6632960c6bb6e40060a2f0eefa9b523856e1f1d",
+   "bytes": 54617,
+   "release": "NOT RELEASED: per-unit or dataset-derived rows (per-unit HOI4D values keyed by unit identifiers)"
+  },
+  {
+   "path": "records/s432-descriptive.json",
+   "release_path": "records/hoi4d_rerun_descriptive.json",
+   "sha256": "71364890104fb937f44e74d9433fe39b9048d84dfdc55848c57bf3c42db5c0ae",
+   "bytes": 2841,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/hoi4d_rerun_descriptive.json"
+  },
+  {
+   "path": "records/s435_paired.json",
+   "release_path": "records/lm_solve_paired.json",
+   "sha256": "0d9422742c372797b64880ec4949ec260ff89c65a83318b07263fd51db7128cf",
+   "bytes": 9178,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/lm_solve_paired.json"
+  },
+  {
+   "path": "records/s524_contrasts.json",
+   "release_path": "records/solve_arms_contrasts.json",
+   "sha256": "1848e64ea50a0431ce95bf194cf6ca2d2e92e47fb4be6b3197b5a10fe86601b9",
+   "bytes": 8744,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/solve_arms_contrasts.json"
+  },
+  {
+   "path": "records/s524_levels.json",
+   "release_path": "records/solve_arms_levels.json",
+   "sha256": "0467b663e2a7ec4c9b4234b16c2c067653a1b7a58ee506f7ca01f99709c6761b",
+   "bytes": 4307,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/solve_arms_levels.json"
+  },
+  {
+   "path": "records/s548_summary.json",
+   "release_path": "records/solve_window_weighted.json",
+   "sha256": "797204dc985ad2df75e4ec4e86d4b6f850f2c47cb357356c479c1de0252676ac",
+   "bytes": 921,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/solve_window_weighted.json"
+  },
+  {
+   "path": "records/s566_summary.json",
+   "release_path": "records/weak_rows_summary.json",
+   "sha256": "5e9ec2f5f8dd20631b44bc5041fec7cce2bf8f75d6ab2f17e0d1c4e566a34e04",
+   "bytes": 25509,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/weak_rows_summary.json"
+  },
+  {
+   "path": "records/summary_first_order.json",
+   "sha256": "721ecc43a9f42d0c2205a4a0bf83ec285fa5a319bca32c81b909caaf896f491f",
+   "bytes": 8110,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/summary_first_order.json"
+  },
+  {
+   "path": "records/summary_multistart.json",
+   "sha256": "463f1651aa3ab0322a1b0bb1798fd6af6bbb7ff3b81cdf6f99aae22e16c6ab5d",
+   "bytes": 8229,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/summary_multistart.json"
+  },
+  {
+   "path": "records/summary_second_order.json",
+   "sha256": "927aeb62cd31482c3345c6e1b051d47465108ee48d00c2a4256e1816f6b9ceed",
+   "bytes": 11459,
+   "release": "PROPOSED FOR RELEASE: aggregate only; shipped as reproduce/records/summary_second_order.json"
+  },
+  {
+   "path": "records/transcribed.json",
+   "sha256": "e0c22d678bc47f7d07e1a2461aae6d13bc25cd1c0ec56751645076560ed66688",
+   "bytes": 11442,
+   "release": "NOT RELEASED: values transcribed from published papers and internal records; names internal file paths"
+  },
+  {
+   "path": "records/wp1/wp1_delivery_cover.md",
+   "sha256": "14f505f96fd8a140d380c84aee6e586e9f6ba7d472a96efd35dcac49c212ba7f",
+   "bytes": 2250,
+   "release": "NOT RELEASED: transcription of published comparator results, with internal delivery notes"
+  },
+  {
+   "path": "records/wp1/wp1_extra_refs.bib.txt",
+   "sha256": "87412f2931e308c4fd9870154d58eb5dc42e2679159b7b3d99c7ab2a9b656970",
+   "bytes": 469,
+   "release": "NOT RELEASED: a draft bibliography entry that no table reads"
+  },
+  {
+   "path": "records/wp1/wp1_tables.tex.txt",
+   "sha256": "a696c9ad52fd11afeda70afce4c058fe0d5d461d01efe1c3a60a663f19796083",
+   "bytes": 5937,
+   "release": "NOT RELEASED: transcription of published comparator results, with internal delivery notes"
+  },
+  {
+   "path": "records/wp1/wp1_verification.md",
+   "sha256": "7f407a1fdb7ddea1d483d364a34b27ad45eac76cfaaa527137f1cef183fb9fb2",
+   "bytes": 32234,
+   "release": "NOT RELEASED: transcription of published comparator results, with internal delivery notes"
+  }
+ ],
+ "outputs": [
+  {
+   "file": "tables/ablate.tex",
+   "sha256": "89db9caf58d99e74173a2927625e0c62c01c8f8a68b84b1d7d3ceec892c259fb",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "s281_analysis.json",
+    "s282_analysis.json",
+    "s396_partA_safe.json",
+    "s435_paired.json",
+    "s524_contrasts.json",
+    "summary_first_order.json",
+    "summary_multistart.json",
+    "summary_second_order.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "tables/bench.tex",
+   "sha256": "7e81ba4cf9e8a33fa7a5a72deb4171dd63db1ddfbe3795d33e99619c5ae46b93",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-26-e1-secondaries.json",
+    "2026-10-26-e1-verdict.json",
+    "2026-10-31-412-cost-gap.json",
+    "s395_reported.json",
+    "s395_score_x1.json",
+    "s395_score_x2.json",
+    "s405_analysis_subset.json",
+    "s432-analysis.json",
+    "s432-descriptive.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "tables/coverage.tex",
+   "sha256": "503a0088cef04d12d57960e6cb0e9ce51f031cae1c951373a56b31c75377ada8",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-26-e1-verdict.json",
+    "s395_score_x1.json",
+    "s395_score_x2.json",
+    "s405_analysis_subset.json"
+   ]
+  },
+  {
+   "file": "tables/decomp.tex",
+   "sha256": "dc914a4a58d59f499143aeb4514f34f2c1f6a207d623b87eaaf696e594d2d690",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-31-408-speed-attribution.json"
+   ]
+  },
+  {
+   "file": "tables/dexycb.tex",
+   "sha256": "4cc81281f0c5cea196b450a744c7a266f3d9812bd38bc697a560f82dbce1651b",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "s395_reported.json",
+    "s395_score_x1.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "tables/dexycb_ci.tex",
+   "sha256": "9a5e31d4d52b1c68eada9577ff103979498bd95b23208a636c38d7be67ac9a7a",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "s395_reported.json",
+    "s395_score_x1.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "tables/evidence.tex",
+   "sha256": "4bf41e9d10aa1dd799d5b232ec082ad281334a437e8dd97648e8688ed573da57",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-26-e1-verdict.json",
+    "2026-10-29-shrm-verdict.json",
+    "2026-10-31-408-speed-attribution.json",
+    "2026-10-31-412-cost-gap.json",
+    "s281_analysis.json",
+    "s395_score_x1.json",
+    "s395_score_x2.json",
+    "s405_analysis_subset.json",
+    "s432-analysis.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "tables/heldout.tex",
+   "sha256": "90e19b80cbcbb0b4e49b7078b5fa9ceaeebded37e49ddd3e2a822de3844da45e",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-26-e1-secondaries.json",
+    "2026-10-26-e1-verdict.json",
+    "2026-10-31-412-cost-gap.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "tables/ho3d_full.tex",
+   "sha256": "d6a600938c30020849fbe6b3076aa782620d6c6065443b9c69c784deb6cc7dd3",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "s395_reported.json",
+    "s395_score_x1.json",
+    "s395_score_x2.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "tables/hyper.tex",
+   "sha256": "dee303d7b111f12fc85a5e3dc92c0648853016564d2853461962b4147f9dd09d",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [],
+   "released": {
+    "script": "reproduce/make_released_tables.py",
+    "compare": "without % comment lines",
+    "content_sha256": "406d095c6fc56b1aeb27bf5e66b9149255d213a94ee5810048a1f5b803aa3dd4"
+   }
+  },
+  {
+   "file": "tables/main.tex",
+   "sha256": "22606f879956286075a32cf49e987179b320ff7dc43a0e79b6c994b24bed7ac9",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-26-e1-secondaries.json",
+    "2026-10-26-e1-verdict.json",
+    "2026-10-31-412-cost-gap.json",
+    "s395_reported.json",
+    "s395_score_x1.json",
+    "s395_score_x2.json",
+    "s405_analysis_subset.json",
+    "s432-analysis.json",
+    "s432-descriptive.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "tables/main_time.tex",
+   "sha256": "627f90a96eb66accea15b7c4078c8e8931fbc11b31652dc49054ddcc037bb4a3",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-26-e1-secondaries.json",
+    "2026-10-26-e1-verdict.json",
+    "2026-10-31-412-cost-gap.json",
+    "s395_reported.json",
+    "s395_score_x1.json",
+    "s395_score_x2.json",
+    "s405_analysis_subset.json",
+    "s432-analysis.json",
+    "s432-descriptive.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "tables/optim.tex",
+   "sha256": "ff9aba8ef191ca1785aeac40e1bca3da037de8aca8beda93f876f3b71f3917c1",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "summary_first_order.json",
+    "summary_multistart.json",
+    "summary_second_order.json"
+   ],
+   "released": {
+    "script": "reproduce/make_released_tables.py",
+    "compare": "without % comment lines",
+    "content_sha256": "3d2ec4d6f52b69e8070442d97e58971a1046d43c5b498bbd198c385ab528cce2"
+   }
+  },
+  {
+   "file": "tables/runtimes.tex",
+   "sha256": "df05f27c37219a75fde87751d0fa31a01434c3dbc9f0d5bbf304bb12fe405541",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "transcribed.json",
+    "wp1/wp1_tables.tex.txt"
+   ]
+  },
+  {
+   "file": "tables/s566.tex",
+   "sha256": "23d5b2f82486b4b45a1848467615fd7563b21cf7b4f7c2e4c5c0df13686b8829",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "s566_summary.json"
+   ],
+   "released": {
+    "script": "reproduce/make_released_tables.py",
+    "compare": "without % comment lines",
+    "content_sha256": "e105039ab01496ea4e0ad93d7c370b7c64758c327c66402720d9c3891784f7a3",
+    "file": "tables/weak_rows.tex"
+   }
+  },
+  {
+   "file": "tables/solve.tex",
+   "sha256": "15d557f100e85b677fa36bf96c221a2a1c36ed67adf175bdb1897b21642f4aa3",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "s281_analysis.json",
+    "s435_paired.json",
+    "s524_contrasts.json",
+    "s524_levels.json",
+    "s548_summary.json"
+   ],
+   "released": {
+    "script": "reproduce/make_released_tables.py",
+    "compare": "without % comment lines",
+    "content_sha256": "bed7d7c1128af0ae4ad74f3f17e609eb69bb18097552b42259809966d91d9c35"
+   }
+  },
+  {
+   "file": "tables/speed.tex",
+   "sha256": "9f8f9213efdb2a5e91939c6f1a5bbf195042ed3e91600e1a3159725e827abaf7",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-29-shrm-verdict.json",
+    "2026-10-31-412-cost-gap.json",
+    "medians.json",
+    "s405_analysis_subset.json"
+   ]
+  },
+  {
+   "file": "tables/speed_model.tex",
+   "sha256": "d83cfbaad14f2fb8d8b116736631923d673a45ea62749abd7ac9cc0719b9ac7e",
+   "exhibits": [
+    "generator table; not included by the paper source"
+   ],
+   "reads": [
+    "2026-10-29-shrm-verdict.json",
+    "2026-10-31-412-cost-gap.json",
+    "medians.json",
+    "s405_analysis_subset.json"
+   ]
+  },
+  {
+   "file": "tables/speed_sens.tex",
+   "sha256": "885a92ade61f7d2b064ef0bcc7f630a678a743c06e8e936f5541a2c3795d4f0c",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-29-shrm-verdict.json",
+    "s405_analysis_subset.json"
+   ]
+  },
+  {
+   "file": "tables/stride.tex",
+   "sha256": "41cb76da8e3d4eaad4e9f9b9373f310506815f48b9128dc8dd2c132964e552ef",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "s396_partA_safe.json"
+   ],
+   "released": {
+    "script": "reproduce/make_released_tables.py",
+    "compare": "without % comment lines",
+    "content_sha256": "75f941f080f3596896dddcefb4dad04dea5ec46311038cd1017a6be9698eb515"
+   }
+  },
+  {
+   "file": "tables/supp_reported.tex",
+   "sha256": "4216dacf8ffc1a2bab645a85bede113c558e40aeda7363f82867c3b2bf8624b8",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "s395_reported.json",
+    "s395_score_x1.json",
+    "s395_score_x2.json",
+    "transcribed.json",
+    "wp1/wp1_tables.tex.txt"
+   ]
+  },
+  {
+   "file": "tables/t2_evidence.tex",
+   "sha256": "e5a35df24c8683a4a4d5ee5e87e5cf1531393432e73bf7ec444ef989a9c1135d",
+   "exhibits": [
+    "generator table; not a table of the submitted main paper"
+   ],
+   "reads": [
+    "2026-10-26-e1-verdict.json",
+    "2026-10-29-shrm-verdict.json",
+    "2026-10-31-408-speed-attribution.json",
+    "2026-10-31-412-cost-gap.json",
+    "s281_analysis.json",
+    "s395_score_x1.json",
+    "s395_score_x2.json",
+    "s405_analysis_subset.json",
+    "s432-analysis.json",
+    "transcribed.json"
+   ]
+  },
+  {
+   "file": "e1_results.tex",
+   "root": "out",
+   "compare": "body",
+   "sha256": "a8d02b125a5e28a9ed097aaab3aec50b785b4938d56adac10d5e196a5fce7c9d",
+   "exhibits": [
+    "held-out test macros; no table or section of the submitted main paper prints them"
+   ],
+   "reads": [
+    "2026-10-26-e1-verdict.json"
+   ]
+  }
+ ]
+}

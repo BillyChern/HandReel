@@ -1,0 +1,665 @@
+{
+ "_note": "alongray 0.3.1 pool_rows outputs with >= 2 clusters; floats as float.hex",
+ "output": {
+  "one_then_two_group_B": {
+   "cohort": "scored units only: 6 of 6 assigned (0 failed, 0 excluded, 0 missing); failed, excluded and missing units are not in any statistic",
+   "excluded_reasons": {},
+   "failure_policy": "report",
+   "mean_e_par": "0x1.5d2527fd04769p+5",
+   "mean_gauge_part": "0x1.4f0184489401cp+5",
+   "mean_off_orbit_part": "0x1.1f673e7ec12f8p+3",
+   "mean_oracle_floor": "0x1.1d85e5643d74ep+3",
+   "mean_shift_part": "0x1.49cea033cd99fp+5",
+   "median_abs_log_lam": "0x1.079477036c2a0p-4",
+   "median_collinearity": "0x1.f7fcf70211220p-1",
+   "median_e_par": "0x1.3988a9200343fp+5",
+   "median_gauge_part": "0x1.2c5487af6c095p+5",
+   "median_off_orbit_part": "0x1.2f8019db44a0ep+3",
+   "median_oracle_floor": "0x1.2e4cc616d61fap+3",
+   "median_shift_part": "0x1.266de547a5fbcp+5",
+   "median_unit_gauge_share": "0x1.c237f711e4022p-1",
+   "n_assigned": 6,
+   "n_clusters": 2,
+   "n_excluded": 0,
+   "n_failed": 0,
+   "n_low_n": 0,
+   "n_missing": 0,
+   "n_scored": 6,
+   "n_units": 6,
+   "pooled_share": {
+    "gauge": "0x1.f01702f5032f9p-1",
+    "off_orbit": "0x1.fd1fa15f9a440p-6",
+    "pure_shift_null": "0x1.f62a7cda14460p-1",
+    "shift": "0x1.e2b97fafd02f3p-1",
+    "shift_scale": "0x1.f105a26c5ffa4p-1"
+   },
+   "pooled_share_ci95": {
+    "gauge": [
+     "0x1.eb23739520f6bp-1",
+     "0x1.f2d8f367582d0p-1"
+    ],
+    "off_orbit": [
+     "0x1.a4e19314fa77cp-6",
+     "0x1.4dc8c6adf0cc1p-5"
+    ],
+    "pure_shift_null": [
+     "0x1.f4922159676f3p-1",
+     "0x1.f907b85cac54ap-1"
+    ],
+    "shift": [
+     "0x1.e25568533f8c6p-1",
+     "0x1.e36d381b7ad37p-1"
+    ],
+    "shift_scale": [
+     "0x1.ebecb62900489p-1",
+     "0x1.f3dc61d226ce1p-1"
+    ]
+   },
+   "rms_e_par": "0x1.9b068ed3d72dcp+5",
+   "rms_gauge_part": "0x1.9496ca4c4242ep+5",
+   "rms_off_orbit_part": "0x1.21d249c599eb6p+3",
+   "rms_oracle_floor": "0x1.230fd346e478dp+3",
+   "rms_shift_part": "0x1.8f1a0bfc05ea8p+5"
+  },
+  "three_clusters": {
+   "all": {
+    "cohort": "scored units only: 9 of 9 assigned (0 failed, 0 excluded, 0 missing); failed, excluded and missing units are not in any statistic",
+    "excluded_reasons": {},
+    "failure_policy": "report",
+    "mean_e_par": "0x1.5442f9dde032cp+5",
+    "mean_gauge_part": "0x1.46d7ca817f13dp+5",
+    "mean_off_orbit_part": "0x1.1c12fb6739e1ap+3",
+    "mean_oracle_floor": "0x1.19b7730f4093fp+3",
+    "mean_shift_part": "0x1.43ed35ad62eb1p+5",
+    "median_abs_log_lam": "0x1.c95562cafbb9ap-5",
+    "median_collinearity": "0x1.f63a141c78876p-1",
+    "median_e_par": "0x1.0891d624170e1p+5",
+    "median_gauge_part": "0x1.f31dc5e2dc8afp+4",
+    "median_off_orbit_part": "0x1.0e7f937399109p+3",
+    "median_oracle_floor": "0x1.20d87d617290bp+3",
+    "median_shift_part": "0x1.ebacf83a3af76p+4",
+    "median_unit_gauge_share": "0x1.e905939716523p-1",
+    "n_assigned": 9,
+    "n_clusters": 3,
+    "n_excluded": 0,
+    "n_failed": 0,
+    "n_low_n": 0,
+    "n_missing": 0,
+    "n_scored": 9,
+    "n_units": 9,
+    "pooled_share": {
+     "gauge": "0x1.eef3ae956813ap-1",
+     "off_orbit": "0x1.10c516a97ec18p-5",
+     "pure_shift_null": "0x1.f58e9084e9b3fp-1",
+     "shift": "0x1.e6562f5ae1552p-1",
+     "shift_scale": "0x1.efe5570678d92p-1"
+    },
+    "pooled_share_ci95": {
+     "gauge": [
+      "0x1.c8efc78d35558p-1",
+      "0x1.f38e6df1685c2p-1"
+     ],
+     "off_orbit": [
+      "0x1.8e3241d2f47d1p-6",
+      "0x1.b881c396554cdp-4"
+     ],
+     "pure_shift_null": [
+      "0x1.f4ce3e511d8cep-1",
+      "0x1.f6d71353d4e8ep-1"
+     ],
+     "shift": [
+      "0x1.bfeda2d63d97cp-1",
+      "0x1.eb8541e723743p-1"
+     ],
+     "shift_scale": [
+      "0x1.c9571bac34341p-1",
+      "0x1.f4900b577714dp-1"
+     ]
+    },
+    "rms_e_par": "0x1.8cdc75e5d61dep+5",
+    "rms_gauge_part": "0x1.8632b50b77ae9p+5",
+    "rms_off_orbit_part": "0x1.21ab3b8c89269p+3",
+    "rms_oracle_floor": "0x1.1f104908d3f55p+3",
+    "rms_shift_part": "0x1.82c9886f513fap+5"
+   }
+  },
+  "two_clusters": {
+   "all": {
+    "cohort": "scored units only: 6 of 6 assigned (0 failed, 0 excluded, 0 missing); failed, excluded and missing units are not in any statistic",
+    "excluded_reasons": {},
+    "failure_policy": "report",
+    "mean_e_par": "0x1.252669a2e6d76p+5",
+    "mean_gauge_part": "0x1.1918a5e88f7cdp+5",
+    "mean_off_orbit_part": "0x1.0754d07f3c1f3p+3",
+    "mean_oracle_floor": "0x1.174984942de3bp+3",
+    "mean_shift_part": "0x1.1526c5d1610e1p+5",
+    "median_abs_log_lam": "0x1.9fcfcec9ab88cp-5",
+    "median_collinearity": "0x1.f72bcac6662c1p-1",
+    "median_e_par": "0x1.e4afe362ef92cp+4",
+    "median_gauge_part": "0x1.d349e396de10fp+4",
+    "median_off_orbit_part": "0x1.198977d6741eap+3",
+    "median_oracle_floor": "0x1.2170ed3113499p+3",
+    "median_shift_part": "0x1.cfddbccf28c37p+4",
+    "median_unit_gauge_share": "0x1.d93e39ecc253fp-1",
+    "n_assigned": 6,
+    "n_clusters": 2,
+    "n_excluded": 0,
+    "n_failed": 0,
+    "n_low_n": 0,
+    "n_missing": 0,
+    "n_scored": 6,
+    "n_units": 6,
+    "pooled_share": {
+     "gauge": "0x1.eb4e76ed0b896p-1",
+     "off_orbit": "0x1.4b18912f477a3p-5",
+     "pure_shift_null": "0x1.f6f0ef70c4a51p-1",
+     "shift": "0x1.dfe6c74a221b3p-1",
+     "shift_scale": "0x1.ed8eff6e56e77p-1"
+    },
+    "pooled_share_ci95": {
+     "gauge": [
+      "0x1.cc568c5a3655ap-1",
+      "0x1.f300158b9cc5ap-1"
+     ],
+     "off_orbit": [
+      "0x1.9ffd4e8c67669p-6",
+      "0x1.9d4b9d2e4d5f6p-4"
+     ],
+     "pure_shift_null": [
+      "0x1.f6d0c05ee63f8p-1",
+      "0x1.f7727a85a9a1ap-1"
+     ],
+     "shift": [
+      "0x1.c3efa62c281f0p-1",
+      "0x1.e6d9665df4e5bp-1"
+     ],
+     "shift_scale": [
+      "0x1.d5c71c7cb9057p-1",
+      "0x1.f3777a7f45881p-1"
+     ]
+    },
+    "rms_e_par": "0x1.4acf6e511efacp+5",
+    "rms_gauge_part": "0x1.440e5fde37ad7p+5",
+    "rms_off_orbit_part": "0x1.0a062a62150afp+3",
+    "rms_oracle_floor": "0x1.19e4ccd652c95p+3",
+    "rms_shift_part": "0x1.4045d6362b13ap+5"
+   }
+  }
+ },
+ "rows": {
+  "one_then_two": [
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9793274044153096,
+     "e_par": 0.020330089344070056,
+     "gauge_part": 0.018246654677193243,
+     "lam": 0.9705950882291461,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.008965050241305637,
+     "oracle_floor": 0.009236653214124957,
+     "shift_part": 0.01800948005205413,
+     "shift_scale_part": 0.018249656117055726,
+     "z_rms": 0.6205308425811802
+    },
+    "unit_id": "A0",
+    "video": "only"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.983827599930474,
+     "e_par": 0.008324772106381658,
+     "gauge_part": 0.0023732384874536236,
+     "lam": 1.0039773320232035,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.007979321381224013,
+     "oracle_floor": 0.007947710696957846,
+     "shift_part": 0.0028958202983609287,
+     "shift_scale_part": 0.004877168213956054,
+     "z_rms": 0.5966910666769346
+    },
+    "unit_id": "A1",
+    "video": "only"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9895239948715661,
+     "e_par": 0.0865796900729975,
+     "gauge_part": 0.08641687738861209,
+     "lam": 1.140995585250209,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.0053071683163328515,
+     "oracle_floor": 0.004651348686129265,
+     "shift_part": 0.08586763079802508,
+     "shift_scale_part": 0.08642190413919723,
+     "z_rms": 0.6129048454620605
+    },
+    "unit_id": "A2",
+    "video": "only"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9815925086502314,
+     "e_par": 0.09247671732953065,
+     "gauge_part": 0.09220667278710365,
+     "lam": 1.1532689082144334,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.007062063549552978,
+     "oracle_floor": 0.006123518547367177,
+     "shift_part": 0.09134861502797285,
+     "shift_scale_part": 0.09220668159903478,
+     "z_rms": 0.6016006368238781
+    },
+    "unit_id": "A3",
+    "video": "only"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9813114221748284,
+     "e_par": 0.02152516478166168,
+     "gauge_part": 0.018600025850873496,
+     "lam": 0.9683409347561901,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.010833824681271396,
+     "oracle_floor": 0.01118802716318003,
+     "shift_part": 0.01888908702860868,
+     "shift_scale_part": 0.01890675838201367,
+     "z_rms": 0.5875102662581057
+    },
+    "unit_id": "A4",
+    "video": "only"
+   },
+   {
+    "corpus": "B",
+    "split": {
+     "collinearity": 0.9865741439897617,
+     "e_par": 0.017792316643651832,
+     "gauge_part": 0.014945511065372223,
+     "lam": 1.0236771000950862,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.009653923064889462,
+     "oracle_floor": 0.009430633022847476,
+     "shift_part": 0.014508295556065016,
+     "shift_scale_part": 0.015225131155162747,
+     "z_rms": 0.6312221938223737
+    },
+    "unit_id": "B0",
+    "video": "w0"
+   },
+   {
+    "corpus": "B",
+    "split": {
+     "collinearity": 0.9868057144636325,
+     "e_par": 0.07088951529939444,
+     "gauge_part": 0.07054685566591877,
+     "lam": 1.11440896930067,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.006961647436859792,
+     "oracle_floor": 0.0062469413192433884,
+     "shift_part": 0.07006168827524446,
+     "shift_scale_part": 0.07054703387581335,
+     "z_rms": 0.616619973915853
+    },
+    "unit_id": "B1",
+    "video": "w1"
+   },
+   {
+    "corpus": "B",
+    "split": {
+     "collinearity": 0.96774688685126,
+     "e_par": 0.056980899038370184,
+     "gauge_part": 0.0560442128508844,
+     "lam": 0.9083711646280634,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.010289269223112506,
+     "oracle_floor": 0.011327164075409079,
+     "shift_part": 0.054830534054333545,
+     "shift_scale_part": 0.056069513828729704,
+     "z_rms": 0.6116438414107491
+    },
+    "unit_id": "B2",
+    "video": "w0"
+   },
+   {
+    "corpus": "B",
+    "split": {
+     "collinearity": 0.9812091772593946,
+     "e_par": 0.021402558622494933,
+     "gauge_part": 0.019038335997238216,
+     "lam": 0.9679266873542627,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.009778101965391611,
+     "oracle_floor": 0.010102110101044058,
+     "shift_part": 0.01877678589148423,
+     "shift_scale_part": 0.019047692233001713,
+     "z_rms": 0.5935880776496123
+    },
+    "unit_id": "B3",
+    "video": "w1"
+   },
+   {
+    "corpus": "B",
+    "split": {
+     "collinearity": 0.9821295436824914,
+     "e_par": 0.08129829874906708,
+     "gauge_part": 0.08091449901825298,
+     "lam": 1.1327544540701826,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.007890324969082173,
+     "oracle_floor": 0.006965609308116928,
+     "shift_part": 0.079790291864602,
+     "shift_scale_part": 0.08096924301664321,
+     "z_rms": 0.6095049660290595
+    },
+    "unit_id": "B4",
+    "video": "w0"
+   },
+   {
+    "corpus": "B",
+    "split": {
+     "collinearity": 0.9878572751275683,
+     "e_par": 0.01349526771486235,
+     "gauge_part": 0.009765028954446801,
+     "lam": 0.9843329545582655,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.009314851593805698,
+     "oracle_floor": 0.009463110577239467,
+     "shift_part": 0.009387753353738636,
+     "shift_scale_part": 0.010182026327400083,
+     "z_rms": 0.6232846512613249
+    },
+    "unit_id": "B5",
+    "video": "w1"
+   }
+  ],
+  "three_clusters": [
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9809118542436994,
+     "e_par": 0.016031876254272444,
+     "gauge_part": 0.013805694664613278,
+     "lam": 1.0224140978476748,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.008150082886681393,
+     "oracle_floor": 0.007971410902723722,
+     "shift_part": 0.013806782522625153,
+     "shift_scale_part": 0.013839460994828,
+     "z_rms": 0.615938002878196
+    },
+    "unit_id": "A0",
+    "video": "v0"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9770857808767442,
+     "e_par": 0.03228049689791931,
+     "gauge_part": 0.03119476879709026,
+     "lam": 0.9474949088579103,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.00830161909946809,
+     "oracle_floor": 0.008761650349630565,
+     "shift_part": 0.030244739827638048,
+     "shift_scale_part": 0.0314377747434317,
+     "z_rms": 0.5941284572322851
+    },
+    "unit_id": "A1",
+    "video": "v1"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9759108028044722,
+     "e_par": 0.09101990066443294,
+     "gauge_part": 0.0904312734330251,
+     "lam": 1.1449438622733874,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.010334752161745155,
+     "oracle_floor": 0.009026426973654926,
+     "shift_part": 0.08949226267242329,
+     "shift_scale_part": 0.09043691909220286,
+     "z_rms": 0.6239055039285292
+    },
+    "unit_id": "A2",
+    "video": "v2"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.988295870737498,
+     "e_par": 0.03307120922274931,
+     "gauge_part": 0.030884060760030592,
+     "lam": 0.9457028720702955,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.011827073620536836,
+     "oracle_floor": 0.01250612001911919,
+     "shift_part": 0.03072972891565538,
+     "shift_scale_part": 0.030885064320957032,
+     "z_rms": 0.5687973183409344
+    },
+    "unit_id": "A3",
+    "video": "v0"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9835829501627266,
+     "e_par": 0.07885947541597202,
+     "gauge_part": 0.07811551030959468,
+     "lam": 1.126663872333245,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.010806660536626947,
+     "oracle_floor": 0.009591734324672257,
+     "shift_part": 0.07746740571570897,
+     "shift_scale_part": 0.07811551731202389,
+     "z_rms": 0.6167150022389772
+    },
+    "unit_id": "A4",
+    "video": "v1"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9827661874350947,
+     "e_par": 0.05198543536030187,
+     "gauge_part": 0.05129357700919462,
+     "lam": 0.9178670500057048,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.00845307324006764,
+     "oracle_floor": 0.009209474553003184,
+     "shift_part": 0.05144326437331486,
+     "shift_scale_part": 0.05149249425850342,
+     "z_rms": 0.6245188686484214
+    },
+    "unit_id": "A5",
+    "video": "v2"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.97547941179692,
+     "e_par": 0.03120945335364373,
+     "gauge_part": 0.030501084673862654,
+     "lam": 1.0490008400656603,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.0066116421826288,
+     "oracle_floor": 0.006302799702443476,
+     "shift_part": 0.029981531496911226,
+     "shift_scale_part": 0.03051480603517069,
+     "z_rms": 0.6224604442085424
+    },
+    "unit_id": "A6",
+    "video": "v0"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9748198548117768,
+     "e_par": 0.03843969413873125,
+     "gauge_part": 0.037942063684383034,
+     "lam": 0.9386201809487399,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.006165216042397584,
+     "oracle_floor": 0.006568382150238766,
+     "shift_part": 0.03768763862599859,
+     "shift_scale_part": 0.03796885905261632,
+     "z_rms": 0.6181520941385716
+    },
+    "unit_id": "A7",
+    "video": "v1"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.991441015516563,
+     "e_par": 0.009896787000693309,
+     "gauge_part": 0.0035302671301803376,
+     "lam": 0.9947217676858751,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.00924573452607527,
+     "oracle_floor": 0.009294794611346031,
+     "shift_part": 0.0035640711877364217,
+     "shift_scale_part": 0.003569687976466484,
+     "z_rms": 0.6688351175322618
+    },
+    "unit_id": "A8",
+    "video": "v2"
+   }
+  ],
+  "two_clusters": [
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9824907769681078,
+     "e_par": 0.060945412372559425,
+     "gauge_part": 0.06063005529700116,
+     "lam": 0.9048439548441979,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.006191904710499611,
+     "oracle_floor": 0.0068430635772615345,
+     "shift_part": 0.06002117119196477,
+     "shift_scale_part": 0.06063275765131856,
+     "z_rms": 0.6371645143272777
+    },
+    "unit_id": "A0",
+    "video": "v0"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.988690428068821,
+     "e_par": 0.02548882829328924,
+     "gauge_part": 0.02403999615932179,
+     "lam": 0.9622546920617537,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.008471065601480013,
+     "oracle_floor": 0.008803350787856042,
+     "shift_part": 0.023642571994050343,
+     "shift_scale_part": 0.02416504043006367,
+     "z_rms": 0.6369002525731876
+    },
+    "unit_id": "A1",
+    "video": "v1"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9830211872932167,
+     "e_par": 0.06325150478458909,
+     "gauge_part": 0.06255961612113765,
+     "lam": 0.8971638919218956,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.009329913627188506,
+     "oracle_floor": 0.010399341426015327,
+     "shift_part": 0.06167763172573661,
+     "shift_scale_part": 0.06261679907419916,
+     "z_rms": 0.6083428991072222
+    },
+    "unit_id": "A2",
+    "video": "v0"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9804644608120655,
+     "e_par": 0.03509705463072981,
+     "gauge_part": 0.03437108246411793,
+     "lam": 0.93890551333927,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.0071015444797057,
+     "oracle_floor": 0.007563641259756437,
+     "shift_part": 0.034340698287199184,
+     "shift_scale_part": 0.03444119357928373,
+     "z_rms": 0.56258893957138
+    },
+    "unit_id": "A3",
+    "video": "v1"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.9712526707050301,
+     "e_par": 0.02242344878925918,
+     "gauge_part": 0.020482809975970306,
+     "lam": 0.963545347373451,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.009124995950290527,
+     "oracle_floor": 0.00947022989127035,
+     "shift_part": 0.020187887905972816,
+     "shift_scale_part": 0.02048281225382344,
+     "z_rms": 0.5618709410236757
+    },
+    "unit_id": "A4",
+    "video": "v0"
+   },
+   {
+    "corpus": "A",
+    "split": {
+     "collinearity": 0.983182190938237,
+     "e_par": 0.012656288166486458,
+     "gauge_part": 0.008738651153862093,
+     "lam": 0.9858374545025357,
+     "low_n": false,
+     "n_frames": 12,
+     "off_orbit_part": 0.009155195583069351,
+     "oracle_floor": 0.009286719165776839,
+     "shift_part": 0.00799363086613635,
+     "shift_scale_part": 0.010156463894283492,
+     "z_rms": 0.6170254602484189
+    },
+    "unit_id": "A5",
+    "video": "v1"
+   }
+  ]
+ }
+}

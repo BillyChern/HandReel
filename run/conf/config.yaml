@@ -1,0 +1,849 @@
+defaults:
+  - _self_
+
+paths:
+  root: ${oc.env:FASTDO_ROOT,.}
+  data: ${paths.root}/data
+  outputs: ${paths.root}/outputs
+  baseline: ${paths.root}/third_party/do-as-i-do
+  # Host paths: each takes an environment variable and defaults to a placeholder under /opt/fastdo
+  # (tests/test_hostpaths.py pins the defaults). An entry point that needs a path that is still a placeholder
+  # stops and names the variable to set. fastdo.hostpaths mirrors these for code that cannot read this config.
+  ext: ${oc.env:FASTDO_EXT_ROOT,/opt/fastdo}                             # holds this checkout and its siblings
+  primary: ${oc.env:FASTDO_PRIMARY_ROOT,${paths.ext}/handreel}   # primary checkout (never a worktree)
+  scratch: ${oc.env:FASTDO_SCRATCH_ROOT,${paths.primary}/temp}
+  conda_base: ${oc.env:FASTDO_CONDA_BASE,${paths.ext}/miniforge3}
+  # The user's own MANO models (MANO licence: never shipped). Default: HaWoR's tree in a sibling checkout.
+  mano_dir: ${oc.env:FASTDO_MANO_DIR,${paths.ext}/HaWoR/_DATA/data/mano}
+  mano_left_dir: ${oc.env:FASTDO_MANO_LEFT_DIR,${paths.ext}/HaWoR/_DATA/data_left/mano_left}
+  # Hands23 env (env_hands23/), weights (weights/) and repo (src/) for the internet prompt stage
+  hands23_root: ${oc.env:FASTDO_HANDS23_ROOT,${paths.scratch}/hands23}
+
+seed: 42
+device: cuda:0
+
+video: ""
+frame_idx: 0
+object: ""
+hand: right
+skip_retarget: false
+
+dexycb:
+  root: ${paths.data}/dexycb
+  mano_pca: ${paths.data}/mano/mano_pca.npz
+  ycb_models: ${paths.data}/dexycb/models
+  max_sequences: 0
+  mode: oracle        # or real (SAM 2 + MoGe-2 + CoTracker front end; GT used only for the
+                      # keyframe mask prompt + hand-scale anchor, see fastdo.io.datasets.dexycb_real)
+  init: pnp          # or gt (exact GT poses) / gt_perturbed (GT poses perturbed by 2cm/10deg)
+  max_frames: 100     # cap on frames evaluated per sequence (after the 10fps stride)
+  batch_size: 1       # sequences solved together by solve_trajectories
+  fused_sinkhorn: false  # SolverConfig.fused_sinkhorn: opt into the fused Triton Sinkhorn kernels (CUDA)
+  protocol_metrics: true  # also score scaled ICP per frame (DO AS I DO Table 2 protocol) and per clip;
+                          # false skips both (CPU cost) and leaves their result fields null
+
+hoi4d:                # second labelled benchmark (fastdo.io.datasets.hoi4d, fastdo.bench.hoi4d_bench)
+  root: ${paths.data}/hoi4d
+
+oakink2:              # contiguous windows with GT object identity (fastdo.io.datasets.oakink2; CC BY-SA 4.0,
+  root: ${paths.data}/oakink2   # share-alike; READ-ONLY)
+
+confidence_calibration:  # run/pipeline/calibrate_confidence.py: SolverConfig.confidence_scale
+  reports: []            # eval_solver_dexycb.py reports (dexycb.mode=oracle), one per init mode below
+  init_modes: [pnp, gt, gt_perturbed]
+  out: ${paths.outputs}/eval/confidence_calibration.json
+  error_threshold_m: 0.005  # an accurate frame: per-frame translation error below this ...
+  min_confidence: 0.5       # ... must score above this ...
+  target_coverage: 0.9      # ... on at least this fraction of the accurate frames
+  synthetic: true           # also solve the synthetic box fixture and report the same statistics (never binds the scale)
+  synthetic_occlusions: [0.0, 0.5]
+  synthetic_seeds: [11, 12]
+
+whisking:
+  # Head-to-head (run/pipeline/whisking_headtohead.py): our real front end + M1 solver vs. the DO AS I
+  # DO baseline layout on the shipped whisking demo. Relative file entries resolve against demo_root.
+  demo_root: ${paths.baseline}/reconstruction/whisking
+  video: whisking.mp4
+  keyframe_frame_idx: 125            # the SAM 3D keyframe; snapped to the nearest 10 fps frame (126)
+  mesh_path: video_segmentation/masks/frame_000125_masks/whisk/whisk.obj
+  hand_npz: whisking/all_hand_meshes.npz
+  hand_side: right                   # the demo's config.json anchor_hand
+  layout_json: obj_tracking_out/whisk/combined_visualization/layout_camera_frame_optimized.json
+  adapters_dir: ${paths.outputs}/whisking/adapters   # masks_sam2 / tracks_cotracker adapter caches
+  out_dir: ${paths.outputs}/whisking
+  notes_path: ${paths.outputs}/whisking/notes.md   # the run appends its "Whisking head-to-head" section here
+  stride: 3                          # 29.97 fps source -> ~10 fps operating point
+  n_frames_full: 138                 # frames 0..137, the baseline layout's own range
+  n_track_queries: 96
+  solver_warmup: false               # true: one synthetic solve first, excluded from solver_seconds
+
+# SAM 2.1 variant sweep (run/pipeline/bench_sam2_variants.py) on the whisking inputs above: every
+# size at each short side, bf16. Large at the first short side (the demo's native 720p) is the IoU reference.
+sam2_bench:
+  sizes: [large, base_plus, small, tiny]
+  short_sides: [720, 512]
+  bf16: true
+  warmup_frames: 8                   # untimed propagation around the keyframe before every timed row
+  min_iou: 0.90                      # choose_sam2_variant: fastest row with mean IoU >= min_iou, else large (native)
+  out_dir: ${paths.outputs}/whisking/sam2_variants
+
+# Isolation study on the baseline's physics stage (see run/pipeline/retarget_whisking.py). Every path here
+# is absolute and points at the primary checkout (`paths.primary`, FASTDO_PRIMARY_ROOT), never a worktree:
+# data/outputs must not live under a worktree. The pipelines refuse these paths while they are still the
+# /opt/fastdo placeholder (fastdo.hostpaths.ISOLATION_HOST_KEYS).
+isolation:
+  baseline_root: ${paths.primary}/third_party/do-as-i-do/retargeting
+  demo_scene_xml: ${isolation.baseline_root}/outputs/sharpa/right/whisking/0/scene.xml
+  demo_trajectory_kinematic_npz: ${isolation.baseline_root}/outputs/sharpa/right/whisking/0/trajectory_kinematic.npz
+  demo_keypoints_npz: ${isolation.baseline_root}/outputs/mano/right/whisking/0/trajectory_keypoints.npz
+  demo_assets_dir: ${isolation.baseline_root}/outputs/assets
+  whisk_obj: ${paths.primary}/third_party/do-as-i-do/reconstruction/whisking/video_segmentation/masks/frame_000125_masks/whisk/whisk.obj
+  mano_dir: ${paths.mano_dir}
+  mano_right_pkl: ${isolation.mano_dir}/MANO_RIGHT.pkl
+  # HaWoR keeps the left model in its own tree (run_mano_left: _DATA/data_left/mano_left)
+  mano_left_dir: ${paths.mano_left_dir}
+  mano_left_pkl: ${isolation.mano_left_dir}/MANO_LEFT.pkl
+  mesh_scale: 0.18086324855404615
+  output_root: ${paths.primary}/outputs/isolation
+  temp_dir: ${paths.scratch}/tc4
+  task_name: whisking_c4
+  robot_type: sharpa
+  embodiment_type: right
+  data_id: 0
+  seed: 0
+  n_per_link_pen: 24
+  conda_bin: ${paths.conda_base}/bin/conda
+  conda_env: retargeting
+  num_samples: null
+  # Reduced from the do_as_i_do default (4, i.e. 4096 total envs) for the shared-host
+  # GPU budget: the 90s dry run at the default peaked at ~13.1 GiB (over an ~72 GiB
+  # baseline from another team's processes), over the 11 GiB cap; at num_perturb_samples=2 (2048
+  # total envs) the peak dropped to ~3.98 GiB. Same value used for both arms.
+  num_perturb_samples: 2
+  max_sim_steps: 0
+  gpu_mem_cap_mib: 11000.0
+  dry_run_seconds: 90
+  dry_run_poll_seconds: 5
+  stage: prepare  # prepare | dry_run | run_arm | report | all
+  arm: theirs     # one of `arms` -- only used when stage=dry_run/run_arm
+  # `prepare` writes our current reference as this arm (the first recorded contact-transport arm is
+  # `ours`; `ours_clearance` is the clearance-band reference). `arms` are the arms run_arm accepts and
+  # the report compares; `match_recorded_arm` makes run_arm refuse an env count (num_samples,
+  # num_perturb_samples) that differs from that recorded arm's arm_meta.json.
+  our_arm: ours_clearance
+  arms: [theirs, ours, ours_clearance, ours_clearance_full, ours_clearance_10fps_inputs]
+  match_recorded_arm: theirs
+  # `engine` samples the demo inputs at `engine_stride`, spline-upsamples them (object and
+  # wrist SE(3); hand vertices lerped in the wrist frame) and solves the reference at full rate. `full` uses the
+  # full-rate inputs. The physics check prepares ours_clearance_full (full) and ours_clearance_10fps_inputs.
+  reference_rate: full
+  engine_stride: 3
+
+# Kinematic-reference profiler (run/pipeline/profile_retarget_kinematic.py). Clips: engine_whisking (the
+# 47 stride-3 keys at 50/3 Hz), engine_10s (100 frames, keys forward-backward-forward), full_whisking (138 frames at
+# 50 Hz, the gate clip), full_10s (300 frames). legacy=true selects the earlier merged path.
+profile_kinematic:
+  label: dev
+  repeats: 5
+  legacy: false
+  engine_stride: 3
+  clips: [engine_whisking, engine_10s, full_whisking, full_10s]
+  cprofile_clips: [engine_whisking, engine_10s, full_whisking]
+  write_reference: ""      # repo-relative npz path; empty = do not write
+
+# Batched hand-mesh recovery at 10 fps (fastdo.hands.hawor_batched). The driver runs in the baseline's hawor conda
+# env and imports HaWoR, ultralytics and MANO at runtime; their licences are CC BY-NC-ND 4.0, AGPL-3.0 and the MANO
+# licence.
+# This backend is the research default; a permissively licensed hand backend is a follow-up.
+hands:
+  backend: hawor_batched
+  hawor_python: ${paths.conda_base}/envs/hawor/bin/python
+  hawor_root: ${oc.env:FASTDO_HAWOR_ROOT,${paths.baseline}/reconstruction/modules/HaWoR}
+  det_conf: 0.2
+  det_frames_per_batch: 16           # fixed predict size per clip (last chunk padded): boxes independent of grouping
+  bf16: true
+  temporal: source_grid              # or sampled (HaWoR's windows over the 10 fps rows; ablation only)
+  crops_per_backbone_batch: 64
+  windows_per_heads_batch: 16
+  clips_per_group: 8
+  max_crops_per_group: 4096          # a group closes before exceeding this; a single larger clip runs alone
+  upload_frames_per_chunk: 256
+  max_clips_per_call: 256            # one model load per call
+  max_fill_gap: 120                  # source frames; HaWoR's infiller horizon
+  timeout_s_base: 120.0              # call timeout = timeout_s_base + timeout_s_per_clip * n_clips
+  timeout_s_per_clip: 20.0
+  warm_driver: true                  # one --serve driver per bench run (models loaded once). Default:
+                                     # hands median -0.67/-2.45 s/window (both ABBA pairs),
+                                     # hands.npz AND solve.npz byte-identical 13/13 per pair; ~2.3-3.5 GB resident
+  batch_invariant: true              # fixed-shape backbone/heads/MANO calls so a window's hands do not depend on
+                                     # its batch mates. Default: hands.npz identical
+                                     # 13/13 Ego4D windows across wave sizes 6 vs 3 (off: 0/13); gauge vs off 1.000
+                                     # (solve identical 13/13); hands median 0.99x / 1.09x. false = the old calls
+  mano_rows_per_batch: 512           # MANO rows per call when batch_invariant (last chunk padded); unused when off
+  deterministic: true                # YOLO's NMS without ultralytics' 2.8 s wall-clock limit, which silently drops a
+                                     # stalled 16-frame call's trailing detections (joints up to 58 mm, one solve
+                                     # 133 mm). PRODUCTION DEFAULT: byte-identical to production
+                                     # whenever no call times out (40/40 stressed replays, 51 Ego4D windows, 12 DexYCB
+                                     # 01/02 clips), cost ratio 1.038 (noise, no added computation). false = the old limit
+
+# Parity and speed run on the whisking demo (run/pipeline/hands_whisking_parity.py; GPU).
+hands_parity:
+  video: ${paths.baseline}/reconstruction/whisking/whisking.mp4
+  reference_npz: ${paths.baseline}/reconstruction/whisking/whisking/all_hand_meshes.npz
+  focal_px: 999.0292358398438        # fx of the baseline MoGe run's 0125_intrinsics.txt (fy 999.0292167663574, cx 640, cy 360)
+  stride: 3
+  n_copies: 4
+  both_detected_ranges: [[0, 120], [129, 137]]   # HaWoR's own left chunks; its right chunk is [0, 137]
+  gap_frame_idx: [123, 126]          # the left rows HaWoR infilled inside its 121-128 gap
+  job_dir: ${paths.outputs}/whisking/hands_parity_job
+  report: ${paths.outputs}/whisking/hands_parity_report.json
+  notes_path: ${paths.outputs}/whisking/hands_parity_notes.md   # relative paths resolve against the repository root
+
+# Retarget stage (fastdo.engine.workers_retarget; RetargetStageConfig.from_mapping): the full-rate kinematic reference
+# of every clip the qc stage accepted. The engine rows' object pose and wrist SE(3) are spline-upsampled and the hand
+# vertices lerped in the wrist frame to one reference frame per source frame, then the reference is solved at that rate.
+# scene_xml: the robot scene the reference is solved in (a per-clip scene carrying the clip's object is the physics
+# stage's concern). mano_pkl_path: per-side MANO model for the finger labels (MANO licence; the left model is HaWoR's
+# _DATA/data_left/mano_left/MANO_LEFT.pkl). side: null = right when present, else left.
+# wrist_target: ik_site = the baseline IK-site wrist target (MANO global orient times the fixed MCP-frame offset),
+# which the kinematic reference was solved against and the isolation study validated in physics; mcp = the per-frame
+# MCP geometric frame (human_wrist_poses), not validated in physics. Making mcp the default requires an isolation-study
+# physics re-run with it.
+# reference_frequency: the Hz label of the reference's grid, which stays one frame per source frame (no resampling);
+# null = the source video rate. Another value scales qvel and playback speed by its ratio to the source rate (the
+# baseline's 50 Hz label on the 29.97 fps whisking video: 1.67x), and the worker logs a WARNING when it is >1% off.
+# retarget: RetargetConfig overrides (empty = the RetargetConfig defaults). Knobs, all off by default:
+# retarget.joint_limits
+# (penalty | projected: a projected LM on the Sharpa joint box), retarget.lam_tip (fingertip keypoint prior, 1/m^2; 0 off).
+# scene_xml_left is the left-hand scene (built object-agnostic by run/pipeline/build_retarget_scenes.py with the
+# baseline's own scene stages; its hand is bit-identical to the earlier tomato-can left scene, and the matching right
+# build is bit-identical to scene_xml's hand). A left hand is never solved on the right robot. side_from_prompt: with side
+# null, retarget the INTERACTING hand (prompt.json choice.side, else geometry.npz hand_sides, else the right-when-present
+# rule); the rule was wrong on 25/48 Ego4D windows. enabled: the throughput bench registers the retarget worker only
+# when true (opt-in; needs qc_stage.rule_path).
+retarget_stage:
+  scene_xml: ${isolation.demo_scene_xml}
+  scene_xml_left: ${paths.outputs}/retarget_scenes/retarget_placeholder/sharpa/left/retarget_placeholder/0/scene.xml
+  mano_pkl_path:
+    right: ${isolation.mano_right_pkl}
+    left: ${isolation.mano_left_pkl}
+  side: null
+  side_from_prompt: false
+  wrist_target: ik_site
+  reference_frequency: null
+  enabled: false
+  retarget: {}
+
+# Solve stage (fastdo.engine.workers_solve; SolveStageConfig.from_mapping): the real mode's keyframe registration,
+# anchoring, PnP initialization, gate and M1 solve on the engine's artifacts. device is used as given (cuda; a CPU-only
+# host sets cpu). registration: register_keyframe_pose arguments; its initial scale comes from scale_source (auto =
+# 1/normalization_scale for a metric template, scale_from_extent otherwise; the generated-shape default is provisional).
+# fix_scale: only false is accepted.
+solve_stage:
+  device: cuda
+  seed: ${seed}
+  fix_scale: false        # only false is accepted (SolverConfig has no fix_scale)
+  registration:           # register_keyframe_pose arguments; scale_source: auto | metric_template | extent
+    scale_source: auto
+    estimate_scale: false
+    scale_range: [0.5, 2.0]
+    n_obs: 512
+    n_mesh: 1024
+    n_iters: 50
+  n_anchor_surface: 16384 # dense anchor samples of mesh.obj (the real mode's _N_ANCHOR_SURFACE)
+  anchor_max_px: 2.0      # anchors_from_pose max_px
+  pnp_min_inliers: 6      # pnp_initialize min_inliers
+  gate:                   # gate_init_poses arguments
+    min_inliers: 6
+    max_offset: 1.0
+    min_points: 20
+  solver: {}              # SolverConfig field overrides (e.g. lam_vel, lam_smooth, lam_track, iters_fine)
+  # Certificate-gated depth anchor. null = off (today's stage, byte for byte). A block
+  # {threshold: 0.25, lam: 500.0, band: 0.2} (all three keys required) re-solves a clip with
+  # lam_depth_anchor=lam, depth_anchor_band=band from the same init when its production solve's
+  # |median_t d_t| >= threshold (fastdo.engine.depth_anchor_gate); solve.json then gains a depth_anchor_gate block.
+  # Default: fires on 4/47 held-out lab clips (3392 -> 603 mm, 0 harms) and 3/51 Ego4D windows (every certificate
+  # lowered, 0 QC flips); unflagged solves byte-identical. `null` restores the ungated stage.
+  depth_anchor_gate: {threshold: 0.25, lam: 500.0, band: 0.2}
+  # Per-frame re-anchor "G" after the production solve and the gate, before contact.
+  # null = off (today's stage, byte for byte). A block {threshold: 0.25, band: 0.2, perp_k: 1.0, vis_min: 5} (all four
+  # keys required): a clip whose production certificate >= threshold has every out-of-band / off-mask frame placed at
+  # its pointmap depth on the mask-centroid ray; any other clip only its track-dead frames (< vis_min visible tracks)
+  # pulled to the band edge and onto the mask ray (fastdo.engine.per_frame_reanchor); solve.json gains a
+  # per_frame_reanchor block.
+  # Optional keys of the same block (absent/null = the G above): occluded_area_frac (a frame whose mask area
+  # is below this fraction of the clip's median mask area is only ever moved TOWARD the camera: an occluded mask reads
+  # the background behind the object) and max_log_shift (cap on a frame's along-ray move |log z_new/z_solved|).
+  # Variants: V1 {occluded_area_frac: 0.25}, V2 {occluded_area_frac: 0.25, max_log_shift: 0.3}.
+  # EGOCENTRIC SOURCES: run V2 with dead_frame_branch: false (Ego4D dead-frame moves are sideways snaps onto
+  # fast-moving/border masks; temporal smoothness worse on 230/253 moved frames). Enforced in code by the source
+  # profile.
+  # PRODUCTION DEFAULT: V2. Evidence: dev 17 rescues / 0 harms (262 units, worst +6.6 mm), egocentric HOI4D 1 / 0
+  # (136 windows, low power), one-shot DexYCB subject 07 17 / 0 (332 clips, worst
+  # +3.6 mm, mean -3.42 mm [-6.04, -1.31]); h2h 6-clip mean 84.5 -> 50.2 mm (DO AS I DO 50.5). null restores the old solve.
+  # dead_frame_branch is left UNSET here on purpose: the source profile sets it false for EGOCENTRIC
+  # clips (Ego4D, HOI4D, any S2 windowed source) and third-person lab video keeps the full V2. Setting it true here is
+  # refused for egocentric clips unless source_profile.study_override.
+  per_frame_reanchor: {threshold: 0.25, band: 0.2, perp_k: 1.0, vis_min: 5, occluded_area_frac: 0.25, max_log_shift: 0.3}
+  # How G computes its per-frame observations. reference = the per-frame loop; vectorized = the same bytes from
+  # exact integer mask moments and np.partition (V2 cost 0.72-0.80 s per window on the gpu thread). Not recorded
+  # in any artifact. PRODUCTION DEFAULT vectorized: byte-identical to reference on every artifact of
+  # 72 Ego4D windows x 2 passes + 6 DexYCB lab clips with hands.deterministic on; V2 45 s -> 4.5 s per 72-window pass.
+  per_frame_reanchor_impl: vectorized
+  # Fixed-scale re-solve. null = the solved scale (today's stage, byte for byte). A block
+  # {file: instance_scale.json} reads the window's scale from that per-window file, written by the instance-size fusion
+  # POST-PASS over already-solved windows (fastdo.engine.instance_scale: log-median of s*sigma(T) over the instance's
+  # windows, K >= 3), registers at it and holds it in the LM (SolverConfig.fix_scale); solve.json gains a fixed_scale
+  # block. A window without the file raises. Under test.
+  fixed_scale: null
+  # Branch-robust keyframe registration. null = one registration hypothesis (today's stage, byte for
+  # byte). A block {top_k, seed_offsets, scale_mults, selector, min_rot_deg, min_shift} (all keys required) solves from
+  # each run's top_k distinct hypotheses and keeps the selector's choice (fastdo.engine.branch_select); solve.json
+  # gains a branch_select block. Under test.
+  branch_select: null
+  # Contact-gated along-ray log-depth smoother (fastdo.engine.contact_ray_smoother), applied after G and after
+  # the final track weights. null = off (today's stage, byte for byte). A block spelling every key
+  # {touch_gate_mm: 56.0, max_log_shift: 0.2, meas_floor_mm: 10.0, min_gated_frames: 3, q_floor: 1.0e-6, patch_k: 20,
+  #  contact_eps_mm: 5.0, hands: prompt, grid_mm: [-300.0, 300.0, 2.0]} gates rows by C_min (<= touch_gate_mm),
+  # measures on each gated row the smallest along-ray move that brings the hand's contact patch (patch_k MANO vertices,
+  # mean surface distance <= contact_eps_mm) onto the object, RTS-smooths that log depth over the window and moves each
+  # row along its centroid ray (capped at max_log_shift); clips with < min_gated_frames gated rows are left exactly as
+  # solved. solve.json gains a contact_ray_smoother block. Under test; not in any source profile.
+  contact_ray_smoother: null
+  # ONE along-ray log factor per clip from the grasp onset (fastdo.engine.grasp_ray_constant), at the smoother's
+  # place (at most one of the two). null = off (today's stage, byte for byte). A block spelling every key
+  # {mode: gauge|shift, touch_gate_mm: 56.0, onset_rows: 10, min_gated_frames: 3, max_log_shift: 0.2, patch_k: 20,
+  #  contact_eps_mm: 5.0, hands: prompt, grid_log: [-0.3, 0.3, 0.004]} gates rows by C_min, measures on each
+  # gated row the smallest log factor that brings the hand's contact patch onto the object, takes the median over the
+  # first onset_rows gated rows and applies it to the whole clip: gauge = scale and every translation (image-exact),
+  # shift = translations along the centroid rays at fixed size. Under test; not in any source profile.
+  grasp_ray_constant: null
+
+# QC stage (fastdo.engine.workers_qc.make_qc_worker_from_config): the AcceptanceRule saved by
+# run/pipeline/calibrate_acceptance.py. There is no accept-all default: null refuses to build the qc stage.
+qc_stage:
+  rule_path: null         # a saved AcceptanceRule JSON; null refuses to build the qc stage
+  laplace_std_threshold: 0.01
+  # Opt-in (default off = qc.json byte-identical): reject windows whose hands never touch the solved object
+  # (fastdo.qc.interaction; per-row C_min <= touch_gate_mm, 56 mm). min_value null refuses to build when
+  # enabled. The tested rule (touch_frac >= 0.26) FAILED on Ego4D: driving windows touch a fixed control
+  # (touch_frac ~1) and 9/26 interaction windows lose the object.
+  interaction_screen:
+    enabled: false
+    feature: touch_frac
+    min_value: null
+    touch_gate_mm: 56.0
+  # Opt-in (default off = qc.json byte-identical): reject windows whose solved object does not move relative to
+  # the static scene (fastdo.qc.world_motion; needs geometry_stage.ego_motion.enabled). min_value null refuses to build
+  # when enabled; the window is KEPT (flagged) when the ego-motion self-check fails or too few rows are usable.
+  world_motion_screen:
+    enabled: false
+    feature: obj_world_disp_mm
+    min_value: null
+
+# The `prompt` stage (an S2 precondition): the keyframe and object mask that raw video carries no label for.
+# Hands23 picks the frame where a hand is most confidently HOLDING an object, SAM 2 turns that box into a mask.
+# Measured on 12 DexYCB clips with no labels: median mask IoU 0.761 against GT, 1 of 12 refused, 1.07 GiB peak.
+# Default OFF, and `min_score: null` REFUSES to build, as qc_stage.rule_path does -- no run may use an unset gate.
+# Licence: the weights are non-commercial academic research only, and that propagates to the data produced with them.
+prompt_stage:
+  enabled: false
+  python: ${oc.env:FASTDO_HANDS23_PYTHON,${paths.hands23_root}/env_hands23/bin/python}
+  weights: ${oc.env:FASTDO_HANDS23_WEIGHTS,${paths.hands23_root}/weights/model_hands23.pth}
+  candidate_stride: 5     # every 5th decode row, ends always included (~20 candidates in a 10 s window at stride 3)
+  min_score: null         # interaction_score * p_held_like; set from CALIB or a priori
+  hand_score: 0.9
+  obj_score: 0.9
+  area_frac: [0.002, 0.40]
+  sam2_variant: large
+  device: cuda
+  # Candidate rows per Hands23 forward. 1 = the one-row loop (byte-identical to before the key existed); >1
+  # batches the backbone and RPN, the ROI heads stay per row (Hands23's heads read image 0 only). Opt-in and NOT
+  # exact: scout (72 Ego4D windows, 8 with prefetch 2) kept every decision and chosen row, chosen boxes <= 0.12 px,
+  # but 31/56 SAM 2 masks moved (IoU >= 0.9989) and 10 windows flipped a non-chosen record's object link.
+  detect_batch: 1
+  # CPU threads preparing candidate rows (BGR flip + resize, ~60 ms of a ~180 ms row) ahead of the forward.
+  # 0 = the one-row loop; >0 is data movement only (same tensors, same model calls at detect_batch 1). Scout, 72
+  # Ego4D windows at 2: records byte-identical 72/72, detector 3.51 -> 2.14 s/window (paired 0.62).
+  # Default 2: on 8 matched production passes, decisions / chosen rows / mask_prompt.npz identical in all 8, solves
+  # within float noise; prompt-stage median
+  # 0.47-0.77x (paired per-window 0.76-0.90x), pass wall 0.99x. The registered rule REFUSED on one pass-wall pair
+  # (1.041, the pair carrying the study's own CPU load); the post-hoc replacement pair passed. 0 restores the loop.
+  detect_prefetch: 2
+  # On a refusal, write prompt_refusal.json (every candidate row's Hands23 records, the first gate each
+  # fails, and on the mask path the chosen record and its area). Record only: decisions and built windows unchanged.
+  # false = nothing written (every artifact byte-identical to before the key existed).
+  record_refusals: false
+
+# The `contact` stage: the hand-contact along-ray correction, applied after `solve`, and consumed by `qc`
+# (which then scores and exports the corrected trajectory). Held out on 49 unseen clips: the along-ray quality pass
+# rate went 8/49 -> 17-20/49 at production depth with production hands, for about 47 ms per clip. Default OFF so no
+# existing run changes silently; the engine registers the stage only when this is true.
+contact_stage:
+  # DEPLOYMENT RULE: leave OFF for EGOCENTRIC sources (Ego4D, HOI4D, any S2 windowed source). The fitted
+  # ruler harms there (fresh HOI4D DEV-2: median +24.5 mm vs off, 53/18 worse) and no egocentric-safe variant passed
+  # its test (bias_free+touch_gate_mm=56 is non-harmful on egocentric video but costs +18 mm on DexYCB). Enable it
+  # only for THIRD-PERSON lab video (DexYCB), where the ruler holds. The freeze headline uses the egocentric config
+  # (off).
+  # ENFORCED IN CODE (source_profile below): true with any egocentric clip in the run is REFUSED.
+  enabled: false
+  cell: prod              # prod (the shipped hand-anchored depth) | oraclescale (diagnostic; gains ~nothing)
+  hands: auto             # auto (the side touching the object; 87/87 agreement with the known side) | left | right
+  hands_source: hawor     # which calibration row: hawor (production) | gt
+  constants: null         # null = the package's src/fastdo/contact/constants_production.json
+  grid_mm: [-300.0, 300.0, 2.0]
+  # Both OPT-IN; their defaults leave the fitted ruler unchanged, byte for byte.
+  bias_free: false        # true = zero the constants' intercept b and prior mean mu (DexYCB's solve bias)
+  touch_gate_mm: null     # a number = correct only frames whose minimum contact cost C_min <= it (mm); null = all
+  # PRODUCTION: the GEOMETRIC ruler, a = 1 and b = mu = 0 (sig, tau from the constants file; implies bias_free).
+  # It beat the fitted ruler on DexYCB at every focal operating point. Applies only where contact runs: THIRD-PERSON
+  # clips with enabled true; the egocentric profile keeps contact OFF. false = the fitted ruler, byte for byte.
+  geometric: true
+
+# SOURCE-DOMAIN PROFILE (fastdo.engine.source_domain, fastdo.engine.source_profile): the domain rules above are
+# enforced in code, not by these comments. Every bench clip carries a typed domain fixed by how it enters the bench:
+# bench.windows_inventory (S2 windowed: Ego4D, EK-100) and bench.hoi4d_windows -> egocentric; bench.dexycb_sequences,
+# whisking copies and 100DOH -> third_person. The bench writes it to <clip>/source_domain.json before any stage runs.
+# Egocentric clips get the egocentric profile, applied per clip by the solve (single-stream and batched) and contact
+# workers of build_stage_fns / build_batched_stages:
+#   contact_stage.enabled                             -> false
+#   solve_stage.per_frame_reanchor.dead_frame_branch  -> false   (per_frame_reanchor null stays null)
+# third_person clips keep the config as given (contact when enabled, full V2). A config that EXPLICITLY
+# asks egocentric clips for the opposite (contact_stage.enabled=true, dead_frame_branch=true) is REFUSED before the run
+# unless study_override is true (e.g. a study running contact on HOI4D). Each solved clip writes
+# source_profile.json: its domain and every rule's configured and applied value (solve.json is unchanged).
+# TBA / TBA-V (fastdo.tba).
+# null = OFF: no `tba` stage is registered and every artefact is BASE's byte for byte (KA-ID). A block turns it on
+# ({} = TBA-V as registered; keys: fastdo.tba.config.TbaConfig): CPU, after solve/contact, before qc; writes tba.npz,
+# tba_mesh.obj and tba.json beside the BASE artefacts. qc does not read them (promotion-time change). UNDER TEST.
+tba_stage: null
+
+source_profile:
+  study_override: false
+  # The domain of clip directories WITHOUT source_domain.json (a harness re-solving directories written before
+  # domains were recorded):
+  # egocentric | third_person. null = such a clip is refused. It never relabels a declared clip (that raises).
+  domain: null
+
+# driftqc (v1 = TRUNC; fastdo.engine.workers_driftqc). OPT-IN: enabled false leaves every
+# engine output unchanged (nothing enters tracked engine defaults before engine adoption). When true,
+# every path must be set; the sha256 of each file is asserted in code, never configured.
+# Geometry pointmap storage: dense (default, the full (N,H,W,3) array) | masked (each frame's object
+# pixels + the keyframe; ~16x smaller, solves equal within the solver's own run-to-run floor).
+# masked is refused while driftqc is enabled: driftqc reads tracked, possibly off-object, pixels.
+geometry_stage:
+  hand_sides: right          # whose joints set the metric scale. right (the measured protocol; the default) | auto
+                             # (right whenever it has a valid decode row, else left: recovers the left-only clips
+                             # `right` drops at geometry, byte-identical on every other clip) | left. auto stays
+                             # OPT-IN.
+  hand_depth_scale: null     # per-side hand-depth correction of the metric anchor, {left: f_L, right: f_R} (each
+                             # in [0.8, 1.25]); the clip's metric scale is multiplied by the anchoring side's f, and
+                             # f = 1/(1+r) cancels a relative HaWoR depth bias r (r_R +2.1%, r_L -1.1%). null (or
+                             # both 1.0) = off, byte-identical. Contact is NOT corrected. OPT-IN.
+  pointmap_storage: masked   # bit-identical solves 13/13, geometry+solve -2.86 s/window, 16x less disk
+  row_stride: 1          # 2 is non-inferior on 71 labelled DexYCB clips, but is REFUSED on
+                         # Ego4D: the metric gauge moves (scale 0.71-0.96 on 7/13 windows). Keep 1.
+  moge_batch_size: 2     # MoGe-2 frames per forward (geometry + intrinsics). 8 saves ~0.8 s/1080p window
+                         # but is NOT bit-identical (fp16 kernels); stays 2 until the qc22 71-clip DexYCB gate rules.
+  moge_cuda_graph: false  # CUDA-graph replay of the batch-2 MoGe-2 forward (geometry + intrinsics); the same
+                          # kernels as eager, meant bit-identical. Off until its GPU gate passes.
+  moge_overlap: true      # pipeline the geometry worker's MoGe-2 batches (batch k's CPU shift solve under batch
+                          # k+1's forward; verbatim infer transcription). Default: bit-identical on
+                          # the real model (50 calls x 2 sizes) and on Ego4D (geometry + solve 13/13), 1440p -7.5%
+  intrinsics_moge_num_tokens: null  # the intrinsics stage's MoGe tokens (3 keyframes; null = 3600). Kept separate
+                          # because on internet video K comes from MoGe and fewer tokens moved fx +1.8%
+  intrinsics_focal_scale: 1.1040399273866555  # PRODUCTION: multiply
+                          # the MoGe-2-ESTIMATED fx, fy by a POOLED constant (DexYCB, HOI4D, OakInk2-ego biases, equal
+                          # weight); MoGe-2's focal is biased LOW on lab cameras (DexYCB -11.7%, HOI4D -4.75%, OakInk2 ego
+                          # ~-12%). camera.json clips are unaffected. null = off, byte-identical to before. Camera-domain
+                          # constant: transfer to internet video is UNVERIFIED.
+  moge_num_tokens: null   # MoGe-2 base ViT tokens (geometry worker only); null = MoGe's default 3600, else an
+                          # int in [1200, 3600]. Scout (1440x1920): 2500 -26% MoGe time but depth moves (median
+                          # ratio 0.97); a QUALITY lever: stays null until the qc25 pose gate + an Ego4D gauge rule.
+  # Opt-in (default off): also write ego_motion.npz, the window's camera trajectory (Sim(3) per row) from the
+  # full-frame pointmaps (fastdo.geometry.ego_motion; background KLT tracks outside the object mask and hands, robust
+  # registration, pose graph). geometry.npz is byte-identical either way; needs row_stride 1. Other keys: see
+  # EgoMotionConfig (defaults are a-priori values validated on HOI4D).
+  ego_motion:
+    enabled: false
+
+driftqc_stage:
+  enabled: false
+  constants_path: null             # e.g. the driftqc constants_v2_2.json
+  trackweight_constants_path: null # e.g. the trackweight constants_v2.json
+  detector_path: null              # e.g. the trackweight v1_weights.py
+
+# QC calibration (run/pipeline/calibrate_acceptance.py): features and pose_error_m labels of DexYCB calibration clips
+# the engine ran with bench.dexycb_shape=template into artifact_root; the rule (alpha, tau, fit_fraction, seed) is saved
+# to out_path and the per-clip data to features_out (written first). dexycb_sequences: the calibration ids, fixed with
+# their sha256 before any output (never subject 07/08, the NEW 26 or the OLD held-out 9).
+# allow_unguaranteed: false refuses a threshold without the conformal coverage guarantee; overwrite: false refuses an
+# existing out_path.
+acceptance_calibration:
+  artifact_root: ${paths.outputs}/calibration/engine
+  dexycb_sequences: []
+  out_path: ${paths.outputs}/qc/acceptance_rule.json
+  features_out: ${paths.outputs}/qc/acceptance_calibration_features.json
+  alpha: 0.1
+  # tau matches the 50 mm translation criterion, so the rule's guarantee is about the metric the paper reports.
+  # At the old 0.02 the measured good-clip rate was
+  # 4-14 %, which needed 129-570 calibration clips to certify coverage at all.
+  tau: 0.05
+  fit_fraction: 0.5
+  seed: ${seed}
+  allow_unguaranteed: false
+  overwrite: false
+
+# End-to-end throughput benchmark and yield report (run/pipeline/bench_throughput.py). Writes <out_dir>/manifest.parquet
+# and <out_dir>/yield_report.json; per-clip artifacts and profile.json go to <artifact_root>/<clip_id>/. Clips: the whisking
+# demo whisking_copies times, the explicit "<subject>/<sequence>/<serial>" ids in dexycb_sequences (under dexycb.root), and
+# the official_split == "train" entries of <doh_root>/manifest.json (the 100DOH bundle root, read in place; test-split
+# clips are reserved for final evaluation and never opened; the row's source records the split, "100doh:train").
+# doh_root null (or no train clips) = S2 raw-stream throughput logged as unmeasured.
+# stages: run in STAGE_NAMES order; encoder is left out until transformers is installed (requesting it without the package
+# fails fast); gate has no registered worker: without gate_stage.model_path (the gate bundle) it is accept-all through the
+# persisted flag gate_status: "unbuilt", so the yield is QC-only (run/pipeline/bench_throughput.py); retarget only with
+# retarget_stage.enabled (opt-in);
+# solve is the solve stage worker (solve_stage); qc
+# is registered only with qc_stage.rule_path set, and requesting it without a rule fails fast (no accept-all default).
+# hands_source: batched (HaWoR driver) or precomputed (the demo's npz, reported as borrowed). dexycb_shape: model
+# (bench.shape for every clip) or template (the GT YCB mesh for DexYCB clips, reported as borrowed; calibration only).
+# shape: ShapeConfig fields; sam3d until TRELLIS is installed (needs FASTDO_GPU_MEM_GB >= 19, so an exclusive
+# GPU window). overwrite: remove the benchmark clips' own artifact directories before the run (false refuses to reuse them).
+# resume: reuse them instead -- load <out_dir>/manifest.parquet and skip the stages it records as done, so a run the GPU
+# guard killed mid-corpus costs the interrupted clip and not the corpus (on this
+# shared card a 4 GB job is 60 % likely to be killed within an hour). Contradicts overwrite; the clip set must match.
+# Resume is refused when the stage list or any config key other than bench.resume / bench.overwrite differs from the
+# first run's record (<out_dir>/resume_settings.json), or when that record is absent: after any change of settings use a
+# fresh artifact root and a fresh out_dir (docs/output.md).
+bench:
+  # Solver throughput curve (run/pipeline/bench_solver_throughput.py)
+  batch_sizes: [1, 2, 4, 8, 16]
+  n_frames: 25
+  n_surface: 1024
+  repeats: 2
+  seed: 200
+  fused_sinkhorn: false  # SolverConfig.fused_sinkhorn
+  stop_gb: 0          # exit the process once NVML reports more than this for it (0: no limit)
+  # End-to-end benchmark (run/pipeline/bench_throughput.py)
+  out_dir: ${paths.outputs}/bench
+  artifact_root: ${paths.outputs}/engine
+  whisking_copies: 3
+  dexycb_sequences: []
+  doh_root: null
+  # S2 windowed sources. A JSON list of {video_id, path, source, split?} naming the
+  # LONG videos of the draw; each is cut into 10 s windows at a per-video stride s_v = max(1, floor(fps/10+0.5))
+  # that holds the ~10 fps operating rate, so `stride` below does NOT apply to them. null = no windowed clips.
+  windows_inventory: null
+  # HOI4D windows: a JSON file holding a list (or {"windows": [...]}) of {sequence, start, stop, shift_px}
+  # entries, each ONE 10 s window of a HOI4D video decoded at the
+  # 15 fps operating stride 2; prompt = GT object label of the window's first frame, camera.json = the shipped
+  # calibration (fastdo.bench.hoi4d_bench; shift_px corrects only the GT object pose). null = no HOI4D clips.
+  hoi4d_windows: null
+  # OakInk2 windows: a JSON file holding a list (or {"windows": [...]}) of {sequence, source, k, start, stop}
+  # (fastdo.bench.oakink2_bench): contiguous 10 s image-index windows, stride 3 (30 fps -> 10 fps). source
+  # oakink2_ego (head-mounted view, egocentric) | oakink2_allo (allocentric_top, third_person). No prompt or
+  # camera.json is written: run with prompt_stage.enabled. null = no OakInk2 clips.
+  oakink2_windows: null
+  # Bounded PILOT only: keep the first k windows of each video. A truncated run's window count is not
+  # the S2 corpus, so its yield denominator is not the corpus's. null (all windows) for any real S2 run.
+  windows_max_per_video: null
+  # `D_v`'s numerator for windowed clips: "decoded" counts decoded frames (O(video): up to 235.7 s for a
+  # 1033 s file, paid while PLACING windows), "screened" takes the packet-table route, which is
+  # exact on all 21 Ego4D videos and falls back to decoding on any file with container evidence of
+  # trimming. Default "decoded": that route is a permission a run opts into, not one it inherits.
+  windows_frame_count: decoded
+  # Which splits of the inventory take part; null = all of them. A bounded pilot sets [CALIB]: the
+  # S2 freeze requires windows_max_per_video to be null for the TEST run, so a run that sets it is not
+  # the TEST run and is REFUSED if it selects TEST windows (TEST is one-shot and runs automatically).
+  windows_splits: null
+  # Keep only these window ids (null = all selected windows). A hand-picked study run: it refuses TEST ids.
+  windows_ids: null
+  # The S2 windowing rule's `scale=-2:720:flags=area`, applied to WINDOWED clips only. null decodes at
+  # source size. 720 is the registered value; it is a DISK lever (2.25x fewer bytes on 1920x1080),
+  # not a decode-time one (~7%). Leaving it null keeps every existing run byte-identical, so the
+  # S2 run opts in explicitly rather than the default changing under other experiments.
+  decode_scale_height: null
+  # Window-local ffprobe instead of the whole-file frame table. Wins when a video contributes FEW
+  # windows (41.4x at one, 10.3x at four); the whole-file table wins past ~34 windows per video. Only
+  # for a source whose frame rate has been compared (Ego4D: 20 of 20 exact).
+  decode_local_probe: false
+  # Address a window from the container's PACKET table on a frame-table cache miss, when the trim screen
+  # passes. The table is 144x cheaper (13.55 s -> 0.09 s); full windowed ingest is 1.6x-3.0x, since the
+  # 1.14 s per-window decode is paid either way, and the big win is on videos you index but barely use.
+  # Opt-in: the screen rests on two genuine negatives.
+  decode_packet_table: false
+  stride: 3
+  stages: [decode, gate, mask, shape, intrinsics, hands, geometry, tracks, solve, qc, retarget]
+  hands_source: batched
+  mask_variant: large
+  # How the mask stage's SAM 2.1 video predictor is built (fastdo.shape.sam2_compile).
+  # none = the eager predictor (byte-identical to before); vos_nocg / vos_cg_clone = upstream's torch.compiled VOS
+  # predictor, compile mode "max-autotune-no-cudagraphs" / upstream's cudagraph mode with a step mark + cloned outputs
+  # per call. NOT bit-exact (mask IoU 0.998). vos_nocg passed qc24 pose 0.00 mm (71 clips), an Ego4D gauge check and
+  # an ABBA pair at 2 mask slots: 0 CUDA errors, mask median -0.23/-1.65 s/window. vos_cg_clone is
+  # UNSAFE (illegal memory access on Ego4D at 1 and 2 slots). Compile cost per predictor (per process and
+  # per mask slot): ~28-53 s warm, 145-263 s cold; inductor caches kernels under TORCHINDUCTOR_CACHE_DIR (default
+  # /tmp/torchinductor_<user>). Set none to reproduce the eager masks exactly.
+  # REVERTED to none: vos_nocg is NOT reproducible across processes (max-autotune picks kernels by
+  # timing; a shared inductor cache does not pin them): repeated production passes differed on the masks of 28/28
+  # Ego4D windows and by up to 107 mm / 3% scale on QC-accepted windows. Re-promotion needs a cross-process byte-
+  # identity check (a compile mode whose kernel choice is not timing-based).
+  mask_compile: none
+  n_track_queries: 96
+  overwrite: true
+  resume: false
+  dexycb_shape: model     # model | template (GT YCB mesh; calibration runs only)
+  shape:
+    backend: sam3d
+    sam3d_pythonpath: null  # SAM 3D worker PYTHONPATH prepends; null reads FASTDO_SAM3D_PYTHONPATH (os.pathsep-separated)
+    deterministic: null     # null = backend default (true for sam3d, whose gates passed; false otherwise)
+    spconv_kernel_pin: null  # null = backend default (true for sam3d)
+    # Shape fast path (the default): the fast postprocess + the 0.3% fragment filter. G-time 5.30/4.76/2.11 s
+    # saved (p 3.05e-05), G-benefit 0.603, G-solve-oracle v4 PASS on both merits. To reproduce a
+    # run without the fast path set mesh_postprocess_impl: official and min_component_area_frac: 0.0.
+    mesh_postprocess_impl: fast            # official (SAM 3D's postprocess_mesh) | fast (instrumented fast path)
+    fast_decimator_min_raw_faces: 250000   # VTK below this many raw faces, fast_simplification at or above it
+    min_component_area_frac: 0.003         # fast path drops components below this area fraction; 0 = off
+    wall_qc: 'off'                         # off | fallback (re-run a flagged request on the 25+25 Euler fast path)
+    wall_qc_max_removed: 0.25              # flag <=> the mincut removed a smaller fraction than this ...
+    wall_qc_min_area_ratio: 1.40           # ... and mesh area / convex hull area is at least this
+    sam3d_expandable_segments: true        # PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True at worker start:
+                                           # byte-identical meshes; eager peak reserved 20.66 -> 18.76 GiB (21 GiB cap)
+    sam3d_cuda_graph_ss: true              # CUDA-graph replay of the sparse-structure flow backbone.
+                                           # Default: 11/11 objects sha-identical, ss flow -2.3 s/request (8/8)
+    sam3d_cuda_graph_slat: true            # per-request CUDA-graph replay of the SLAT flow's transformer
+                                           # blocks. Default: 8/8 objects SLAT-latent + mesh sha-identical,
+                                           # 0 eager fallbacks, SLAT -2.09 s/request (8/8), peak <= 19.4 GiB
+    sparse_structure_shortcut: false       # the SS flow via the checkpoint's shortcut path (guidance off; tested
+                                           # with sparse_structure_steps 4). Opt-in
+    structured_latent_steps: 12            # S12, the default, with the solver below. Shape gate (40
+    structured_latent_solver: ab2r         # objects); pose gate (71 clips: post-contact paired median
+                                           # -0.38 mm, harms 4 <= rescues 6); stacked with the SLAT graphs the SAM 3D
+                                           # request is -1.87 s paired (68/71). ab2r = a right-limited AB2; null =
+                                           # `solver`. Earlier runs: structured_latent_steps 25,
+                                           # structured_latent_solver null
+    sparse_structure_solver: null          # the SS flow under the right-limited AB2 (ss_cfg_strength regime; tested
+                                           # with sparse_structure_steps 12). Opt-in until its shape
+                                           # gate, the pose gate and an Ego4D gauge pass; null = `solver`. Not with the
+                                           # shortcut above (refused)
+  shape_cache_dir: null     # per-clip shape cache directory (content-keyed; null = off)
+  # Opt-in: cross-window template reuse (fastdo.engine.shape_reuse). donors: a JSON {clip_id: donor_clip_id}
+  # (e.g. from shape_reuse.plan_donors over an instance key); a listed window copies its donor's mesh/sdf/samples
+  # instead of running SAM 3D (own shape on fallback). null = OFF: the shape worker is unchanged, byte for byte.
+  shape_reuse:
+    donors: null
+  # Batched cross-clip orchestration (fastdo.engine.batched_runner; fastdo.bench.bench_batched).
+  # The default: +34-35%
+  # clips/GPU-hour on the 6-clip clean-rerun family -- 107.55 (d14_rr_single_r1) and 106.26 (d14_rr_single_r2)
+  # against 143.91 (d14_rr_batched), total 200.83 / 203.28 s against 150.10 s. 94% of the saving is the hands
+  # stage (58.92 / 59.51 s -> 11.38 s), whose cost is one HaWoR driver load per call, not per-frame work.
+  # Shape does NOT benefit (93.28 / 94.68 -> 93.50 s), never batched above 1, and stays the dominant serial cost.
+  #
+  # Every cap below is MEASURED, each from one named row of outputs/bench/d14_rr_batched/batches.jsonl:
+  #   max_batch     = the batch size that row actually ran. No batch size is registered
+  #                   beyond what the evidence exercised.
+  #   budget_gb     = that row's peak_gpu_mem_gb -- device GiB of the WHOLE batch -- rounded up to 2 dp.
+  #   fixed_cost_gb = the same peak divided by that row's batch size, rounded DOWN to 2 dp, because
+  #                   dynamic_batches (fastdo.engine.batching) sums this PER-CLIP cost over a group. So
+  #                   max_batch * fixed_cost_gb stays just under budget_gb, and one more clip exceeds it.
+  # Both caps are device GiB throughout; the placeholders mixed host and device figures across stages, while the
+  # budget they fall back to (FASTDO_GPU_MEM_GB) has always been the device cap.
+  # Every budget below is validated at config load against the LOWER of cap_gb and the cap this process actually
+  # applies (fastdo.bench.gpu_budget.apply_gpu_budget: FASTDO_GPU_MEM_GB, else 12.0 GiB), so running this config
+  # takes FASTDO_GPU_MEM_GB=32 (the stage budgets below were measured under 21 and stay valid under 32).
+  # Without it solve's 13.39 GiB budget is refused by name rather than planned inside a 12 GiB process (one such plan
+  # was a solver OOM under FASTDO_GPU_MEM_GB=20). At 21, the in-process pool hit its own cap with ~29 GiB of the card
+  # free: tracks retried a batch-of-2 in every pass, and a split gpu thread OOMed the mask stage.
+  batched:
+    enabled: true                # bench.batched.enabled=false still runs the single-stream reference
+    cap_gb: 32                   # was 21, the evidence cap. The per-process device cap; the stage budgets
+                                 # below were measured under 21 (gpu_mem_cap_gb in the d14 yield_report.json files);
+                                 # a stage budget above it -- or above the cap the
+                                 # process applies, whichever is lower -- is refused at config load, as is a batched
+                                 # stage that declares neither budget_gb nor fixed_cost_gb
+    max_clips_per_wave: 6        # was 8. solve and hands are measured only to batch 6, and
+                                 # solve is the stage nearest the cap, so the wave may not offer a 7th clip
+    retry_singly: true
+    prefetch_decode: true        # decode wave k+1 on one CPU thread while wave k runs its GPU stages. Default:
+                                 # artifacts byte-identical 13/13, pass wall -6.4% on 13 windows (3 waves),
+                                 # GPU stages within 5%. The recorded decode wall then overlaps other stages.
+    # One thread per resource class,
+    # up to pipeline_depth waves in flight, so wave k+1 overlaps wave k on other classes; artifacts and batch ids
+    # unchanged, the GPU lock held once for the run, prefetch_decode subsumed. pipeline_depth caps the waves in flight
+    # (decode.npz is 0.6-1.5 GB a window, disk floor 60 GB). pipeline_resources: a stage it does not name goes to `gpu`
+    # when STAGE_GPU says so, else to a CPU class of its own. shape and hands default to `gpu` because their MAIN-process
+    # side calls torch.cuda (shape: apply_gpu_budget's set_per_process_memory_fraction on its first clip; hands:
+    # release_cuda_cache's synchronize + empty_cache before every HaWoR call), though neither allocates on the card.
+    # The intended overlap is `{shape: sam3d_worker, hands: hawor_worker}` (sam3d backend only), e.g.
+    # bench.batched.pipeline_resources.shape=sam3d_worker bench.batched.pipeline_resources.hands=hawor_worker.
+    pipeline_waves: true         # default: T1 byte-identical, T2 within tolerance, ABBA both pairs negative (~1.23x)
+    # Default depth 4 WITH memory_ledger below (depth 3/4 alone OOMed solve at the 32 GB cap):
+    # pass wall 0.903 / 0.809 of depth 2 in both matched pairs, byte-identical everything, no OOM.
+    pipeline_depth: 4
+    # Default: geometry, prompt and mask on their own threads (with the 32 GB cap): pass wall
+    # 0.911 / 0.831 of production in both matched pairs, T1 byte-identical, solve <= 2.7e-7, no OOM. The earlier classes
+    # shape/hands unchanged (their main-process CUDA calls allocate nothing).
+    pipeline_resources: {shape: sam3d_worker, hands: hawor_worker, geometry: geom, prompt: prompt, mask: mask}
+    # null = off (today's behaviour, byte-identical batches.jsonl).
+    # {resident_gb: R} gates in-process CUDA classes (every class not named *_worker) on their groups' declared costs
+    # (stages below) within FASTDO_GPU_MEM_GB - R; pipeline_waves only. Refused at load if R >= the applied cap.
+    # costs_gb replaces a stage's declared cost with a MEASURED per-attempt cost (the stage declarations under-state
+    # Ego4D). Default with depth 4, values from solo peaks at the 32 GB cap (resident 7.0 GiB):
+    # (peak - 7) x 1.15; solve (82% of the cap alone) costs the full capacity, i.e. runs alone among in-process stages.
+    # Measured at FASTDO_GPU_MEM_GB=32: re-measure before changing the cap.
+    # After memory reductions in solve and tracks, their solo peaks measured 14.1 / 13.4 GB
+    # (own ~7.9 / ~7.2 GB above the 6.16 GB floor); both re-costed to 9.0 so solve and tracks share the card: pass wall
+    # 0.929 / 0.943 of the exclusive ledger in both matched pairs (72 windows), byte-identical everything, 0 OOM.
+    memory_ledger: {resident_gb: 7.0, costs_gb: {solve: 9.0, tracks: 9.0, mask: 3.9, geometry: 2.3, intrinsics: 2.0, prompt: 0.5}}
+    # fastdo.engine.card_admission; ON by default (below): null = the old behaviour. In one measured run another
+    # tenant held 35 GB of the card; the SAM 3D worker, solve, geometry and intrinsics OOMed at the CARD level (under
+    # our 32 GB cap) and 3-8 of 51 windows were lost for good.
+    # card_admission: {min_free_gb: {<stage or class>: GiB}, poll_s: 5, max_wait_s: 600} -- before an attempt of a
+    #   listed stage/class starts, wait until the card has that much free (in-process stages: free + our own unallocated
+    #   cache; *_worker classes: free alone), polling every poll_s; after max_wait_s dispatch anyway with a WARNING.
+    # oom_retry: {max_total_wait_s: 900, backoff_s: [10, 120]} -- a clip that failed with a CUDA OOM is retried alone
+    #   (one-clip groups too) with exponential backoff, re-admitted each time, until its waits reach max_total_wait_s.
+    # Waits are outside wall_ns and recorded per row as card_wait_ns / oom_backoff_ns.
+    # Default, with reclaim_cache (default true): under a persistent 36 GB tenant production lost 27/51 and 4/51
+    # windows in one pair of passes (1/51 and 6/51 in another), the bundle 0/51 in all four passes; cost per solved
+    # window 0.668x / 0.988x; byte-identical wherever a window's solve batch matches, 0 QC flips. The values are exactly
+    # the ones those passes ran. `null` restores the old behaviour. A mapping override MERGES into these
+    # (e.g. `bench.batched.card_admission={min_free_gb:{solve:6}}` changes one floor); to REPLACE a block, set it to
+    # null first: `bench.batched.card_admission=null bench.batched.card_admission={...}`.
+    card_admission: {min_free_gb: {solve: 8.5, tracks: 8.0, mask: 4.5, geometry: 3.0, intrinsics: 3.0, sam3d_worker: 4.0, hawor_worker: 4.0}, poll_s: 5, max_wait_s: 300}
+    oom_retry: {max_total_wait_s: 900, backoff_s: [10, 120]}
+    # Stages (fastdo.engine.prewarm) whose worker-subprocess model the pipelined runner loads at run start, beside
+    # wave 0's decode/prompt/mask, instead of on first use: shape (the SAM 3D worker, ~50 s of load on the fill's
+    # critical path) and hands (the warm HaWoR driver, via a zero-clip request). Exact: the same load, the first
+    # use waits for it. [] = first-use loads. PRODUCTION DEFAULT [shape, hands]: byte-identical on 72
+    # Ego4D windows x 2 passes + lab; with vectorized V2, AB/O wall 0.978 / 0.956 and 0.937 / 0.904 (two pairs).
+    prewarm: [shape, hands]
+    stages:
+      # encoder never ran in this family (it is in `unmeasured_stages` in all three yield_report.json files).
+      # It stays conservative and labelled. `unmeasured: true` makes raising max_batch above 1
+      # an error rather than a silent promotion, so enabling it takes a measurement and an explicit edit.
+      encoder:  {max_batch: 1, unmeasured: true}
+      # row mask-00002: 2 clips, peak 4.376729088 GB -> 2.188 GB/clip. Was fixed_cost_gb 6.0, a 2.7x per-clip
+      # OVERestimate, with no budget at all.
+      mask:     {max_batch: 2, budget_gb: 4.38, fixed_cost_gb: 2.18}
+      # row tracks-00000: 2 clips, peak 8.193717760 GB -> 4.096 GB/clip. Was fixed_cost_gb 4.0 with no budget: as a
+      # per-clip figure it understated the measurement by 2.4%, and the batch-of-2 total it never bounded is 8.19 GB.
+      tracks:   {max_batch: 2, budget_gb: 8.20, fixed_cost_gb: 4.09}
+      # row hands-00000: 6 clips, peak 5.764341354 GB -> 0.960 GB/clip. Was max_batch 16, of which only 6 ever ran;
+      # capped at the measured 6. This is the stage the whole promotion rests on.
+      hands:    {max_batch: 6, budget_gb: 5.77, fixed_cost_gb: 0.96}
+      # row geometry-00000: 4 clips, peak 7.269983744 GB -> 1.817 GB/clip. Row geometry-00001 ran 2 clips at
+      # 7.234896384 GB, so the peak moved 0.035 GB across a 3.3x frame range (49 -> 162 frames): the evidence
+      # supports no per-frame term, and cost_per_frame_gb is dropped to its 0.0 default rather than invented.
+      # The old budget_gb 8.0 was tight -- 0.73 GB, 9.1% of it, over the measured 7.27; pinned to the measurement
+      # here, headroom against the 21 GiB cap is 13.73 GB.
+      geometry: {max_batch: 4, budget_gb: 7.27, fixed_cost_gb: 1.81}
+      # row solve-00000: 6 clips, peak 13.382537216 GB -> 2.230 GB/clip. The largest single consumer on the card:
+      # 7.61 GB of headroom under the 21 GiB cap. Was max_batch 8 with NO budget declared at all.
+      # Stated rather than left silent: rounding the per-clip share DOWN puts the planner's frame-independent peak,
+      # 6 x 2.23 = 13.38 GiB, 0.0025 GiB BELOW the 13.382537216 measured. Benign -- budget_gb 13.39 covers the
+      # measurement and max_batch 6 is the binding constraint, so no group is planned that the measurement did not
+      # run -- but solve is the stage nearest the cap, so the direction of that 0.0025 GiB is on the record.
+      solve:    {max_batch: 6, budget_gb: 13.39, fixed_cost_gb: 2.23}
+
+# Interaction gate stage (fastdo.engine.workers_gate.make_gate_worker): a gate bundle written by
+# run/pipeline/train_gate.py. null leaves the gate unregistered (gate_status "unbuilt"). CPU only.
+gate_stage:
+  model_path: null
+
+# Gate token dataset (run/pipeline/build_gate_dataset.py; DINOv2 on the GPU). 100DOH: the train-split entries of
+# <doh_root>/manifest.json, read in place (test-split entries dropped before any path is built). DexYCB: the ids in
+# dexycb_ids_file under dexycb.root (subjects in dexycb_allowed_subjects only; ids and sha256 fixed
+# before any output). Only DINOv2 tokens persist; decode.npz is deleted after each clip's encoder call.
+# dexycb_exclude_files: JSON files whose DexYCB sequence names (YYYYMMDD_HHMMSS)
+# are refused before any I/O. Empty by default: list your own evaluation and QC calibration sets here, e.g.
+# 'gate_data.dexycb_exclude_files=[/path/to/eval_sequences.json]', so the gate never trains on them. A listed file
+# that is missing fails the build.
+gate_data:
+  doh_root: null
+  dexycb_ids_file: null
+  dexycb_allowed_subjects: [20200820-subject-03, 20200903-subject-04, 20200908-subject-05, 20200918-subject-06]
+  dexycb_exclude_files: []
+  stride: 3              # 100DOH decode stride and DexYCB positive-window stride (= bench.stride)
+  crop: letterbox
+  contact_m: 0.015
+  free_m: 0.030
+  still_m: 0.005
+  min_negative_frames: 4
+  n_object_points: 2048
+  val_subject: 20200918-subject-06  # "val": subject-held-out, the promotion metric
+  val_every: 5           # every 5th remaining sorted id is "val_seq" (sequence-held-out, reported only)
+  token_dir: ${paths.outputs}/gate/tokens
+  work_dir: ${paths.outputs}/gate/work
+  index_path: ${paths.outputs}/gate/index.json
+  overwrite: false
+
+# Gate fit and calibration (run/pipeline/train_gate.py; CPU). Values are fixed before any output; no tuning on
+# the calibration clips. The bundle is written only when the subject-held-out val AUROC >= min_val_auroc and the
+# conformal k >= 1.
+gate_train:
+  index_path: ${gate_data.index_path}
+  bundle_path: ${paths.outputs}/gate/gate_bundle.pt
+  card_path: ${paths.outputs}/gate/gate_card.json
+  alpha: 0.05
+  # Upper bound on the OUT-OF-FOLD false-positive rate at the calibrated threshold; null does not bound
+  # it. The conformal calibration fixes RECALL only, so without this the card had no false-positive
+  # column at all and a reader could infer only the fit-partition rate -- 0.004 against 0.123 out of
+  # fold, a 30x understatement. Left null so this breaks no existing run; the card now records
+  # `fpr_bounded: false` when it is, which makes the omission visible instead of invisible.
+  max_fpr: null
+  min_val_auroc: 0.90
+  hidden: 128
+  steps: 400
+  batch_size: 64
+  lr: 1.0e-3
+  weight_decay: 1.0e-2
+  seed: ${seed}
+  overwrite: false
+
+# Per-object policy scenes (run/pipeline/build_ycb_scenes.py; fastdo.policy.dexycb_inputs layout). The baseline's
+# decompose_mesh (CoACD), generate_scene, solve_ik and resolve_pedestal run inside the retargeting conda env, imported from
+# third_party at runtime (read-only), one output tree per object under out_root/<object>/. The scene is shared by every
+# clip of the object, so it carries no pedestal; solve_ik runs on a 3-frame neutral stand-in only because
+# resolve_pedestal loads an IK output. coacd: launch.py's stage-2 call (thicken and dilate 2 mm) on decompose_mesh's
+# defaults; preprocess_resolution is fixed inside the baseline and only recorded.
+policy_scenes:
+  out_root: ${paths.outputs}/policy_scenes
+  dexycb_root: ${dexycb.root}
+  objects: []                # empty: every DexYCB object (fastdo.io.datasets.dexycb.YCB_OBJECTS)
+  sides: [right]
+  python: ${paths.conda_base}/envs/retargeting/bin/python
+  baseline_root: ${isolation.baseline_root}
+  coacd: {threshold: 0.05, max_convex_hull: 32, max_ch_vertex: 256, preprocess_resolution: 100, thicken: 0.002,
+          dilate: 0.002}
+  friction_scale: 1.5
+  add_ur3_arm: true
+  force: false
+  timeout_s: 7200.0
+  pin: true                  # driver under taskset -c <cpu>; cpu null: pid-spread CPU of the mask
+  cpu: null
+
+# DexYCB GT MANO hands (run/pipeline/build_dexycb_hands.py): HaWoR-format all_hand_meshes.npz per sequence through
+# the hawor env (CPU subprocess), right and left hands, with the 5-frame validation (joint error <= joint_tol_mm, vertex
+# in hand label >= label_frac_min). Both MANO models come from retarget_stage.mano_pkl_path, never from code.
+policy_hands:
+  out_root: ${paths.outputs}/policy_refs
+  dexycb_root: ${dexycb.root}
+  mano_pca: ${dexycb.mano_pca}
+  hawor_python: ${hands.hawor_python}
+  hawor_root: ${hands.hawor_root}
+  mano_right_pkl: ${retarget_stage.mano_pkl_path.right}
+  mano_left_pkl: ${retarget_stage.mano_pkl_path.left}
+  serial_index: 0
+  subjects: []               # empty: every subject not excluded
+  exclude_subjects: [subject-07, subject-08]   # reserved for calibration and confirmation
+  sequences: []              # explicit <subject>/<sequence> ids; empty: every sequence of the subjects
+  max_seqs: 0
+  validate_frames: 5
+  joint_tol_mm: 2.0
+  label_frac_min: 0.8
+  threads: 2                 # driver threads (torch, OpenMP, MKL, OpenBLAS), pinned: float32 MANO output depends on the
+                             # thread count, and the h2h and regtracks references ran at 2
+  force: false
+  timeout_s: 600.0

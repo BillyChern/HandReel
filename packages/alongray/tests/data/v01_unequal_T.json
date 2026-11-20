@@ -1,0 +1,40 @@
+{
+ "generated_by": "alongray 0.1.0 (the package at commit 18d0fab2), command line",
+ "fixture": "object = _traj(10, 1), hand = _traj(8, 2) of tests/test_cli_io.py; pred = 1.1 object, 0.9 hand",
+ "output": {
+  "object": {
+   "e_par": 0.06413729042664779,
+   "gauge_part": 0.06413729042664779,
+   "off_orbit_part": 0.0,
+   "lam": 1.1,
+   "z_rms": 0.6413729042664773,
+   "oracle_floor": 0.0,
+   "e_perp": 1.0631862107092585e-17,
+   "e_3d": 0.06413729042664779,
+   "n_frames": 10,
+   "reproj_rms_px": null,
+   "n_reproj_frames": 0,
+   "aligned": {
+    "centre_rms_after_lam": 0.0,
+    "centre_ate_sim3": 2.0834600604771674e-16
+   }
+  },
+  "hand": {
+   "e_par": 0.06365579749343764,
+   "gauge_part": 0.06365579749343765,
+   "off_orbit_part": 0.0,
+   "lam": 0.9,
+   "z_rms": 0.6365579749343767,
+   "oracle_floor": 0.0,
+   "e_perp": 1.4262565224311347e-17,
+   "e_3d": 0.06365579749343765,
+   "n_frames": 8,
+   "reproj_rms_px": null,
+   "n_reproj_frames": 0,
+   "aligned": {
+    "centre_rms_after_lam": 0.0,
+    "centre_ate_sim3": 6.20451685437383e-17
+   }
+  }
+ }
+}

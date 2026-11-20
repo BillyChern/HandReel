@@ -1,0 +1,61 @@
+{
+  "clip_id": "v2d_t3_ep011_cam_a",
+  "keyframe_index": 0,
+  "keyframe_frame_idx": 0,
+  "n_rows": 69,
+  "registration": {
+    "scale_source": "extent",
+    "init_scale": 0.2372706288362622,
+    "scale": 0.2372706288362622,
+    "score": 0.015433456065219729,
+    "estimate_scale": false
+  },
+  "n_queries": 96,
+  "n_anchored": 70,
+  "n_pnp_solved": 69,
+  "pnp_fallback": false,
+  "n_init_accepted": 69,
+  "solver": {
+    "scale": 0.24704542455155476,
+    "iterations": 18,
+    "seconds": 1.5351551030762494,
+    "overrides": {}
+  },
+  "fix_scale": false,
+  "device": "cuda",
+  "depth_anchor_gate": {
+    "threshold": 0.25,
+    "lam": 500.0,
+    "band": 0.2,
+    "min_valid_frames": 3,
+    "certificate": {
+      "value": 0.004493752390045791,
+      "median_d": -0.004493752390045791,
+      "n_valid": 69,
+      "n_frames": 69
+    },
+    "flagged": false,
+    "init": "the production solve's SolveCall (same init poses, registration scale, seed)"
+  },
+  "per_frame_reanchor": {
+    "threshold": 0.25,
+    "band": 0.2,
+    "perp_k": 1.0,
+    "vis_min": 5,
+    "occluded_area_frac": 0.25,
+    "max_log_shift": 0.3,
+    "dead_frame_branch": false,
+    "low_visibility_frames": [],
+    "min_points": 10,
+    "certificate": 0.004493752390045791,
+    "certificate_source": "depth_anchor_gate",
+    "flagged": false,
+    "mode": "unflagged: dead frames only, band edge then mask ray",
+    "n_frames": 69,
+    "dead_frames": [],
+    "frames": [],
+    "shifts_m": [],
+    "max_shift_m": 0.0,
+    "seconds": 0.0664004759164527
+  }
+}

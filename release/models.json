@@ -1,0 +1,481 @@
+{
+ "schema": "fastdo.release.models/v1",
+ "_note": "External models the reconstruction pipeline loads. sha256 values were computed locally on the files the pipeline used; nothing here is shipped. Paths: $HF_HOME (default ~/.cache/huggingface), $TORCH_HOME (default ~/.cache/torch), and the FASTDO_* variables of README.md 'Host paths'.",
+ "written_utc": "2026-11-07T10:25:54Z",
+ "models": [
+  {
+   "key": "sam2",
+   "name": "SAM 2.1 Hiera-L",
+   "stages": [
+    "mask",
+    "prompt (opt-in)"
+   ],
+   "env": "uv (main)",
+   "version": "HF revision 665f8e2ad61cf5f53d65644ff27c8ee525124610",
+   "code": "sam-2 git 2b90b9f5ceec907a1c18123530e92e794ad901a4 (uv.lock)",
+   "source_url": "https://huggingface.co/facebook/sam2.1-hiera-large",
+   "license": "Apache-2.0",
+   "license_url": "https://github.com/facebookresearch/sam2/blob/main/LICENSE",
+   "commercial_use": true,
+   "gated": false,
+   "fetch": "scripts/fetch_weights.py --yes --only sam2",
+   "flags": [],
+   "files": [
+    {
+     "file": "sam2.1_hiera_large.pt",
+     "size": 898083611,
+     "sha256": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam2.1-hiera-large/snapshots/665f8e2ad61cf5f53d65644ff27c8ee525124610/sam2.1_hiera_large.pt"
+    }
+   ]
+  },
+  {
+   "key": "sam3d",
+   "name": "SAM 3D Objects",
+   "stages": [
+    "shape"
+   ],
+   "env": "sam3d (conda)",
+   "version": "HF revision 2e73555018d2741ccd486e56c24fac41155a1dc6",
+   "code": "sam-3d-objects fork @ 875b010016f4c86936985b74ffcd7230e6979d02 (inside the DO AS I DO submodule)",
+   "source_url": "https://huggingface.co/facebook/sam-3d-objects",
+   "license": "SAM License (custom)",
+   "license_url": "https://huggingface.co/facebook/sam-3d-objects/blob/main/LICENSE",
+   "commercial_use": false,
+   "gated": true,
+   "fetch": "accept the terms on the HF page, `hf auth login`, then scripts/fetch_weights.py --yes --only sam3d (checkpoints/* at this revision; the shape stage reads exactly that snapshot)",
+   "flags": [
+    "shape stage non-commercial as run: nvdiffrast 0.4.0 (NVIDIA Source Code License, non-commercial, cl. 3.3) runs in its process through fast_postprocess.py -> utils3d RastContext (hole filling, on by default); kaolin 0.18.0, imported by SAM 3D's flexicubes on a static reading, loads its NVIDIA-NSCL (non-commercial) kaolin/non_commercial package",
+    "the model licence itself (SAM License) permits commercial use on our reading, with its acknowledgement and trade-control terms; read it",
+    "gated download",
+    "the checkpoint sha256s equal Hugging Face's LFS ids; the yaml digests are of our copy",
+    "ss_encoder.safetensors is empty upstream too (size 0, the git empty blob, in the HF tree at this revision)"
+   ],
+   "files": [
+    {
+     "file": "checkpoints/pipeline.yaml",
+     "size": 3548,
+     "sha256": "53c3d226b21df85c0bb3d16e6e4fa63abde0d6167525765eb929d02bfa9d358c",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/pipeline.yaml"
+    },
+    {
+     "file": "checkpoints/slat_decoder_gs.ckpt",
+     "size": 171476155,
+     "sha256": "f8077c36a06eaf890dd93cda1937411f793dea1eb80b3dd9329f2038ba84a111",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_decoder_gs.ckpt"
+    },
+    {
+     "file": "checkpoints/slat_decoder_gs.yaml",
+     "size": 576,
+     "sha256": "53f054e02a0c185f0a6885d30bb6ca0ec92efe0a98148688e7f05f7c26afe670",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_decoder_gs.yaml"
+    },
+    {
+     "file": "checkpoints/slat_decoder_gs_4.ckpt",
+     "size": 170269801,
+     "sha256": "731a0eceaa47945b52aa27f650d695b2aea9cc70945751e5609e5cb5b49f0186",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_decoder_gs_4.ckpt"
+    },
+    {
+     "file": "checkpoints/slat_decoder_gs_4.yaml",
+     "size": 575,
+     "sha256": "3d1dfd4c56cdac56f30e0cf5eb310d4df973fe25c60ac0a462c86ca4e3bf8b48",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_decoder_gs_4.yaml"
+    },
+    {
+     "file": "checkpoints/slat_decoder_mesh.ckpt",
+     "size": 363726862,
+     "sha256": "85907b37b67d8ce5b099a96629bdcfbd873eb407dee6b3aa9a75deb15038db33",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_decoder_mesh.ckpt"
+    },
+    {
+     "file": "checkpoints/slat_decoder_mesh.pt",
+     "size": 363728714,
+     "sha256": "93333fcd57a3e36ded0b3bca6969e05ce2b35142029dadab514f41df46d2f985",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_decoder_mesh.pt"
+    },
+    {
+     "file": "checkpoints/slat_decoder_mesh.yaml",
+     "size": 300,
+     "sha256": "8f46952764aa985c50109a56f0b4f07625cdb06457aaded74957d26f3520c69e",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_decoder_mesh.yaml"
+    },
+    {
+     "file": "checkpoints/slat_encoder.ckpt",
+     "size": 173263986,
+     "sha256": "6485623145535f42c8afa4cbb68ab9953e54e2f0c1cb1eaf95dcb41051e10181",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_encoder.ckpt"
+    },
+    {
+     "file": "checkpoints/slat_encoder.yaml",
+     "size": 268,
+     "sha256": "ca80da7f1395a2acef9c6cea30ec3ccc89321ef890c644860f316a4ef1e8ebdb",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_encoder.yaml"
+    },
+    {
+     "file": "checkpoints/slat_generator.ckpt",
+     "size": 4906537684,
+     "sha256": "91529bde8e7daa12d09618a66c319e3a5a6398db6b23b958cedcb1c3f28faabb",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_generator.ckpt"
+    },
+    {
+     "file": "checkpoints/slat_generator.yaml",
+     "size": 1986,
+     "sha256": "53029fadff6fe34a0344381a16d64d65d0567d603484952712e8969319559c4e",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/slat_generator.yaml"
+    },
+    {
+     "file": "checkpoints/ss_decoder.ckpt",
+     "size": 147609242,
+     "sha256": "6dac1cd7b7fda5a38e0614fadae441f1794f80e39ea2981f1ac8aff0a7e99340",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/ss_decoder.ckpt"
+    },
+    {
+     "file": "checkpoints/ss_decoder.yaml",
+     "size": 244,
+     "sha256": "baacff269b664f84f7aa1896ebd66128065f6568cdb88d419d5c3d2ccb4193ae",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/ss_decoder.yaml"
+    },
+    {
+     "file": "checkpoints/ss_encoder.ckpt",
+     "size": 119085402,
+     "sha256": "dcc47810ac568b11fe6e4821ea1c8d6b960dfbda3e5f68e94c19f44b3bf9e83b",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/ss_encoder.ckpt"
+    },
+    {
+     "file": "checkpoints/ss_encoder.safetensors",
+     "size": 0,
+     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/ss_encoder.safetensors"
+    },
+    {
+     "file": "checkpoints/ss_encoder.yaml",
+     "size": 231,
+     "sha256": "d3df5e18b2cbe87697d319adce0fe7e4fb6266809ad9d2f8c502761739bc4a06",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/ss_encoder.yaml"
+    },
+    {
+     "file": "checkpoints/ss_generator.ckpt",
+     "size": 6690136964,
+     "sha256": "225f40479e4cff4f39d6fa14c55be3abad1475bf55b61af3bec1e19ed2f6c146",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/ss_generator.ckpt"
+    },
+    {
+     "file": "checkpoints/ss_generator.yaml",
+     "size": 5076,
+     "sha256": "3c265448bca7c057f94e3ef56adea3a895a10bcd9f15f992a41dd03fa35412cd",
+     "expected_at": "$HF_HOME/hub/models--facebook--sam-3d-objects/snapshots/2e73555018d2741ccd486e56c24fac41155a1dc6/checkpoints/ss_generator.yaml"
+    }
+   ]
+  },
+  {
+   "key": "moge1_sam3d",
+   "name": "MoGe ViT-L (v1), the SAM 3D worker's pointmap model",
+   "stages": [
+    "shape"
+   ],
+   "env": "sam3d (conda)",
+   "version": "HF revision ad326bfb61facd6c52b5a825bc1e34d7c97d9672",
+   "code": "moge git a8c37341bc0325ca99b9d57981cc3bb2bd3e255b (sam3d env)",
+   "source_url": "https://huggingface.co/Ruicheng/moge-vitl",
+   "license": "MIT (MoGe repository licence)",
+   "license_url": "https://github.com/microsoft/MoGe/blob/main/LICENSE",
+   "commercial_use": true,
+   "gated": false,
+   "fetch": "scripts/fetch_weights.py --yes --only moge1_sam3d; the SAM 3D worker reads it at this revision (--hf-revision)",
+   "flags": [],
+   "files": [
+    {
+     "file": "model.pt",
+     "size": 1256823446,
+     "sha256": "da96b09a0485a3c45a5aa455e67743c8b4efc4dd8437c1f2aa93c2b4303d957f",
+     "expected_at": "$HF_HOME/hub/models--Ruicheng--moge-vitl/snapshots/ad326bfb61facd6c52b5a825bc1e34d7c97d9672/model.pt"
+    }
+   ]
+  },
+  {
+   "key": "dinov2_sam3d",
+   "name": "DINOv2 ViT-L/14 with registers, SAM 3D's image conditioner",
+   "stages": [
+    "shape"
+   ],
+   "env": "sam3d (conda)",
+   "version": "dinov2_vitl14_reg4_pretrain.pth (unversioned URL); code torch.hub facebookresearch/dinov2 @ 7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+   "code": "torch.hub facebookresearch/dinov2 @ 7764ea0f912e53c92e82eb78a2a1631e92725fc8 (equal file for file to the main our runs cached), unpacked by fetch_weights.py into $TORCH_HOME/hub/facebookresearch_dinov2_main, which SAM 3D's unpinned torch.hub.load reads",
+   "source_url": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_reg4_pretrain.pth",
+   "license": "Apache-2.0 (backbone code and weights)",
+   "license_url": "https://github.com/facebookresearch/dinov2/blob/main/LICENSE",
+   "commercial_use": true,
+   "gated": false,
+   "fetch": "scripts/fetch_weights.py --yes --only dinov2_sam3d (checkpoint and code; an existing code directory is kept)",
+   "flags": [
+    "the hub code at that commit (hubconf.py) also imports the Cell-DINO modules when torch.hub loads it; their files state CC BY 4.0 (LICENSE_CELL_DINO_CODE) and, in dinov2/hub/cell_dino/backbones.py, CC BY-NC. SAM 3D calls only dinov2_vitl14_reg and loads no Cell-DINO weights (THIRD_PARTY_LICENSES.md M14)",
+    "unversioned weights URL: the sha256 is of our copy"
+   ],
+   "files": [
+    {
+     "file": "dinov2_vitl14_reg4_pretrain.pth",
+     "size": 1217607321,
+     "sha256": "36e4deffbaef061a2576705b0c36f93621e2ae20bf6274694821b0b492551b51",
+     "expected_at": "$TORCH_HOME/hub/checkpoints/dinov2_vitl14_reg4_pretrain.pth"
+    }
+   ]
+  },
+  {
+   "key": "moge2",
+   "name": "MoGe-2 ViT-L",
+   "stages": [
+    "intrinsics",
+    "geometry"
+   ],
+   "env": "uv (main)",
+   "version": "HF revision 39c4d5e957afe587e04eec59dc2bcc3be5ecd968",
+   "code": "moge git b942f00bdc2a2a23ebb474fbe034d487e6dcceec (pyproject.toml)",
+   "source_url": "https://huggingface.co/Ruicheng/moge-2-vitl",
+   "license": "MIT",
+   "license_url": "https://github.com/microsoft/MoGe/blob/main/LICENSE",
+   "commercial_use": true,
+   "gated": false,
+   "fetch": "scripts/fetch_weights.py --yes --only moge2",
+   "flags": [],
+   "files": [
+    {
+     "file": "model.pt",
+     "size": 1305030700,
+     "sha256": "3eefd4abb2102f38f12b2d1992e5ff15e4923e5431c67dd494afe157e0111cd5",
+     "expected_at": "$HF_HOME/hub/models--Ruicheng--moge-2-vitl/snapshots/39c4d5e957afe587e04eec59dc2bcc3be5ecd968/model.pt"
+    }
+   ]
+  },
+  {
+   "key": "cotracker3",
+   "name": "CoTracker3 online",
+   "stages": [
+    "tracks"
+   ],
+   "env": "uv (main)",
+   "version": "weights HF facebook/cotracker3 revision bf55ea50d4390e1820a267f131cd6587240fb2c5; code torch.hub co-tracker @ 82e02e8029753ad4ef13cf06be7f4fc5facdda4d",
+   "code": "torch.hub facebookresearch/co-tracker @ 82e02e8029753ad4ef13cf06be7f4fc5facdda4d (set FASTDO_COTRACKER_HUB_REF)",
+   "source_url": "https://huggingface.co/facebook/cotracker3",
+   "license": "CC BY-NC 4.0",
+   "license_url": "https://github.com/facebookresearch/co-tracker/blob/main/LICENSE.md",
+   "commercial_use": false,
+   "gated": false,
+   "fetch": "scripts/fetch_weights.py --yes --only cotracker3",
+   "flags": [
+    "non-commercial",
+    "the engine loads the torch.hub code at commit 82e02e80 by default, the commit the paper's runs loaded (their cached main equals it file for file); FASTDO_COTRACKER_HUB_REF overrides it (THIRD_PARTY_LICENSES.md M4)"
+   ],
+   "files": [
+    {
+     "file": "scaled_online.pth",
+     "size": 101695610,
+     "sha256": "205d34789f19699d64b22cf93f9b697f15f28d4025240e31532e504109837218",
+     "expected_at": "$TORCH_HOME/hub/checkpoints/scaled_online.pth"
+    }
+   ]
+  },
+  {
+   "key": "hawor",
+   "name": "HaWoR",
+   "stages": [
+    "hands"
+   ],
+   "env": "hawor (conda)",
+   "version": "HF ThunderVVV/HaWoR revision da6335f47f9806308992d5ae1002a4cc5f7252c2; code malik-group/HaWoR fork @ 2c3fa0c06e54a1b192c1ff692eaa89d526cd6317",
+   "code": "https://github.com/malik-group/HaWoR @ 2c3fa0c06e54a1b192c1ff692eaa89d526cd6317 (the fork and commit DO AS I DO pins; clone it outside third_party/ in QUICKSTART step 2; obtain the weights in step 3)",
+   "source_url": "https://huggingface.co/ThunderVVV/HaWoR",
+   "license": "CC BY-NC-ND 4.0",
+   "license_url": "https://github.com/ThunderVVV/HaWoR/blob/main/license.txt",
+   "commercial_use": false,
+   "gated": false,
+   "fetch": "scripts/fetch_weights.py --yes --only hawor --hawor-root <HaWoR checkout>; it also verifies mano_mean_params.npz, which the HaWoR repository tracks",
+   "flags": [
+    "non-commercial",
+    "no derivatives (ND)",
+    "imports smplx (MPI non-commercial licence)"
+   ],
+   "files": [
+    {
+     "file": "hawor.ckpt",
+     "size": 3267481572,
+     "sha256": "4d1cc43853c190d6f2c10d9b6295c73109f0faf9ef41ac817a2b31d94b4823f2",
+     "expected_at": "$FASTDO_HAWOR_ROOT/weights/hawor/checkpoints/hawor.ckpt"
+    },
+    {
+     "file": "model_config.yaml",
+     "size": 2743,
+     "sha256": "edfe12dc14ce371d698da722b59acfed5b4a38a7f8f5116cbc1fce459a07dd2d",
+     "expected_at": "$FASTDO_HAWOR_ROOT/weights/hawor/model_config.yaml"
+    },
+    {
+     "file": "mano_mean_params.npz",
+     "size": 1178,
+     "sha256": "efc0ec58e4a5cef78f3abfb4e8f91623b8950be9eff8b8e0dbb0d036ebc63988",
+     "expected_at": "$FASTDO_HAWOR_ROOT/_DATA/data/mano_mean_params.npz"
+    }
+   ]
+  },
+  {
+   "key": "wilor_detector",
+   "name": "WiLoR hand detector (YOLO), loaded by the HaWoR driver",
+   "stages": [
+    "hands"
+   ],
+   "env": "hawor (conda)",
+   "version": "HF space rolpotamias/WiLoR revision 99fe3d7acff8104ecca1055df7467709506c2fa6",
+   "code": "ultralytics 8.4.36 (hawor env)",
+   "source_url": "https://huggingface.co/spaces/rolpotamias/WiLoR",
+   "license": "CC BY-NC-ND 4.0 (stricter of two conflicting upstream statements; the other is CC BY-NC 2.0)",
+   "license_url": "https://github.com/rolpotamias/WiLoR/blob/main/license.txt",
+   "commercial_use": false,
+   "gated": false,
+   "fetch": "scripts/fetch_weights.py --yes --only wilor_detector --hawor-root <HaWoR checkout>",
+   "flags": [
+    "non-commercial",
+    "unclear: conflicting upstream licence statements",
+    "loaded in-process by ultralytics (AGPL-3.0)"
+   ],
+   "files": [
+    {
+     "file": "detector.pt",
+     "size": 53582271,
+     "sha256": "5ef3df44e42d2db52d4ffe91f83a22ce9925e2acc9abebf453f2c5d22e380033",
+     "expected_at": "$FASTDO_HAWOR_ROOT/weights/external/detector.pt"
+    }
+   ]
+  },
+  {
+   "key": "hands23",
+   "name": "Hands23 hand-object detector (opt-in internet-video prompt stage)",
+   "stages": [
+    "prompt"
+   ],
+   "env": "hands23 (venv)",
+   "version": "unversioned URL; code hands23_detector @ 1bc0f919ffa7a9f375e7e8042e1d26f3743d5819, detectron2 @ a2f4a8771ab77e8411c26b27f24f9489a28a2453",
+   "code": "https://github.com/EvaCheng-cty/hands23_detector @ 1bc0f919ffa7a9f375e7e8042e1d26f3743d5819",
+   "source_url": "https://fouheylab.eecs.umich.edu/~dandans/projects/hands23/model_weights/model_hands23.pth",
+   "license": "code MIT; weights carry no licence text; training data CC BY-NC 4.0",
+   "license_url": "https://github.com/EvaCheng-cty/hands23_detector",
+   "commercial_use": false,
+   "gated": false,
+   "fetch": "scripts/fetch_weights.py --yes --only hands23 --hands23-root <dir>",
+   "flags": [
+    "unclear: weights have no licence text",
+    "treat as non-commercial (training data CC BY-NC)",
+    "unversioned download URL"
+   ],
+   "files": [
+    {
+     "file": "model_hands23.pth",
+     "size": 467798701,
+     "sha256": "b3d2ff966d8a19b991a3ce170e2d8f86040f614ef2edf4a55423288b278f723c",
+     "expected_at": "$FASTDO_HANDS23_ROOT/weights/model_hands23.pth"
+    }
+   ]
+  },
+  {
+   "key": "mano",
+   "name": "MANO hand model (right and left)",
+   "stages": [
+    "hands",
+    "retarget"
+   ],
+   "env": "hawor (conda); uv (retarget)",
+   "version": "the MANO_RIGHT.pkl / MANO_LEFT.pkl of the MANO download; identify yours by sha256",
+   "code": "smplx 0.1.28 (hawor env)",
+   "source_url": "https://mano.is.tue.mpg.de",
+   "license": "MANO licence (non-commercial; no redistribution in any form; no training of commercial models)",
+   "license_url": "https://mano.is.tue.mpg.de/license.html",
+   "commercial_use": false,
+   "gated": true,
+   "fetch": "MANUAL ONLY: register, accept the licence, download it yourself; never fetched or shipped",
+   "flags": [
+    "non-commercial",
+    "no redistribution",
+    "registration required"
+   ],
+   "files": [
+    {
+     "file": "MANO_RIGHT.pkl",
+     "size": 3821356,
+     "sha256": "45d60aa3b27ef9107a7afd4e00808f307fd91111e1cfa35afd5c4a62de264767",
+     "expected_at": "$FASTDO_MANO_DIR/MANO_RIGHT.pkl and $FASTDO_HAWOR_ROOT/_DATA/data/mano/MANO_RIGHT.pkl"
+    },
+    {
+     "file": "MANO_LEFT.pkl",
+     "size": 3821391,
+     "sha256": "c4022f7083f2ca7c78b2b3d595abbab52debd32b09d372b16923a801f0ea6a30",
+     "expected_at": "$FASTDO_MANO_LEFT_DIR/MANO_LEFT.pkl and $FASTDO_HAWOR_ROOT/_DATA/data_left/mano_left/MANO_LEFT.pkl"
+    }
+   ]
+  }
+ ],
+ "code_licence_flags": [
+  {
+   "package": "nvdiffrast 0.4.0",
+   "licence": "NVIDIA Source Code License (non-commercial, cl. 3.3)",
+   "env": "sam3d",
+   "use": "in-process: src/fastdo/shape/fast_postprocess.py:218 builds utils3d's RastContext (nvdiffrast) for hole filling, on by default; SAM 3D's postprocessing_utils imports it lazily too",
+   "decision": "the shape stage is non-commercial as run"
+  },
+  {
+   "package": "kaolin 0.18.0",
+   "licence": "Apache-2.0, except kaolin/non_commercial/ under NVIDIA LICENSE.NSCL (non-commercial)",
+   "env": "sam3d",
+   "use": "in-process on a static reading: SAM 3D's representations/mesh/flexicubes imports kaolin, whose __init__ imports non_commercial unconditionally; not verified at run time",
+   "decision": "the shape stage is non-commercial as run"
+  },
+  {
+   "package": "pymeshfix 0.17.0",
+   "licence": "GPL-3.0",
+   "env": "sam3d",
+   "use": "in-process: imported by src/fastdo/shape/fast_postprocess.py and by SAM 3D's own postprocess",
+   "decision": "original HandReel portions Apache-2.0, adapted portions under the upstream terms of THIRD_PARTY_LICENSES.md; imported at run time, not included; its copyleft terms apply to any combined work you distribute"
+  },
+  {
+   "package": "igraph 0.11.8 (formerly python-igraph)",
+   "licence": "GPL-2.0-or-later",
+   "env": "sam3d",
+   "use": "in-process: src/fastdo/shape/fast_postprocess.py",
+   "decision": "original HandReel portions Apache-2.0, adapted portions under the upstream terms of THIRD_PARTY_LICENSES.md; imported at run time, not included; its copyleft terms apply to any combined work you distribute"
+  },
+  {
+   "package": "plyfile 1.1.3",
+   "licence": "GPL-3.0-or-later",
+   "env": "sam3d, hawor",
+   "use": "in-process in the SAM 3D worker on a static reading: sam3d_objects ...representations/__init__.py imports the gaussian representation, which imports plyfile; not verified at run time",
+   "decision": "original HandReel portions Apache-2.0, adapted portions under the upstream terms of THIRD_PARTY_LICENSES.md; imported at run time, not included; its copyleft terms apply to any combined work you distribute"
+  },
+  {
+   "package": "ultralytics 8.4.36 (+ ultralytics-thop 2.0.18)",
+   "licence": "AGPL-3.0",
+   "env": "hawor",
+   "use": "in-process: run/pipeline/_hawor_*.py load the WiLoR detector with it",
+   "decision": "original HandReel portions Apache-2.0, adapted portions under the upstream terms of THIRD_PARTY_LICENSES.md; imported at run time, not included; its copyleft terms apply to any combined work you distribute"
+  },
+  {
+   "package": "evo 1.35.2",
+   "licence": "GPL-3.0",
+   "env": "hawor",
+   "use": "installed; imported only by HaWoR's lib/pipeline/masked_droid_slam.py (SLAM), which the hands driver does not import on a static reading",
+   "decision": "installed only; listed in THIRD_PARTY_LICENSES.md"
+  },
+  {
+   "package": "PyQt5 5.15.11",
+   "licence": "GPL-3.0",
+   "env": "hawor",
+   "use": "installed (dependency of the env); not imported by the pipeline on a static reading",
+   "decision": "installed only; listed in THIRD_PARTY_LICENSES.md"
+  },
+  {
+   "package": "easydict, dominate, autocommand, PyQt5-Qt5",
+   "licence": "LGPL-3.0",
+   "env": "sam3d, hawor",
+   "use": "installed; LGPL (library copyleft)",
+   "decision": "note only"
+  }
+ ],
+ "summary": "**As shipped, the pipeline is for non-commercial research only**: CoTracker3, HaWoR, the WiLoR detector, MANO and the Hands23 weights are non-commercial or carry no licence, smplx (inside HaWoR) is MPI non-commercial, and the shape stage runs NVIDIA's non-commercial nvdiffrast (and, on a static reading, kaolin's non-commercial package) in its process.",
+ "code_licence_note": "From the package metadata of the environments in `release/env/` (scan of `*.dist-info/METADATA`) and the licence files of kaolin and nvdiffrast. None of these packages is included in this repository. The usage column says, for each, whether the pipeline imports it at run time or the environment only installs it. Original HandReel portions of the files that run in the same process carry Apache-2.0. Adapted portions retain the upstream terms identified in THIRD_PARTY_LICENSES.md (for example the SAM-adapted parts of `src/fastdo/shape/fast_postprocess.py`). If you distribute a combined work, the copyleft terms of the packages it contains apply to it."
+}

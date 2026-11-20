@@ -1,0 +1,772 @@
+[
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 5,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history); role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 20,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 22,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 27,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 31,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 32,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 50,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 64,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 67,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 73,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 78,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 96,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 104,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 106,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 107,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 117,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 209,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 224,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 230,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 254,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 257,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 262,
+  "change": "internal path removed (file name or neutral description kept); internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 263,
+  "change": "internal path removed (file name or neutral description kept); internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 264,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 265,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 297,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 354,
+  "change": "absolute host path"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 357,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 361,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 362,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 363,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 369,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 376,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 386,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 405,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 412,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 424,
+  "change": "role or workflow wording made neutral (now: the authors, the operator); internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 461,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 462,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 463,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 464,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 466,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 467,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 468,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 469,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 470,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 474,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 0,
+  "change": "sha256 original fc6374ba7805bb1334a0a3b346a9c0ccb7f84db3b835c80a81833066eb3e74bc released f048a915e9b1b27aed6e2b77da88886c6a206f3b9af15ba7567eea07a647fa9e"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 235,
+  "change": "name of a development unit beside its error or delivery outcome replaced by an unnamed description (public copy: aggregates only)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 245,
+  "change": "name of a development unit beside its error or delivery outcome replaced by an unnamed description (public copy: aggregates only)"
+ },
+ {
+  "file": "2026-10-02-prereg-e1-heldout.md",
+  "line": 246,
+  "change": "name of a development unit beside its error or delivery outcome replaced by an unnamed description (public copy: aggregates only)"
+ },
+ {
+  "file": "2026-10-06-e1-amendment-disk-floor.md",
+  "line": 8,
+  "change": "host volume name"
+ },
+ {
+  "file": "2026-10-06-e1-amendment-disk-floor.md",
+  "line": 11,
+  "change": "personal or session wording replaced by a neutral approval line (date kept)"
+ },
+ {
+  "file": "2026-10-06-e1-amendment-disk-floor.md",
+  "line": 0,
+  "change": "sha256 original bd05d8993dd4488cb763d9495f8706e1e11d831da5eec41a1fb468986492154a released 71c38e76916284e0e704aa1e944573a92e4e0ff0c32d0685e875c4a14c4b79a0"
+ },
+ {
+  "file": "2026-10-07-e1-amendment-no-disk-guards.md",
+  "line": 3,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-07-e1-amendment-no-disk-guards.md",
+  "line": 5,
+  "change": "personal or session wording replaced by a neutral approval line (date kept)"
+ },
+ {
+  "file": "2026-10-07-e1-amendment-no-disk-guards.md",
+  "line": 11,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-07-e1-amendment-no-disk-guards.md",
+  "line": 18,
+  "change": "host volume name"
+ },
+ {
+  "file": "2026-10-07-e1-amendment-no-disk-guards.md",
+  "line": 18,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-07-e1-amendment-no-disk-guards.md",
+  "line": 20,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-07-e1-amendment-no-disk-guards.md",
+  "line": 0,
+  "change": "sha256 original 814a9bc94bd59629b7211003c96e794d04459b8e89d96697b31a6ee78fbfe93b released f44eee8f9f2f15ec97cbcaf31ea85b153f1fe81618db2b50f419634018efec5d"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 4,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 6,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history); role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 7,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 14,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 16,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 26,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history); internal record number (#NNN) replaced by a neutral reference; internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 29,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 34,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 44,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 54,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 61,
+  "change": "internal path removed (file name or neutral description kept); internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-F-freeze.md",
+  "line": 0,
+  "change": "sha256 original 7215b68c3c05e250229a5ca5fa526366e78f857b342ec5baf0e5d8c6ea60f5fa released 870908544b92d9f9daa1cd075fcd4c6ffc48e0471c052084ddb7889c1cf3db2c"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-N.md",
+  "line": 3,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-N.md",
+  "line": 5,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-N.md",
+  "line": 13,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-N.md",
+  "line": 17,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-N.md",
+  "line": 44,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-N.md",
+  "line": 47,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-N.md",
+  "line": 0,
+  "change": "sha256 original 7bb69c3cbe898b7aa8d2289d4d90892502f4b67b1f7a5f119cd2a8968be2032f released 6cfbfe4e90619049157a198f13e730a8904b1c024544867b90fa4f60afd2727f"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-T.md",
+  "line": 3,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-T.md",
+  "line": 5,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-T.md",
+  "line": 13,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-T.md",
+  "line": 34,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-T.md",
+  "line": 0,
+  "change": "sha256 original cd92211ca6a3d11e2e1986779c388e7d2e545b5989b38398652f52e4f6795dbd released e50e54407ddad979da60a90cbf67b5414063641e1cba3c18a2c11db378044421"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-U-unseal.md",
+  "line": 7,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history); role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-U-unseal.md",
+  "line": 16,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-U-unseal.md",
+  "line": 19,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-U-unseal.md",
+  "line": 26,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-U-unseal.md",
+  "line": 30,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-U-unseal.md",
+  "line": 32,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-U-unseal.md",
+  "line": 39,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-U-unseal.md",
+  "line": 40,
+  "change": "role or workflow wording made neutral (now: the authors, the operator); internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-14-e1-amendment-A-U-unseal.md",
+  "line": 0,
+  "change": "sha256 original 13908fc26ad39dcfabed3cc1f12f16386337529722c7038755ce18c8fe2bd145 released 218a26777f55544c8591f79d6df562f5a1cffdca89d8e18bab5c39f46355d1e2"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 3,
+  "change": "role or workflow wording made neutral (now: the authors, the operator); internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 13,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 17,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history); internal record number (#NNN) replaced by a neutral reference; internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 18,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history); internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 22,
+  "change": "absolute host path"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 22,
+  "change": "absolute host path"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 23,
+  "change": "absolute host path"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 23,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 24,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 32,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 34,
+  "change": "internal record number (#NNN) replaced by a neutral reference"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 45,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 0,
+  "change": "sha256 original ba7c383a5f5857d1e149d9ff0496746095926787e6c07fae1c5c87fe98b56ddf released 09ae150175e7720170ebf1a9c59fab48d88631fe29fa2f9b4e6b87d7868af332"
+ },
+ {
+  "file": "2026-10-14-freeze-manifest.md",
+  "line": 5,
+  "change": "the venue name in 'the ... freeze plan' replaced by 'the earlier freeze plan (one venue name removed from this public copy)'"
+ },
+ {
+  "file": "2026-10-15-e1-amendment-A-T2.md",
+  "line": 3,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-15-e1-amendment-A-T2.md",
+  "line": 14,
+  "change": "another tenant's job name"
+ },
+ {
+  "file": "2026-10-15-e1-amendment-A-T2.md",
+  "line": 22,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-15-e1-amendment-A-T2.md",
+  "line": 31,
+  "change": "role or workflow wording made neutral (now: the authors, the operator); internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-15-e1-amendment-A-T2.md",
+  "line": 34,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-15-e1-amendment-A-T2.md",
+  "line": 0,
+  "change": "sha256 original 125139caa9e5fc636bb3731b866057dba58717ae31e7df6e3ee1a84938ff500a released ffbdf8d82d37b0b9aa6c2e35a6f4c787d4aa8a404435746423793542593e0727"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 4,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 10,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 14,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 16,
+  "change": "personal or session wording replaced by a neutral approval line (date kept); role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 21,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 23,
+  "change": "absolute host path"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 26,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 35,
+  "change": "absolute host path"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 35,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 45,
+  "change": "role or workflow wording made neutral (now: the authors, the operator); internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 48,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 78,
+  "change": "internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 81,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 94,
+  "change": "role or workflow wording made neutral (now: the authors, the operator); internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 98,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 102,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 103,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 107,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 109,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 111,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 123,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 125,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 126,
+  "change": "internal path removed (file name or neutral description kept)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 129,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-19-e1-amendment-A-V.md",
+  "line": 0,
+  "change": "sha256 original 34836e58466a32b4fd113c67df6543a99ac6a5e7c36194600c52abe813897d4f released 96c7980eb2e153eb48725567b5f718a3cc0f3f3688d9daf195bb1f989342f800"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 1,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 11,
+  "change": "internal path removed (file name or neutral description kept); role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 17,
+  "change": "personal or session wording replaced by a neutral approval line (date kept); role or workflow wording made neutral (now: the authors, the operator); internal record file reference replaced by a reference to this folder or by 'internal record, not released'; internal commit id replaced by a neutral reference (not in this release's history)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 32,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 34,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 38,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 48,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 60,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 71,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 73,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 74,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 76,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 81,
+  "change": "internal record file reference replaced by a reference to this folder or by 'internal record, not released'"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 94,
+  "change": "role or workflow wording made neutral (now: the authors, the operator)"
+ },
+ {
+  "file": "2026-10-22-e1-amendment-A-W.md",
+  "line": 0,
+  "change": "sha256 original 33b0397a63bec152c9bc35a15a2260a233aa716c0d05ffa4249aa43cbd790cea released d0b5eddc86b903f3f7c4204237cd777c9d4465c9ab1ae61144b81dcc062f5d7f"
+ }
+]

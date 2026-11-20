@@ -1,0 +1,51 @@
+{
+ "_note": "The one input of release/example/run_example.py. The clip is NOT shipped: run_example.py downloads it from the pinned dataset revision and checks its sha256. Licence CC BY 4.0: redistribution allowed with attribution.",
+ "clip_id": "v2d_t3_ep011_cam_a",
+ "source": "v2d_track3_public",
+ "domain": "egocentric",
+ "dataset": {
+  "name": "Video to Data (V2D) Challenge Dataset, Track 3 public split",
+  "hf_repo": "nvidia/video_to_data_challenge",
+  "repo_type": "dataset",
+  "revision": "5f68335f3acc802033d1e80728c1633197521de8",
+  "licence": "CC BY 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Video to Data (V2D) Challenge Dataset, NVIDIA, CC BY 4.0, https://huggingface.co/datasets/nvidia/video_to_data_challenge"
+ },
+ "file": "track_3/public/videos/chunk-000/observation.images.ego_cam_a/episode_000011.mp4",
+ "sha256": "508a4fc94747741f35fd12780e6d5e6e7f78a233e2bf379202515cb9bff32585",
+ "size": 15759846,
+ "video": {
+  "fps": 20.0,
+  "n_frames": 137,
+  "width": 2028,
+  "height": 1520,
+  "codec": "h264",
+  "camera": "head-mounted colour"
+ },
+ "camera": {
+  "stream": "ego_cam_a",
+  "hfov_deg": 108.0,
+  "rotation_deg_in_calibration": 180,
+  "distortion": "14-term OpenCV rational model in meta/camera_calibration.json (k1 8.53, k2 10.92, ...)",
+  "frames_rotated": false,
+  "frames_undistorted": false,
+  "intrinsics": "estimated per clip by MoGe-2 (the intrinsics stage), as for internet video; the factory K is not used",
+  "why": "the stored frames are upright (frame 0 viewed 2026-11-07: floor, table and hands at the bottom), so no rotation; Track 3 has no pinhole camera, and the repository has no undistortion step in its V2D path, so the frames go in as recorded",
+  "distortion_at_box_px": "1-44 (box centre 12-16); left and right image edges about 205-259"
+ },
+ "task": "Cup_Stack (episode 11): the right hand lifts the beige cup and stacks it into the blue cup",
+ "window": [
+  0,
+  137
+ ],
+ "keyframe": 0,
+ "object": "beige cup",
+ "box_xyxy": [
+  1225,
+  865,
+  1485,
+  1245
+ ],
+ "box_check": "box_xyxy drawn on source frame 0 of the pinned clip and viewed 2026-11-07: it encloses the beige cup (the right marker ball is clipped at the box edge)"
+}

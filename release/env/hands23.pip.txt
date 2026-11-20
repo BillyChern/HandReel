@@ -1,0 +1,76 @@
+# hands23 environment, pip lock for a venv on Python 3.12.3 (uv venv; uv pip install -r <this file>). Exported 2026-11-07 by release/env/export_env_locks.py from the environment the pipeline ran in.
+# Python 3.12.3. CUDA 12.8 user-space libraries (+cu128 wheels); the host of the reference run had NVIDIA driver 595.91.07; no minimum driver has been established.
+# Source-built CUDA extensions were compiled for sm_90 (H100) only: rebuild them for another GPU.
+# See release/QUICKSTART.md, step 2.
+--extra-index-url https://download.pytorch.org/whl/cu128
+absl-py==2.5.0
+antlr4-python3-runtime==4.9.3
+black==26.5.1
+click==8.5.0
+cloudpickle==3.1.2
+contourpy==1.4.0
+cycler==0.12.1
+filelock==3.32.6
+fonttools==4.65.0
+fsspec==2026.7.0
+fvcore==0.1.5.post20221221
+grpcio==1.84.0
+hydra-core==1.3.7
+iopath==0.1.9
+jinja2==3.1.6
+kiwisolver==1.5.1
+markdown==3.10.3
+markupsafe==3.0.3
+matplotlib==3.11.2
+mpmath==1.3.0
+mypy-extensions==1.1.0
+networkx==3.6.1
+ninja==1.13.2
+numpy==2.5.3
+nvidia-cublas-cu12==12.8.4.1
+nvidia-cuda-cupti-cu12==12.8.90
+nvidia-cuda-nvrtc-cu12==12.8.93
+nvidia-cuda-runtime-cu12==12.8.90
+nvidia-cudnn-cu12==9.10.2.21
+nvidia-cufft-cu12==11.3.3.83
+nvidia-cufile-cu12==1.13.1.3
+nvidia-curand-cu12==10.3.9.90
+nvidia-cusolver-cu12==11.7.3.90
+nvidia-cusparse-cu12==12.5.8.93
+nvidia-cusparselt-cu12==0.7.1
+nvidia-nccl-cu12==2.27.3
+nvidia-nvjitlink-cu12==12.8.93
+nvidia-nvtx-cu12==12.8.90
+omegaconf==2.3.1
+opencv-python-headless==5.0.0.93
+packaging==26.3
+parso==0.8.7
+pathspec==1.1.1
+pillow==12.3.0
+pip==26.2.1
+platformdirs==4.11.8
+portalocker==4.3.2
+protobuf==7.36.1
+pycocotools==2.0.11
+pyparsing==3.3.2
+python-dateutil==2.9.0.post0
+pytokens==0.4.1
+pyyaml==6.0.3
+setuptools==84.0.0
+six==1.17.0
+sympy==1.14.0
+tabulate==0.10.0
+tensorboard==2.21.0
+tensorboard-data-server==0.7.2
+termcolor==3.3.0
+torch==2.8.0+cu128
+torchvision==0.23.0+cu128
+tqdm==4.70.1
+triton==3.4.0
+typing-extensions==4.16.0
+werkzeug==3.1.8
+wheel==0.48.0
+yacs==0.1.8
+
+# ---- build from source after the install above ----
+# editable detectron2: https://github.com/facebookresearch/detectron2 @ a2f4a8771ab77e8411c26b27f24f9489a28a2453 (pip install --no-build-isolation -e <that checkout>)

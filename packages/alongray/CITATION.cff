@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+cff-version: 1.2.0
+message: "If you use alongray, please cite it as below."
+title: "alongray: the unaligned along-ray error of hand-object reconstructions and its exact gauge / off-orbit split"
+type: software
+version: "0.4.1"
+license: Apache-2.0
+authors:
+  - family-names: "Chen"
+    given-names: "Shi"
+  - family-names: "Ichnowski"
+    given-names: "Jeffrey"
+keywords:
+  - 3D reconstruction
+  - hand-object interaction
+  - evaluation
+  - monocular depth

@@ -1,0 +1,8 @@
+Input: track_3/public/videos/chunk-000/observation.images.ego_cam_a/episode_000011.mp4 (Video to Data (V2D) Challenge Dataset, Track 3 public split), by NVIDIA.
+Source: https://huggingface.co/datasets/nvidia/video_to_data_challenge at revision 5f68335f3acc802033d1e80728c1633197521de8.
+Licence: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+Modified: reconstructed by this pipeline (the object mesh, the object pose per frame, the hand meshes
+and the other stage artifacts in this directory are derived from the clip).
+The outputs are also produced by third-party models whose licences bind them (several are
+non-commercial, HaWoR's is NoDerivatives, MANO's forbids redistribution): read release/MODELS.md and
+THIRD_PARTY_LICENSES.md before you use or share them.

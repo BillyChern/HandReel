@@ -1,0 +1,86 @@
+"""Interaction gate: rejects clips without hand-object interaction before any heavy stage runs."""
+
+from .bundle import GATE_BUNDLE_VERSION, GateBundle, load_gate_bundle, save_gate_bundle
+from .calibrate import (
+    GateCalibration,
+    auroc,
+    calibrate_gate,
+    conformal_recall_threshold,
+    operating_point,
+)
+from .dataset import (
+    PARTITIONS,
+    GateDataset,
+    GateItem,
+    check_dexycb_ids,
+    dexycb_gate_items,
+    doh_gate_items,
+    excluded_dexycb_sequences,
+    load_gate_dataset,
+    read_dexycb_frame_labels,
+    write_gate_index,
+)
+from .features import N_GATE_FRAMES, gate_features, read_gate_tokens, sample_rows
+from .labels import (
+    HEADS,
+    DexycbFrameLabels,
+    GateLabels,
+    dexycb_frame_labels,
+    dexycb_partition,
+    dexycb_windows,
+    doh_interact_label,
+    synthetic_stand_in_labels,
+)
+from .model import GateConfig, GateOutput, InteractionGate, lse_pool
+from .train import (
+    GateTrainConfig,
+    GateTrainResult,
+    gate_loss,
+    gate_scores,
+    keyframe_hinge,
+    train_gate,
+)
+
+__all__ = [
+    "GATE_BUNDLE_VERSION",
+    "HEADS",
+    "N_GATE_FRAMES",
+    "PARTITIONS",
+    "DexycbFrameLabels",
+    "GateBundle",
+    "GateCalibration",
+    "GateConfig",
+    "GateDataset",
+    "GateItem",
+    "GateLabels",
+    "GateOutput",
+    "GateTrainConfig",
+    "GateTrainResult",
+    "InteractionGate",
+    "auroc",
+    "calibrate_gate",
+    "check_dexycb_ids",
+    "conformal_recall_threshold",
+    "dexycb_frame_labels",
+    "dexycb_gate_items",
+    "dexycb_partition",
+    "dexycb_windows",
+    "doh_gate_items",
+    "doh_interact_label",
+    "excluded_dexycb_sequences",
+    "gate_features",
+    "gate_loss",
+    "gate_scores",
+    "keyframe_hinge",
+    "load_gate_bundle",
+    "load_gate_dataset",
+    "lse_pool",
+    "operating_point",
+    "read_dexycb_frame_labels",
+    "read_gate_tokens",
+    "sample_rows",
+    "save_gate_bundle",
+    "synthetic_stand_in_labels",
+    "train_gate",
+    "write_gate_index",
+]

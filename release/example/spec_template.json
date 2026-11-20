@@ -1,0 +1,23 @@
+{
+ "_note": "Copy this file, edit it for your video, and pass it as release/example/run_example.py --spec <copy> --video <your clip>. Required: clip_id (letters, digits, '_', '.', '-'; names the output directory engine/<clip_id>/), domain ('egocentric' for a head-mounted camera, 'third_person' otherwise), video (fps, n_frames, width, height of the file: ffprobe -v error -select_streams v:0 -count_frames -show_entries stream=width,height,avg_frame_rate,nb_read_frames -of json <your clip>), window [start, stop) in source frames (about 10 s at most is what the pipeline is tuned for), keyframe (a source frame inside the window where the object is clearly visible) and box_xyxy (x0, y0, x1, y1 in source pixels of the keyframe, around the object). Optional: object (a label for the report). Nothing is downloaded and no sha256 is checked for your file.",
+ "clip_id": "my_clip",
+ "domain": "third_person",
+ "object": "mug",
+ "video": {
+  "fps": 30.0,
+  "n_frames": 300,
+  "width": 1920,
+  "height": 1080
+ },
+ "window": [
+  0,
+  300
+ ],
+ "keyframe": 0,
+ "box_xyxy": [
+  800,
+  400,
+  1100,
+  700
+ ]
+}

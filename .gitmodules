@@ -1,0 +1,3 @@
+[submodule "third_party/do-as-i-do"]
+	path = third_party/do-as-i-do
+	url = https://github.com/malik-group/do-as-i-do.git

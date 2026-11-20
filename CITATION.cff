@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: Apache-2.0
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling"
+type: software
+version: "0.1.0"
+license: Apache-2.0
+authors:
+  - family-names: "Chen"
+    given-names: "Shi"
+  - family-names: "Ichnowski"
+    given-names: "Jeffrey"
+preferred-citation:
+  type: unpublished
+  title: "HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling"
+  authors:
+    - family-names: "Chen"
+      given-names: "Shi"
+    - family-names: "Ichnowski"
+      given-names: "Jeffrey"

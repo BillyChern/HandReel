@@ -1,0 +1,54 @@
+HandReel
+Copyright 2026 The HandReel authors
+
+The source code in this repository is licensed under the Apache License,
+Version 2.0 (see LICENSE), except where a file header states otherwise.
+The derived data files listed in THIRD_PARTY_LICENSES.md, "Derived data in
+this repository", are not: they follow the terms of the datasets and models
+they were derived from (CC BY-NC 4.0 for the two held-out unit-list files and
+the QC constants file, as that section lists them file by file; CC BY 4.0,
+HaWoR's CC BY-NC-ND 4.0 and MANO's licence for the reference output).
+
+This repository includes code adapted from DO AS I DO (MIT), MoGe (MIT) and
+SAM 3D Objects (SAM License): two short expressions, and an adaptation of its
+mesh postprocess (postprocess_mesh and _fill_holes, in
+src/fastdo/shape/fast_postprocess.py). The files and their licences are listed
+in THIRD_PARTY_LICENSES.md, and the licence texts are in licenses/. It does
+not include third-party model weights, MANO model files or datasets.
+
+At run time the pipeline calls third-party software that keeps its own
+licence, including:
+
+  - HaWoR (code and weights): CC BY-NC-ND 4.0
+  - ultralytics (YOLOv8 hand-detector runtime): AGPL-3.0
+  - MANO model files: the MANO licence (non-commercial research use)
+  - SAM 3D Objects (code and weights): the SAM License
+  - nvdiffrast 0.4.0: the NVIDIA Source Code License (non-commercial use
+    only, section 3.3); it runs in the SAM 3D worker process through
+    src/fastdo/shape/fast_postprocess.py (utils3d RastContext, hole filling,
+    on by default)
+  - kaolin 0.18.0: Apache-2.0, except its kaolin/non_commercial package,
+    under the NVIDIA Source Code License (non-commercial); importing kaolin
+    loads that package, and SAM 3D imports kaolin (static reading)
+  - the DINOv2 torch.hub code SAM 3D loads (commit 7764ea0f): the backbone
+    code and weights are Apache-2.0; at that commit hubconf.py also imports
+    the Cell-DINO modules, whose files state CC BY 4.0 and CC BY-NC; SAM 3D
+    calls only dinov2_vitl14_reg and loads no Cell-DINO weights
+So the shape stage, as run, is for non-commercial use.
+
+Copyleft packages imported at run time: our files are Apache-2.0. They
+import, at run time, ultralytics (AGPL-3.0; run/pipeline/_hawor_*.py, in
+the HaWoR process) and pymeshfix (GPL-3.0), igraph (GPL-2.0-or-later) and
+plyfile (GPL-3.0-or-later) (in the SAM 3D worker process;
+src/fastdo/shape/fast_postprocess.py imports the first two). None of them is
+included or modified here. If you distribute a combined work, their copyleft
+terms apply to it.
+
+Outputs of the pipeline are produced by the models above, and their licences
+(non-commercial, NoDerivatives, MANO's) also bind what you do with them.
+
+This notice states what the licence texts say as we read them. It is not legal
+advice.
+
+Files that carry dataset-derived values, dataset names or constants from
+upstream projects are listed by topic in DATA_NOTICES.md.

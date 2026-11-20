@@ -1,0 +1,372 @@
+{
+ "domains": {
+  "D": {
+   "domain_safe_channels": [
+    "O-c",
+    "O-R",
+    "H-j"
+   ],
+   "rate_hz": 30.0,
+   "safe": {
+    "primary": {
+     "F-th": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "F-th-slerp": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "H-j-spline": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "H-w": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "H-wR": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     }
+    },
+    "thr20": {
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     }
+    },
+    "thr5": {
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     }
+    },
+    "w0.1": {
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     }
+    },
+    "w0.4": {
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     }
+    }
+   }
+  },
+  "H": {
+   "domain_safe_channels": [
+    "H-j"
+   ],
+   "rate_hz": 15.0,
+   "safe": {
+    "primary": {
+     "F-th": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "F-th-slerp": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "H-j-spline": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "H-w": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "H-wR": {
+      "median": 6,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     },
+     "O-c": {
+      "median": 6,
+      "point": 3,
+      "ub": 3
+     }
+    },
+    "thr20": {
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     },
+     "O-c": {
+      "median": 6,
+      "point": 3,
+      "ub": 3
+     }
+    },
+    "thr5": {
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     },
+     "O-c": {
+      "median": 6,
+      "point": 3,
+      "ub": 3
+     }
+    },
+    "w0.1": {
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     },
+     "O-c": {
+      "median": 6,
+      "point": 3,
+      "ub": 3
+     }
+    },
+    "w0.4": {
+     "H-j": {
+      "median": 1,
+      "point": 1,
+      "ub": 1
+     },
+     "O-R": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     },
+     "O-c": {
+      "median": 6,
+      "point": 3,
+      "ub": 3
+     }
+    }
+   }
+  },
+  "O": {
+   "domain_safe_channels": [
+    "O-c",
+    "O-R",
+    "H-j"
+   ],
+   "rate_hz": 30.0,
+   "safe": {
+    "primary": {
+     "F-th": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     },
+     "F-th-slerp": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     },
+     "H-j": {
+      "median": 6,
+      "point": 4,
+      "ub": 3
+     },
+     "H-j-spline": {
+      "median": 6,
+      "point": 4,
+      "ub": 4
+     },
+     "H-w": {
+      "median": 6,
+      "point": 5,
+      "ub": 5
+     },
+     "H-wR": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     },
+     "O-R": {
+      "median": 6,
+      "point": 3,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 6,
+      "ub": 5
+     }
+    },
+    "thr20": {
+     "H-j": {
+      "median": 6,
+      "point": 4,
+      "ub": 3
+     },
+     "O-R": {
+      "median": 6,
+      "point": 3,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     }
+    },
+    "thr5": {
+     "H-j": {
+      "median": 6,
+      "point": 4,
+      "ub": 4
+     },
+     "O-R": {
+      "median": 6,
+      "point": 3,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 6,
+      "ub": 5
+     }
+    },
+    "w0.1": {
+     "H-j": {
+      "median": 6,
+      "point": 4,
+      "ub": 3
+     },
+     "O-R": {
+      "median": 6,
+      "point": 3,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 6,
+      "ub": 5
+     }
+    },
+    "w0.4": {
+     "H-j": {
+      "median": 6,
+      "point": 4,
+      "ub": 4
+     },
+     "O-R": {
+      "median": 6,
+      "point": 3,
+      "ub": 1
+     },
+     "O-c": {
+      "median": 6,
+      "point": 6,
+      "ub": 6
+     }
+    }
+   }
+  }
+ },
+ "tolerances": {
+  "F-th": 4.8,
+  "F-th-slerp": 4.8,
+  "H-j": 2.5,
+  "H-j-spline": 2.5,
+  "H-w": 2.5,
+  "H-wR": 4.8,
+  "O-R": 2.9,
+  "O-c": 2.5
+ }
+}

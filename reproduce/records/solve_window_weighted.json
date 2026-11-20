@@ -1,0 +1,39 @@
+{
+ "criteria": {
+  "a_ci_gt_0": false,
+  "a_dM_gt_2": false,
+  "a_rr_ge_0.20": false,
+  "b_ci_lt_0": false,
+  "b_dM_lt_-2": true
+ },
+ "decision": "NO_FINDING (both specific claims killed)",
+ "n_eligible_videos": 18,
+ "n_eligible_windows": 42,
+ "window_weighted": {
+  "dM_better_gt2": 25,
+  "dM_ci95": [
+   -8.632493264636858,
+   0.007546315589117114
+  ],
+  "dM_worse_gt2": 12,
+  "dR_ci95": [
+   -7.5232764576959,
+   0.5643983181592205
+  ],
+  "excluded_rr_floor": [],
+  "mean_dM_mm": -2.0357240821018965,
+  "median_M_C_mm": 26.84612692919107,
+  "median_M_D_mm": 27.382385114168056,
+  "median_R_C_mm": 77.41431088405288,
+  "median_R_D_mm": 80.64894755279383,
+  "median_R_GT_mm": 46.714621422413146,
+  "median_dM_mm": -4.460375778804874,
+  "median_dR_mm": -5.402462083591004,
+  "median_rel_rough_reduction": 0.05774948649237206,
+  "n_rr_windows": 42,
+  "rr_ci95": [
+   -0.006203869633623181,
+   0.10870856792883744
+  ]
+ }
+}

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nullaudit"
+version = "0.1.0"
+description = "Check whether a physics success test for hand-object trajectories passes trivial null trajectories"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+mujoco = ["mujoco>=3.4"]
+test = ["pytest>=7"]
+
+[project.scripts]
+nullaudit = "nullaudit.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["study: parity against study code and stored records that do not ship (skipped)"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["nullaudit"]

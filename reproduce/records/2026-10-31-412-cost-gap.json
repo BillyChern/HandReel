@@ -1,0 +1,584 @@
+{
+ "reproduced": {
+  "ours_per_unit": 137.4361111111111,
+  "theirs_mean": 3898.181818181818,
+  "ratio_per_unit": 28.363592266011572,
+  "ratio_totals": 22.533298300220306
+ },
+ "theirs_ours_overlap_s": 0.09999990463256836,
+ "upstream_marks_full": true,
+ "clean": {
+  "decode_le_1.25min": {
+   "turns": [
+    "20261015T151310Z",
+    "20261016T093820Z",
+    "20261016T095021Z"
+   ],
+   "units": 30,
+   "two_arms": 60.21,
+   "one_arm": 39.36983285891513,
+   "stage_seconds_one_arm": 37.892358676834654,
+   "upstream_wall": 18.333333333333332,
+   "EST": 20.61902534350132,
+   "CAL": 20.47842078221341,
+   "stages": {
+    "decode": 1.49,
+    "mask": 3.0433333333333334,
+    "shape": 12.746666666666666
+   }
+  },
+  "decode_le_1.5min": {
+   "turns": [
+    "20261015T151310Z",
+    "20261015T190534Z",
+    "20261016T042247Z",
+    "20261016T093820Z",
+    "20261016T095021Z"
+   ],
+   "units": 50,
+   "two_arms": 60.93600000000001,
+   "one_arm": 39.8621997493729,
+   "stage_seconds_one_arm": 38.16658599129319,
+   "upstream_wall": 18.92,
+   "EST": 20.460585991293193,
+   "CAL": 20.695254775620995,
+   "stages": {
+    "decode": 1.6980000000000002,
+    "mask": 3.2760000000000002,
+    "shape": 12.735999999999999
+   }
+  },
+  "lowest4_wall": {
+   "turns": [
+    "20261016T042247Z",
+    "20261016T093820Z",
+    "20261015T151310Z",
+    "20261016T095021Z"
+   ],
+   "units": 40,
+   "two_arms": 58.964999999999996,
+   "one_arm": 38.64949994677212,
+   "stage_seconds_one_arm": 37.0071472916659,
+   "upstream_wall": 18.25,
+   "EST": 19.934647291665897,
+   "CAL": 19.95115061646793,
+   "stages": {
+    "decode": 1.6125,
+    "mask": 3.1100000000000003,
+    "shape": 12.355
+   }
+  }
+ },
+ "all_turns": {
+  "two_arms": 137.4361111111111,
+  "one_arm": 90.96750976940514,
+  "stage_one_arm": 86.64530467865988,
+  "upstream_wall": 40.516666666666666,
+  "EST": 49.036971345326556,
+  "CAL": 45.476775782301814,
+  "other": 2.4056973168160742
+ },
+ "M511": {
+  "R0a": {
+   "wall": 821.2320001125336,
+   "S": 11.406000001562965,
+   "full_window_stage": {
+    "decode": 3.0688569240784314,
+    "prompt": 3.749755853235295,
+    "mask": 6.575042216137257,
+    "shape": 7.873487639294118,
+    "intrinsics": 0.30126654290196064,
+    "hands": 1.931128665333334,
+    "geometry": 7.399958566078432,
+    "tracks": 2.8235183395294126,
+    "solve": 3.8686302839411773,
+    "qc": 0.7825922471176472
+   },
+   "full": 38.37423727764706,
+   "refused": 4.319454647571429,
+   "attempted": 28.441592343875
+  },
+  "R0b": {
+   "wall": 846.8210000991821,
+   "S": 11.761402779155308,
+   "full_window_stage": {
+    "decode": 3.282863490450982,
+    "prompt": 3.3839691062549013,
+    "mask": 6.883156638549018,
+    "shape": 8.071944815607843,
+    "intrinsics": 0.2787639957450979,
+    "hands": 2.0266659018823514,
+    "geometry": 7.678481615313726,
+    "tracks": 2.91464506972549,
+    "solve": 3.902799825882354,
+    "qc": 0.801828832019608
+   },
+   "full": 39.22511929143137,
+   "refused": 4.6062548472380955,
+   "attempted": 29.12795049520833
+  }
+ },
+ "chain": {
+  "decode_le_1.25min|R0a": {
+   "states": [
+    [
+     "S10 reported: both arms, all turns",
+     137.4361111111111
+    ],
+    [
+     "clean-host turns, both arms",
+     60.21
+    ],
+    [
+     "one arm (EST), wall",
+     39.36983285891513
+    ],
+    [
+     "one arm, stage-seconds",
+     37.892358676834654
+    ],
+    [
+     "M511 full-window stage-seconds",
+     38.37423727764706
+    ],
+    [
+     "M511 attempted stage-seconds",
+     28.441592343875
+    ],
+    [
+     "M511 S_att",
+     11.406000001562965
+    ]
+   ],
+   "factors": [
+    [
+     "S10 reported: both arms, all turns -> clean-host turns, both arms",
+     2.2826127073760354
+    ],
+    [
+     "clean-host turns, both arms -> one arm (EST), wall",
+     1.5293435513370666
+    ],
+    [
+     "one arm (EST), wall -> one arm, stage-seconds",
+     1.0389913490126368
+    ],
+    [
+     "one arm, stage-seconds -> M511 full-window stage-seconds",
+     0.9874426533268689
+    ],
+    [
+     "M511 full-window stage-seconds -> M511 attempted stage-seconds",
+     1.3492295654083197
+    ],
+    [
+     "M511 attempted stage-seconds -> M511 S_att",
+     2.493564118882838
+    ]
+   ],
+   "product": 12.049457398937244
+  },
+  "decode_le_1.25min|R0b": {
+   "states": [
+    [
+     "S10 reported: both arms, all turns",
+     137.4361111111111
+    ],
+    [
+     "clean-host turns, both arms",
+     60.21
+    ],
+    [
+     "one arm (EST), wall",
+     39.36983285891513
+    ],
+    [
+     "one arm, stage-seconds",
+     37.892358676834654
+    ],
+    [
+     "M511 full-window stage-seconds",
+     39.22511929143137
+    ],
+    [
+     "M511 attempted stage-seconds",
+     29.12795049520833
+    ],
+    [
+     "M511 S_att",
+     11.761402779155308
+    ]
+   ],
+   "factors": [
+    [
+     "S10 reported: both arms, all turns -> clean-host turns, both arms",
+     2.2826127073760354
+    ],
+    [
+     "clean-host turns, both arms -> one arm (EST), wall",
+     1.5293435513370666
+    ],
+    [
+     "one arm (EST), wall -> one arm, stage-seconds",
+     1.0389913490126368
+    ],
+    [
+     "one arm, stage-seconds -> M511 full-window stage-seconds",
+     0.9660227772745651
+    ],
+    [
+     "M511 full-window stage-seconds -> M511 attempted stage-seconds",
+     1.3466487900645143
+    ],
+    [
+     "M511 attempted stage-seconds -> M511 S_att",
+     2.476571123542482
+    ]
+   ],
+   "product": 11.685350267460326
+  },
+  "decode_le_1.5min|R0a": {
+   "states": [
+    [
+     "S10 reported: both arms, all turns",
+     137.4361111111111
+    ],
+    [
+     "clean-host turns, both arms",
+     60.93600000000001
+    ],
+    [
+     "one arm (EST), wall",
+     39.8621997493729
+    ],
+    [
+     "one arm, stage-seconds",
+     38.16658599129319
+    ],
+    [
+     "M511 full-window stage-seconds",
+     38.37423727764706
+    ],
+    [
+     "M511 attempted stage-seconds",
+     28.441592343875
+    ],
+    [
+     "M511 S_att",
+     11.406000001562965
+    ]
+   ],
+   "factors": [
+    [
+     "S10 reported: both arms, all turns -> clean-host turns, both arms",
+     2.255417341327148
+    ],
+    [
+     "clean-host turns, both arms -> one arm (EST), wall",
+     1.5286662648605747
+    ],
+    [
+     "one arm (EST), wall -> one arm, stage-seconds",
+     1.0444266552545864
+    ],
+    [
+     "one arm, stage-seconds -> M511 full-window stage-seconds",
+     0.994588784010182
+    ],
+    [
+     "M511 full-window stage-seconds -> M511 attempted stage-seconds",
+     1.3492295654083197
+    ],
+    [
+     "M511 attempted stage-seconds -> M511 S_att",
+     2.493564118882838
+    ]
+   ],
+   "product": 12.049457398937246
+  },
+  "decode_le_1.5min|R0b": {
+   "states": [
+    [
+     "S10 reported: both arms, all turns",
+     137.4361111111111
+    ],
+    [
+     "clean-host turns, both arms",
+     60.93600000000001
+    ],
+    [
+     "one arm (EST), wall",
+     39.8621997493729
+    ],
+    [
+     "one arm, stage-seconds",
+     38.16658599129319
+    ],
+    [
+     "M511 full-window stage-seconds",
+     39.22511929143137
+    ],
+    [
+     "M511 attempted stage-seconds",
+     29.12795049520833
+    ],
+    [
+     "M511 S_att",
+     11.761402779155308
+    ]
+   ],
+   "factors": [
+    [
+     "S10 reported: both arms, all turns -> clean-host turns, both arms",
+     2.255417341327148
+    ],
+    [
+     "clean-host turns, both arms -> one arm (EST), wall",
+     1.5286662648605747
+    ],
+    [
+     "one arm (EST), wall -> one arm, stage-seconds",
+     1.0444266552545864
+    ],
+    [
+     "one arm, stage-seconds -> M511 full-window stage-seconds",
+     0.9730138921369854
+    ],
+    [
+     "M511 full-window stage-seconds -> M511 attempted stage-seconds",
+     1.3466487900645143
+    ],
+    [
+     "M511 attempted stage-seconds -> M511 S_att",
+     2.476571123542482
+    ]
+   ],
+   "product": 11.685350267460326
+  },
+  "lowest4_wall|R0a": {
+   "states": [
+    [
+     "S10 reported: both arms, all turns",
+     137.4361111111111
+    ],
+    [
+     "clean-host turns, both arms",
+     58.964999999999996
+    ],
+    [
+     "one arm (EST), wall",
+     38.64949994677212
+    ],
+    [
+     "one arm, stage-seconds",
+     37.0071472916659
+    ],
+    [
+     "M511 full-window stage-seconds",
+     38.37423727764706
+    ],
+    [
+     "M511 attempted stage-seconds",
+     28.441592343875
+    ],
+    [
+     "M511 S_att",
+     11.406000001562965
+    ]
+   ],
+   "factors": [
+    [
+     "S10 reported: both arms, all turns -> clean-host turns, both arms",
+     2.330808294939559
+    ],
+    [
+     "clean-host turns, both arms -> one arm (EST), wall",
+     1.525634227640882
+    ],
+    [
+     "one arm (EST), wall -> one arm, stage-seconds",
+     1.04437933683897
+    ],
+    [
+     "one arm, stage-seconds -> M511 full-window stage-seconds",
+     0.9643747971825491
+    ],
+    [
+     "M511 full-window stage-seconds -> M511 attempted stage-seconds",
+     1.3492295654083197
+    ],
+    [
+     "M511 attempted stage-seconds -> M511 S_att",
+     2.493564118882838
+    ]
+   ],
+   "product": 12.049457398937246
+  },
+  "lowest4_wall|R0b": {
+   "states": [
+    [
+     "S10 reported: both arms, all turns",
+     137.4361111111111
+    ],
+    [
+     "clean-host turns, both arms",
+     58.964999999999996
+    ],
+    [
+     "one arm (EST), wall",
+     38.64949994677212
+    ],
+    [
+     "one arm, stage-seconds",
+     37.0071472916659
+    ],
+    [
+     "M511 full-window stage-seconds",
+     39.22511929143137
+    ],
+    [
+     "M511 attempted stage-seconds",
+     29.12795049520833
+    ],
+    [
+     "M511 S_att",
+     11.761402779155308
+    ]
+   ],
+   "factors": [
+    [
+     "S10 reported: both arms, all turns -> clean-host turns, both arms",
+     2.330808294939559
+    ],
+    [
+     "clean-host turns, both arms -> one arm (EST), wall",
+     1.525634227640882
+    ],
+    [
+     "one arm (EST), wall -> one arm, stage-seconds",
+     1.04437933683897
+    ],
+    [
+     "one arm, stage-seconds -> M511 full-window stage-seconds",
+     0.9434553153736367
+    ],
+    [
+     "M511 full-window stage-seconds -> M511 attempted stage-seconds",
+     1.3466487900645143
+    ],
+    [
+     "M511 attempted stage-seconds -> M511 S_att",
+     2.476571123542482
+    ]
+   ],
+   "product": 11.685350267460327
+  }
+ },
+ "ladder": {
+  "analysed": {
+   "n": 143,
+   "theirs": 3898.181818181818,
+   "ours_two": 154.33705913610567,
+   "ours_one": 101.96856677098907,
+   "r_two": 25.257587775753308,
+   "r_one": 38.22924987203884,
+   "src_frames": 104.06993006993007,
+   "our_rows": 44.96503496503497
+  },
+  "analysed_H": {
+   "n": 58,
+   "theirs": 5571.363793103448,
+   "ours_two": 183.61767321996393,
+   "ours_one": 121.97789996051712,
+   "r_two": 30.342197978019573,
+   "r_one": 45.6751903001022,
+   "src_frames": 150.0,
+   "our_rows": 75.0
+  },
+  "analysed_D": {
+   "n": 85,
+   "theirs": 2756.4811764705883,
+   "ours_two": 134.3573459965318,
+   "ours_one": 88.31513941813463,
+   "r_two": 20.516043659732176,
+   "r_one": 31.211875955036678,
+   "src_frames": 72.72941176470589,
+   "our_rows": 24.470588235294116
+  },
+  "theirs_done": {
+   "n": 118,
+   "theirs": 4549.260169491525,
+   "ours_two": 156.20655386017688,
+   "ours_one": 102.86202645688165,
+   "r_two": 29.1233629900295,
+   "r_one": 44.226818449843705,
+   "src_frames": 104.83050847457628,
+   "our_rows": 45.46610169491525
+  },
+  "all180_ours": {
+   "n": 180,
+   "ours_two": 137.4361111111111,
+   "ours_one": 90.96750976940514,
+   "theirs": 3177.3511111111106
+  },
+  "145_run": {
+   "n": 145,
+   "theirs": 3943.780689655172,
+   "ours_two": 153.9375840159313
+  }
+ },
+ "theirs": {
+  "analysed": {
+   "n": 143,
+   "frames": 104.06993006993007,
+   "wall": 3898.181818181818,
+   "wall_f": 37.45733100389732,
+   "gated_f": 33.72962639430184,
+   "s3_f": 28.621757828248892,
+   "gated": 3510.23986013986
+  },
+  "done": {
+   "n": 118,
+   "frames": 104.83050847457628,
+   "wall": 4549.260169491525,
+   "wall_f": 43.39633791430881,
+   "gated_f": 39.469854486661276,
+   "s3_f": 34.426653193209376,
+   "gated": 4137.644915254237
+  },
+  "done_1008_09": {
+   "n": 51,
+   "frames": 105.84313725490196,
+   "wall": 3286.270588235294,
+   "wall_f": 31.048499444238605,
+   "gated_f": 28.44916635791034,
+   "s3_f": 24.920414968506854,
+   "gated": 3011.1490196078435
+  },
+  "done_1008_10": {
+   "n": 67,
+   "frames": 104.83582089552239,
+   "wall": 3420.34776119403,
+   "wall_f": 32.62575455580866,
+   "gated_f": 29.676907744874715,
+   "s3_f": 26.051950455580865,
+   "gated": 3111.202985074627
+  },
+  "done_1011_on": {
+   "n": 51,
+   "frames": 104.82352941176471,
+   "wall": 6032.341176470589,
+   "wall_f": 57.54758698092032,
+   "gated_f": 52.33660680882903,
+   "s3_f": 45.43000374111485,
+   "gated": 5486.107843137255
+  },
+  "not_done": {
+   "not_done": 25,
+   "not_done_wall": 20627.3
+  },
+  "all_attempts_h": null,
+  "all_lines_analysed_h": 162.44747222222222,
+  "scored_analysed_h": 154.84444444444443
+ }
+}

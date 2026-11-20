@@ -1,0 +1,113 @@
+# Tracking policy: training (run/pipeline/train_policy.py) and evaluation (run/pipeline/eval_policy.py).
+# Compose onto the root config: `+policy=default`.
+run: default
+device: cuda                 # cpu: the plain-MuJoCo twin (<= 8 worlds; tests and debugging); cuda: MuJoCo Warp
+seed: 0
+n_updates: 7650              # 4096 worlds x 32 steps x 7650 updates = 1.003e9 env-steps (target ~1e9)
+checkpoint_every: 50
+init_log_std: -1.0
+scene_xml: ${paths.baseline}/retargeting/outputs/sharpa/right/whisking/0/scene.xml
+
+data:
+  source: whisking           # whisking: the shipped kinematic reference; dexycb: DexYCB GT references (fastdo.policy.dexycb_refs)
+  whisking_npz: ${paths.baseline}/retargeting/outputs/sharpa/right/whisking/0/trajectory_kinematic.npz
+  n_frames: null             # crop the whisking clip to its first frames (null: all of them)
+  covariance_pos_std: 0.001  # m; synthetic posterior of the shipped reference (it has no M1 solve)
+  covariance_rot_std: 0.01   # rad
+  covariance_log_scale_std: 0.01
+  # dexycb (fastdo.policy.pipeline_config.load_reference_clips; references from fastdo.policy.dexycb_refs):
+  # object_split(YCB_OBJECTS, n_held_out, split_seed). Training takes exactly one train-side object (train_objects)
+  # and one hand side per run (multi-object training is not covered here); eval_policy takes the held-out
+  # side with one environment pool per object scene. Up to max_seqs sequences (0: all). Inputs: scenes from
+  # run/pipeline/build_ycb_scenes.py, GT hands from
+  # run/pipeline/build_dexycb_hands.py; a clip whose scene or hands failed validation is skipped and logged.
+  dexycb_root: ${dexycb.root}
+  mano_pca: ${dexycb.mano_pca}
+  n_held_out: 4
+  split_seed: 0
+  max_seqs: 0
+  train_objects: null        # dexycb training: exactly one train-side object, e.g. [002_master_chef_can]
+  hand_side: right           # sequences of this hand only; dexycb training needs left or right; null: both (evaluation).
+                             # Left references are excluded by default (left clearance is a follow-up)
+  exclude_subjects: [subject-07, subject-08]   # reserved for calibration and confirmation: never listed or opened
+  scenes_root: ${paths.outputs}/policy_scenes
+  hands_root: ${paths.outputs}/policy_refs
+  engine_stride: 3           # engine decode rows (10 fps); the kinematic reference is solved at the 30 Hz source rate
+
+env:
+  n_worlds: 4096
+  hz: 50.0
+  n_substeps: 10
+  horizon: 10
+  delta_max: 0.3
+  kp: 300.0
+  kd: 35.0
+  wrist_kp: 1000.0
+  wrist_kd: 100.0
+  warmup_duration: 3.0
+  warmup_open_hand: true
+  randomize: true
+  reward_scale: 0.02
+  warmup_reward_scale: 0.1
+  nconmax: 120
+  njmax: 500
+  reward:                    # RewardConfig overrides; its gamma is always set to ppo.gamma
+    w_phi: 1.0
+    d_phi: 0.1
+
+ppo:
+  n_steps: 32
+  n_epochs: 5
+  n_minibatches: 4
+  gamma: 0.99
+  lam: 0.95
+  clip: 0.2
+  value_clip: 0.2
+  ent_coef: 0.0
+  lr: 3.0e-4
+  max_grad_norm: 1.0
+  hidden: [512, 512, 512]
+  value_coef: 1.0
+
+curriculum:                  # randomization strength 0 -> 1 x Sigma, episode length 1 s -> full clip
+  strength_updates: 500
+  start_seconds: 1.0
+  end_seconds: 10.0
+  length_updates: 1000
+  stage_updates: 50
+
+bc:                          # whether BC shortens PPO is measured on the GPU (pending)
+  enabled: false
+  # the isolation study's "theirs" arm, where run/pipeline/retarget_whisking.py writes it (isolation.output_root is the
+  # primary checkout's outputs/, never a worktree's, so ${paths.outputs} would miss it from a worktree)
+  arm_dir: ${isolation.output_root}/theirs/${isolation.robot_type}/${isolation.embodiment_type}/${isolation.task_name}/0
+  n_epochs: 50
+  lr: 1.0e-3
+  saturation: 0.95
+  clamp_ctrl: true
+  rescale_velocity: true     # MPC qvel x steps_per_frame dt hz (1.761): observation velocities on the 50 Hz clock
+
+smc:                         # chunk-0 potential and tempering floor
+  n_particles: 64
+  chunk_seconds: 0.5
+  ess_fraction: 0.5
+  action_noise_std: 0.1
+  reference_noise: true
+  subtract_start_potential: false
+  lambda_floor_c: 1.0
+
+eval:
+  checkpoint: null           # a checkpoint file; null: the latest under outputs/policy/<run>/checkpoints
+  best_of_k: [1, 4, 16, 64, 256]
+  smc_k: [4, 16, 64]
+  law_rollouts: 256          # independent rollouts per clip for the fitted law (never quote pi_0 from 8)
+  law_min_clips: 20          # floor (>= 20): fewer clips, the law is not fitted, meets_target is None and
+                             # the report writes per-clip outcomes instead
+  law_min_rollouts: 64       # floor (>= 64): fewer rollouts per clip, likewise (pi_0 sd 0.058 at 300 x 8)
+  n_boot: 1000
+  excess_target: 0.05        # smallest K with f_BoK - pi_0 <= 5 %
+  compute_induced_target: 0.003
+  calibrate_sigma_v: true
+  t_rest_seconds: null       # front end + solver + kinematic reference per clip (budget Section 3); null: pending
+  t_mpc_seconds: 900.0       # the quality-parity configuration's MPC fallback (isolation study: 895 s)
+  report_dir: ${paths.outputs}/policy/${policy.run}/eval

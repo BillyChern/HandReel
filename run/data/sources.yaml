@@ -1,0 +1,226 @@
+# Dataset source manifest for HandReel.
+#
+# Every entry has: name, url, requires_registration (bool), size_gb, notes.
+# `notes` records the `curl -sIL <url> | head -1` (or equivalent) HTTP status observed on the
+# research date below, plus format/gating details discovered while reading each project page.
+# Optional `files:` lists give the individual component URLs consumed by the downloader scripts
+# in this directory (download_100doh.py, download_dexycb.py) so no URL is hardcoded in Python.
+#
+# Research date: 2026-09-12. Re-verify before relying on this for a new download run; academic
+# mirrors (Google Drive / OneDrive / Baidu links) rotate periodically.
+
+datasets:
+  - name: 100doh
+    url: https://fouheylab.eecs.umich.edu/~dandans/projects/100DOH/downloads/file.zip
+    requires_registration: false
+    size_gb: 0.0246
+    notes: |
+      `curl -sIL https://fouheylab.eecs.umich.edu/~dandans/projects/100DOH/downloads/file.zip
+      | head -1` -> HTTP/1.1 200 OK (Content-Length 26416596 bytes = 0.0246 GB).
+      `curl -sIL https://fouheylab.eecs.umich.edu/~dandans/projects/100DOH/download.html | head -1`
+      -> HTTP/1.1 200 OK (project download page).
+      file.zip (public, no click-through) unpacks to: meta_100DOH_video.txt (27306 rows: video_id,
+      genre, duration_s, resolution, frame_rate, frame_number, creation_time, youtube_link) and
+      meta_100K_frame.txt (99899 rows: image_name, video_id, frame_index, genre, duration_s,
+      resolution, frame_rate, frame_number, creation_time, youtube_link), plus train/val/test/
+      trainval .json hand-contact bounding-box annotations. Per README_100K.md, frames were
+      extracted with `ffmpeg -i video -vf fps=0.5 ...`, i.e. one frame every 2 s, so 1-based
+      frame_index i maps to an approximate source-video timestamp t = (i - 1) * 2.0 s. This is
+      the machine-readable video-id/frame list the downloader discovers.
+      Pre-extracted frame caches (raw.zip / pascal_voc_format.zip) sit behind a free, no-signup
+      click-through agreement at ./agreement.html?raw -- not needed here since 10 s clips are
+      re-fetched from YouTube directly via yt-dlp.
+      TLS note: `openssl s_client -connect fouheylab.eecs.umich.edu:443` on 2026-09-12 reports
+      `Verify return code: 10 (certificate has expired)` -- a server-side issue on the
+      University of Michigan's end (cert subject CN=all.eecs.umich.edu), not a client/sandbox
+      problem; the earlier `curl -sIL` 200s above were obtained with `-k`/`--insecure`. Plain
+      `curl -sIL` (no -k) and Python's verified `urllib.request.urlretrieve` both fail with
+      SSL: CERTIFICATE_VERIFY_FAILED. download_100doh.py fails loudly on this by default and
+      only retries without verification if the operator passes `--insecure-tls` (never a
+      silent bypass) -- see that script's module docstring for the exact, hardcoded host
+      allowlist this applies to.
+    files:
+      - name: annotations
+        url: https://fouheylab.eecs.umich.edu/~dandans/projects/100DOH/downloads/file.zip
+        size_gb: 0.0246
+      - name: readme
+        url: https://fouheylab.eecs.umich.edu/~dandans/projects/100DOH/downloads/README_100K.md
+        size_gb: 0.000004
+
+  - name: dexycb
+    url: https://dex-ycb.github.io/
+    requires_registration: false
+    size_gb: 122.6
+    notes: |
+      `curl -sIL https://dex-ycb.github.io/ | head -1` -> HTTP/2 200.
+      `curl -sIL https://github.com/NVlabs/dex-ycb-toolkit | head -1` -> HTTP/2 200 (eval/reader
+      toolkit; not used by the download, useful reference for src/fastdo/io/datasets/dexycb.py).
+      Data is hosted on Google Drive as one CC-BY-NC-4.0 archive per subject (10 subjects, ~12 GB
+      each) plus calibration.tar.gz (16 KB), models.tar.gz (1.4 GB, YCB meshes), bop.tar.gz
+      (1.2 GB, optional BOP-format annotations) and a single combined dex-ycb-20210415.tar.gz
+      (119 GB, redundant with the per-subject files -- skipped by default). No login wall was
+      hit fetching any of these (`curl -sIL` on each `drive.google.com/file/d/<id>` -> HTTP/2
+      302, 302, 200), so requires_registration is recorded as false. Large-file bytes verified
+      with `curl -r 0-2047 https://drive.usercontent.google.com/download?id=<id>&export=download
+      &confirm=t` returning valid gzip magic bytes for calibration, models and subject-03 (this
+      is the URL pattern download_dexycb.py streams from).
+      DexYCB's official toolkit (dex_ycb_toolkit/dex_ycb.py) defines split `s0` (`test`) as
+      subject_ind = [2..9] (0-based, i.e. subjects 03-10) x sequence_ind = [i for i in range(100)
+      if i % 5 == 4] (20 of 100 sequences per subject) = 8 * 20 = 160 sequences (all 8 camera
+      serials are kept for s0 test). The paper has no evaluation on those 160 sequences; its
+      held-out DexYCB views are all from subject 08, one of these eight subjects. `--subset eval` downloads calibration.tar.gz + models.tar.gz + the 8
+      subject archives for subjects 03-10 (~97.4 GB total, under the 100 GB budget) -- this is
+      coarser than the split's 160 sequences (each subject archive holds all 100 of that
+      subject's sequences, not just its 20 s0-test sequences) because Google Drive only exposes
+      per-subject granularity, not per-sequence; extraneous sequences can be deleted after
+      extraction if disk is tight. Subjects 01-02 (not in s0 test) and bop.tar.gz (optional BOP
+      annotations, not required by DexYCBReader) are skipped by `--subset eval`; `--subset full`
+      adds them but still skips the redundant single-archive alternative.
+    files:
+      - name: calibration
+        drive_id: 1UAwVKT4Rgb1fLcFoa1o71_-0NtSvvLAQ
+        size_gb: 0.000016
+        s0_test: true
+      - name: models
+        drive_id: 1cAzlQBpcTatI5ykYQ8ziQiHLUG_a_UpM
+        size_gb: 1.4
+        s0_test: true
+      - name: 20200709-subject-01
+        drive_id: 1Ehh92wDE3CWAiKG7E9E73HjN2Xk2XfEk
+        size_gb: 12
+        s0_test: false
+      - name: 20200813-subject-02
+        drive_id: 1Uo7MLqTbXEa-8s7YQZ3duugJ1nXFEo62
+        size_gb: 12
+        s0_test: false
+      - name: 20200820-subject-03
+        drive_id: 1FkUxas8sv8UcVGgAzmSZlJw1eI5W5CXq
+        size_gb: 12
+        s0_test: true
+      - name: 20200903-subject-04
+        drive_id: 14up6qsTpvgEyqOQ5hir-QbjMB_dHfdpA
+        size_gb: 12
+        s0_test: true
+      - name: 20200908-subject-05
+        drive_id: 1NBA_FPyGWOQF5-X9ueAat5g8lDMz-EmS
+        size_gb: 12
+        s0_test: true
+      - name: 20200918-subject-06
+        drive_id: 1UWIN2-wOBZX2T0dkAi4ctAAW8KffkXMQ
+        size_gb: 12
+        s0_test: true
+      - name: 20200928-subject-07
+        drive_id: 1oWEYD_o3PVh39pLzMlJcArkDtMj4nzI0
+        size_gb: 12
+        s0_test: true
+      - name: 20201002-subject-08
+        drive_id: 1GTNZwhWbs7Mfez0krTgXwLPndvrw1Ztv
+        size_gb: 12
+        s0_test: true
+      - name: 20201015-subject-09
+        drive_id: 1j0BLkaCjIuwjakmywKdOO9vynHTWR0UH
+        size_gb: 12
+        s0_test: true
+      - name: 20201022-subject-10
+        drive_id: 1FvFlRfX-p5a5sAWoKEGc17zKJWwKaSB-
+        size_gb: 12
+        s0_test: true
+      - name: bop
+        drive_id: 1CPqLjsaYNjE3xSJbuWmqaMsGvyGIxiKL
+        size_gb: 1.2
+        s0_test: false
+      - name: full_archive
+        drive_id: 18fD8RtWJM_fBi3bsuQTzdjIKxdRYtl57
+        size_gb: 119
+        s0_test: false
+
+  - name: ho3d
+    url: https://1drv.ms/f/s!AsG9HA3ULXQRlFy5tCZXahAe3bEV?e=BevrKO
+    requires_registration: false
+    size_gb: null
+    notes: |
+      `curl -sIL https://www.tugraz.at/institute/icg/research/team-lepetit/research-projects/ho-3d/
+      | head -1` -> HTTP/1.1 404 Not Found (the old URL has moved). The current
+      project page is https://www.tugraz.at/institute/icg/research/team-lepetit/research-projects/
+      hand-object-3d-pose-annotation -- `curl -sIL ... | head -1` -> HTTP/1.1 200 OK, but it lists
+      no direct file links; it points to the authors' scripts repo
+      https://github.com/shreyashampali/ho3d for current download links (v2/v3 GT + a Nov 2024
+      GT-annotation update, plus CodaLab eval instructions).
+      HO-3D v3 OneDrive folder (from ho3d README, 2026-09-12):
+      https://1drv.ms/f/s!AsG9HA3ULXQRlFy5tCZXahAe3bEV?e=BevrKO
+      A bare `curl -sIL` HEAD on the 1drv.ms short link returns HTTP/2 403 (OneDrive rejects
+      bot-like HEAD requests); following the full redirect chain with a browser UA and GET
+      (`curl -sL -o /dev/null -w '%{http_code}'`) lands on HTTP/2 200, a public unauthenticated
+      SharePoint/OneDrive folder listing -- no sign-in wall was hit at any hop, so
+      requires_registration is recorded as false. HO-3D v2 link:
+      https://1drv.ms/f/c/11742dd40d1cbdc1/ElPb2rhOCeRMg-dFSM3iwO8B5nS1SgnQJs9F6l28G0pKKg?e=TMuxgr .
+      Folder-level bulk download needs interactive browsing or a OneDrive-aware client (curl
+      cannot enumerate/zip a live folder listing), so this release has no `download_ho3d.py`
+      (only the 100DOH and DexYCB downloaders ship). HO-3D v3: 103,462
+      annotated images + depth maps (arXiv:2107.00887); no total GB is published by the authors.
+      A third-party aggregator (hyper.ai) lists HO-3D v2 at ~34.5 GB but this figure is
+      unverified against an authoritative source, hence size_gb is left null here.
+
+  - name: hoi4d
+    url: https://hoi4d.github.io/
+    requires_registration: true
+    size_gb: null
+    notes: |
+      `curl -sIL https://hoi4d.github.io/ | head -1` -> HTTP/2 200.
+      HOI4D is treated as registration-gated: obtain it from the dataset owners through the
+      official project page above (https://hoi4d.github.io/), which gives the current access
+      route and terms; only that page is recorded here, and no mirror or download link is.
+      Licensed CC BY-NC 4.0
+      (non-commercial). No total GB is published; paper reports 2.4M RGB-D frames / 4000
+      sequences / 800 object instances / 16 categories (arXiv:2203.01577).
+
+  - name: arctic
+    url: https://arctic.is.tue.mpg.de/
+    requires_registration: true
+    size_gb: null
+    notes: |
+      `curl -sIL https://arctic.is.tue.mpg.de/ | head -1` -> HTTP/1.1 200 OK.
+      `curl -sIL https://arctic.is.tue.mpg.de/download.php | head -1` -> HTTP/1.1 302 Found,
+      redirecting to a `Sign in` page with `Not Registered? Register` (register.php) -- an
+      account + accepted license is required before any file becomes reachable, so
+      requires_registration is true and only the registration page is recorded. Code/splits
+      scripts (open, no login) at https://github.com/zc-alexfan/arctic. Dataset: 2.1M video
+      frames (8 third-person views + 1 egocentric view) with 3D hand + object meshes and contact
+      annotations (CVPR 2023, Fan et al.); no total GB is published by the authors.
+
+  - name: oakink2
+    url: https://oakink.net/v2
+    requires_registration: true
+    size_gb: null
+    notes: |
+      `curl -sIL https://oakink.net/v2 | head -1` -> HTTP/2 301 -> HTTP/2 200 (redirects to
+      https://www.oakink.net/v2). The official page states OakInk2 "is currently in preview.
+      Annotations are subject to future changes" and does not give a direct bulk-download link
+      or registration form on this page, so OakInk2 is
+      treated as registration-gated and only this project page is recorded as the primary
+      pointer, consistent with OakInk v1's known gate (Google Form
+      https://forms.gle/g6QEmmCeZYLGaVe29 before annotation files are released).
+      For transparency: a maintainer-hosted mirror exists at
+      https://huggingface.co/datasets/kelvin34501/OakInk-v2 (`curl -sIL ... | head -1` ->
+      HTTP/2 200; `GET https://huggingface.co/api/datasets/kelvin34501/OakInk-v2` reports
+      `"gated": false`, license cc-by-sa-4.0, 1M-10M rows) -- this is publicly downloadable
+      without a HF access request, but it is a "preview" mirror maintained by a toolkit author
+      rather than the canonical release, so it is noted here rather than substituted as the
+      primary url. Paper: arXiv:2403.19417.
+
+  - name: ego4d
+    url: https://ego4d.dev/request/ego4d
+    requires_registration: true
+    size_gb: 30000.0
+    notes: |
+      `curl -sIL https://ego4d-data.org/ | head -1` -> HTTP/2 200 (public docs/info site).
+      `curl -sIL https://ego4d.dev/request/ego4d | head -1` -> HTTP/2 429 on repeated automated
+      HEAD requests (Cloudflare-style rate limiting on the licensing app, not a content error);
+      per docs.ego-exo4d-data.org and ego4d-data.org/docs/start-here, the license agreement must
+      be reviewed and executed at this URL, after which AWS access credentials are emailed
+      (~48 h approval turnaround, credentials expire after 14 days). Gated the whole way through
+      -- only the registration page is recorded. Full
+      primary dataset ~7.1 TB (7100 GB); "entire dataset" including all derived features is
+      cited at 30+ TB. size_gb records that coarse upper bound (30000 GB) -- treat it as
+      "tens of TB", not a precise figure; most downstream uses only need a benchmark subset,
+      not the full corpus.
