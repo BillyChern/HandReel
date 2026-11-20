@@ -1,12 +1,12 @@
-<div align="center">
+<div align='center'>
 <h1>HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling</h1>
 
 [Shi Chen](https://shichen.world/)<sup>1,2</sup>, [Jeffrey Ichnowski](https://ichnow.ski/)<sup>1</sup>
 
 <sup>1</sup>[Robotics Institute, Carnegie Mellon University](https://www.ri.cmu.edu/) &nbsp;&nbsp; <sup>2</sup>[Intuition](https://intuition.dev/)
 
-<img src="https://img.shields.io/badge/arXiv-coming_soon-b31b1b" alt="arXiv: coming soon">
-<a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue" alt="License: Apache 2.0"></a>
+<img src='https://img.shields.io/badge/arXiv-coming_soon-b31b1b' alt='arXiv: coming soon'>
+<a href='LICENSE'><img src='https://img.shields.io/badge/License-Apache_2.0-blue' alt='License: Apache 2.0'></a>
 
 </div>
 
@@ -30,10 +30,9 @@ you use (SAM 2, SAM 3D, MoGe-2, CoTracker3, HaWoR, WiLoR, MANO, Hands23).
 
 ## Overview
 
-HandReel takes a short video of a hand using an object. It returns the object's shape, its pose in every processed
-frame and its metric scale, with the motion of the right hand in the frames where the hand estimator finds it. The
-picture shows the reference result that ships with this repository, drawn over three frames of a public clip (see
-"Expected output").
+HandReel takes a short video of a hand using an object. It returns the object's 3D shape, its position and rotation
+over time and its real-world size, with the motion of the right hand in the frames where the hand estimator finds
+it. The picture at the top shows six such results, each drawn over one frame of its clip.
 
 HandReel (Python package `fastdo`) is a staged engine (decode, mask, shape, intrinsics, hands, geometry, tracks, solve,
 then the optional qc and retarget stages), configured with Hydra (`run/conf/config.yaml`). The mask, shape, intrinsics,
@@ -146,8 +145,7 @@ reference output of "Interactive viewer". The whole CPU suite is `uv run --froze
 (about 30 min on a 4-thread cap; measured on the development host); GPU tests are faked or skip, as do tests whose
 dataset, conda env or baseline checkout is absent.
 
-On a GPU, with the environments, weights and MANO in place and the four variables the GPU example needs ("Host
-paths") set:
+On a GPU, with the environments, weights and MANO in place and the four variables the GPU example needs ("Installation") set:
 
 ```bash
 export CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0   # the one card to use, numbered as /proc lists them
@@ -247,58 +245,22 @@ uv run --frozen --extra viser python scripts/view_clip.py outputs/example/engine
 
 ## Results in the paper
 
-Selected results, in the words and with the status that the submitted paper gives each. [`docs/paper_exhibits.md`](docs/paper_exhibits.md)
-maps each number to its table, figure or section; some rest on the paper's prose alone.
+| Measured in the paper | DO AS I DO | HandReel | Ratio |
+|---|---|---|---|
+| Reconstruction time per window, both one window at a time (Ego4D, 20 windows) | about 2,000 s | 66 s | about 30x |
+| Reconstruction time per window, baseline restarting for every window against HandReel's batched runs (Ego4D, 9 windows) | 2,100 s | 17 s per-window share | 130x |
+| Object-centre error, HandReel over DO AS I DO, held-out HOI4D (58 windows) | | | 0.50 |
+| Object-centre error, HandReel over DO AS I DO, held-out DexYCB | | | 0.85 |
 
-- **Error on held-out data (object-centre error).** Across 58 analysed held-out HOI4D windows with ground-truth
-  object prompts, the paired object-centre error ratio of HandReel to DO AS I DO was 0.50 under the registered failure
-  rules, in which a failure to deliver counts as an error (Table 1). On DexYCB, HandReel's ratio was 0.85, which is non-inferior, but that verdict is not robust if
-  joint failures count against HandReel, and the authors partly used this subject in development (Table 1).
-- **Reconstruction time, one window at a time (Table 2, row 1).** On Ego4D, on one H100 on a shared host with
-  a 17-core CPU quota, the paper timed both pipelines one window at a time. DO AS I DO's reconstruction stage took about 30x as long as HandReel: about
-  2,000 s against 66 s per window, on 20 windows. The study drew 74 windows; both pipelines completed 25, and the
-  paper analyses 20 of them, without 5 that an audit of the timed processes' CPU affinity and a screening of CPU
-  use flagged. It prints the lower of the readings on 25 and 20 windows, by a rule that the authors set after the
-  study ended and before they computed estimates. A window counts as completed when DO AS I DO finishes
-  and HandReel's solve runs, even if HandReel's quality check then rejects it. The bracket that Table 2 prints,
-  25 to 37, is an envelope.
-- **Reconstruction time, the baseline restarts against HandReel's share of batched runs (Table 2, row 2).** The
-  paper timed DO AS I DO's reconstruction stage with a restart for every window: 2,100 s per window. HandReel's side
-  is not the time of one window alone. It is a 17 s per-window share: the mean wall time of batched runs, which the
-  paper splits among windows in proportion to their stage seconds. Each batched run loaded its models once, and the
-  timing includes that load. The ratio is 130x, with a 95% confidence interval of 97 to 170, on the 9 of 19
-  attempted windows that both pipelines completed, which is below the registered minimum of 10.
-- **Reconstruction time, both in batched runs, where the paper models the baseline (Table 2, row 3).** The
-  baseline's seconds in this row are a modelled value, about 1,600 s per window: the paper models two instances of
-  DO AS I DO that run at once, with the 1.2x throughput gain that two instances showed on three window pairs.
-  HandReel's side is a 14 s per-window share of its batched runs. The modelled ratio is about 120x, on the 20
-  completed windows that the paper analyses; the bracket that Table 2 prints, 87 to 150, is an envelope.
-- **One video through the full pipeline (Table 5).** By a sum of separately measured stage times, DO AS I DO's full
-  pipeline would take about 3x as long per window with its own reconstruction as with HandReel's: 3,069 s against
-  991 s. This comparison times neither pipeline end to end. The reconstruction terms of the sums are the 2,100 s
-  and the 17 s per-window share of Table 2, row 2. HandReel's sum also holds 2.63 CPU core-seconds for the
-  certificate check. Both sums share one 894 s physics time and neither holds a gravity term. The 894 s is the median
-  elapsed time of one planner arm, which the authors measured only after HandReel's reconstruction, at 2 perturbation
-  samples (default 4), while two planner arms ran at once on the same GPU. It is not a time for one arm alone on the
-  GPU. With HandReel reconstruction, physics is the largest term in the stage sum.
+Ego4D has no ground-truth object poses, so the two timing rows measure speed only. The DexYCB error ratio is
+less certain than the HOI4D one (see the linked page). HandReel is not the most
+accurate method in the paper's comparisons: on HO3D-v3, five published methods (HOLD, MagicHOI, AGILE, Open-CHOIR
+and 4D-HOF) list a lower Chamfer distance than the paper measured for HandReel, and on the DexYCB views of objects
+without symmetry HandReel had the higher median rotation error.
 
-- **Orientation (Sec. 5.2).** Object-centre error ignores orientation. Both pipelines delivered 13 of the 25
-  evaluated DexYCB views of objects without symmetry. On those 13 views, HandReel had the higher median rotation
-  error.
-- **Published methods on HO3D-v3 (Table 3).** Table 3 lists published timings for six methods beside the
-  measured Ego4D times. AGILE reports the times for HOLD and MagicHOI. AGILE reports HOLD and MagicHOI accuracy on
-  successful sequences (100.0% and 83.3% succeeded, respectively). Each published timing uses its source's own
-  input, hardware and timing scope. On HO3D-v3, five of them (HOLD, MagicHOI, AGILE, Open-CHOIR and 4D-HOF) have a
-  lower Chamfer distance, in the values that the 4D-HOF paper lists, than the paper measured for HandReel. The
-  listed and the measured errors use different inputs and evaluation protocols, so they are not a paired ranking.
-
-Table 2 computes each ratio as the baseline's seconds over HandReel's, from unrounded seconds, so dividing the
-printed seconds need not give the printed ratio. For each row of Table 2, the supplement describes the windows
-included in the row and explains how each time was obtained (the supplement, Additional Experiments).
-
-Ego4D has no ground-truth object poses, so the Ego4D timing studies measure speed only. HandReel ran the held-out
-test from one frozen code tree and both timing studies from a later one, and the authors did not compare the outputs
-of the two trees (the supplement, Experiment Details). This release cannot rerun these studies.
+[`docs/results.md`](docs/results.md) states each result in full, with its conditions, and
+[`docs/paper_exhibits.md`](docs/paper_exhibits.md) maps each number to its table, figure or section. This release
+cannot rerun these studies.
 
 ## Evaluation
 

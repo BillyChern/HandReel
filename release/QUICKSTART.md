@@ -463,8 +463,8 @@ One run of the GPU command above, on 2026-11-16, is shipped in `release/referenc
 
 A run on other hardware, drivers or environments can differ. These numbers are what this one run gave, not a
 tolerance to test against. The CPU smoke test is not a reference: its workers are placeholders, its artifacts are
-empty files and its seconds are not timings. `scripts/view_clip.py` opens the reference output on CPU (README "View
-the result"). `expected_projection.png` in that directory shows the reference reconstruction over the clip at decode
+empty files and its seconds are not timings. `scripts/view_clip.py` opens the reference output on CPU (README "Interactive
+viewer"). `expected_projection.png` in that directory shows the reference reconstruction over the clip at decode
 rows 0, 34 and 68 (README "Expected output"); `scripts/render_reference_png.py` draws the same picture for your run.
 
 ## 5. Paper numbers

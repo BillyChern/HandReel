@@ -48,11 +48,11 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SECTION_DOCS = ["README.md", "release/QUICKSTART.md", "docs/paper_exhibits.md", "docs/record_names.md",
+SECTION_DOCS = ["README.md", "docs/installation.md", "docs/weights.md", "release/QUICKSTART.md", "docs/paper_exhibits.md", "docs/results.md", "docs/record_names.md",
                 "docs/audit.md", "docs/timing_protocol.md", "docs/output.md", "reproduce/README.md",
                 "reproduce/heldout/README.md", "release/reference/v2d_t3_ep011_cam_a/README.md", "release/MODELS.md",
                 "THIRD_PARTY_LICENSES.md"]
-DOCS = ["README.md", "release/QUICKSTART.md", "docs/paper_exhibits.md", "docs/record_names.md", "docs/output.md",
+DOCS = ["README.md", "release/QUICKSTART.md", "docs/paper_exhibits.md", "docs/results.md", "docs/record_names.md", "docs/output.md",
         "docs/audit.md", "docs/timing_protocol.md",
         "reproduce/README.md", "reproduce/heldout/README.md", "release/reference/v2d_t3_ep011_cam_a/README.md",
         "reproduce/e1_verdict_from_scores.py", "reproduce/alongray_shares.py", "reproduce/regenerate_tables.py",
