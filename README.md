@@ -12,6 +12,20 @@
 
 ![Three frames of a video of a hand moving a cup, and the same frames with HandReel's reconstructed cup and hand joints drawn over them](docs/assets/teaser.jpg)
 
+## Citation
+
+`CITATION.cff` and the entry below cite the paper, "HandReel: Fast Hand-Object Reconstruction from Video without
+Per-Frame Pose Sampling". Please also cite DO AS I DO (arXiv 2606.19333) and the models
+you use (SAM 2, SAM 3D, MoGe-2, CoTracker3, HaWoR, WiLoR, MANO, Hands23).
+
+```bibtex
+@misc{chen2026handreel,
+  title  = {{HandReel}: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling},
+  author = {Chen, Shi and Ichnowski, Jeffrey},
+  year   = {2026}
+}
+```
+
 ## Overview
 
 HandReel takes a short video of a hand using an object. It returns the object's shape, its pose in every processed
@@ -27,7 +41,11 @@ files for the released reconstruction configurations, their sources and licensin
 recorded on the authors' system. The release also contains research code for retargeting to a robot hand
 and for physics-based tracking; these do not yet run from this release (see ["Known gaps"](#known-gaps)).
 
-## Try it on CPU, no weights
+## Quick start
+
+The fastest check needs no GPU and no model weights. A full run needs the installation and the weights below.
+
+### Try it on CPU, no weights
 
 The shipped reference reconstruction of the clip above opens in your browser, in 3D over the video's frames. It needs
 no GPU, model weights or MANO. Unpack the release archive and work from its `handreel/` directory:
@@ -50,7 +68,7 @@ The viewer pairs frames by index and accepts any readable video that contains th
 takes to load and draw is viewer time. The GPU example of "Quick start" logs its reconstruction seconds apart from
 any viewer time.
 
-## Installation
+### Installation
 
 Requirements: Linux x86_64, Python 3.12, [uv](https://docs.astral.sh/uv/), conda (for the worker environments),
 `git`, and `ffmpeg` and `ffprobe` on `PATH` (the ffmpeg package provides both). The model stages need an NVIDIA
@@ -87,7 +105,7 @@ lives there.
 
 For a CPU-only look, `uv sync --frozen --python 3.12 --extra dev --extra frontend --extra viser` builds only the
 main environment (it installs exactly what `uv.lock` pins; the torch wheel also runs without a GPU; the `viser` extra
-is the 3D viewer of "View the result").
+is the 3D viewer of "Interactive viewer").
 `release/QUICKSTART.md` walks through every step by hand and says which commands were run for this release. Its
 "Notes" cover installing from the release tar (no git metadata), the expected pip `ERROR:` line of the `sam3d` step,
 uv's harmless decord reinstall message and the optional alongray package.
@@ -108,7 +126,7 @@ them. The lock-based route, `scripts/setup_all.sh` (`release/QUICKSTART.md` step
 `run/setup/build_baseline_envs.sh` is the from-source recipe. It installs nvdiffrast, the `hawor` pytorch3d, chumpy
 and GeoCalib unpinned, so it is not byte-identical to the locks.
 
-### Host paths
+#### Host paths
 
 Every host-specific path is a config key with an environment override (`run/conf/config.yaml` `paths.*`, mirrored in
 `fastdo.hostpaths`). The defaults name a placeholder layout under `/opt/fastdo`; an entry point that needs a path that
@@ -167,7 +185,7 @@ start" need none of these variables.
 The other variables (CPU threads, extra SAM 3D paths, the Hands23 files, the frame-table cache, HaWoR diagnostics)
 are listed in `release/QUICKSTART.md`, "Environment variables".
 
-## Weights
+### Weights
 
 `scripts/fetch_weights.py` pins every model to a revision and verifies each published sha256; it never writes under
 `third_party/`.
@@ -210,7 +228,7 @@ every file, and `THIRD_PARTY_LICENSES.md` the full list with the licence texts.
 `MANO_LEFT.pkl` in `FASTDO_MANO_DIR` and `FASTDO_MANO_LEFT_DIR`, and copy them into the HaWoR checkout
 (`release/QUICKSTART.md` step 3).
 
-## Quick start
+### Run the example on a GPU
 
 On CPU, with only the main environment, these run without weights, data or a GPU:
 
@@ -230,7 +248,7 @@ schema only; in stub mode `--video` is never decoded, so any existing file works
 `README.md`); and the physics-certificate audit (`docs/audit.md`) on a synthetic scene. The stub's stage artifacts are
 empty placeholder files (0 bytes) and its seconds are not timings; the run also leaves an empty `engine/.gpu.lock`
 (`docs/output.md`). To look at a real reconstruction on CPU, open the
-reference output of "View the result". The whole CPU suite is `uv run --frozen pytest -q -m "not slow and not timing"`
+reference output of "Interactive viewer". The whole CPU suite is `uv run --frozen pytest -q -m "not slow and not timing"`
 (about 30 min on a 4-thread cap; measured on the development host); GPU tests are faked or skip, as do tests whose
 dataset, conda env or baseline checkout is absent.
 
@@ -271,25 +289,7 @@ uv run --frozen python scripts/render_reference_png.py outputs/example/engine/v2
 It reads the frames from `decode.npz` (pass `--video` for a directory without it). Compare by eye: the overlay
 should sit on the same pixels. It is not a numeric tolerance.
 
-### View the result
-
-`scripts/view_clip.py` serves one clip directory in the browser (Viser, on 127.0.0.1): the object mesh and the hands
-in 3D over the source frame of the same frame id, with play/pause, a frame slider and orbit (drag; scroll to zoom).
-It needs the `viser` extra (in the CPU `uv sync` above) and no GPU. The shipped reference output, on CPU:
-
-```bash
-uv run --frozen --extra viser python scripts/view_clip.py release/reference/v2d_t3_ep011_cam_a
-```
-
-Open the printed URL (default <http://127.0.0.1:8080>; `--port N` changes it); Ctrl-C stops the server. To show the source frames in the
-viewer, supply the matching clip with `--video` (download command in
-`release/reference/v2d_t3_ep011_cam_a/README.md`). The PNG preview includes three source stills. Its hands are drawn as their 21 joints (right green, left
-orange, as in the picture above), because the MANO mesh arrays (vertices and faces) are not shipped. Your own GPU run has `decode.npz` and the full hand arrays, so the viewer
-shows its frames and hand meshes. The frame slider counts decode rows from 0, as the rest of this page does:
-
-```bash
-uv run --frozen --extra viser python scripts/view_clip.py outputs/example/engine/v2d_t3_ep011_cam_a
-```
+## Detailed usage
 
 ### Run on your own video
 
@@ -312,6 +312,44 @@ script checks the spec's width and height against the file and exits with a one-
 estimated per clip by MoGe-2, as for the example. Add `--stub` to check a spec on CPU without a model: it checks the
 spec itself (its fields, window and keyframe, and the box inside the frame) but not its width and height against the
 file, which only a GPU run probes.
+
+### Input
+
+- One or more windows of monocular RGB video (an mp4 file and a frame range), decoded at the working rate.
+- A box on the manipulated object at one keyframe. For internet video, the opt-in prompt stage (Hands23 detector)
+  proposes the keyframe and its box instead.
+- Model weights (fetched by `scripts/fetch_weights.py`) and your own MANO files (never fetched or shipped).
+
+`release/example/example_input.json` is a complete input description for one public clip. The clip is downloaded at
+a pinned revision on first use; it is not shipped.
+
+### Output
+
+Per window, the run writes a directory `<bench.artifact_root>/<clip_id>/` (default `outputs/engine/<clip_id>/`) with
+one artifact per stage (`decode.npz` to `solve.npz`, plus `mesh.obj`) and `profile.json`. The object's pose per frame
+and its metric scale are in `solve.npz`; the hands are in `hands.npz`, in the camera of `intrinsics.npz`. The shipped
+example stops at `solve.npz` (see ["Known gaps"](#known-gaps)). [`docs/output.md`](docs/output.md) gives the stage layout and the fields
+and coordinate conventions of the solve and hand outputs.
+
+## Interactive viewer
+
+`scripts/view_clip.py` serves one clip directory in the browser (Viser, on 127.0.0.1): the object mesh and the hands
+in 3D over the source frame of the same frame id, with play/pause, a frame slider and orbit (drag; scroll to zoom).
+It needs the `viser` extra (in the CPU `uv sync` above) and no GPU. The shipped reference output, on CPU:
+
+```bash
+uv run --frozen --extra viser python scripts/view_clip.py release/reference/v2d_t3_ep011_cam_a
+```
+
+Open the printed URL (default <http://127.0.0.1:8080>; `--port N` changes it); Ctrl-C stops the server. To show the source frames in the
+viewer, supply the matching clip with `--video` (download command in
+`release/reference/v2d_t3_ep011_cam_a/README.md`). The PNG preview includes three source stills. Its hands are drawn as their 21 joints (right green, left
+orange, as in the picture above), because the MANO mesh arrays (vertices and faces) are not shipped. Your own GPU run has `decode.npz` and the full hand arrays, so the viewer
+shows its frames and hand meshes. The frame slider counts decode rows from 0, as the rest of this page does:
+
+```bash
+uv run --frozen --extra viser python scripts/view_clip.py outputs/example/engine/v2d_t3_ep011_cam_a
+```
 
 ## Results in the paper
 
@@ -367,24 +405,6 @@ included in the row and explains how each time was obtained (the supplement, Add
 Ego4D has no ground-truth object poses, so the Ego4D timing studies measure speed only. HandReel ran the held-out
 test from one frozen code tree and both timing studies from a later one, and the authors did not compare the outputs
 of the two trees (the supplement, Experiment Details). This release cannot rerun these studies.
-
-## Input
-
-- One or more windows of monocular RGB video (an mp4 file and a frame range), decoded at the working rate.
-- A box on the manipulated object at one keyframe. For internet video, the opt-in prompt stage (Hands23 detector)
-  proposes the keyframe and its box instead.
-- Model weights (fetched by `scripts/fetch_weights.py`) and your own MANO files (never fetched or shipped).
-
-`release/example/example_input.json` is a complete input description for one public clip. The clip is downloaded at
-a pinned revision on first use; it is not shipped.
-
-## Output
-
-Per window, the run writes a directory `<bench.artifact_root>/<clip_id>/` (default `outputs/engine/<clip_id>/`) with
-one artifact per stage (`decode.npz` to `solve.npz`, plus `mesh.obj`) and `profile.json`. The object's pose per frame
-and its metric scale are in `solve.npz`; the hands are in `hands.npz`, in the camera of `intrinsics.npz`. The shipped
-example stops at `solve.npz` (see ["Known gaps"](#known-gaps)). [`docs/output.md`](docs/output.md) gives the stage layout and the fields
-and coordinate conventions of the solve and hand outputs.
 
 ## Evaluation
 
@@ -455,6 +475,11 @@ tests/             pytest suite
 `VERSION` reads `$Format:%H %cs$` in a git clone. Only `git archive` exports, such as the release tar, fill it in with
 the commit and its date (`.gitattributes`: `export-subst`); in a clone, `git rev-parse HEAD` gives the commit.
 
+## Acknowledgements
+
+The reconstruction builds on DO AS I DO, SAM 2, SAM 3D Objects, MoGe, HaWoR, WiLoR, CoTracker3, MANO and Hands23, and
+the physics code on MuJoCo and MuJoCo-Warp; `THIRD_PARTY_LICENSES.md` credits each with its licence.
+
 ## Known gaps
 
 - The reference output (`release/reference/v2d_t3_ep011_cam_a/`) comes from a run with CoTracker3 at its pinned
@@ -473,20 +498,6 @@ the commit and its date (`.gitattributes`: `export-subst`); in a clone, `git rev
 - No script in this release reruns a paper experiment; [`docs/paper_exhibits.md`](docs/paper_exhibits.md) says what this release holds toward
   each exhibit, and [`reproduce/README.md`](reproduce/README.md) lists the gaps.
 - No container image.
-
-## Citation
-
-`CITATION.cff` and the entry below cite the paper, "HandReel: Fast Hand-Object Reconstruction from Video without
-Per-Frame Pose Sampling". Please also cite DO AS I DO (arXiv 2606.19333) and the models
-you use (SAM 2, SAM 3D, MoGe-2, CoTracker3, HaWoR, WiLoR, MANO, Hands23).
-
-```bibtex
-@misc{chen2026handreel,
-  title  = {{HandReel}: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling},
-  author = {Chen, Shi and Ichnowski, Jeffrey},
-  year   = {2026}
-}
-```
 
 ## Licence
 
@@ -527,8 +538,3 @@ dependency with its version and licence. Read it before use:
   packages.
 
 This section states what the licence texts say as we read them. It is not legal advice.
-
-## Acknowledgements
-
-The reconstruction builds on DO AS I DO, SAM 2, SAM 3D Objects, MoGe, HaWoR, WiLoR, CoTracker3, MANO and Hands23, and
-the physics code on MuJoCo and MuJoCo-Warp; `THIRD_PARTY_LICENSES.md` credits each with its licence.

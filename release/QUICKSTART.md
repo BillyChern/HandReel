@@ -553,7 +553,7 @@ the table). Every other command is marked with what it needs.
 | 3 | `release/env/check_weights.py --sha256sum-list --only mano` | run with `FASTDO_MANO_DIR` unset: exits 1 with `set FASTDO_MANO_DIR first`. Listing needs `FASTDO_MANO_DIR`, `FASTDO_MANO_LEFT_DIR` and `FASTDO_HAWOR_ROOT`. Verifying the four registered copies also needs the files and `sha256sum -c -` (an independent run of the full pipeline with all four copies in place: 4x OK) |
 | 4 | `pytest -q tests/release` | run: all pass. In a git clone with the submodule: 92 passed. In a tar extract: 91 passed and 1 skipped after `fetch_baseline.sh` (a tracked-file check that needs git metadata), and 90 passed and 2 skipped before it (also the check against SAM 3D's own card list, which needs the DO AS I DO code). Each skip prints its reason |
 | 4 | `FASTDO_GPU_MEM_GB=32 uv run ... release/example/run_example.py --out outputs/example --card dedicated` | run: exit 0, every stage done; note 2 |
-| 4 | `scripts/view_clip.py release/reference/v2d_t3_ep011_cam_a` (README "View the result") | run: serves on 127.0.0.1 and answers HTTP 200 (`tests/test_view_clip.py` does the same on a synthetic clip) |
+| 4 | `scripts/view_clip.py release/reference/v2d_t3_ep011_cam_a` (README "Interactive viewer") | run: serves on 127.0.0.1 and answers HTTP 200 (`tests/test_view_clip.py` does the same on a synthetic clip) |
 | 5 | `python3 reproduce/regenerate_tables.py --out <new or empty dir>` | run: exit 0; the 14 records proposed for release match their pins and the 5 tables match the paper generator's output at the pinned paper-source revision without their `%` comment lines |
 
 Notes on the table:
