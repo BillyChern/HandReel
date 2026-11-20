@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'self'; base-uri 'none'; form-action 'none'">
+<title>HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling</title>
+<meta name="description" content="For each window of a monocular video, HandReel outputs one object mesh, its pose in every processed frame and the right hand where the hand estimator returns one.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling">
+<meta property="og:description" content="For each window of a monocular video, HandReel outputs one object mesh, its pose in every processed frame and the right hand where the hand estimator returns one.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/site.css?v=f9dc3e0ede">
+
+<script src="js/viewer.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main" tabindex="-1">
+<header class="hero" id="top">
+  <div class="wrap hero-text">
+    <h1>HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling</h1>
+    <p class="authors"><span class="au"><a href="https://shichen.world/">Shi Chen</a><sup>1,2</sup>,</span><span class="au"><a href="https://ichnow.ski/">Jeffrey Ichnowski</a><sup>1</sup></span></p>
+    <p class="affil"><span class="af"><sup>1</sup><a href="https://www.ri.cmu.edu/">Robotics Institute, Carnegie Mellon University</a>,</span><span class="af"><sup>2</sup><a href="https://intuition.dev/">Intuition</a></span></p>
+    <p class="links"><a class="lbtn" href="#" aria-disabled="true" title="The arXiv link is coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.8423 0a1.0037 1.0037 0 0 0-.922.6078c-.1536.3687-.0438.6275.2938 1.1113l6.9185 8.3597-1.0223 1.1058a1.0393 1.0393 0 0 0 .003 1.4229l1.2292 1.3135-5.4391 6.4444c-.2803.299-.4538.823-.2971 1.1986a1.0253 1.0253 0 0 0 .9585.635.9133.9133 0 0 0 .6891-.3405l5.783-6.126 7.4902 8.0051a.8527.8527 0 0 0 .6835.2597.9575.9575 0 0 0 .8777-.6138c.1577-.377-.017-.7502-.306-1.1407l-7.0518-8.3418 1.0632-1.13a.9626.9626 0 0 0 .0089-1.3165L4.6336.4639s-.3733-.4535-.768-.463zm0 .272h.0166c.2179.0052.4874.2715.5644.3639l.005.006.0052.0055 10.169 10.9905a.6915.6915 0 0 1-.0072.945l-1.0666 1.133-1.4982-1.7724-8.5994-10.39c-.3286-.472-.352-.6183-.2592-.841a.7307.7307 0 0 1 .6704-.4401Zm14.341 1.5701a.877.877 0 0 0-.6554.2418l-5.6962 6.1584 1.6944 1.8319 5.3089-6.5138c.3251-.4335.479-.6603.3247-1.0292a1.1205 1.1205 0 0 0-.9763-.689zm-7.6557 12.2823 1.3186 1.4135-5.7864 6.1295a.6494.6494 0 0 1-.4959.26.7516.7516 0 0 1-.706-.4669c-.1119-.2682.0359-.6864.2442-.9083l.0051-.0055.0047-.0055z"/></svg>arXiv (coming soon)</a> <a class="lbtn" href="https://github.com/BillyChern/HandReel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a></p>
+  </div>
+
+  <div class="wrap hero-viewer">
+
+    <figure class="vx" id="viewer" data-seq="dexycb-v2-1" data-ext="-0.5205,0.5205,-0.3904,0.4489" data-look="0.0000,0.0000,0.6452" data-obj="#6a3d9a" data-hand="#bca8d2">
+      <div class="vx-ctl">
+        <button type="button" class="btn vx-play">Play</button>
+        <button type="button" class="btn vx-replay">Replay</button>
+        <input class="vx-seek" type="range" min="0" max="11" step="1" value="0" aria-label="Frame">
+        <span class="vx-readout" data-numreg="generated">frame 036, 0.00 s into the clip</span>
+        <button type="button" class="btn vx-opacity" aria-pressed="false" hidden>See-through meshes</button>
+        <button type="button" class="btn vx-reset" hidden>Reset view</button>
+        <button type="button" class="btn vx-mode" hidden>Pre-rendered video</button>
+      </div>
+      <p class="vx-msg">
+        <span class="vx-note" hidden>The 3D viewer could not start here, so the page shows a pre-rendered video of the same frames.</span>
+        <button type="button" class="btn btn-primary vx-again" hidden>Try the 3D viewer again</button>
+        <span class="vx-detail" hidden><span class="vx-detail-text"></span></span>
+        <span class="vx-sw" hidden>This browser draws 3D in software, so the page shows a pre-rendered video. <button type="button" class="btn btn-primary vx-try">Try the 3D viewer</button></span>
+      </p>
+      <div class="vx-grid">
+        <div class="vx-panel vx-in">
+          <p class="vx-label">Input video</p>
+          <div class="vx-img"><img src="viewer/input/dexycb-v2-1/f036.jpg" alt="Input video frame" width="640" height="516"></div>
+          <span class="vx-incap" aria-hidden="true" data-numreg="generated"></span>
+        </div>
+        <div class="vx-panel vx-out">
+          <p class="vx-label vx-label-fb">Camera view and side view</p>
+          <p class="vx-label vx-label-live" hidden><span class="vx-hint-desk">Drag to rotate, Ctrl + scroll to zoom.</span><span class="vx-hint-touch">Swipe to rotate, pinch to zoom.</span></p>
+          <div class="vx-stage">
+            <video class="vx-fallback" muted playsinline controls preload="none" poster="viewer/fallback/dexycb-v2-1.jpg" data-size="2576x1176" data-size-m="960x1800" aria-label="Pre-rendered video of HandReel's posed object mesh and the estimated hand"><source src="viewer/fallback/dexycb-v2-1-m.mp4" type="video/mp4" media="(max-width: 760px)"><source src="viewer/fallback/dexycb-v2-1.mp4" type="video/mp4"></video>
+            <p class="vx-status" role="status" hidden>Loading the 3D viewer ...</p>
+          </div>
+        </div>
+      </div>
+      <figcaption class="vx-cap">HandReel's 3D reconstruction of a DexYCB clip from the development set: the object and the hand. The viewer plays every third frame of the video at real-time speed. We marked the object in the first frame with the dataset's mask.</figcaption>
+    </figure>
+
+  </div>
+
+  <div class="wrap hero-text">
+    <p class="tagline">HandReel turns a video of a hand moving an object into one 3D mesh of the object and its position and rotation over time.</p>
+  </div>
+</header>
+
+<section class="block" id="abstract">
+  <div class="wrap narrow">
+    <h2>Abstract</h2>
+    <p class="abstract">Videos of people handling objects could teach robots manipulation, if we could cheaply recover each object's 3D shape and motion from monocular video. A rigid object keeps its shape, so one mesh can serve many frames. HandReel processes video in short windows and poses one mesh per window from point tracks instead of sampling a pose in every frame. It builds each mesh from one masked frame, aligns it to estimated depth and takes metric scale from the estimated right hand. On Ego4D, HandReel processed many windows in one run that loaded models once. When the DO AS I DO pipeline's reconstruction stage ran its released code and restarted for every window, it took far longer per window than a window's share of HandReel's run. On held-out HOI4D with ground-truth prompts, HandReel's object-centre error was lower than that stage's in the median window when a failure to deliver counts as an error. There, HandReel delivered every analysed window. In a first application, which turns one video into a robot trajectory, that pipeline would take longer with its own reconstruction than with HandReel's, by a sum of separately measured stage times. In a second application, which converts many videos with one retargeting policy, every video needs the reconstruction that HandReel shortens.</p>
+  </div>
+</section>
+
+<section class="block" id="method">
+  <div class="wrap narrow">
+    <h2>Method</h2>
+    <p>HandReel works on a short stretch of video at a time, in three steps, and it never asks a generative model for the object's position. First, it builds one 3D mesh of the object and reuses it for the whole stretch. Second, it gets a first guess of where the object is over time by following points on the object through the video. Third, it adjusts all of those positions and the object's size together until they agree with the depth maps and the followed points. HandReel takes the real-world scale from the estimated right hand, so the right hand must be visible. It returns a result only when its own quality check passes.</p>
+  </div>
+  <div class="wrap wide">
+    <figure class="fig">
+      <img src="fig/fig2_overview.png" width="1520" height="627" alt="Method overview, per window. From a video window and one object mask, HandReel generates one mesh with SAM 3D on the keyframe, aligns it to metric depth by ICP to the MoGe-2 pointmap, where the hand gives metric scale, starts poses from CoTracker3 point tracks with EPnP, and refines all poses and one scale jointly with Levenberg-Marquardt over all frames at once. The output is the same mesh, posed in each processed frame, with the right hand where the hand estimator returns one." loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<section class="block" id="results">
+  <div class="wrap narrow">
+    <h2>Results</h2>
+    <p>Six clips that we picked from the DexYCB and HOI4D development sets, with HandReel's object mesh and the estimated hand in purple.</p>
+    <figure class="fig">
+      <img src="fig/fig4_gallery.jpg" width="1520" height="866" alt="Six tiles, one frame per clip, with HandReel's posed object mesh and the estimated hand outlined in purple: a knife from HOI4D, and a sugar box, a cracker box, a potted meat can, a tomato soup can and a pitcher from DexYCB." loading="lazy">
+    </figure>
+
+  </div>
+</section>
+
+<section class="block" id="time">
+  <div class="wrap narrow">
+    <h2>Reconstruction time</h2>
+    <p>In our experiments on Ego4D, the baseline, DO AS I DO's reconstruction stage, took about 30&times; as long as HandReel when both ran one window at a time, and 130&times; as long as HandReel's per-window share of batched runs when it restarted for every window.</p>
+    <figure class="fig chart">
+
+<svg class="plot plot-wide" viewBox="0 0 720 178" role="img" aria-labelledby="time-plot-t">
+<title id="time-plot-t">Reconstruction time per Ego4D window, in seconds, as bars for the baseline (DO AS I DO's reconstruction stage) and for HandReel: both one window at a time; and the baseline restarting for every window against HandReel's per-window share of batched runs.</title>
+<text x="0" y="16" class="pl-group">One window at a time (20 windows)</text>
+<text x="86" y="44" text-anchor="end" class="pl-lab">Baseline</text>
+<rect x="96" y="28" width="476.2" height="22" class="pl-bar-them"/>
+<text x="580.2" y="44" class="pl-val">2,000 s</text>
+<text x="86" y="72" text-anchor="end" class="pl-lab">HandReel</text>
+<rect x="96" y="56" width="15.7" height="22" class="pl-bar-ours"/>
+<text x="119.7" y="72" class="pl-val">66 s</text>
+<text x="0" y="108" class="pl-group">Baseline restarts for every window (9 windows)</text>
+<text x="86" y="136" text-anchor="end" class="pl-lab">Baseline</text>
+<rect x="96" y="120" width="500.0" height="22" class="pl-bar-them"/>
+<text x="604.0" y="136" class="pl-val">2,100 s</text>
+<text x="86" y="164" text-anchor="end" class="pl-lab">HandReel</text>
+<rect x="96" y="148" width="4.0" height="22" class="pl-bar-ours"/>
+<text x="108.0" y="164" class="pl-val">17 s per-window share</text>
+</svg>
+<svg class="plot plot-narrow" viewBox="0 0 300 230" role="img" aria-labelledby="time-plot-n">
+<title id="time-plot-n">Reconstruction time per Ego4D window, in seconds, as bars for the baseline (DO AS I DO's reconstruction stage) and for HandReel: both one window at a time; and the baseline restarting for every window against HandReel's per-window share of batched runs.</title>
+<text x="0" y="14" class="pl-group">One window at a time (20 windows)</text>
+<text x="0" y="34" class="pl-lab">Baseline</text>
+<rect x="0" y="40" width="211.4" height="18" class="pl-bar-them"/>
+<text x="217.4" y="54" class="pl-val">2,000 s</text>
+<text x="0" y="74" class="pl-lab">HandReel</text>
+<rect x="0" y="80" width="7.0" height="18" class="pl-bar-ours"/>
+<text x="13.0" y="94" class="pl-val">66 s</text>
+<text x="0" y="120" class="pl-group">Baseline restarts for every window</text>
+<text x="0" y="138" class="pl-group">(9 windows)</text>
+<text x="0" y="158" class="pl-lab">Baseline</text>
+<rect x="0" y="164" width="222.0" height="18" class="pl-bar-them"/>
+<text x="228.0" y="178" class="pl-val">2,100 s</text>
+<text x="0" y="198" class="pl-lab">HandReel</text>
+<rect x="0" y="204" width="2.0" height="18" class="pl-bar-ours"/>
+<text x="8.0" y="218" class="pl-val">17 s per-window share</text>
+</svg>
+
+      <figcaption>Seconds per Ego4D window on one H100 GPU. Ego4D has no ground-truth object poses, so it measures speed only. The paper gives the full protocol.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="block" id="applications">
+  <div class="wrap narrow">
+    <h2>Applications</h2>
+    <p>DO AS I DO is a pipeline that turns a video of a person handling an object into a robot motion, and reconstruction is its first stage. With HandReel in that stage, DO AS I DO's full pipeline would take about 3&times; as long per window with its own reconstruction as with HandReel's. We added up stage times that we measured separately and did not time a full run. When one retargeting policy serves many videos, every video still pays for reconstruction.</p>
+  </div>
+</section>
+
+<section class="block" id="bibtex">
+  <div class="wrap narrow">
+    <h2>BibTeX</h2>
+    <pre class="bibtex"><code>@misc{chen2026handreel,
+  title  = {HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling},
+  author = {Chen, Shi and Ichnowski, Jeffrey},
+  year   = {2026}
+}</code></pre>
+  </div>
+</section>
+
+<section class="block" id="credits">
+  <div class="wrap narrow">
+    <h2>Acknowledgements</h2>
+    <p>The viewer clip and the Method figure show frames of one <a href="https://dex-ycb.github.io/">DexYCB</a> sequence (Chao et al., 2021). The Results figure shows five DexYCB frames and one <a href="https://hoi4d.github.io/">HOI4D</a> frame (Liu et al., 2022). Both datasets state <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> on their pages. We cropped or scaled the frames and drew overlays on them; <a href="ATTRIBUTION.txt">ATTRIBUTION.txt</a> lists each asset, its source and its changes. The chart shows no dataset media; its times come from Ego4D video (Grauman et al., 2022). The viewer is <a href="https://viser.studio/">Viser</a>; <a href="https://github.com/facebookresearch/sam-3d-objects">SAM 3D</a> generates the object mesh and <a href="https://hawor-project.github.io/">HaWoR</a> estimates the hand.</p>
+  </div>
+</section>
+</main>
+</body>
+</html>

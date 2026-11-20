@@ -1,0 +1,46 @@
+Content security policy of this site
+
+The site is self-contained: every request stays on its own origin, and the embedded 3D viewer reads its
+own code, WebAssembly, environment map and the recording's textures from data: and blob: URLs. Two
+documents have two policies. Each is the minimum under which the document works.
+
+The file _headers carries both. It is written in the _headers syntax of Cloudflare Pages and Netlify: a
+path pattern on its own line, then indented header lines, with * as a wildcard at the end of a
+pattern. Its rules do not overlap: the page's policy is on the two exact paths / and /index.html, the
+client's on /viewer/client/*, and no path matches two rules. A host that applies every matching rule
+and joins their headers would otherwise enforce both policies on the client, and the page's policy
+refuses the client's inline scripts. Files other than the two documents get no policy header; a policy
+acts on documents only. No real host has served this build: how Cloudflare Pages, Netlify or any other
+host reads this file is untested, and the tests here use a local server that sends these headers. On
+another server, send the first policy with the page and only the second with viewer/client/index.html.
+
+1. The page (/ and /index.html). It also carries this policy as a meta tag.
+
+   default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'self'; base-uri 'none'; form-action 'none'
+
+   script, style, images, fonts, the frame of the viewer and the fetches of the page come from this
+   origin only. media-src blob: is for the pre-rendered video, which the page fetches whole and plays
+   from a blob: URL; where a policy refuses blob: media the page streams the file from its path.
+
+2. The viewer client (viewer/client/, the static client of Viser 1.1.1, one pinned file).
+
+   default-src 'none'; script-src 'sha256-5iRcjB7VnwnYpbUpHa15FmjNIRu22hIQnvWuocHMxJw=' 'sha256-o/BTEGoB4UnTxqb+3RxwUFQZkWXpqUxouHkbDNrAkqE=' 'wasm-unsafe-eval'; style-src 'unsafe-inline'; img-src blob: data:; connect-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'self'
+
+   script-src: the two hashes are the client's loader script and the application module that the
+     loader unpacks and inserts; 'wasm-unsafe-eval' lets it compile its zstd decoder. No
+     'unsafe-inline' and no 'unsafe-eval' for scripts.
+   style-src 'unsafe-inline': the client inserts its style sheet and its UI library's rules as
+     style elements at run time.
+   img-src blob: data:: blob: for the textures of the recording (the input frames); data: for the
+     client's own tab icon (without it the viewer works and the console shows one refusal).
+   connect-src 'self' data:: 'self' for the recording; data: for the WebAssembly module and the
+     environment map that are built into the client.
+   frame-ancestors 'self': only this site's page embeds the client.
+   The client holds code for features this site does not use (web workers for splat sorting and
+   compressed meshes, a decoder path on another host, running script sent by a live server). The
+   recordings here trigger none of them, and this policy refuses all of them.
+
+Under a stricter policy the page does not leave the viewer blank: it shows the pre-rendered video
+of the same frames and says so in one line. That includes a host that sends both policies with
+the client (tested with one joined header and with two headers). Served with no policy at all (for example
+python3 -m http.server), the site works the same way and makes the same requests.
