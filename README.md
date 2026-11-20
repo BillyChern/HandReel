@@ -1,15 +1,23 @@
-# HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling
+<div align="center">
+<h1>HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling</h1>
 
-- **Paper:** the arXiv link is not posted yet.
-- **Project site:** the link is not posted yet.
-- **Weights and licences:** the table under "Weights"; no weights ship with this repository.
+[Shi Chen](https://shichen.world/)<sup>1,2</sup>, [Jeffrey Ichnowski](https://ichnow.ski/)<sup>1</sup>
 
-![HandReel's reconstruction of a public clip: object mesh in magenta, hand joints in green and orange, at three frames](release/reference/v2d_t3_ep011_cam_a/expected_projection.png)
+<sup>1</sup>[Robotics Institute, Carnegie Mellon University](https://www.ri.cmu.edu/) &nbsp;&nbsp; <sup>2</sup>[Intuition](https://intuition.dev/)
 
-HandReel reconstructs a hand and the object it holds from a short video: the object's shape, its pose in every
-processed frame and its metric scale, with the motion of the right hand in the frames where the hand estimator
-finds it. The picture shows the shipped reference reconstruction of a public
-clip, drawn over three of its frames ("Expected output").
+<img src="https://img.shields.io/badge/arXiv-coming_soon-b31b1b" alt="arXiv: coming soon">
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue" alt="License: Apache 2.0"></a>
+
+</div>
+
+![Three frames of a video of a hand moving a cup, and the same frames with HandReel's reconstructed cup and hand joints drawn over them](docs/assets/teaser.jpg)
+
+## Overview
+
+HandReel takes a short video of a hand using an object. It returns the object's shape, its pose in every processed
+frame and its metric scale, with the motion of the right hand in the frames where the hand estimator finds it. The
+picture shows the reference result that ships with this repository, drawn over three frames of a public clip (see
+"Expected output").
 
 HandReel (Python package `fastdo`) is a staged engine (decode, mask, shape, intrinsics, hands, geometry, tracks, solve,
 then the optional qc and retarget stages), configured with Hydra (`run/conf/config.yaml`). The mask, shape, intrinsics,
