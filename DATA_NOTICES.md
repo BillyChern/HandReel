@@ -2,11 +2,28 @@
 
 This file names, by topic, every file of this release that carries something derived from a dataset or from a
 third-party model or project, and says what that something is. It complements `NOTICE`, `THIRD_PARTY_LICENSES.md`,
-`release/MODELS.md` and the `ATTRIBUTION.txt` of the reference example. The release contains no dataset frame, no
+`release/MODELS.md` and the `ATTRIBUTION.txt` of the reference example. Apart from the README figure described in the next section, the release contains no dataset frame, no
 dataset annotation, no model weight and no hand-model geometry.
 
 The datasets and their terms are listed in `THIRD_PARTY_LICENSES.md`. Users obtain each dataset from its publisher
 under its own terms; Ego4D identifiers are not redistributed here.
+
+## Dataset frames in the README figure
+
+`docs/assets/gallery.jpg` is the only file of this release that shows dataset frames. It is not under the Apache-2.0
+licence of the code: its frames come from HOI4D and DexYCB, both CC BY-NC 4.0 (non-commercial use, attribution).
+It shows six development clips, one frame per tile.
+
+- HOI4D (Liu et al., 2022, https://hoi4d.github.io/): tile "knife", sequence ZY20210800001/H1/C13/N48/S238/s03/T4,
+  frame 88.
+- DexYCB (Chao et al., 2021, https://dex-ycb.github.io/): tile "sugar box", sequence 20200709_142553 (subject 01),
+  camera 841412060263, frame 36; tile "cracker box", sequence 20200813_145653 (subject 02), camera 932122061900,
+  frame 36; tile "potted meat can", sequence 20200709_144814 (subject 01), camera 840412060917, frame 36; tile
+  "tomato soup can", sequence 20200709_142926 (subject 01), camera 932122062010, frame 36; tile "pitcher", sequence
+  20200813_153152 (subject 02), camera 932122062010, frame 36.
+
+Changes made to the frames: each frame cropped and scaled, with the outlines of HandReel's posed object mesh and of
+the estimated hand drawn over it; composed with its label into one figure and saved as JPEG.
 
 ## Outputs of third-party models on the example clip
 

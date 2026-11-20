@@ -10,7 +10,9 @@
 
 </div>
 
-![Three frames of a video of a hand moving a cup, and the same frames with HandReel's reconstructed cup and hand joints drawn over them](docs/assets/teaser.jpg)
+![Six video frames, each with HandReel's reconstructed object and the estimated hand outlined in purple: a knife, a sugar box, a cracker box, a potted meat can, a tomato soup can and a pitcher](docs/assets/gallery.jpg)
+
+<sub>HandReel takes a video of a hand moving an object and returns the object's 3D mesh and its pose in each processed frame, together with the hand. Purple outlines: the reconstructed object and the estimated hand, drawn over one frame of each of six clips. Frames from HOI4D and DexYCB (CC BY-NC 4.0); see [`DATA_NOTICES.md`](DATA_NOTICES.md).</sub>
 
 ## Citation
 
