@@ -22,9 +22,9 @@ every file, and `THIRD_PARTY_LICENSES.md` the full list with the licence texts.
 
 | part | used for | licence | commercial use | how you get it |
 |---|---|---|---|---|
-| this repository's code | everything | Apache-2.0 (`LICENSE`, `NOTICE`) | the code, yes; the pipeline as shipped, no (README, "Licence") | in this repository |
+| this repository's code | everything | Apache-2.0 (`LICENSE`, `NOTICE`) | the code, yes; the pipeline as shipped, no (README, "Licence"; `docs/licensing.md`) | in this repository |
 | SAM 2.1 Hiera-L | mask | Apache-2.0 | yes | `fetch_weights.py` |
-| SAM 3D Objects | shape | SAM License | no, as the shape stage runs (nvdiffrast and kaolin, README, "Licence") | gated on Hugging Face: accept its terms, then `fetch_weights.py` |
+| SAM 3D Objects | shape | SAM License | no, as the shape stage runs (nvdiffrast and kaolin, `docs/licensing.md`) | gated on Hugging Face: accept its terms, then `fetch_weights.py` |
 | MoGe ViT-L (v1), inside the SAM 3D worker | shape | MIT | yes | `fetch_weights.py` |
 | DINOv2 ViT-L/14 with registers, inside SAM 3D | shape | Apache-2.0 (backbone code and weights) | yes | `fetch_weights.py` |
 | MoGe-2 ViT-L | intrinsics, geometry | MIT | yes | `fetch_weights.py` |

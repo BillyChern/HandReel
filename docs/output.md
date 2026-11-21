@@ -1,6 +1,6 @@
 # Output files: layout, keys, units and frames
 
-What a run of the reconstruction writes (`README.md`, "Output", gives the short version). Every path, key and
+What a run of the reconstruction writes (`README.md`, "Run on your own video", gives the short version). Every path, key and
 convention below is the code's; the module is named beside each.
 
 ## Layout

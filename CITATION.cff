@@ -5,6 +5,8 @@ title: "HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame P
 type: software
 version: "0.1.0"
 license: Apache-2.0
+repository-code: "https://github.com/BillyChern/HandReel"
+url: "https://shichen.world/HandReel/"
 authors:
   - family-names: "Chen"
     given-names: "Shi"

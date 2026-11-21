@@ -63,7 +63,7 @@ packages is included or modified here. If you distribute a combined work, their 
 
 | ID | Component | Version | Licence |
 |---|---|---|---|
-| C1 | DO AS I DO (baseline; a git submodule pointer, not its files) | `malik-group/do-as-i-do` @ `824591b` | MIT, "Copyright (c) 2026 malik-group". The whisking demo video carries no licence statement |
+| C1 | DO AS I DO (baseline; fetched by `scripts/fetch_baseline.sh`, not shipped) | `malik-group/do-as-i-do` @ `824591b` | MIT, "Copyright (c) 2026 malik-group". The whisking demo video carries no licence statement |
 | C2 | SAM 3 (DO AS I DO's segmenter) | HF `facebook/sam3` @ `3c879f39` | SAM License |
 | C3 | TAPNet (inside DO AS I DO) | as pinned there | The TAPNet code and Google DeepMind's linked BootsTAPIR v2 PyTorch checkpoint are published under Apache-2.0. |
 | C4 | FoundationPose (external evaluation only; this repository has no code that runs it and ships no weights) | NVlabs/FoundationPose a1b694b83e633c2cb6115b9063d940a687759392; released refiner 2023-10-28-18-33-37 and scorer 2024-01-11-20-02-45 (the public weights) | NVIDIA Source Code License: non-commercial use only |

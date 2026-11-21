@@ -38,7 +38,7 @@ in a git clone and in an archive without git metadata.
 
 For a CPU-only look, `uv sync --frozen --python 3.12 --extra dev --extra frontend --extra viser` builds only the
 main environment (it installs exactly what `uv.lock` pins; the torch wheel also runs without a GPU; the `viser` extra
-is the 3D viewer of "Interactive viewer").
+is the 3D viewer of the README's "Try it on CPU, no weights").
 `release/QUICKSTART.md` walks through every step by hand and says which commands were run for this release. Its
 "Notes" cover installing from an archive without git metadata, the expected pip `ERROR:` line of the `sam3d` step,
 uv's harmless decord reinstall message and the optional alongray package.

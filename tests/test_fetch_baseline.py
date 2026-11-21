@@ -44,10 +44,14 @@ def _run(root: Path, *args: str, env: dict[str, str] | None = None) -> subproces
                           capture_output=True, text=True, timeout=600, check=False)
 
 
-def test_the_pin_is_the_submodule_commit_the_readme_and_gitmodules_name() -> None:
-    assert re.search(rf"^PIN={PIN}$", SCRIPT.read_text(), re.MULTILINE)
+def test_the_pin_and_url_are_the_ones_the_script_and_readme_name() -> None:
+    # 2026-11-21: the release records no submodule for third_party/do-as-i-do and ships no .gitmodules (it named only
+    # that submodule); the script clones the baseline itself
+    text = SCRIPT.read_text()
+    assert re.search(rf"^PIN={PIN}$", text, re.MULTILINE)
+    assert URL in text
     assert PIN in (REPO / "README.md").read_text()
-    assert f"url = {URL}" in (REPO / ".gitmodules").read_text()
+    assert not (REPO / ".gitmodules").exists()
 
 
 def test_the_pin_is_the_gitlink_of_this_commit() -> None:

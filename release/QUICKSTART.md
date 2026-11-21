@@ -1,8 +1,8 @@
 # Quickstart: reconstruct one window
 
 This page takes you from a fresh clone to one reconstructed window of a public video, with its timing-ledger row.
-It complements `README.md`, which has the installation summary, the host-path variables and the licences. Where the
-two overlap, the README is the reference. `scripts/setup_all.sh` runs step 2 below in one command (`--dry-run` prints
+It complements `README.md`, which has the installation summary, the host-path variables and a licence summary
+(full notes: `docs/licensing.md`). Where the two overlap, the README is the reference. `scripts/setup_all.sh` runs step 2 below in one command (`--dry-run` prints
 it).
 
 **Status of this page.** Steps 1, 2 (main env), 3 (the table) and the CPU smoke test of step 4 run without a GPU. The
@@ -283,6 +283,7 @@ The opt-in Hands23 weights (`--only hands23`) come from an unversioned URL on th
 verification, so the fetch can fail there. We do not mirror the file: the weights carry no licence text. A copy you
 obtain from the Hands23 authors another way is checked the same way, by the sha256 in `release/MODELS.md`. The example
 does not use Hands23.
+Manual download: the upstream README (<https://github.com/EvaCheng-cty/hands23_detector>, "Pre-trained model weights") gives this same URL for `wget`. On 2026-11-21 a HEAD request to it failed certificate verification ("unable to get local issuer certificate"); if your download fails the same way, get the file from the Hands23 authors and check it against the sha256 in `release/MODELS.md`.
 
 ## 4. Run the example
 
@@ -500,6 +501,32 @@ attribute the V2D dataset as CC BY 4.0 requires (`ATTRIBUTION.txt` holds the cre
 Anaconda's Terms of Service (step 2). See `release/MODELS.md`, `THIRD_PARTY_LICENSES.md` and `NOTICE`. This is not
 legal advice.
 
+## CPU checks without weights
+
+(Moved here from the README on 2026-11-21.)
+
+On CPU, with only the main environment, these run without weights, data or a GPU:
+
+```bash
+uv sync --frozen --python 3.12 --extra dev --extra frontend --extra viser
+export CUDA_VISIBLE_DEVICES=
+uv run --frozen pytest -q -m "not slow and not timing" \
+  tests/release tests/test_package.py tests/test_hostpaths.py tests/run/test_build_hoi4d_hands.py tests/reproduce
+uv run --frozen python run/pipeline/bench_throughput.py --cfg job > /dev/null
+uv run --frozen python release/example/run_example.py --stub --video README.md --out outputs/example_stub
+PYTHONPATH=src uv run --frozen python -m fastdo.audit.example outputs/audit_example
+```
+
+In order: a CPU subset of the test suite; Hydra config composition for the benchmark entry point without running it; the
+example runner with every stage replaced by a placeholder (argument parsing, config loading, orchestration and output
+schema only; in stub mode `--video` is never decoded, so any existing file works as a placeholder, here
+`README.md`); and the physics-certificate audit (`docs/audit.md`) on a synthetic scene. The stub's stage artifacts are
+empty placeholder files (0 bytes) and its seconds are not timings; the run also leaves an empty `engine/.gpu.lock`
+(`docs/output.md`). To look at a real reconstruction on CPU, open the
+reference output in the viewer (README, "Try it on CPU, no weights"). The whole CPU suite is `uv run --frozen pytest -q -m "not slow and not timing"`
+(about 30 min on a 4-thread cap; measured on the development host); GPU tests are faked or skip, as do tests whose
+dataset, conda env or baseline checkout is absent.
+
 ## Notes
 
 - **From an archive without git metadata.** Run `bash scripts/fetch_baseline.sh` from its root, as in a clone (step 1;
@@ -556,7 +583,7 @@ the table). Every other command is marked with what it needs.
 | 3 | `release/env/check_weights.py --sha256sum-list --only mano` | run with `FASTDO_MANO_DIR` unset: exits 1 with `set FASTDO_MANO_DIR first`. Listing needs `FASTDO_MANO_DIR`, `FASTDO_MANO_LEFT_DIR` and `FASTDO_HAWOR_ROOT`. Verifying the four registered copies also needs the files and `sha256sum -c -` (an independent run of the full pipeline with all four copies in place: 4x OK) |
 | 4 | `pytest -q tests/release` | run: all pass. In a fresh clone after `fetch_baseline.sh`: 101 passed. Before it: 100 passed and 1 skipped (the check against SAM 3D's own card list, which needs the DO AS I DO code). The skip prints its reason |
 | 4 | `FASTDO_GPU_MEM_GB=32 uv run ... release/example/run_example.py --out outputs/example --card dedicated` | run: exit 0, every stage done; note 2 |
-| 4 | `scripts/view_clip.py release/reference/v2d_t3_ep011_cam_a` (README "Interactive viewer") | run: serves on 127.0.0.1 and answers HTTP 200 (`tests/test_view_clip.py` does the same on a synthetic clip) |
+| 4 | `scripts/view_clip.py release/reference/v2d_t3_ep011_cam_a` (README "Try it on CPU, no weights") | run: serves on 127.0.0.1 and answers HTTP 200 (`tests/test_view_clip.py` does the same on a synthetic clip) |
 | 5 | `python3 reproduce/regenerate_tables.py --out <new or empty dir>` | run: exit 0; the 14 released records match their pins and the 5 tables match the paper generator's output at the pinned paper-source revision without their `%` comment lines |
 
 Notes on the table:
