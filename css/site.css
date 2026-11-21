@@ -93,6 +93,10 @@ a.lbtn, a.lbtn:hover, a.lbtn:focus { text-decoration: none; color: #fff; }
 .vx.vx-drawn video::-webkit-media-controls { display: none !important; }   
 .vx-stage { position: relative; border-radius: 6px; overflow: hidden; background: #fff; aspect-ratio: 16 / 10; max-height: calc(100vh - 420px); min-height: 280px; }   
 .vx-stage video { width: 100%; height: 100%; object-fit: contain; }
+.vx-pic { position: absolute; inset: 0; }
+.vx-pic img { width: 100%; height: 100%; object-fit: contain; }
+.vx-pic ~ video { position: relative; }
+@media (scripting: enabled) { .no-js .vx-pic ~ video::-webkit-media-controls { display: none !important; } }
 .vx-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
 .vx.is-live .vx-stage video { display: none; }
 .vx-touch { display: none; position: absolute; inset: 0; z-index: 2; touch-action: pan-y; }

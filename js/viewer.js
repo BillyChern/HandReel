@@ -107,6 +107,17 @@ const boot = () => {
   const seek = root.querySelector(".vx-seek");
   const readout = root.querySelector(".vx-readout");
   const narrow = window.matchMedia("(max-width: 760px)");
+  // One poster per viewport: the markup's poster is a <picture> behind the video (its media query, the same as
+  // narrow's, fetched only the desktop or only the phone poster). Its choice becomes the video's poster attribute,
+  // which the waits and view switches below read (same URL, so no second request), and the picture goes.
+  {
+    const pic = stage.querySelector(".vx-pic");
+    if (pic) {
+      const img = pic.querySelector("img");
+      video.setAttribute("poster", (img && img.currentSrc) || `viewer/fallback/${key}${narrow.matches ? "-m" : ""}.jpg`);
+      pic.remove();
+    }
+  }
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const STALL_MS = 15000;       // a recording download that makes no progress this long is given up
   const PAGE_CAP_MS = 180000;   // longest wait for the client's own page to arrive
