@@ -1,7 +1,7 @@
 /* Embedded 3D viewer (#viewer), one clip (figure data-seq).
    Layout, both modes: page controls on top (Play/Pause, Replay, a frame slider with one step per displayed frame,
-   keyboard-operable, a text readout "frame NNN, T.TT s into this excerpt": the dataset's frame number and the time from the excerpt's
-   first frame, which the readout names as such; no source time stamp is shown or claimed),
+   keyboard-operable, a text readout "frame NNN, T.TT s": the dataset's frame number and the time from the first
+   frame shown; no source time stamp is shown or claimed),
    then the input frame in its own panel (left; first on phones) beside the 3D. The excerpt starts by itself when the
    viewer comes into view and loops, muted (the video has no audio track): after the last frame's own duration it
    starts again from the first frame with no added hold, until the visitor pauses, scrubs or switches the view. With reduced motion it neither starts by
@@ -150,10 +150,10 @@ const boot = () => {
     const f = input.frames;
     return (f[i].t + (i + 1 < f.length ? f[i + 1].t : input.dur)) / 2;
   };
-  const label = (i) => {           // the caption strip's own numbering: dataset frame id and excerpt time
+  const label = (i) => {           // the caption strip's own numbering: dataset frame id and time from the first frame shown
     const t = input.frames[i].t.toFixed(2);
     const id = String(input.frames[i].frame).padStart(3, "0");
-    return { text: `frame ${id}, ${t} s into this excerpt`, aria: `input frame ${id}, ${t} seconds into this excerpt` };
+    return { text: `frame ${id}, ${t} s`, aria: `input frame ${id}, ${t} seconds` };
   };
   const paintInput = (i) => {
     if (!input) return;

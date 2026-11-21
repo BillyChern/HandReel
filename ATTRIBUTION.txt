@@ -23,35 +23,35 @@ Viewer software
   potsdamer_platz_1k.jpg of the Viser 1.1.1 package (37,111 bytes, sha256 01e4690f086a...), read from inside the
   client and from no other host. The Viser package ships it without a licence note of its own.
 
-Chart in the section "Reconstruction time"
-  No dataset media. The bars and labels are numbers that the paper's Table 2 prints, measured on Ego4D video
-  (Ego4D, Grauman et al., "Ego4D: Around the World in 3,000 Hours of Egocentric Video", 2022). The page shows
-  no Ego4D frame or clip.
+Charts in the sections "Reconstruction time" and "Applications"
+  No dataset media. The bars and labels are numbers that the paper's Table 2 and Table 5 print, measured on Ego4D
+  video (Ego4D, Grauman et al., "Ego4D: Around the World in 3,000 Hours of Egocentric Video", 2022). The page
+  shows no Ego4D frame or clip.
 
 DexYCB, Chao et al., "DexYCB: A Benchmark for Capturing Hand Grasping of Objects", 2021.
   Dataset page: https://dex-ycb.github.io/
   Licence: CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/), as the dataset page states; non-commercial use, attribution.
   Clips: dexycb-v2-1
-  Figure fig/fig2_overview.png, method overview (the paper's Fig. 2). Frames from DexYCB: sequence 20200820_144829
-    (subject 03), camera 932122062010, frames 0, 36 and 69. Changes made to the frames: the three frames cropped and
-    scaled; the object mask outline drawn on frame 0 and point tracks on frame 36; shown beside HandReel's meshes
-    and a rendered hand; composed into one figure and saved as PNG.
+  Figure fig/fig2_overview.png, method overview (the paper's Fig. 2). Frames from DexYCB: three frames of one clip.
+    Changes made to the frames: the three frames cropped and scaled; the object outline drawn on one frame and
+    followed points on another; shown beside HandReel's meshes and a rendered hand; composed into one figure and
+    saved as PNG.
+  Figure fig/fig3_strip.jpg, one clip against DO AS I DO and ground truth (the paper's Fig. 3). Frames from DexYCB:
+    six frames of one clip. Changes made to the frames: each frame cropped and scaled, in three rows, with outlines
+    of the ground-truth object and hand joints, of DO AS I DO's object and of HandReel's object and estimated hand
+    drawn over it; composed with a plot of error over time into one figure and saved as JPEG.
   Figure fig/fig4_gallery.jpg, six selected development clips (the paper's Fig. 4), one frame per tile. Frames from
-    DexYCB: tile "sugar box": sequence 20200709_142553 (subject 01), camera 841412060263, frame 36; tile "cracker
-    box": sequence 20200813_145653 (subject 02), camera 932122061900, frame 36; tile "potted meat can": sequence
-    20200709_144814 (subject 01), camera 840412060917, frame 36; tile "tomato soup can": sequence 20200709_142926
-    (subject 01), camera 932122062010, frame 36; tile "pitcher": sequence 20200813_153152 (subject 02), camera
-    932122062010, frame 36. Changes made to the frames: each frame cropped and scaled, with the outlines of
-    HandReel's posed object mesh and of the estimated hand drawn over it; composed with its label into one figure
-    and saved as JPEG.
-  Frames of dexycb-v2-1: sequence 20200820_144829 (subject 03), camera 932122062010, frames 36 to 69, every third frame.
+    DexYCB: five frames, one from each of five clips. Changes made to the frames: each frame cropped and scaled,
+    with the outlines of HandReel's posed object mesh and of the estimated hand drawn over it; composed with its
+    label into one figure and saved as JPEG.
+  Frames of dexycb-v2-1: consecutive frames of one DexYCB clip.
   Changes made to the frames of dexycb-v2-1: not resized (640 x 480); re-encoded as JPEG (quality 88); a white caption strip (dataset, frame number, time) added below each frame (640 x 516); HandReel's 3D reconstruction drawn over them in the interactive viewer; in the pre-rendered videos, rendered in perspective with the 3D, scaled and re-encoded as H.264 video.
 
 HOI4D, Liu et al., "HOI4D: A 4D Egocentric Dataset for Category-Level Human-Object Interaction", 2022.
   Dataset page: https://hoi4d.github.io/
   Licence: CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/), as the footer of the dataset page states; non-commercial use, attribution.
   Figure fig/fig4_gallery.jpg, six selected development clips (the paper's Fig. 4), one frame per tile. Frames from
-    HOI4D: tile "knife": sequence ZY20210800001/H1/C13/N48/S238/s03/T4, frame 88. Changes made to the frames: each
-    frame cropped and scaled, with the outlines of HandReel's posed object mesh and of the estimated hand drawn over
-    it; composed with its label into one figure and saved as JPEG.
+    HOI4D: one frame of one clip. Changes made to the frames: each frame cropped and scaled, with the outlines of
+    HandReel's posed object mesh and of the estimated hand drawn over it; composed with its label into one figure
+    and saved as JPEG.
 

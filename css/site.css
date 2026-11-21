@@ -28,7 +28,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font: 400 16px/1.6
 img, video { display: block; max-width: 100%; }
 a { color: var(--ours); text-underline-offset: 3px; }
 .wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--gut); }
-.wrap.hero-viewer { max-width: 1340px; }
+.wrap.hero-viewer { max-width: 1200px; }   
 .wrap.narrow { max-width: calc(760px + 2 * var(--gut)); }
 .wrap.wide { max-width: calc(960px + 2 * var(--gut)); }
 .skip { position: absolute; left: -9999px; }
@@ -40,18 +40,20 @@ main { padding-bottom: 72px; }
 h1 { font: 600 clamp(30px, 2.65vw, 38px)/1.16 var(--sans); letter-spacing: -0.012em; margin: 0 auto; max-width: 27em; text-wrap: balance; }
 .authors { margin: 12px 0 0; font-size: 20px; line-height: 1.4; color: var(--ink-2); }
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0 0; }
-.lbtn { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 999px; background: var(--pill); color: #fff; font: 500 15px/1 var(--sans); cursor: default; white-space: nowrap; }
+.lbtn { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 999px; background: var(--pill); color: #fff; font: 500 16px/1 var(--sans); cursor: default; white-space: nowrap; }   
 .authors a { color: hsl(204, 86%, 38%); text-decoration: none; }   
 .authors a:hover, .affil a:hover { text-decoration: underline; }
 .authors .au, .affil .af { display: inline-block; margin: 0 5px; }
 .authors sup, .affil sup { font-size: 0.7em; }
-.affil { margin: 2px 0 0; font-size: 18px; line-height: 1.4; color: var(--ink-2); }
+.affil { margin: 2px 0 0; font-size: 20px; line-height: 1.4; color: var(--ink-2); }   
 .affil a { color: inherit; text-decoration: none; }
 a.lbtn { text-decoration: none; cursor: pointer; }
 a.lbtn:hover { background: #292929; }
 .lbtn svg { width: 17px; height: 17px; margin-right: 8px; fill: currentColor; flex: none; }
+.lbtn svg.ic-line { fill: none; stroke: currentColor; }   
 a.lbtn, a.lbtn:hover, a.lbtn:focus { text-decoration: none; color: #fff; }
-.tagline { margin: 10px auto 0; max-width: 46em; font: 400 18px/1.45 var(--sans); color: var(--ink); }   
+.tagline { margin: 10px auto 0; max-width: 64em; font: 400 17px/1.4 var(--sans); color: var(--ink); }   
+.tagline a { white-space: nowrap; }   
 .vx { margin: 8px 0 0; outline: none; }
 .btn { font: 500 14px/1 var(--sans); border: 1px solid var(--rule-2); background: var(--page); color: var(--ink-2); border-radius: 999px; min-height: 32px; padding: 0 13px; cursor: pointer; }
 .btn:hover { border-color: var(--ours); color: var(--ours); }
@@ -120,9 +122,13 @@ h2 { font: 600 28px/1.2 var(--sans); letter-spacing: -0.01em; margin: 0 0 18px; 
 .fig { margin: 8px 0 0; }
 .fig figcaption { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
 .fig.chart { margin-top: 4px; }
+.fig.chart + p { margin-top: 16px; }   
 .fig img { width: 100%; height: auto; border: 1px solid var(--rule); border-radius: var(--r); background: #fff; }
 pre.bibtex { margin: 0; padding: 16px 18px; background: var(--band); border: 1px solid var(--rule); border-radius: var(--r); font: 400 14px/1.55 var(--mono); color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
 #credits p { font-size: 15px; color: var(--ink-2); }
+.foot { padding: 8px 0 32px; text-align: center; font-size: 14px; line-height: 1.5; color: var(--muted); }
+.foot p { margin: 0; }
+.foot a { color: inherit; }
 .plot { display: block; width: 100%; height: auto; margin: 6px 0 0; font-family: var(--sans); }
 .plot-narrow { display: none; }
 .pl-group { font-size: 14px; font-weight: 600; fill: var(--ink); }
@@ -131,13 +137,15 @@ pre.bibtex { margin: 0; padding: 16px 18px; background: var(--band); border: 1px
 .pl-note { font-size: 13px; fill: var(--muted); }
 .pl-bar-them { fill: var(--baseline); }
 .pl-bar-ours { fill: var(--ours); }
+.pl-bar-retarget { fill: #8a8f96; }
+.pl-bar-physics { fill: #c9ccd1; }
 @media (max-width: 760px) {
   .hero { padding-top: 16px; }
   h1 { font-size: min(5.9vw, 26px); line-height: 1.2; letter-spacing: -0.02em; }   
   .authors { font-size: 16px; margin-top: 6px; }
   .affil { font-size: 15px; }
   .links { gap: 6px; margin-top: 8px; }
-  .lbtn { height: 36px; padding: 0 13px; font-size: 14px; }
+  .lbtn { height: 36px; padding: 0 13px; font-size: 16px; }
   .tagline { font-size: 16px; }
   .vx { display: flex; flex-direction: column; margin-top: 12px; }
   .vx > .vx-ctl { order: 1; margin-bottom: 4px; gap: 6px 8px; }
