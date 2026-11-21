@@ -46,9 +46,9 @@
    "fetch": "accept the terms on the HF page, `hf auth login`, then scripts/fetch_weights.py --yes --only sam3d (checkpoints/* at this revision; the shape stage reads exactly that snapshot)",
    "flags": [
     "shape stage non-commercial as run: nvdiffrast 0.4.0 (NVIDIA Source Code License, non-commercial, cl. 3.3) runs in its process through fast_postprocess.py -> utils3d RastContext (hole filling, on by default); kaolin 0.18.0, imported by SAM 3D's flexicubes on a static reading, loads its NVIDIA-NSCL (non-commercial) kaolin/non_commercial package",
-    "the model licence itself (SAM License) permits commercial use on our reading, with its acknowledgement and trade-control terms; read it",
+    "the model licence itself (SAM License) permits commercial use as we read it, with its acknowledgement and trade-control terms; read it",
     "gated download",
-    "the checkpoint sha256s equal Hugging Face's LFS ids; the yaml digests are of our copy",
+    "the checkpoint sha256s equal Hugging Face's LFS ids; the yaml digests are of the copy we downloaded",
     "ss_encoder.safetensors is empty upstream too (size 0, the git empty blob, in the HF tree at this revision)"
    ],
    "files": [
@@ -201,7 +201,7 @@
    ],
    "env": "sam3d (conda)",
    "version": "dinov2_vitl14_reg4_pretrain.pth (unversioned URL); code torch.hub facebookresearch/dinov2 @ 7764ea0f912e53c92e82eb78a2a1631e92725fc8",
-   "code": "torch.hub facebookresearch/dinov2 @ 7764ea0f912e53c92e82eb78a2a1631e92725fc8 (equal file for file to the main our runs cached), unpacked by fetch_weights.py into $TORCH_HOME/hub/facebookresearch_dinov2_main, which SAM 3D's unpinned torch.hub.load reads",
+   "code": "torch.hub facebookresearch/dinov2 @ 7764ea0f912e53c92e82eb78a2a1631e92725fc8 (equal file for file to the copy our runs cached), unpacked by fetch_weights.py into $TORCH_HOME/hub/facebookresearch_dinov2_main, which SAM 3D's unpinned torch.hub.load reads",
    "source_url": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_reg4_pretrain.pth",
    "license": "Apache-2.0 (backbone code and weights)",
    "license_url": "https://github.com/facebookresearch/dinov2/blob/main/LICENSE",
@@ -210,7 +210,7 @@
    "fetch": "scripts/fetch_weights.py --yes --only dinov2_sam3d (checkpoint and code; an existing code directory is kept)",
    "flags": [
     "the hub code at that commit (hubconf.py) also imports the Cell-DINO modules when torch.hub loads it; their files state CC BY 4.0 (LICENSE_CELL_DINO_CODE) and, in dinov2/hub/cell_dino/backbones.py, CC BY-NC. SAM 3D calls only dinov2_vitl14_reg and loads no Cell-DINO weights (THIRD_PARTY_LICENSES.md M14)",
-    "unversioned weights URL: the sha256 is of our copy"
+    "unversioned weights URL: the sha256 is of the copy we downloaded"
    ],
    "files": [
     {

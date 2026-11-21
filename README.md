@@ -210,7 +210,7 @@ the physics code on MuJoCo and MuJoCo-Warp; `THIRD_PARTY_LICENSES.md` credits ea
 
 ## Licence
 
-- Our code is Apache-2.0 (`LICENSE`, `NOTICE`); `packages/alongray` and `packages/nullaudit` carry their own.
+- The code is Apache-2.0 (`LICENSE`, `NOTICE`); `packages/alongray` and `packages/nullaudit` carry their own.
 - Derived data (`reproduce/heldout/`, `release/reference/`, `docs/assets/gallery.jpg`) and the default models are
   non-commercial where their upstream terms say so; as shipped, the pipeline and what it produces are for
   non-commercial research only. No weights, MANO files or datasets ship.

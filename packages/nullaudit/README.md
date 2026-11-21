@@ -142,7 +142,7 @@ report.to_dict()           # every rate carries z0_clips/clips, its Wilson 95% i
   Each clip `.npz` holds `reference`, or `frames` + `ref_dt`, `sim_dt`, `warmup_rows`, `n_rows`, plus optional
   `required_rows` and `release_row`.
 - **MuJoCo adapter.** `nullaudit.mujoco_adapter.MujocoExecutor(model, q0, hand_geom, ctrl0, warmup_rows, gravity,
-  weld_eq_ids, ctrl_steps, terminate_z, absent_mode)`. It runs our certifier's executor loop:
+  weld_eq_ids, ctrl_steps, terminate_z, absent_mode)`. It runs the registered certifier's executor loop:
   - the warm-up weld is on and gravity is zero during the warm-up;
   - controls are rounded to float32;
   - the run stops on a simulator warning ("invalid") or on an object drop at a block end ("drop");

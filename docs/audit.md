@@ -118,7 +118,7 @@ fa.report_dict([run], tool_version=fa.__version__)        # the pooled JSON repo
 A certificate is any callable that scores executed object rows and returns a bool, an object with
 `.passed`, or a mapping with `"passed"`. Presets: `CD`, DO AS I DO's object test (mean position
 error < 0.1 m and mean angle < 0.5 rad over the whole executed trace; when `required_rows` is supplied, a run that
-executed fewer rows than the clip has also fails), and `C289`, our registered
+executed fewer rows than the clip has also fails), and `C289`, the registered
 certificate (window means after a 50-row grace, the object-must-move rule, MT-informative clips
 only; T must exceed W + 50). PLAUS and the hand half of C289 are checked only when the caller
 supplies `plaus` and `hand_errors`; otherwise the report labels the certificate with the terms it

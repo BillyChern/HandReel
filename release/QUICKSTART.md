@@ -487,13 +487,13 @@ this release holds toward it.
 
 ## 6. Licences, in one paragraph
 
-Our code is Apache-2.0. With its default models, the pipeline is **for non-commercial research only**. CoTracker3,
+The code is Apache-2.0. With its default models, the pipeline is **for non-commercial research only**. CoTracker3,
 HaWoR, the WiLoR detector, smplx, MANO and the Hands23 weights are non-commercial or carry no licence. The **shape
 stage is non-commercial as run**: nvdiffrast 0.4.0 (NVIDIA Source Code License, non-commercial, clause 3.3) runs in
-the SAM 3D worker through our `fast_postprocess.py` (utils3d's `RastContext`, for hole filling, on by default).
+the SAM 3D worker through the release's `fast_postprocess.py` (utils3d's `RastContext`, for hole filling, on by default).
 kaolin 0.18.0 is Apache-2.0 except its `non_commercial` package (NVIDIA `LICENSE.NSCL`), which every kaolin import
 loads, and SAM 3D's FlexiCubes code imports kaolin on a static reading. SAM 3D's own model licence allows commercial
-use on our reading. Our files are Apache-2.0; they import GPL and AGPL packages at run time, not included here:
+use as we read it. The release's files are Apache-2.0; they import GPL and AGPL packages at run time, not included here:
 pymeshfix, igraph and plyfile in `sam3d`, and ultralytics in `hawor`. If you distribute a combined work, their
 copyleft terms apply to it.
 What the pipeline produces is bound by these model licences too. If you publish results on the example clip,

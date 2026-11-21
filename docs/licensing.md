@@ -4,7 +4,7 @@ The full licence notes that the README summarises in its "Licence" section (move
 2026-11-21). Paths are relative to the repository root. The README picture, `docs/assets/gallery.jpg`, holds dataset
 frames under CC BY-NC 4.0, not Apache-2.0; `DATA_NOTICES.md` gives its terms.
 
-Our code is Apache-2.0 (`LICENSE`, `NOTICE`). `packages/alongray` and `packages/nullaudit` carry their own `LICENSE` and
+The code is Apache-2.0 (`LICENSE`, `NOTICE`). `packages/alongray` and `packages/nullaudit` carry their own `LICENSE` and
 `NOTICE`. **The derived data files are not Apache-2.0**: `reproduce/heldout/` (unit IDs derived from HOI4D and DexYCB, CC
 BY-NC 4.0: non-commercial use only; no per-unit error against their ground truth ships) and the reference output in `release/reference/` (derived from a CC BY 4.0 clip; its
 hand arrays are HaWoR outputs on the MANO model and follow HaWoR's CC BY-NC-ND 4.0 and MANO's licence). We do not ship
