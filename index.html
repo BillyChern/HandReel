@@ -14,7 +14,7 @@
 <meta property="og:image" content="https://shichen.world/HandReel/fig/fig4_gallery.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/site.css?v=f37abb8eb9">
+<link rel="stylesheet" href="css/site.css?v=4b1ad6e683">
 
 <script src="js/viewer.js" defer></script>
 <script src="js/video.js" defer></script>
@@ -29,7 +29,7 @@
     <p class="affil"><span class="af"><sup>1</sup><a href="https://www.ri.cmu.edu/">Robotics Institute, Carnegie Mellon University</a>,</span><span class="af"><sup>2</sup><a href="https://intuition.dev/">Intuition</a></span></p>
     <p class="links"><span class="lbtn" role="link" aria-disabled="true" title="The arXiv link is coming soon"><svg class="ic-line" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M9 9l1 0"/><path d="M9 13l6 0"/><path d="M9 17l6 0"/></svg>arXiv (coming soon)</span> <a class="lbtn" href="#video"><svg class="ic-line" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4"/><path d="M3 8a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -8"/></svg>Video</a> <a class="lbtn" href="https://github.com/BillyChern/HandReel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a></p>
     <p class="subtitle">HandReel turns a video of a hand moving an object into one 3D mesh of the object and its position and rotation over time.</p>
-    <p class="subtitle-note">On 9 Ego4D video segments, <span class="nobr">DO AS I DO</span>'s reconstruction stage took <strong>130&times;</strong> as long per segment when it restarted for every segment as HandReel processing segments in batches. On held-out HOI4D video, with the dataset's outline of the object in the first frame, HandReel's object-centre error was <strong>half</strong> of <span class="nobr">DO AS I DO</span>'s in the median segment.</p>
+    <p class="subtitle-note">On 9 Ego4D segments, <span class="nobr">DO AS I DO</span>'s reconstruction stage restarted for every segment and took <strong>130&times;</strong> as long per segment as HandReel did in batches. On held-out HOI4D video, with the dataset's outline of the object in the first frame, HandReel's object-centre error was <strong>half</strong> of <span class="nobr">DO AS I DO</span>'s in the median segment.</p>
   </div>
 
   <div class="wrap hero-viewer">
@@ -197,7 +197,7 @@
 <rect x="0" y="150" width="12" height="12" class="pl-bar-retarget"/>
 <text x="18" y="161" class="pl-lab">Scene build and retargeting</text>
 <rect x="300" y="150" width="12" height="12" class="pl-bar-physics"/>
-<text x="318" y="161" class="pl-lab">Physics, with 2 random perturbations (default 4)</text>
+<text x="318" y="161" class="pl-lab">Physics, with 2 perturbation samples (default 4)</text>
 </svg>
 <svg class="plot plot-narrow" viewBox="0 0 300 252" role="img" aria-labelledby="apps-plot-n">
 <title id="apps-plot-n">Seconds per Ego4D segment of DO AS I DO's full pipeline as stacked bars of reconstruction, scene build and retargeting, and physics: with DO AS I DO's reconstruction 2,100 + 75 + 894 = 3,069 s; with HandReel's reconstruction 17 + 80 + 894 = 991 s.</title>
@@ -218,7 +218,7 @@
 <rect x="0" y="184" width="12" height="12" class="pl-bar-retarget"/>
 <text x="18" y="195" class="pl-lab">Scene build and retargeting</text>
 <rect x="0" y="204" width="12" height="12" class="pl-bar-physics"/>
-<text x="18" y="215" class="pl-lab">Physics, with 2 random perturbations</text>
+<text x="18" y="215" class="pl-lab">Physics, with 2 perturbation samples</text>
 <text x="18" y="235" class="pl-lab">(default 4)</text>
 </svg>
 

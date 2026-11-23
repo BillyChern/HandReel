@@ -54,7 +54,7 @@ a.lbtn:hover { background: #292929; }
 .lbtn svg.ic-line { fill: none; stroke: currentColor; }   
 a.lbtn, a.lbtn:hover, a.lbtn:focus { text-decoration: none; color: #fff; }
 .subtitle { margin: 18px auto 0; max-width: 760px; font: 400 20px/1.35 var(--sans); color: var(--ink-2); text-wrap: balance; }   
-.subtitle-note { margin: 8px auto 16px; max-width: 720px; font: 400 16px/1.55 var(--sans); color: var(--muted); text-wrap: balance; }   
+.subtitle-note { margin: 8px auto 16px; max-width: 760px; font: 400 16px/1.55 var(--sans); color: var(--muted); text-wrap: balance; }   
 .subtitle-note strong { color: var(--ink); font-weight: 600; }
 .subtitle-note .nobr { white-space: nowrap; }   
 .vx { margin: 8px 0 0; outline: none; }
@@ -128,7 +128,7 @@ a.lbtn, a.lbtn:hover, a.lbtn:focus { text-decoration: none; color: #fff; }
 h2 { font: 600 28px/1.2 var(--sans); letter-spacing: -0.01em; margin: 0 0 24px; text-align: center; }   
 .block p { margin: 0 0 16px; color: var(--ink); text-wrap: pretty; }
 .block p:last-child { margin-bottom: 0; }   
-#abstract .abstract { text-align: justify; }   
+@media (min-width: 761px) { #abstract .abstract { text-align: justify; } }   
 .fig { margin: 8px 0 0; }
 .fig figcaption { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
 .fig.chart { margin-top: 4px; }
@@ -160,7 +160,7 @@ pre.bibtex { margin: 0; padding: 16px 18px; background: var(--band); border: 1px
   .links { gap: 6px; margin-top: 8px; }
   .lbtn { height: 36px; padding: 0 13px; font-size: 16px; }
   .subtitle { font-size: 18px; margin-top: 14px; }
-  .subtitle-note { font-size: 15px; margin-bottom: 12px; }
+  .subtitle-note { font-size: 15px; margin-bottom: 12px; text-align: left; text-wrap: pretty; }   
   .vx { display: flex; flex-direction: column; margin-top: 12px; }
   .vx > .vx-ctl { order: 1; margin-bottom: 4px; gap: 6px 8px; }
   .vx > .vx-grid { order: 2; }
