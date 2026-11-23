@@ -14,7 +14,7 @@
 <meta property="og:image" content="https://shichen.world/HandReel/fig/fig4_gallery.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/site.css?v=e34cf2c672">
+<link rel="stylesheet" href="css/site.css?v=6e53f49f2c">
 
 <script src="js/viewer.js" defer></script>
 </head>
@@ -26,7 +26,7 @@
     <h1>HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling</h1>
     <p class="authors"><span class="au"><a href="https://shichen.world/">Shi Chen</a><sup>1,2</sup>,</span><span class="au"><a href="https://ichnow.ski/">Jeffrey Ichnowski</a><sup>1</sup></span></p>
     <p class="affil"><span class="af"><sup>1</sup><a href="https://www.ri.cmu.edu/">Robotics Institute, Carnegie Mellon University</a>,</span><span class="af"><sup>2</sup><a href="https://intuition.dev/">Intuition</a></span></p>
-    <p class="links"><span class="lbtn" role="link" aria-disabled="true" title="The arXiv link is coming soon"><svg class="ic-line" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M9 9l1 0"/><path d="M9 13l6 0"/><path d="M9 17l6 0"/></svg>arXiv (coming soon)</span> <a class="lbtn" href="https://github.com/BillyChern/HandReel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a></p>
+    <p class="links"><span class="lbtn" role="link" aria-disabled="true" title="The arXiv link is coming soon"><svg class="ic-line" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M9 9l1 0"/><path d="M9 13l6 0"/><path d="M9 17l6 0"/></svg>arXiv (coming soon)</span> <a class="lbtn" href="#video"><svg class="ic-line" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4"/><path d="M3 8a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -8"/></svg>Video</a> <a class="lbtn" href="https://github.com/BillyChern/HandReel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a></p>
     <p class="tagline">HandReel turns a video of a hand moving an object into one 3D mesh of the object and its position and rotation over time. HandReel reconstructs video in windows (stretches of up to about 10 s in the paper's experiments). On 20 Ego4D windows run one at a time, <a href="https://arxiv.org/abs/2606.19333">DO AS I DO</a>'s reconstruction stage took about 30&times; as long as HandReel. On held-out HOI4D windows, with the dataset's object outline in the first frame, HandReel's object-centre error was half of DO AS I DO's in the median window.</p>
   </div>
 
@@ -75,6 +75,15 @@
   <div class="wrap narrow">
     <h2>Abstract</h2>
     <p class="abstract">Videos of people handling objects could teach robots manipulation, if we could cheaply recover each object's 3D shape and motion from monocular video. A rigid object keeps its shape, so one mesh can serve many frames. HandReel processes video in short windows and poses one mesh per window from point tracks instead of sampling a pose in every frame. It builds each mesh from one masked frame, aligns it to estimated depth and takes metric scale from the estimated right hand. On Ego4D, HandReel processed many windows in one run that loaded models once. When the DO AS I DO pipeline's reconstruction stage ran its released code and restarted for every window, it took far longer per window than a window's share of HandReel's run. On held-out HOI4D with ground-truth prompts, HandReel's object-centre error was lower than that stage's in the median window when a failure to deliver counts as an error. There, HandReel delivered every analysed window. In a first application, which turns one video into a robot trajectory, that pipeline would take longer with its own reconstruction than with HandReel's, by a sum of separately measured stage times. In a second application, which converts many videos with one retargeting policy, every video needs the reconstruction that HandReel shortens.</p>
+  </div>
+</section>
+
+<section class="block" id="video">
+  <div class="wrap wide">
+    <h2>Video</h2>
+    <figure class="fig">
+      <video controls playsinline preload="none" poster="media/video/results_video.jpg" width="1920" height="1080"><source src="media/video/results_video.mp4" type="video/mp4"></video>
+    </figure>
   </div>
 </section>
 
@@ -228,7 +237,7 @@
 <section class="block" id="credits">
   <div class="wrap narrow">
     <h2>Credits</h2>
-    <p>The viewer clip and the Method figure show frames of one <a href="https://dex-ycb.github.io/">DexYCB</a> sequence (Chao et al., 2021). The Results figure shows five DexYCB frames and one <a href="https://hoi4d.github.io/">HOI4D</a> frame (Liu et al., 2022), and the Comparison figure six DexYCB frames. Both datasets state <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> on their pages. We cropped or scaled the frames and drew overlays on them; <a href="ATTRIBUTION.txt">ATTRIBUTION.txt</a> lists each asset, its source and its changes. The charts show no dataset media; their times come from Ego4D video (Grauman et al., 2022). The viewer is <a href="https://viser.studio/">Viser</a>; <a href="https://github.com/facebookresearch/sam-3d-objects">SAM 3D</a> generates the object mesh and <a href="https://hawor-project.github.io/">HaWoR</a> estimates the hand.</p>
+    <p>The viewer clip and the Method figure show frames of one <a href="https://dex-ycb.github.io/">DexYCB</a> sequence (Chao et al., 2021). The Results figure shows five DexYCB frames and one <a href="https://hoi4d.github.io/">HOI4D</a> frame (Liu et al., 2022), and the Comparison figure six DexYCB frames. The video shows six DexYCB clips and one HOI4D clip. Both datasets state <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> on their pages. We cropped or scaled the frames and drew overlays on them; <a href="ATTRIBUTION.txt">ATTRIBUTION.txt</a> lists each asset, its source and its changes. The charts show no dataset media; their times come from Ego4D video (Grauman et al., 2022). The viewer is <a href="https://viser.studio/">Viser</a>; <a href="https://github.com/facebookresearch/sam-3d-objects">SAM 3D</a> generates the object mesh and <a href="https://hawor-project.github.io/">HaWoR</a> estimates the hand.</p>
   </div>
 </section>
 </main>
