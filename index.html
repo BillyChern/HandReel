@@ -14,9 +14,10 @@
 <meta property="og:image" content="https://shichen.world/HandReel/fig/fig4_gallery.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/site.css?v=6e53f49f2c">
+<link rel="stylesheet" href="css/site.css?v=f37abb8eb9">
 
 <script src="js/viewer.js" defer></script>
+<script src="js/video.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,7 +28,8 @@
     <p class="authors"><span class="au"><a href="https://shichen.world/">Shi Chen</a><sup>1,2</sup>,</span><span class="au"><a href="https://ichnow.ski/">Jeffrey Ichnowski</a><sup>1</sup></span></p>
     <p class="affil"><span class="af"><sup>1</sup><a href="https://www.ri.cmu.edu/">Robotics Institute, Carnegie Mellon University</a>,</span><span class="af"><sup>2</sup><a href="https://intuition.dev/">Intuition</a></span></p>
     <p class="links"><span class="lbtn" role="link" aria-disabled="true" title="The arXiv link is coming soon"><svg class="ic-line" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M9 9l1 0"/><path d="M9 13l6 0"/><path d="M9 17l6 0"/></svg>arXiv (coming soon)</span> <a class="lbtn" href="#video"><svg class="ic-line" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4"/><path d="M3 8a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -8"/></svg>Video</a> <a class="lbtn" href="https://github.com/BillyChern/HandReel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a></p>
-    <p class="tagline">HandReel turns a video of a hand moving an object into one 3D mesh of the object and its position and rotation over time. HandReel reconstructs video in windows (stretches of up to about 10 s in the paper's experiments). On 20 Ego4D windows run one at a time, <a href="https://arxiv.org/abs/2606.19333">DO AS I DO</a>'s reconstruction stage took about 30&times; as long as HandReel. On held-out HOI4D windows, with the dataset's object outline in the first frame, HandReel's object-centre error was half of DO AS I DO's in the median window.</p>
+    <p class="subtitle">HandReel turns a video of a hand moving an object into one 3D mesh of the object and its position and rotation over time.</p>
+    <p class="subtitle-note">On 9 Ego4D video segments, <span class="nobr">DO AS I DO</span>'s reconstruction stage took <strong>130&times;</strong> as long per segment when it restarted for every segment as HandReel processing segments in batches. On held-out HOI4D video, with the dataset's outline of the object in the first frame, HandReel's object-centre error was <strong>half</strong> of <span class="nobr">DO AS I DO</span>'s in the median segment.</p>
   </div>
 
   <div class="wrap hero-viewer">
@@ -64,7 +66,7 @@
           </div>
         </div>
       </div>
-      <figcaption class="vx-cap">A DexYCB clip from the development set: HandReel's object mesh and HaWoR's hand. The viewer plays every third frame of the video at real-time speed. We marked the object with the dataset's mask in the clip's first frame, which comes before the frames shown.</figcaption>
+      <figcaption class="vx-cap">A DexYCB clip from the development set: HandReel's object mesh and the estimated hand. The viewer plays every third frame of the video at real-time speed. We marked the object with the dataset's outline in the clip's first frame, which comes before the frames shown.</figcaption>
     </figure>
 
   </div>
@@ -82,7 +84,7 @@
   <div class="wrap wide">
     <h2>Video</h2>
     <figure class="fig">
-      <video controls playsinline preload="none" poster="media/video/results_video.jpg" width="1920" height="1080"><source src="media/video/results_video.mp4" type="video/mp4"></video>
+      <video controls playsinline preload="none" width="1920" height="1080" data-src="media/video/results_video.mp4" data-src-m="media/video/results_video_phone.mp4" data-poster="media/video/results_video.jpg" data-poster-m="media/video/results_video_phone.jpg"><source src="media/video/results_video_phone.mp4" type="video/mp4" media="(max-width: 760px)"><source src="media/video/results_video.mp4" type="video/mp4"></video>
     </figure>
   </div>
 </section>
@@ -90,11 +92,11 @@
 <section class="block" id="method">
   <div class="wrap narrow">
     <h2>Method</h2>
-    <p>HandReel works on one window at a time, in three steps, and it never asks a generative model for the object's position. First, it builds one 3D mesh of the object and reuses it for the whole window. Second, it gets a first guess of where the object is over time by following points on the object through the video. Third, it adjusts all of those positions and the object's size together until they agree with the depth maps and the followed points. HandReel takes the real-world scale from the estimated right hand, so the right hand must be visible. In the paper's experiments, it returned a result only when its quality check passed.</p>
+    <p>HandReel works on one short video segment (up to about 10 s in the paper's experiments) at a time, in three steps, and it never asks a generative model for the object's position. First, it builds one 3D mesh of the object and reuses it for the whole segment. Second, it gets a first guess of where the object is over time by following points on the object through the video. Third, it adjusts all of those positions and the object's size together until they agree with the depth maps and the followed points. HandReel takes the real-world scale from the estimated right hand, so the right hand must be visible. In the paper's experiments, it returned a result only when its quality check passed.</p>
   </div>
   <div class="wrap wide">
     <figure class="fig">
-      <img src="fig/fig2_overview.png" width="1520" height="627" alt="How HandReel works on one window: it builds one 3D mesh of the object from one frame, sets the mesh's real-world size with the estimated hand, starts the object's motion from points followed through the video and then refines all positions together. The result is the object's position and rotation over time, with the estimated right hand." loading="lazy">
+      <img src="fig/fig2_overview.png" width="1520" height="627" alt="How HandReel works on one video segment: it builds one 3D mesh of the object from one frame, sets the mesh's real-world size with the estimated hand, starts the object's motion from points followed through the video and then refines all positions together. The result is the object's position and rotation over time, with the estimated right hand." loading="lazy">
     </figure>
   </div>
 </section>
@@ -103,6 +105,8 @@
   <div class="wrap narrow">
     <h2>Results</h2>
     <p>Six clips that we picked from the DexYCB and HOI4D development sets, with HandReel's object mesh in purple and the estimated hand in light purple.</p>
+  </div>
+  <div class="wrap wide">
     <figure class="fig">
       <img src="fig/fig4_gallery.jpg" width="1520" height="866" alt="Six clips from DexYCB and HOI4D with HandReel's object mesh outlined in purple and the estimated hand in light purple." loading="lazy">
     </figure>
@@ -111,11 +115,13 @@
 </section>
 
 <section class="block" id="comparison">
-  <div class="wrap wide">
+  <div class="wrap narrow">
     <h2>Comparison</h2>
+    <p>One selected DexYCB development clip, start to end: ground truth (green), DO AS I DO (orange) and HandReel (purple, estimated hand lighter), with each one's object-centre error over time below.</p>
+  </div>
+  <div class="wrap wide">
     <figure class="fig">
       <img src="fig/fig3_strip.jpg" width="1520" height="639" alt="Six frames of one clip in three rows, ground truth, DO AS I DO and HandReel, each with the object outlined, above a plot of each one's object-centre error over time." loading="lazy">
-      <figcaption>One selected DexYCB development clip, start to end: ground truth (green), DO AS I DO (orange) and HandReel (purple, estimated hand lighter), with each one's object-centre error over time below.</figcaption>
     </figure>
   </div>
 </section>
@@ -123,47 +129,47 @@
 <section class="block" id="time">
   <div class="wrap narrow">
     <h2>Reconstruction time</h2>
-    <p>In our experiments on Ego4D, the baseline, DO AS I DO's reconstruction stage, took about 30&times; as long as HandReel when both ran one window at a time, and 130&times; as long as HandReel's per-window share of batched runs when it restarted for every window.</p>
+    <p>In our experiments on Ego4D, DO AS I DO's reconstruction stage took about 30&times; as long as HandReel when both processed one segment at a time, and 130&times; as long per segment when it restarted for every segment while HandReel processed segments in batches.</p>
     <figure class="fig chart">
 
 <svg class="plot plot-wide" viewBox="0 0 720 178" role="img" aria-labelledby="time-plot-t">
-<title id="time-plot-t">Reconstruction time per Ego4D window, in seconds, as bars for the baseline (DO AS I DO's reconstruction stage) and for HandReel: both one window at a time; and the baseline restarting for every window against HandReel's per-window share of batched runs.</title>
-<text x="0" y="16" class="pl-group">One window at a time (20 windows)</text>
-<text x="86" y="44" text-anchor="end" class="pl-lab">Baseline</text>
+<title id="time-plot-t">Reconstruction time per Ego4D segment, in seconds, as bars for DO AS I DO's reconstruction stage and for HandReel: both one segment at a time; and DO AS I DO restarting for every segment against HandReel processing segments in batches.</title>
+<text x="0" y="16" class="pl-group">One segment at a time (20 segments)</text>
+<text x="86" y="44" text-anchor="end" class="pl-lab">DO AS I DO</text>
 <rect x="96" y="28" width="476.2" height="22" class="pl-bar-them"/>
 <text x="580.2" y="44" class="pl-val">2,000 s</text>
 <text x="86" y="72" text-anchor="end" class="pl-lab">HandReel</text>
 <rect x="96" y="56" width="15.7" height="22" class="pl-bar-ours"/>
 <text x="119.7" y="72" class="pl-val">66 s</text>
-<text x="0" y="108" class="pl-group">Baseline restarts for every window (9 of 19 attempted windows that both completed)</text>
-<text x="86" y="136" text-anchor="end" class="pl-lab">Baseline</text>
+<text x="0" y="108" class="pl-group">DO AS I DO restarts for every segment (9 of 19 attempted segments that both completed)</text>
+<text x="86" y="136" text-anchor="end" class="pl-lab">DO AS I DO</text>
 <rect x="96" y="120" width="500.0" height="22" class="pl-bar-them"/>
 <text x="604.0" y="136" class="pl-val">2,100 s</text>
 <text x="86" y="164" text-anchor="end" class="pl-lab">HandReel</text>
 <rect x="96" y="148" width="4.0" height="22" class="pl-bar-ours"/>
-<text x="108.0" y="164" class="pl-val">17 s per-window share</text>
+<text x="108.0" y="164" class="pl-val">17 s per segment, in batches</text>
 </svg>
 <svg class="plot plot-narrow" viewBox="0 0 300 248" role="img" aria-labelledby="time-plot-n">
-<title id="time-plot-n">Reconstruction time per Ego4D window, in seconds, as bars for the baseline (DO AS I DO's reconstruction stage) and for HandReel: both one window at a time; and the baseline restarting for every window against HandReel's per-window share of batched runs.</title>
-<text x="0" y="14" class="pl-group">One window at a time (20 windows)</text>
-<text x="0" y="34" class="pl-lab">Baseline</text>
+<title id="time-plot-n">Reconstruction time per Ego4D segment, in seconds, as bars for DO AS I DO's reconstruction stage and for HandReel: both one segment at a time; and DO AS I DO restarting for every segment against HandReel processing segments in batches.</title>
+<text x="0" y="14" class="pl-group">One segment at a time (20 segments)</text>
+<text x="0" y="34" class="pl-lab">DO AS I DO</text>
 <rect x="0" y="40" width="211.4" height="18" class="pl-bar-them"/>
 <text x="217.4" y="54" class="pl-val">2,000 s</text>
 <text x="0" y="74" class="pl-lab">HandReel</text>
 <rect x="0" y="80" width="7.0" height="18" class="pl-bar-ours"/>
 <text x="13.0" y="94" class="pl-val">66 s</text>
-<text x="0" y="120" class="pl-group">Baseline restarts for every window</text>
-<text x="0" y="138" class="pl-group">(9 of 19 attempted windows</text>
+<text x="0" y="120" class="pl-group">DO AS I DO restarts for every segment</text>
+<text x="0" y="138" class="pl-group">(9 of 19 attempted segments</text>
 <text x="0" y="156" class="pl-group">that both completed)</text>
-<text x="0" y="176" class="pl-lab">Baseline</text>
+<text x="0" y="176" class="pl-lab">DO AS I DO</text>
 <rect x="0" y="182" width="222.0" height="18" class="pl-bar-them"/>
 <text x="228.0" y="196" class="pl-val">2,100 s</text>
 <text x="0" y="216" class="pl-lab">HandReel</text>
 <rect x="0" y="222" width="2.0" height="18" class="pl-bar-ours"/>
-<text x="8.0" y="236" class="pl-val">17 s per-window share</text>
+<text x="8.0" y="236" class="pl-val">17 s per segment, in batches</text>
 </svg>
 
-      <figcaption>Seconds per Ego4D window on one H100 GPU. Ego4D has no ground-truth object poses, so it measures speed only. The paper gives the full protocol.</figcaption>
+      <figcaption>Seconds per Ego4D segment on one H100 GPU. Ego4D has no ground-truth object poses, so it measures speed only. The paper gives the full protocol.</figcaption>
     </figure>
   </div>
 </section>
@@ -171,11 +177,11 @@
 <section class="block" id="applications">
   <div class="wrap narrow">
     <h2>Applications</h2>
-    <p>DO AS I DO turns a video of a person handling an object into a robot motion, and reconstruction is its first stage. By stage times that we measured separately on Ego4D, its full pipeline would take about 3&times; as long per window with its own reconstruction as with HandReel's.</p>
+    <p><a href="https://arxiv.org/abs/2606.19333">DO AS I DO</a> turns a video of a person handling an object into a robot motion, and reconstruction is its first stage. By stage times that we measured separately on Ego4D, its full pipeline would take about 3&times; as long per segment with its own reconstruction as with HandReel's.</p>
     <figure class="fig chart">
 
 <svg class="plot plot-wide" viewBox="0 0 720 176" role="img" aria-labelledby="apps-plot-t">
-<title id="apps-plot-t">Seconds per Ego4D window of DO AS I DO's full pipeline as stacked bars of reconstruction, scene build and retargeting, and physics: with DO AS I DO's reconstruction 2,100 + 75 + 894 = 3,069 s; with HandReel's reconstruction 17 + 80 + 894 = 991 s.</title>
+<title id="apps-plot-t">Seconds per Ego4D segment of DO AS I DO's full pipeline as stacked bars of reconstruction, scene build and retargeting, and physics: with DO AS I DO's reconstruction 2,100 + 75 + 894 = 3,069 s; with HandReel's reconstruction 17 + 80 + 894 = 991 s.</title>
 <text x="0" y="16" class="pl-group">With DO AS I DO's reconstruction: 2,100 + 75 + 894 = 3,069 s</text>
 <rect x="0.0" y="24" width="479.0" height="22" class="pl-bar-them"/>
 <rect x="479.0" y="24" width="17.1" height="22" class="pl-bar-retarget"/>
@@ -191,10 +197,10 @@
 <rect x="0" y="150" width="12" height="12" class="pl-bar-retarget"/>
 <text x="18" y="161" class="pl-lab">Scene build and retargeting</text>
 <rect x="300" y="150" width="12" height="12" class="pl-bar-physics"/>
-<text x="318" y="161" class="pl-lab">Physics, at 2 perturbation samples (default 4)</text>
+<text x="318" y="161" class="pl-lab">Physics, with 2 random perturbations (default 4)</text>
 </svg>
 <svg class="plot plot-narrow" viewBox="0 0 300 252" role="img" aria-labelledby="apps-plot-n">
-<title id="apps-plot-n">Seconds per Ego4D window of DO AS I DO's full pipeline as stacked bars of reconstruction, scene build and retargeting, and physics: with DO AS I DO's reconstruction 2,100 + 75 + 894 = 3,069 s; with HandReel's reconstruction 17 + 80 + 894 = 991 s.</title>
+<title id="apps-plot-n">Seconds per Ego4D segment of DO AS I DO's full pipeline as stacked bars of reconstruction, scene build and retargeting, and physics: with DO AS I DO's reconstruction 2,100 + 75 + 894 = 3,069 s; with HandReel's reconstruction 17 + 80 + 894 = 991 s.</title>
 <text x="0" y="14" class="pl-group">With DO AS I DO's reconstruction:</text>
 <text x="0" y="32" class="pl-group">2,100 + 75 + 894 = 3,069 s</text>
 <rect x="0.0" y="40" width="198.4" height="18" class="pl-bar-them"/>
@@ -212,11 +218,11 @@
 <rect x="0" y="184" width="12" height="12" class="pl-bar-retarget"/>
 <text x="18" y="195" class="pl-lab">Scene build and retargeting</text>
 <rect x="0" y="204" width="12" height="12" class="pl-bar-physics"/>
-<text x="18" y="215" class="pl-lab">Physics, at 2 perturbation samples</text>
+<text x="18" y="215" class="pl-lab">Physics, with 2 random perturbations</text>
 <text x="18" y="235" class="pl-lab">(default 4)</text>
 </svg>
 
-      <figcaption>Seconds per Ego4D window on one H100 GPU, stage by stage. The 17 s is HandReel's per-window share of batched runs. These are sums of separately measured stage times, not a timed end-to-end run.</figcaption>
+      <figcaption>Seconds per Ego4D segment on one H100 GPU, stage by stage. The 17 s is HandReel's time per segment when it processes segments in batches. These are sums of separately measured stage times, not a timed end-to-end run.</figcaption>
     </figure>
     <p>When one retargeting policy serves many videos, every video still pays for reconstruction.</p>
   </div>
