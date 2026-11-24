@@ -1,7 +1,7 @@
 Data credits
 
 The input frames shown in the viewer (viewer/input/, the input frames inside viewer/recordings/ and the pre-rendered
-videos in viewer/fallback/) and the frames inside the page's figures (fig/) and its videos (media/video/) come from
+videos in viewer/fallback/) and the frames inside the page's figures (fig/) and its video (media/video/) come from
 the datasets below. Each dataset entry gives the licence that the dataset states, the assets that hold its frames
 and the changes made to those frames.
 
@@ -45,20 +45,18 @@ DexYCB, Chao et al., "DexYCB: A Benchmark for Capturing Hand Grasping of Objects
     DexYCB: five frames, one from each of five clips. Changes made to the frames: each frame cropped and scaled,
     with the outlines of HandReel's posed object mesh and of the estimated hand drawn over it; composed with its
     label into one figure and saved as JPEG.
-  Videos media/video/results_video.mp4 (desktop) and media/video/results_video_phone.mp4 (phone) with their posters
-    media/video/results_video.jpg and media/video/results_video_phone.jpg, the site copy of the paper's
-    supplementary video in a desktop (1920 x 1080) and a phone (1080 x 1920) layout (the same frames and timing,
-    plain-language on-screen text; 92.5 s, no sound). Frames from DexYCB: frames of six clips (the Comparison
-    figure's clip, four of the Results figure's clips and the viewer's clip). Changes made to the frames: the
-    Comparison figure's clip, the same frame three times, side by side at its size (640 x 480) in the desktop video
-    and stacked, scaled and with a label box over each frame's corner in the phone video, with the ground-truth
-    object outline and the dataset's hand joints as dots joined by lines, the object outline from DO AS I DO's
-    reconstruction stage, and HandReel's object outline and estimated hand drawn over them, under a plot of error
-    over time with a moving cursor; the Results figure's four clips scaled, with the outlines of HandReel's posed
-    object mesh and of the estimated hand drawn over them; the viewer's clip scaled, with HandReel's object mesh and
-    the estimated hand rendered over it, beside (desktop) or above (phone) a side view of the two meshes. Titles,
-    labels and notes added; composed into the two videos, encoded as H.264 and saved as MP4; each poster is its
-    video's frame at 80.0 s, of the viewer's clip, saved as JPEG.
+  Video media/video/handreel_overview.mp4 with its poster media/video/handreel_overview.jpg, a narrated overview of
+    HandReel (1920 x 1080, five minutes and twenty seconds, with sound; the captions and the on-screen text are part
+    of the picture). Frames from DexYCB: frames of two clips (the viewer's clip and the Comparison figure's clip).
+    Changes made to the frames: the viewer's clip scaled, beside a rendered side view of HandReel's object mesh and
+    the estimated hand, with the two rendered over some frames; on other frames, outlines that illustrate candidate
+    object poses, followed points or depth points drawn over them; one frame darkened, with the outline of the
+    object's mask, and one blurred behind the title card; the Comparison figure's clip, the same frame three times
+    side by side, with the ground-truth object outline and the dataset's hand joints, the object outline from DO AS
+    I DO's reconstruction stage, and HandReel's object outline and estimated hand drawn over them, under a plot of
+    error over time with a moving cursor. Titles, labels, captions, charts and a narration added; composed into one
+    video, encoded as H.264 and saved as MP4; the poster is its frame at 3.5 s, the title card over a blurred frame
+    of the viewer's clip, saved as JPEG.
   Frames of dexycb-v2-1: consecutive frames of one DexYCB clip.
   Changes made to the frames of dexycb-v2-1: not resized (640 x 480); re-encoded as JPEG (quality 88); a white caption strip (dataset, frame number, time) added below each frame (640 x 516); HandReel's 3D reconstruction drawn over them in the interactive viewer; in the pre-rendered videos, rendered in perspective with the 3D, scaled and re-encoded as H.264 video.
 
@@ -69,10 +67,4 @@ HOI4D, Liu et al., "HOI4D: A 4D Egocentric Dataset for Category-Level Human-Obje
     HOI4D: one frame of one clip. Changes made to the frames: each frame cropped and scaled, with the outlines of
     HandReel's posed object mesh and of the estimated hand drawn over it; composed with its label into one figure
     and saved as JPEG.
-  Videos media/video/results_video.mp4 (desktop) and media/video/results_video_phone.mp4 (phone), the site copy of
-    the paper's supplementary video in a desktop (1920 x 1080) and a phone (1080 x 1920) layout (the same frames and
-    timing, plain-language on-screen text; 92.5 s, no sound). Frames from HOI4D: frames of one clip, the Results
-    figure's HOI4D clip. Changes made to the frames: frames scaled, with the outlines of HandReel's posed object
-    mesh and of the estimated hand drawn over them. Titles, labels and notes added; composed into the two videos,
-    encoded as H.264 and saved as MP4.
 

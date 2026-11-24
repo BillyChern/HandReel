@@ -14,10 +14,9 @@
 <meta property="og:image" content="https://shichen.world/HandReel/fig/fig4_gallery.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/site.css?v=4b1ad6e683">
+<link rel="stylesheet" href="css/site.css?v=17eb13f94f">
 
 <script src="js/viewer.js" defer></script>
-<script src="js/video.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -81,10 +80,13 @@
 </section>
 
 <section class="block" id="video">
-  <div class="wrap wide">
+  <div class="wrap narrow">
     <h2>Video</h2>
+    <p>A narrated overview, five minutes and twenty seconds long, with captions in the picture. HandReel replaces only DO AS I DO's reconstruction stage. The video shows how HandReel builds one object mesh and tracks it without sampling poses frame by frame. It then compares HandReel's time on Ego4D and object-centre error on held-out HOI4D with those of DO AS I DO's reconstruction stage, and shows one DexYCB development clip slowed down.</p>
+  </div>
+  <div class="wrap wide">
     <figure class="fig">
-      <video controls playsinline preload="none" width="1920" height="1080" data-src="media/video/results_video.mp4" data-src-m="media/video/results_video_phone.mp4" data-poster="media/video/results_video.jpg" data-poster-m="media/video/results_video_phone.jpg"><source src="media/video/results_video_phone.mp4" type="video/mp4" media="(max-width: 760px)"><source src="media/video/results_video.mp4" type="video/mp4"></video>
+      <video controls playsinline preload="none" width="1920" height="1080" poster="media/video/handreel_overview.jpg"><source src="media/video/handreel_overview.mp4" type="video/mp4"></video>
     </figure>
   </div>
 </section>
@@ -245,7 +247,7 @@
 <section class="block" id="credits">
   <div class="wrap narrow">
     <h2>Credits</h2>
-    <p>The viewer clip and the Method figure show frames of one <a href="https://dex-ycb.github.io/">DexYCB</a> sequence (Chao et al., 2021). The Results figure shows five DexYCB frames and one <a href="https://hoi4d.github.io/">HOI4D</a> frame (Liu et al., 2022), and the Comparison figure six DexYCB frames. The video shows six DexYCB clips and one HOI4D clip. Both datasets state <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> on their pages. We cropped or scaled the frames and drew overlays on them; <a href="ATTRIBUTION.txt">ATTRIBUTION.txt</a> lists each asset, its source and its changes. The charts show no dataset media; their times come from Ego4D video (Grauman et al., 2022). The viewer is <a href="https://viser.studio/">Viser</a>; <a href="https://github.com/facebookresearch/sam-3d-objects">SAM 3D</a> generates the object mesh and <a href="https://hawor-project.github.io/">HaWoR</a> estimates the hand.</p>
+    <p>The viewer clip and the Method figure show frames of one <a href="https://dex-ycb.github.io/">DexYCB</a> sequence (Chao et al., 2021). The Results figure shows five DexYCB frames and one <a href="https://hoi4d.github.io/">HOI4D</a> frame (Liu et al., 2022), and the Comparison figure six DexYCB frames. The video shows two DexYCB clips. Both datasets state <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> on their pages. We cropped or scaled the frames and drew overlays on them; <a href="ATTRIBUTION.txt">ATTRIBUTION.txt</a> lists each asset, its source and its changes. The charts show no dataset media; their times come from Ego4D video (Grauman et al., 2022). The viewer is <a href="https://viser.studio/">Viser</a>; <a href="https://github.com/facebookresearch/sam-3d-objects">SAM 3D</a> generates the object mesh and <a href="https://hawor-project.github.io/">HaWoR</a> estimates the hand.</p>
   </div>
 </section>
 </main>

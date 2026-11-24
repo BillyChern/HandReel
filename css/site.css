@@ -167,7 +167,6 @@ pre.bibtex { margin: 0; padding: 16px 18px; background: var(--band); border: 1px
   .vx > .vx-ctl2 { order: 3; display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; margin: 8px 0 0; }
   .vx > .vx-msg { order: 4; margin-top: 8px; }
   .vx > .vx-cap { order: 5; font-size: 14px; text-align: left; }   
-  #video .fig video { aspect-ratio: 9 / 16; }   
   .vx-ctl2 .vx-readout { flex: 1 1 100%; font-size: 13px; }
   .vx-ctl2 .vx-opacity, .vx-ctl2 .vx-reset, .vx-ctl2 .vx-mode { flex: 1 1 40%; font-size: 14px; padding: 0 10px; }
   .vx-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
