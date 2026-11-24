@@ -54,6 +54,7 @@ a.lbtn { text-decoration: none; cursor: pointer; }
 .lbtn svg.ic-line { fill: none; stroke: currentColor; }   
 a.lbtn, a.lbtn:hover, a.lbtn:focus { text-decoration: none; color: #fff; }
 .subtitle { margin: 18px auto 16px; max-width: 760px; font: 400 20px/1.35 var(--sans); color: var(--ink-2); text-wrap: balance; }   
+.nobr { white-space: nowrap; }   
 .vx { margin: 8px 0 0; outline: none; }
 .btn { font: 500 14px/1 var(--sans); border: 1px solid var(--rule-2); background: var(--page); color: var(--ink-2); border-radius: 999px; min-height: 32px; padding: 0 13px; cursor: pointer; }
 @media (hover: hover) { .btn:hover { border-color: var(--ours); color: var(--ours); } }
@@ -131,6 +132,13 @@ h2 { font: 600 28px/1.2 var(--sans); letter-spacing: -0.01em; margin: 0 0 24px; 
 @media (min-width: 761px) { #abstract .abstract { text-align: justify; } }   
 .fig { margin: 8px 0 0; }
 .fig figcaption { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
+.fig.tbl { margin: 24px 0 24px; overflow-x: auto; }
+table.res { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.4; color: var(--ink); font-variant-numeric: tabular-nums; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+table.res thead th { font-weight: 600; font-size: 14px; color: var(--ink-2); vertical-align: bottom; border-bottom: 1px solid var(--rule-2); }
+table.res th, table.res td { padding: 6px 8px; text-align: right; }
+table.res td { white-space: nowrap; }   
+table.res th[scope="row"], table.res thead th:first-child { text-align: left; font-weight: 600; }
+@media (max-width: 760px) { table.res { font-size: 14px; } table.res thead th { font-size: 13px; } table.res th, table.res td { padding: 5px 4px; } }
 .fig.chart { margin-top: 4px; }
 #results .fig { max-width: 760px; margin-left: auto; margin-right: auto; }   
 .fig.chart + p { margin-top: 16px; }   
