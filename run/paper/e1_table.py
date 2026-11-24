@@ -1,6 +1,6 @@
 """Writes `e1_results.tex`: the E1 held-out results as LaTeX macros (`\\Eone...`), from the verdict record (the JSON
 passed as `--verdict`) and nothing else. Without a record every macro is `\\TBDr`. The paper source `\\input`s this
-file, but no table or section of the submitted main paper prints these macros: the paper source writes its Table 1 by
+file, but no table or section of the paper's main text prints these macros: the paper source writes its Table 1 by
 hand.
 
     python run/paper/e1_table.py [--verdict <date>-e1-verdict.json] [--out paper/e1_results.tex]

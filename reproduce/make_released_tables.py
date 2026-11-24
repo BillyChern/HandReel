@@ -14,7 +14,7 @@ unchanged), and local names and assertion messages that were internal study numb
 file are new. Each table still asserts the values it prints, so a changed record stops the run. Each table it writes
 starts with a two-line `%` header naming this file; `reproduce/regenerate_tables.py` compares the rest of the file,
 without its `%` comment lines, with the paper generator's output at the pinned revision (none of the five is a
-table of the submitted main paper, whose tables the paper source writes by hand). The copied code keeps the generator's style, so ruff
+table of the paper's main text, whose tables the paper source writes by hand). The copied code keeps the generator's style, so ruff
 does not check this file.
 """
 # ruff: noqa

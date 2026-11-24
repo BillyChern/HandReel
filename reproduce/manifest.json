@@ -1,6 +1,6 @@
 {
  "paper_revision": "2b6e3f9348c6ae01d5516b761c8c2b344a40ff08",
- "paper_revision_note": "the paper-source revision that generated the pinned tables; the frozen source of the submitted main paper holds the same generator and the same records, byte for byte",
+ "paper_revision_note": "the paper-source revision that generated the pinned tables; the frozen source of the paper holds the same generator and the same records, byte for byte",
  "generator": {
   "path": "tools/make_tables.py",
   "sha256": "887a266cd73512cbf4e507c8b5d3d6fc69fd610d907a979237265ef1d1105d24"
@@ -208,7 +208,7 @@
    "file": "tables/ablate.tex",
    "sha256": "89db9caf58d99e74173a2927625e0c62c01c8f8a68b84b1d7d3ceec892c259fb",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "s281_analysis.json",
@@ -226,7 +226,7 @@
    "file": "tables/bench.tex",
    "sha256": "7e81ba4cf9e8a33fa7a5a72deb4171dd63db1ddfbe3795d33e99619c5ae46b93",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-26-e1-secondaries.json",
@@ -245,7 +245,7 @@
    "file": "tables/coverage.tex",
    "sha256": "503a0088cef04d12d57960e6cb0e9ce51f031cae1c951373a56b31c75377ada8",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-26-e1-verdict.json",
@@ -258,7 +258,7 @@
    "file": "tables/decomp.tex",
    "sha256": "dc914a4a58d59f499143aeb4514f34f2c1f6a207d623b87eaaf696e594d2d690",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-31-408-speed-attribution.json"
@@ -268,7 +268,7 @@
    "file": "tables/dexycb.tex",
    "sha256": "4cc81281f0c5cea196b450a744c7a266f3d9812bd38bc697a560f82dbce1651b",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "s395_reported.json",
@@ -280,7 +280,7 @@
    "file": "tables/dexycb_ci.tex",
    "sha256": "9a5e31d4d52b1c68eada9577ff103979498bd95b23208a636c38d7be67ac9a7a",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "s395_reported.json",
@@ -292,7 +292,7 @@
    "file": "tables/evidence.tex",
    "sha256": "4bf41e9d10aa1dd799d5b232ec082ad281334a437e8dd97648e8688ed573da57",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-26-e1-verdict.json",
@@ -311,7 +311,7 @@
    "file": "tables/heldout.tex",
    "sha256": "90e19b80cbcbb0b4e49b7078b5fa9ceaeebded37e49ddd3e2a822de3844da45e",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-26-e1-secondaries.json",
@@ -324,7 +324,7 @@
    "file": "tables/ho3d_full.tex",
    "sha256": "d6a600938c30020849fbe6b3076aa782620d6c6065443b9c69c784deb6cc7dd3",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "s395_reported.json",
@@ -337,7 +337,7 @@
    "file": "tables/hyper.tex",
    "sha256": "dee303d7b111f12fc85a5e3dc92c0648853016564d2853461962b4147f9dd09d",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [],
    "released": {
@@ -350,7 +350,7 @@
    "file": "tables/main.tex",
    "sha256": "22606f879956286075a32cf49e987179b320ff7dc43a0e79b6c994b24bed7ac9",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-26-e1-secondaries.json",
@@ -369,7 +369,7 @@
    "file": "tables/main_time.tex",
    "sha256": "627f90a96eb66accea15b7c4078c8e8931fbc11b31652dc49054ddcc037bb4a3",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-26-e1-secondaries.json",
@@ -388,7 +388,7 @@
    "file": "tables/optim.tex",
    "sha256": "ff9aba8ef191ca1785aeac40e1bca3da037de8aca8beda93f876f3b71f3917c1",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "summary_first_order.json",
@@ -405,7 +405,7 @@
    "file": "tables/runtimes.tex",
    "sha256": "df05f27c37219a75fde87751d0fa31a01434c3dbc9f0d5bbf304bb12fe405541",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "transcribed.json",
@@ -416,7 +416,7 @@
    "file": "tables/s566.tex",
    "sha256": "23d5b2f82486b4b45a1848467615fd7563b21cf7b4f7c2e4c5c0df13686b8829",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "s566_summary.json"
@@ -432,7 +432,7 @@
    "file": "tables/solve.tex",
    "sha256": "15d557f100e85b677fa36bf96c221a2a1c36ed67adf175bdb1897b21642f4aa3",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "s281_analysis.json",
@@ -451,7 +451,7 @@
    "file": "tables/speed.tex",
    "sha256": "9f8f9213efdb2a5e91939c6f1a5bbf195042ed3e91600e1a3159725e827abaf7",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-29-shrm-verdict.json",
@@ -477,7 +477,7 @@
    "file": "tables/speed_sens.tex",
    "sha256": "885a92ade61f7d2b064ef0bcc7f630a678a743c06e8e936f5541a2c3795d4f0c",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-29-shrm-verdict.json",
@@ -488,7 +488,7 @@
    "file": "tables/stride.tex",
    "sha256": "41cb76da8e3d4eaad4e9f9b9373f310506815f48b9128dc8dd2c132964e552ef",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "s396_partA_safe.json"
@@ -503,7 +503,7 @@
    "file": "tables/supp_reported.tex",
    "sha256": "4216dacf8ffc1a2bab645a85bede113c558e40aeda7363f82867c3b2bf8624b8",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "s395_reported.json",
@@ -517,7 +517,7 @@
    "file": "tables/t2_evidence.tex",
    "sha256": "e5a35df24c8683a4a4d5ee5e87e5cf1531393432e73bf7ec444ef989a9c1135d",
    "exhibits": [
-    "generator table; not a table of the submitted main paper"
+    "generator table; not a table of the paper's main text"
    ],
    "reads": [
     "2026-10-26-e1-verdict.json",
@@ -538,7 +538,7 @@
    "compare": "body",
    "sha256": "a8d02b125a5e28a9ed097aaab3aec50b785b4938d56adac10d5e196a5fce7c9d",
    "exhibits": [
-    "held-out test macros; no table or section of the submitted main paper prints them"
+    "held-out test macros; no table or section of the paper's main text prints them"
    ],
    "reads": [
     "2026-10-26-e1-verdict.json"

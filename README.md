@@ -154,7 +154,7 @@ HandReel replaces only the reconstruction stage of DO AS I DO, the first of its 
 | Object-centre error, HandReel over DO AS I DO's reconstruction stage, held-out DexYCB | | | 0.85 |
 
 Ego4D has no ground-truth object poses, so the two timing rows measure speed only. The DexYCB error ratio is
-less certain than the HOI4D one (see the linked page). HandReel is not the most
+less certain than the HOI4D one (see [`docs/results.md`](docs/results.md)). HandReel is not the most
 accurate method in the paper's comparisons: on HO3D-v3, five published methods (HOLD, MagicHOI, AGILE, Open-CHOIR
 and 4D-HOF) report a lower Chamfer distance than the paper measured for HandReel, and on the 13 DexYCB views of
 objects without symmetry HandReel's rotation error was higher than that of DO AS I DO's reconstruction stage.
@@ -175,7 +175,7 @@ table regeneration check and the held-out error ratios from your own per-unit sc
   video ships, and there is no path from a reconstruction to a physics run.
   `reproduce/heldout/qc_rule_constants.json` records the rule that the held-out test used. The authors fitted it on
   71 DexYCB development clips, where its five-fold cross-validated area under the curve was 0.4904 (0.5 is chance;
-  the supplement, Limitations), so do not use it on new video.
+  the paper's appendix, Limitations), so do not use it on new video.
 - **This code is newer than the code the paper ran.** It is a later commit than the tree frozen for the held-out
   test and the tree timed in the Ego4D timing studies, and this release shows no comparison of its outputs with
   either.

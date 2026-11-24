@@ -22,13 +22,13 @@ from this release:
   release includes in `reproduce/records/`. It uses ten of them to
   write four tables of the paper source's table generator and writes a fifth from settings in the generator. It
   compares the five outputs with that generator's output at a pinned paper-source revision, ignoring comment lines. None of
-  the five is a table of the submitted main paper, whose Tables 1 to 5 the paper source writes by hand.
+  the five is a table of the paper's main text, whose Tables 1 to 5 the paper source writes by hand.
 - With per-unit errors that you regenerate after acquiring HOI4D and DexYCB,
   `reproduce/e1_verdict_from_scores.py` recomputes the error ratios, intervals and median errors of Table 1
   (`reproduce/heldout/README.md`).
 
-[`reproduce/README.md`](../reproduce/README.md) says what each check covers, and [`docs/paper_exhibits.md`](paper_exhibits.md) maps every exhibit of the submitted
-main paper to what this release holds toward it.
+[`reproduce/README.md`](../reproduce/README.md) says what each check covers, and [`docs/paper_exhibits.md`](paper_exhibits.md) maps every exhibit of the paper's
+main text to what this release holds toward it.
 
 ## The benchmark entry point
 

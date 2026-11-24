@@ -480,9 +480,9 @@ release. From this release alone, `python3 reproduce/regenerate_tables.py --out 
 aggregate-only records that this release includes in `reproduce/records/`. It uses ten of them to write four tables of
 the paper source's table generator, writes a fifth from settings in the generator, and compares the five outputs
 with that generator's output at a pinned paper-source revision, ignoring comment lines. None of the five is
-a table of the submitted main paper, whose tables the paper source writes by hand (README "Evaluation"). No command
+a table of the paper's main text, whose tables the paper source writes by hand (README "Evaluation"). No command
 here prints a main-paper table or one of the paper's reconstruction times. `reproduce/README.md` says what each
-check takes and what it covers, and `docs/paper_exhibits.md` maps every exhibit of the submitted main paper to what
+check takes and what it covers, and `docs/paper_exhibits.md` maps every exhibit of the paper's main text to what
 this release holds toward it.
 
 ## 6. Licences, in one paragraph

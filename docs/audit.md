@@ -166,7 +166,7 @@ report.
 
 ## Results
 
-The submitted main paper reports no result of the three checks on this page. It reports one count from the
+The paper's main text reports no result of the three checks on this page. It reports one count from the
 certificate check that its authors registered: in a run of 53 fresh Ego4D windows, 2 of the 53 trajectories passed
 (Sec. 5.3). The study inputs and records behind that count do not ship with this release.
 

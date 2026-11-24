@@ -8,8 +8,8 @@ Without `--paper-src` (the released check) it uses only this folder: every recor
 descriptive name, when the manifest gives one; `path` is always the paper source's name), `reproduce/make_released_tables.py`
 regenerates the five tables those records support into `<out>/tables/`, and each is compared with the paper
 generator's output at the pinned paper-source revision without its `%` comment lines (`released.content_sha256` in the
-manifest). The paper source writes the submitted main paper's tables by hand, so a match covers the generator's tables,
-not a table of the submitted paper. The comment lines are left out
+manifest). The paper source writes the tables of the paper's main text by hand, so a match covers the generator's
+tables, not a table of the paper's main text. The comment lines are left out
 because the paper's generator writes provenance comments that name files which are not released.
 
 With `--paper-src`, the check needs the paper source tree (the directory holding `tools/make_tables.py` and
@@ -35,7 +35,7 @@ It runs the same steps without the input check, then rewrites `--manifest` (defa
 `paper_revision` = REV, the generator's and every record's sha256 and size, and every expected output's sha256 as
 regenerated. Each record keeps its release status (a record new to the paper source gets "NOT RELEASED"), each
 output keeps its label and the records it reads, and a table the generator writes that the manifest did not list
-is added with the label "supplement". Run the command again without `--repin` to confirm the new pins.
+is added with the label "appendix". Run the command again without `--repin` to confirm the new pins.
 """
 from __future__ import annotations
 
@@ -172,7 +172,7 @@ def repinned(src: Path, out: Path, manifest: dict[str, Any], revision: str) -> d
     listed = {o["file"] for o in manifest["outputs"]}
     for t in sorted((work / "tables").glob("*.tex")) if (work / "tables").is_dir() else []:
         if f"tables/{t.name}" not in listed:
-            outputs.append({"file": f"tables/{t.name}", "sha256": sha256_file(t), "exhibits": ["supplement"],
+            outputs.append({"file": f"tables/{t.name}", "sha256": sha256_file(t), "exhibits": ["appendix"],
                             "reads": []})
     shutil.rmtree(out / "work")
     (out / "e1_results.tex").unlink(missing_ok=True)

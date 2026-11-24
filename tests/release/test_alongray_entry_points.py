@@ -1,4 +1,4 @@
-"""packages/alongray declares the three console entry points the paper's supplement names (`alongray`, `alongray-pool`
+"""packages/alongray declares the three console entry points the paper's appendix names (`alongray`, `alongray-pool`
 and the validator `alongray-coverage`), and each one answers --help. No install needed: the package is pure Python."""
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ PKG = REPO / "packages" / "alongray"
 SCRIPTS = tomllib.loads((PKG / "pyproject.toml").read_text())["project"]["scripts"]
 
 
-def test_the_supplement_s_entry_points_are_declared() -> None:
+def test_the_appendix_s_entry_points_are_declared() -> None:
     assert SCRIPTS == {"alongray": "alongray.cli:main", "alongray-pool": "alongray.pool:main",
                        "alongray-coverage": "alongray.coverage:main"}
 

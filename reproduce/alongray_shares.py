@@ -4,7 +4,7 @@
     python reproduce/alongray_shares.py MANIFEST.jsonl [--boot 10000] [--json out.json]
     python reproduce/alongray_shares.py --demo DIR          # synthetic windows with a known answer, then pooled
 
-Needs alongray 0.4.1 (`uv pip install ./packages/alongray`). The submitted main paper reports such a share on
+Needs alongray 0.4.1 (`uv pip install ./packages/alongray`). The paper reports such a share on
 32 DexYCB development units (Sec. 5.2). The paper's values need DexYCB or HO3D-v3 ground truth and per-window outputs
 that this release does not include; `reproduce/README.md`.
 

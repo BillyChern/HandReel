@@ -19,7 +19,7 @@ This release ships no per-unit error derived from HOI4D or DexYCB ground truth. 
   of 72 HOI4D units and 87 of 108 DexYCB units with `run` true. The two DexYCB timeouts of amendment A-W have `run`
   true and are then removed from both methods (`REMOVED` below), which leaves 85 analysed DexYCB units;
 - `delivered`: whether the method returned a result that is scored (ours: only after passing its QC);
-- `e_mm`: the unit's mean unaligned object-centre error in mm over its scored frames (Sec. 5.1 of the submitted main paper: the processed
+- `e_mm`: the unit's mean unaligned object-centre error in mm over its scored frames (Sec. 5.1 of the paper: the processed
   frames with ground truth), `null` when not delivered. `processed_frames` lists a unit's processed frames.
   `unit_centre_error_mm` below is an AVERAGING HELPER FOR COMPLETED ROWS, not the registered scorer: it needs one
   centre for every scored frame and refuses a missing or repeated frame. Complete each method's centres first by the

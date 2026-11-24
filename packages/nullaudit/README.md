@@ -93,7 +93,7 @@ need the command to adapt after the release; it does not show that no grasp exis
 
 ## Results
 
-The package ships no study records. The submitted HandReel paper reports a separate registered certificate count.
+The package ships no study records. The HandReel paper reports a separate registered certificate count.
 
 When you report "physics-certified" counts, say that "certified" means tracking re-executed under the executor's
 contact and actuator model. It does not mean a force-bounded, physically realisable grasp.

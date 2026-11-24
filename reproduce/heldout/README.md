@@ -12,10 +12,10 @@ the sha256 of both copies of each document. An edit can extend past the line on 
 removes a line, so line numbers are preserved. Kept as
 registered: the freeze commit and its three tree ids that amendment A-F and the freeze manifest record (commits of the
 authors' internal repository, not of this release's history), the file hashes, and the labels and branch names of
-internal records the rules cite (such as M341, s255, U-1 to U-8 or e1/unseal-prep), which are not released.
+internal records the rules cite, which are not released.
 
 This folder holds what this release includes from the paper's held-out test against DO AS I DO's reconstruction stage (Table 1; Secs. 5.1
-and 5.2 of the submitted main paper), without dataset media or per-unit results: the registered protocol, the unit-ID
+and 5.2 of the paper), without dataset media or per-unit results: the registered protocol, the unit-ID
 lists, the thresholds that the analysis used and the QC rule's constants. **This release contains no per-unit error derived
 from HOI4D or DexYCB ground truth.** Regenerate the errors after acquiring the datasets
 (`regenerate_unit_errors.py`, below); with that file, `reproduce/e1_verdict_from_scores.py` recomputes the error
@@ -52,16 +52,16 @@ With the file, the script prints six aggregate values per corpus, each beside `m
 `DIFFERS from the reference`, and exits 0 only if every value matches. On a file in which no unit of a corpus was
 delivered by both reconstructions, three of the six (the complete-case ratio, the within-50 mm counts and the medians) do
 not exist and print as `unavailable`; an interval end past the range of a float prints as `above the float range`. The reference values are aggregate values of
-the authors' registered analysis. The submitted main paper prints four of the six:
+the authors' registered analysis. The paper's main text prints four of the six:
 
-| script key | what it is | where the submitted paper prints it |
+| script key | what it is | where the paper prints it |
 |---|---|---|
 | `analysed` | analysed units over assigned units: 58/72 on HOI4D, 85/108 on DexYCB | Sec. 5.1 |
 | `delivered` | units that HandReel, DO AS I DO's reconstruction stage and both delivered: 58/49/49 on HOI4D, 58/69/48 on DexYCB | Sec. 5.2; Table 1, caption |
 | `mitt` | the exponentiated median of the failure-coded paired log error ratios, with its two-sided 95% bootstrap interval, where a failure to deliver counts as an error and a joint failure as a tie, and the verdict: 0.50 [0.33, 0.63] on HOI4D, 0.85 [0.58, 1.00] on DexYCB, both non-inferior | Table 1 |
 | `median_mm` | the median error in mm over the units that both reconstructions delivered, HandReel/DO AS I DO's reconstruction stage: 56.8/101.3 on HOI4D, 76.6/112.5 on DexYCB | Table 1 |
-| `complete_case` | the error ratio and its interval on the units that both reconstructions delivered, with estimated camera intrinsics, on 49 HOI4D windows and 48 DexYCB views | not in the main paper; the supplement's detailed table of the held-out test reports it |
-| `within_50mm` | among units both reconstructions delivered, the count with mean centre error at most 50 mm, separately for each reconstruction | not in the submitted paper; the script keeps the registered analysis's counts as its reference |
+| `complete_case` | the error ratio and its interval on the units that both reconstructions delivered, with estimated camera intrinsics, on 49 HOI4D windows and 48 DexYCB views | not in the paper's main text; the appendix's detailed table of the held-out test reports it |
+| `within_50mm` | among units both reconstructions delivered, the count with mean centre error at most 50 mm, separately for each reconstruction | not in the paper; the script keeps the registered analysis's counts as its reference |
 
 Table 1 marks the DexYCB rows: that verdict is not robust if joint failures count against HandReel, and the authors
 partly used this subject in development. The script prints `NI` for DexYCB and does not compute that mark.
@@ -80,8 +80,8 @@ views, the script checks that DO AS I DO's reconstruction stage started at least
 excluded DexYCB timeouts as starts. If you call summarise directly, check completeness against the full assignment
 and pass only runs with no recorded removal to the function. `--json <file>` also writes the values. In this study a unit ran when DO AS I DO's reconstruction stage
 began an attempt on it (amendment A-V): the 35 units on which the baseline refused to start count as not run,
-although HandReel processed them. The reference values that the submitted
-paper prints are those of its Table 1 and Secs. 5.1 and 5.2 (recheck them against the published version).
+although HandReel processed them. The reference values that the
+paper prints are those of its Table 1 and Secs. 5.1 and 5.2 (recheck them against the version of the paper that you read).
 `tests/reproduce/test_heldout_release.py` checks the skip, the regeneration script's refusals and, on synthetic
 errors, that the script computes and compares every value.
 
@@ -90,7 +90,7 @@ The printed intervals are those of seed 1, the registered seed. Do not replace t
 
 This recomputes the verdict from per-unit errors. It does not rerun either reconstruction, the scorer, the QC decisions or
 the exclusions, and it does not show that the errors are correct. It does not recompute the sensitivity analyses
-that the supplement reports, such as the ratio when joint failures count against HandReel: their per-unit inputs
+that the paper's appendix reports, such as the ratio when joint failures count against HandReel: their per-unit inputs
 are not here.
 
 ## Provenance
@@ -163,13 +163,13 @@ internal and are not in this release; the protocol and `e1-power-size.json`, cit
   the constants (five feature names, six logistic weights, the feature means and standard deviations, tau 0.05, the
   conformal threshold 0.6907751134070998 at alpha 0.1 on 19 calibration clips) and the fit's counts and settings
   (71 clips, 39 good and 32 bad, fit fraction 0.5, seed 42). Every constant is the original's value, unrounded; the
-  supplement's settings table prints the threshold rounded. Because the copy leaves the provenance out, its sha256 is
+  appendix's settings table prints the threshold rounded. Because the copy leaves the provenance out, its sha256 is
   not the registered `e564b52e92d3...`: the registered hash refers to the original file, which the authors keep. The
   copy's sha256 is `eddd0032993fe4256887c3bd882933ad5de92b22e92e0f167eec5c89d3699dda`, and
   `derive_qc_rule_constants.py` rebuilds it byte for byte from the registered file (`--check` confirms a copy; by
   default it refuses any input whose sha256 is not the registered one, and with `--allow-unregistered` it marks
   what it writes or prints as unregistered). The copy is a record of the test, not a rule for new
-  video: the supplement's limitations report that the authors fitted the QC on 71 DexYCB development clips with
+  video: the limitations section of the paper's appendix reports that the authors fitted the QC on 71 DexYCB development clips with
   ground-truth template meshes, and that its five-fold cross-validated area under the curve on those clips was
   0.4904, where 0.5 is chance. Without the per-unit QC features, which are not released, a user cannot re-derive
   its held-out decisions from it.

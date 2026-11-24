@@ -95,9 +95,10 @@ Notes:
 3. Default 12; `<= 0` disables the cap. Set it to `32` for a GPU run: SAM 3D alone needs 19.
 4. Set it to make amortised units take turns on `gpu.lock` there. Unset: no shared lock.
 5. Default: the pinned commit `82e02e8029753ad4ef13cf06be7f4fc5facdda4d`; `main` loads the moving branch.
-6. A directory holding the frozen drift-QC constants: three calibration files of the authors, at
-   `temp/driftqc/constants_v2_2.json`, `temp/trackweight/constants_v2.json` and `temp/trackweight/code/v1_weights.py`
-   under it. When the variable is unset, the drift-QC tests that need them skip.
+6. A directory holding the frozen drift-QC constants: three calibration files of the authors (the drift-QC
+   constants, the track-weight constants and the track-weight detector), which this release does not ship. The
+   drift-QC tests name the relative path of each file under that directory in their skip message. When the variable
+   is unset, the drift-QC tests that need them skip.
 7. When unset, `tests/bench/test_metric_frame.py::test_cd_h_matches_hold_bit_for_bit` skips.
 
 The GPU example (`release/example/run_example.py`) needs exactly these four variables:

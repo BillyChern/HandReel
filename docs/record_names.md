@@ -30,7 +30,7 @@ Every other record and table keeps the paper source's name.
 `reproduce/README.md`, "The generator's tables", lists the five outputs of `reproduce/regenerate_tables.py`. Four
 tables use the records listed there; `hyper.tex` uses settings in the generator and reads no record. The command
 prints the five with the paper generator's functions and compares them with that generator's output at the pinned
-paper-source revision, ignoring comment lines. None of the five is a table of the submitted main paper, whose
+paper-source revision, ignoring comment lines. None of the five is a table of the paper's main text, whose
 tables the paper source writes by hand.
 
 Study numbers that remain in this release, and why:

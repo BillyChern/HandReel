@@ -8,22 +8,22 @@ holds three things:
 - `records/`, with 14 of the paper source's 31 records, all aggregate only;
 - `heldout/`, with the held-out test's protocol, unit-ID lists and thresholds, and a script that rebuilds the
   per-unit centre errors from your own runs after you acquire the datasets. Per-unit errors never ship. From them,
-  `e1_verdict_from_scores.py` recomputes the error ratios and median errors of the submitted Table 1
+  `e1_verdict_from_scores.py` recomputes the error ratios and median errors of the paper's Table 1
   (`heldout/README.md`).
 
 `regenerate_tables.py` checks all 14 records. It uses ten of them to write four of the generator's tables,
 `solve.tex`, `stride.tex`, `optim.tex` and `weak_rows.tex`, and writes a fifth, `hyper.tex`, from settings in the
 generator. **None of the generator's tables is an exhibit of the
-submitted main paper.** The paper source writes the submitted Tables 1 to 5 by hand, in files that the generator
-does not write. The supplement is not final, and this release does not state which generator tables it prints. The
+paper's main text.** The paper source writes the main text's Tables 1 to 5 by hand, in files that the generator
+does not write. This release does not state which generator tables the paper's appendix prints. The
 other generator tables require `tools/make_tables.py` and records from the authors' internal tree. The inventory
 below lists what this release includes.
 
-`docs/paper_exhibits.md` maps every exhibit of the submitted main paper (Tables 1 to 5, Figs. 1 to 5, Algorithm 1)
+`docs/paper_exhibits.md` maps every exhibit of the paper's main text (Tables 1 to 5, Figs. 1 to 5, Algorithm 1)
 to what this release contains toward reproducing it. Every table, figure and section number in this folder's
-documents is a number of the submitted main paper; recheck them against the published version. These documents cite
-the supplement without numbers, because its numbering is not final. A manual audit compared the results sentences
-with the submitted main paper (`docs/paper_exhibits.md`, "The manual audit").
+documents is a number of the paper's main text; recheck them against the version of the paper that you read. These
+documents cite the paper's appendix by section title. A manual audit compared the results sentences
+with the paper (`docs/paper_exhibits.md`, "The manual audit").
 
 The authors edited the protocol records in `heldout/protocol/` for public release: they replaced internal references
 (record files, commits, record numbers and paths), made role wording neutral and left the rule text unchanged.
@@ -33,7 +33,7 @@ The authors edited the protocol records in `heldout/protocol/` for public releas
 every output with a pinned sha256. Without `--paper-src` it re-reads only the 14 aggregate records in `records/`.
 Only with `--paper-src` does it also re-read the per-unit score records, which are not in this release. A match
 shows that the generated tables follow from the records, as the paper source's generator printed them at the pinned
-revision. It does not show that the records are correct, it does not cover any table of the submitted main paper,
+revision. It does not show that the records are correct, it does not cover any table of the paper's main text,
 and it does not reproduce any scorer, timing, unit exclusion or quality-check decision.
 
 ## Contents
@@ -44,9 +44,9 @@ and it does not reproduce any scorer, timing, unit exclusion or quality-check de
 | `make_released_tables.py` | (needs Python 3.12 or later, as the rest of the release does: it nests quotes inside f-strings) the paper generator's functions for the five tables that the records in `records/` support, with comments, docstrings and LaTeX comment lines removed (its docstring says what else changed) |
 | `records/` | the 14 aggregate-only records that this release includes, byte for byte as the paper source holds them (sha256 in `manifest.json`) |
 | `manifest.json` | the paper source revision, the generator's sha256, every record's sha256 and release status, and each expected output's sha256, the records it reads and, for the five released tables, the sha256 of the table without its `%` comment lines |
-| `e1_verdict_from_scores.py` | recomputes the held-out test's aggregate values per corpus (analysed and assigned units, deliveries, the error ratio with its interval and verdict, the ratio on the units that both reconstructions delivered, the within-50 mm counts and the median errors) from a per-unit error file that you regenerate (`heldout/regenerate_unit_errors.py`), with `run/study/e1_stats.py`, and compares each with its reference value; without that file it prints that the check is skipped and exits 0. `heldout/README.md` says which of these values the submitted paper prints, and where |
+| `e1_verdict_from_scores.py` | recomputes the held-out test's aggregate values per corpus (analysed and assigned units, deliveries, the error ratio with its interval and verdict, the ratio on the units that both reconstructions delivered, the within-50 mm counts and the median errors) from a per-unit error file that you regenerate (`heldout/regenerate_unit_errors.py`), with `run/study/e1_stats.py`, and compares each with its reference value; without that file it prints that the check is skipped and exits 0. `heldout/README.md` says which of these values the paper prints, and where |
 | `heldout/` | the held-out test's registered protocol and amendments (edited for public release, above), the 72 HOI4D and 108 DexYCB subject-08 unit-ID lists, the calibrated thresholds, the QC rule's constants and `regenerate_unit_errors.py` (per-unit errors are not shipped); its `README.md` gives sources, sha256, what was left out and the datasets' CC BY-NC 4.0 terms |
-| `alongray_shares.py`, `strict_json.py` | the per-method median share of squared centre error along the camera ray, with its sequence-cluster bootstrap interval; needs `uv pip install ./packages/alongray`; `--demo DIR` runs it on synthetic windows of known share (1, 0 and 1/2). The submitted paper reports such a share on 32 DexYCB development units (Sec. 5.2); the inputs for the paper's values are not released |
+| `alongray_shares.py`, `strict_json.py` | the per-method median share of squared centre error along the camera ray, with its sequence-cluster bootstrap interval; needs `uv pip install ./packages/alongray`; `--demo DIR` runs it on synthetic windows of known share (1, 0 and 1/2). The paper reports such a share on 32 DexYCB development units (Sec. 5.2); the inputs for the paper's values are not released |
 
 Related code elsewhere in this repository:
 
@@ -79,9 +79,8 @@ uv pip install ./packages/alongray && uv run --frozen python reproduce/alongray_
   line. The shipped records regenerate no other output: each other output reads at least one record that is not
   released.
 - The check with `--paper-src`: run for this release on a copy of the paper source at the pinned revision
-  `2b6e3f934`, and again on the authors' full internal source tree for the submitted revision, which includes the
-  generators and records (CPU only, seconds). The manuscript-only source bundle of the submitted paper does not hold
-  those inputs, so the check cannot run on it. Both times all 32
+  `2b6e3f934`, and again on the authors' full internal source tree, which includes the
+  generators and records (CPU only, seconds). Both times all 32
   pinned inputs matched, and the run regenerated all 23 expected outputs byte for byte (22 tables, plus the body of
   `e1_results.tex`, whose first line names the record path and is not compared).
 - `e1_verdict_from_scores.py`: run for this release without a regenerated file: exit 0, `skipped: ...`. The authors
@@ -90,7 +89,7 @@ uv pip install ./packages/alongray && uv run --frozen python reproduce/alongray_
 - `alongray_shares.py --demo`: run for this release: along 1.000, lateral 0.000, mixed 0.500 (`tests/reproduce/
   test_alongray_shares.py`).
 - The manual audit: made on 2026-11-17, it compared each results sentence of `README.md` and
-  `docs/paper_exhibits.md` with the words of the submitted main paper; the results sentences changed on 2026-11-20
+  `docs/paper_exhibits.md` with the words of the paper; the results sentences changed on 2026-11-20
   were checked the same way. No script checks what a sentence claims, and the PDF is not in this release.
 - `--repin REV`: writes `paper_revision` REV and the sha256 of the generator, every record and every regenerated output
   into `manifest.json` (or `--manifest`); each record keeps its release status, each output its label and the records
@@ -102,11 +101,11 @@ and every expected output matches. `--allow-unpinned` runs on changed inputs and
 ## What the check covers, and what it does not
 
 - **It compares the generator's output, not the compiled paper.** The check compares the tables that
-  `tools/make_tables.py` writes with the pinned sha256. The submitted main paper prints none of them: hand-written
-  files of the paper source hold its Tables 1 to 5. So the check covers no table of the submitted main PDF.
-- **Table 1.** The generator's `tables/main.tex` is not the submitted Table 1, and no table or section of the
-  submitted main paper prints the `\Eone...` macros of `e1_results.tex`. The check covers both files as generator
-  outputs only. `e1_verdict_from_scores.py` is the route to the submitted Table 1's values (`heldout/README.md`).
+  `tools/make_tables.py` writes with the pinned sha256. The paper's main text prints none of them: hand-written
+  files of the paper source hold its Tables 1 to 5. So the check covers no table of the paper's main text.
+- **Table 1.** The generator's `tables/main.tex` is not the paper's Table 1, and no table or section of the
+  paper's main text prints the `\Eone...` macros of `e1_results.tex`. The check covers both files as generator
+  outputs only. `e1_verdict_from_scores.py` is the route to the values of the paper's Table 1 (`heldout/README.md`).
 - **Table 2, second row.** `records/timing_t1_analysis_subset.json` ships. It holds the aggregate analysis of the
   first Ego4D timing study: the baseline's mean seconds (`primary.mean_D_meas`), the ratio with its interval
   (`ci.X_meas`) and the attempted and jointly completed windows (`primary.n_A`, `primary.n_J`). Table 2 prints
@@ -123,7 +122,7 @@ and every expected output matches. `--allow-unpinned` runs on changed inputs and
   "Unshipped inputs of the held-out verdict" for what is missing.
 - **Paper revision.** `manifest.json` pins the paper source revision `2b6e3f934` (full SHA in `manifest.json`), the
   paper-source revision that generated the pinned tables. The authors report that the run on their full
-  internal tree for the submitted revision matched the pinned generator and 31 records and regenerated all 23
+  internal source tree matched the pinned generator and 31 records and regenerated all 23
   outputs with the expected hashes. If the published paper's records or generator differ from the pinned revision, re-pin with
   `--repin` before the check means anything for it.
 
@@ -134,10 +133,10 @@ with its sha256 and the records it reads. From this release alone, `regenerate_t
 
 | table | records it reads | what it holds |
 |---|---|---|
-| `solve.tex` | `solve_arms_contrasts.json`, `solve_arms_levels.json`, `lm_solve_paired.json`, `solve_perframe_contrast.json`, `solve_window_weighted.json` | five pipeline variants on 44 development units (42 DexYCB clips and 2 HOI4D windows, from 20 videos), with and without the windowed solve. The supplement's table on the windowed solve's effect reports centre-error differences: the windowed-solve-only comparison (the paper's variant C against A) is `paired_vs_init.core_lm.e_mm` in `lm_solve_paired.json`, and the other paired comparisons are in `solve_arms_contrasts.json`, whose record arm C is the paper's variant E (the supplement, Further Ablations) |
+| `solve.tex` | `solve_arms_contrasts.json`, `solve_arms_levels.json`, `lm_solve_paired.json`, `solve_perframe_contrast.json`, `solve_window_weighted.json` | five pipeline variants on 44 development units (42 DexYCB clips and 2 HOI4D windows, from 20 videos), with and without the windowed solve. The appendix's table on the windowed solve's effect reports centre-error differences: the windowed-solve-only comparison (the paper's variant C against A) is `paired_vs_init.core_lm.e_mm` in `lm_solve_paired.json`, and the other paired comparisons are in `solve_arms_contrasts.json`, whose record arm C is the paper's variant E (the paper's appendix, Further Ablations) |
 | `stride.tex` | `stride_safe_carry.json` | for each scored ground-truth channel, the largest stride, in study-grid frames, for which the upper 95% confidence bound on the 95th-percentile carry error meets the registered tolerance in every evaluable contact phase at that stride and at every smaller one. The table prints the stride selected by that rule (`ub` in the record), not the point estimate. The study grid is the rate the record gives as `rate_hz` (30 Hz for DexYCB and OakInk2, 15 Hz for HOI4D); it need not be a dataset's native capture rate, so a stride of one keeps every study-grid frame and says nothing about native samples. A historical table: it does not describe the input cadence the pipeline runs at |
 | `optim.tex` | `summary_first_order.json`, `summary_multistart.json`, `summary_second_order.json` | other step rules applied to the solve's objective, each compared with LM within its own development cohort: second-order rules on 44 units (undamped Gauss-Newton succeeds on 42), first-order rules on 8 and nine-start LM on 11; the time is a median paired solve-time ratio, not pipeline wall time |
-| `weak_rows.tex` | `weak_rows_summary.json` | per-row centre and off-orbit changes, paired within each weak stratum: the historical C-B labels compare the solve with depth layers against the initialiser with depth layers. Medians are formed within windows and then across windows. The table comes from the legacy full supplement |
+| `weak_rows.tex` | `weak_rows_summary.json` | per-row centre and off-orbit changes, paired within each weak stratum: the historical C-B labels compare the solve with depth layers against the initialiser with depth layers. Medians are formed within windows and then across windows. The table comes from an earlier version of the paper's appendix |
 | `hyper.tex` | none: the generator prints settings from the held-out study as text. See `run/conf/config.yaml` for the release defaults and `reproduce/heldout/` for the historical QC constants | the pipeline's settings: the defaults at the tree pinned for the held-out test. Its description of the automatic keyframe abbreviates the ranking: the implementation (`src/fastdo/prompt/choose.py`) multiplies the interaction score by the held-like probability and takes the highest product |
 
 The other 17 tables and `e1_results.tex` each read at least one record that is not released.
@@ -203,7 +202,7 @@ inside the secondaries record. Other records may carry the same path normalisati
 
 | input | what it is | kept privately as |
 |---|---|---|
-| per-unit score file | one row per assigned unit (180 rows): unit, corpus, cluster, stratum, and the delivery and centre error of DO AS I DO's reconstruction stage and of HandReel under each of its two intrinsics settings. `summarise` does not take all 180: the wrapper passes only the 143 analysed rows (58 and 85), those that ran and were not removed (`e1_verdict_from_scores.py`, `cells`), so a direct caller must make the same selection or the two removed DexYCB timeouts enter | an uncommitted file; sha256 `efcb767640df` in the secondaries record. **Not released:** per-unit errors derived from HOI4D and DexYCB ground truth are never shipped. For the submitted estimated-intrinsics comparison, use `heldout/regenerate_unit_errors.py` (`heldout/README.md`) to write a score file from your own runs on the 180 assigned units, after acquiring the datasets; it does not reproduce this file's second intrinsics setting |
+| per-unit score file | one row per assigned unit (180 rows): unit, corpus, cluster, stratum, and the delivery and centre error of DO AS I DO's reconstruction stage and of HandReel under each of its two intrinsics settings. `summarise` does not take all 180: the wrapper passes only the 143 analysed rows (58 and 85), those that ran and were not removed (`e1_verdict_from_scores.py`, `cells`), so a direct caller must make the same selection or the two removed DexYCB timeouts enter | an uncommitted file; sha256 `efcb767640df` in the secondaries record. **Not released:** per-unit errors derived from HOI4D and DexYCB ground truth are never shipped. For the paper's estimated-intrinsics comparison, use `heldout/regenerate_unit_errors.py` (`heldout/README.md`) to write a score file from your own runs on the 180 assigned units, after acquiring the datasets; it does not reproduce this file's second intrinsics setting |
 | per-unit run records | the unit status log, the result logs of HandReel's two intrinsics settings, HandReel's queue log and per-turn records, each unit's N' file and the sensitivity record | uncommitted files; sha256 values in the secondaries record |
 | unit list | the registered draw of held-out units | a committed file in the authors' repository; sha256 in the secondaries record. **Released:** `heldout/units_hoi4d_72.json` and `heldout/units_dexycb_s08_108.json`, without the per-window `shift_px` (derived from HOI4D's annotations) |
 | QC rule file | the acceptance rule that HandReel ran with, registered by sha256 (`e564b52e92d3`) before the run | an uncommitted file. **Released in reduced form:** `heldout/qc_rule_constants.json` holds its constants, unrounded, without the development clip IDs, host paths and internal commit of its provenance, so its sha256 is not the registered one (`heldout/README.md`) |
@@ -223,12 +222,12 @@ Never preserved: two of HandReel's queue turns left no result record. Every othe
    not released. Eight name internal file paths or carry internal notes: two aggregates, the provenance index and
    five files that record or document comparator or transcribed values. The ninth is an unused draft bibliography
    entry. The released check writes five generator tables, and none
-   of them is a table of the submitted main paper.
+   of them is a table of the paper's main text.
 2. **The table generator.** `tools/make_tables.py` lives in the paper source (pinned by sha256) and is not released:
    its comments and the provenance strings it prints into the generated tables name internal files.
    `make_released_tables.py` holds its functions for the five tables above, without those comments; it matches the
    generator's tables on every line except the `%` comment lines.
-3. **The paper source holds the submitted Tables 1 to 5 as hand-written files.** No command here prints them.
+3. **The paper source holds the main text's Tables 1 to 5 as hand-written files.** No command here prints them.
    `docs/paper_exhibits.md` says what this release holds toward each.
 4. **Figures.** Figs. 1, 3 and 4 show frames of DexYCB or HOI4D clips with per-unit overlays; a renderer needs those
    frames and the per-unit reconstructions, and this release ships neither. Fig. 2 combines a method diagram with
@@ -242,8 +241,8 @@ Never preserved: two of HandReel's queue turns left no result record. Every othe
    rerun the test. `packages/alongray` (with `alongray-coverage`) and `alongray_shares.py` ship as code, but not
    with the inputs of any exhibit.
 6. **Paper revision.** See "What the check covers, and what it does not": the pin is `2b6e3f934`, the paper-source
-   revision that generated the pinned tables; the authors report that the run on their full internal tree for the
-   submitted revision matched the pinned inputs and regenerated outputs. Re-pin with one `--repin` command.
+   revision that generated the pinned tables; the authors report that the run on their full internal
+   source tree matched the pinned inputs and regenerated outputs. Re-pin with one `--repin` command.
 7. **Held-out verdict inputs.** See "Unshipped inputs of the held-out verdict": the unit lists and thresholds are included
    in this release in `heldout/` (the per-unit errors are not; regenerate them with the datasets), with the QC rule's constants (not the
    hash-registered file itself); the run records and the sealed outputs do not.
