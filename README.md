@@ -14,7 +14,7 @@
 </div>
 
 <p align='center'>
-<a href='https://shichen.world/HandReel/#video'><img src='docs/assets/teaser.gif' alt="Excerpt of the HandReel video: HandReel's 3D reconstruction of a hand-held clamp next to the input video, then the Ego4D reconstruction time per window, 2,100 s for DO AS I DO's reconstruction stage against 17 s for HandReel's share of a batch (130x), then the summary: 130x batched, 30x one window at a time, about half the error on held-out HOI4D" width='100%'></a>
+<a href='https://shichen.world/HandReel/#video'><img src='docs/assets/teaser.gif' alt="Excerpt of the HandReel video: HandReel's 3D reconstruction of a hand-held object next to the input video, then the Ego4D reconstruction time per window, 2,100 s for DO AS I DO's reconstruction stage against 17 s for HandReel's share of a batch (130x), then the summary: 130x batched, 30x one window at a time, about half the error on held-out HOI4D" width='100%'></a>
 <br>
 <sub><b>Click the animation for the full narrated video (about 5 min) on the project page.</b></sub>
 </p>
