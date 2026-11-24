@@ -124,5 +124,5 @@ it still lists "the hand meshes" among the derived files: this directory does no
 removed, above), and the hand arrays it does ship are derived from the clip in the same way. The files are not covered by the
 Apache-2.0 licence of the code. They are also outputs of third-party models whose licences bind them: several are
 non-commercial, HaWoR's is NoDerivatives, MANO's forbids redistribution; the hand arrays follow HaWoR's and MANO's
-terms. Use them for non-commercial research only, and read README "Licence", `release/MODELS.md` and
+terms. Use them for non-commercial research only, and read README "License", `release/MODELS.md` and
 `THIRD_PARTY_LICENSES.md` ("Derived data in this repository") before you share them.

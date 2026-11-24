@@ -14,7 +14,7 @@ uv run --frozen python scripts/fetch_weights.py --yes \
 
 `../hawor` is the HaWoR checkout that `scripts/setup_all.sh` cloned ("Installation"); pass yours if it is elsewhere.
 
-`--yes` means you accept the licence of each model you fetch; several are non-commercial (see README, "Licence"). SAM 3D
+`--yes` means you accept the licence of each model you fetch; several are non-commercial (see README, "License"). SAM 3D
 Objects is gated on Hugging Face.
 
 What each part is licensed under, and who must fetch it. `release/MODELS.md` adds the pinned revision and sha256 of
@@ -22,7 +22,7 @@ every file, and `THIRD_PARTY_LICENSES.md` the full list with the licence texts.
 
 | part | used for | licence | commercial use | how you get it |
 |---|---|---|---|---|
-| this repository's code | everything | Apache-2.0 (`LICENSE`, `NOTICE`) | the code, yes; the pipeline as shipped, no (README, "Licence"; `docs/licensing.md`) | in this repository |
+| this repository's code | everything | Apache-2.0 (`LICENSE`, `NOTICE`) | the code, yes; the pipeline as shipped, no (README, "License"; `docs/licensing.md`) | in this repository |
 | SAM 2.1 Hiera-L | mask | Apache-2.0 | yes | `fetch_weights.py` |
 | SAM 3D Objects | shape | SAM License | no, as the shape stage runs (nvdiffrast and kaolin, `docs/licensing.md`) | gated on Hugging Face: accept its terms, then `fetch_weights.py` |
 | MoGe ViT-L (v1), inside the SAM 3D worker | shape | MIT | yes | `fetch_weights.py` |
@@ -35,7 +35,7 @@ every file, and `THIRD_PARTY_LICENSES.md` the full list with the licence texts.
 | MANO hand model | hands, retarget | MANO licence: non-commercial, no redistribution | no | register and download it yourself; never fetched or shipped |
 | DO AS I DO code (`scripts/fetch_baseline.sh`, commit `824591b8`) | the baseline; the SAM 3D code that the shape stage runs | MIT for its own files; the model code inside it keeps its upstream licence (`THIRD_PARTY_LICENSES.md`) | see `THIRD_PARTY_LICENSES.md` | `git clone --recurse-submodules`; from the plain archive, `bash scripts/fetch_baseline.sh` |
 | the example clip (V2D Challenge Track 3, NVIDIA) | example input | CC BY 4.0 | under CC BY 4.0, with attribution | downloaded at a pinned revision on first use; not shipped |
-| the reference output and the picture at the top (`release/reference/`) | expected output | not Apache-2.0: derived from the CC BY 4.0 clip; its hand arrays follow HaWoR's CC BY-NC-ND 4.0 and MANO's licence | no | in this repository (README, "Licence") |
+| the reference output and the picture at the top (`release/reference/`) | expected output | not Apache-2.0: derived from the CC BY 4.0 clip; its hand arrays follow HaWoR's CC BY-NC-ND 4.0 and MANO's licence | no | in this repository (README, "License") |
 | the held-out unit lists (`reproduce/heldout/`) | the held-out test's unit IDs | not Apache-2.0: derived from HOI4D and DexYCB, both CC BY-NC 4.0 | no | in this repository |
 
 **MANO** is never downloaded or shipped. Register at <https://mano.is.tue.mpg.de>, accept the licence
