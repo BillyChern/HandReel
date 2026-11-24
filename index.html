@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'self'; base-uri 'none'; form-action 'none'">
 <title>HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling</title>
@@ -11,6 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="HandReel: Fast Hand-Object Reconstruction from Video without Per-Frame Pose Sampling">
 <meta property="og:description" content="HandReel turns a video of a hand moving an object into one 3D mesh of the object and its position and rotation over time.">
+<meta property="og:url" content="https://shichen.world/HandReel/">
 <meta property="og:image" content="https://shichen.world/HandReel/fig/fig4_gallery.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -86,7 +86,7 @@
   </div>
   <div class="wrap wide">
     <figure class="fig">
-      <video controls playsinline preload="none" width="1920" height="1080" poster="media/video/handreel_overview.jpg"><source src="media/video/handreel_overview.mp4" type="video/mp4"></video>
+      <video controls playsinline preload="none" width="1920" height="1080" poster="media/video/handreel_overview.jpg" aria-label="HandReel overview video, narrated, with burned-in captions"><source src="media/video/handreel_overview.mp4" type="video/mp4"></video>
     </figure>
   </div>
 </section>
@@ -119,7 +119,7 @@
 <section class="block" id="comparison">
   <div class="wrap narrow">
     <h2>Comparison</h2>
-    <p>One selected DexYCB development clip, start to end: ground truth (green), DO AS I DO's reconstruction stage (orange) and HandReel (purple, estimated hand lighter), with each one's object-centre error over time below.</p>
+    <p>One DexYCB development clip that we selected, start to end: ground truth (green), DO AS I DO's reconstruction stage (orange) and HandReel (purple, estimated hand lighter), with each one's object-centre error over time below.</p>
   </div>
   <div class="wrap wide">
     <figure class="fig">
@@ -173,7 +173,7 @@
 <text x="8.0" y="255" class="pl-val">17 s per segment, in batches</text>
 </svg>
 
-      <figcaption>Seconds per Ego4D segment on one H100 GPU. Ego4D has no ground-truth object poses, so it measures speed only. The paper gives the full protocol.</figcaption>
+      <figcaption>Seconds per Ego4D segment on one H100 GPU. Ratios use unrounded times. Ego4D has no ground-truth object poses, so on Ego4D we measure speed only. The paper gives the full protocol.</figcaption>
     </figure>
   </div>
 </section>
