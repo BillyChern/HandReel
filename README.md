@@ -11,6 +11,12 @@
 
 </div>
 
+**TL;DR**: HandReel recovers a hand-held object's 3D mesh and 6-DoF motion from monocular video, 30-130x faster than DO AS I DO's reconstruction stage (30x one window at a time, 130x batched), with half its median object-centre error on held-out HOI4D.
+
+## News
+
+- **2026-11-20**: Code released.
+
 ![Six clips from DexYCB and HOI4D with HandReel's object mesh outlined in purple and the estimated hand in light purple](docs/assets/gallery.jpg)
 
 <sub>HandReel takes a video of a hand moving an object and returns one 3D mesh of the object and its position and rotation over time, together with the hand. Outlines: the reconstructed object (purple) and the estimated hand (light purple), drawn over one frame of each of six clips. Frames from HOI4D and DexYCB (CC BY-NC 4.0); see [`DATA_NOTICES.md`](DATA_NOTICES.md).</sub>
@@ -27,6 +33,8 @@ finds it.
 The Python package is `fastdo`, configured with Hydra (`run/conf/config.yaml`); [`docs/development.md`](docs/development.md)
 describes its stages. The release also contains research code for retargeting to a robot hand and for physics-based
 tracking; these do not yet run from this release (see ["Known gaps"](#known-gaps)).
+
+<sub>On the name: HandReel's code keeps its working name, `fastdo`, for the package, the `FASTDO_*` variables and the commands; only the method is called HandReel.</sub>
 
 ## Quick start
 
@@ -56,6 +64,15 @@ subset and a stub run of the example), see [`release/QUICKSTART.md`](release/QUI
 weights".
 
 ### Installation
+
+**What you need.**
+
+| Requirement | Detail |
+|---|---|
+| OS | Linux x86_64 |
+| GPU memory | one NVIDIA GPU with at least 24 GB; only one H100 80 GB with CUDA 12.8 wheels was tested |
+| Disk | about 60 GB for a cold build, plus about 25 GB of weights (`release/QUICKSTART.md`) |
+| Accounts | a MANO registration, and a Hugging Face login that has accepted the gated SAM 3D Objects terms |
 
 Requirements: Linux x86_64, Python 3.12, [uv](https://docs.astral.sh/uv/), conda, `git`, and `ffmpeg` with `ffprobe`
 on `PATH`. The model stages need an NVIDIA GPU with at least 24 GB of memory; the code was developed on one H100 80 GB
@@ -88,7 +105,7 @@ uv run --frozen python scripts/fetch_weights.py --yes \
   --only sam2,moge2,sam3d,moge1_sam3d,dinov2_sam3d,cotracker3,hawor,wilor_detector --hawor-root ../hawor
 ```
 
-`--yes` means you accept the licence of each model you fetch; several are non-commercial (see ["Licence"](#licence)).
+`--yes` means you accept the licence of each model you fetch; several are non-commercial (see ["License"](#license)).
 SAM 3D Objects is gated on Hugging Face.
 
 **MANO** is never downloaded or shipped. Register at <https://mano.is.tue.mpg.de>, accept the licence
@@ -150,8 +167,12 @@ HandReel replaces only the reconstruction stage of DO AS I DO, the first of its 
 |---|---|---|---|
 | Reconstruction time per window, both one window at a time (Ego4D, 20 windows) | about 2,000 s | 66 s | about 30x |
 | Reconstruction time per window, baseline restarting for every window against HandReel's batched runs (Ego4D, 9 windows) | 2,100 s | 17 s per-window share | 130x |
-| Object-centre error, HandReel over DO AS I DO's reconstruction stage, held-out HOI4D (58 windows) | | | 0.50 |
-| Object-centre error, HandReel over DO AS I DO's reconstruction stage, held-out DexYCB | | | 0.85 |
+| Object-centre error, HandReel over DO AS I DO's reconstruction stage, held-out HOI4D (58 windows) | 101.3 mm (median, 49 windows both delivered) | 56.8 mm (same 49 windows) | 0.50 [0.33, 0.63] |
+| Object-centre error, HandReel over DO AS I DO's reconstruction stage, held-out DexYCB | 112.5 mm (median, 48 views both delivered) | 76.6 mm (same 48 views) | 0.85 [0.58, 1.00] |
+
+In the error rows, each pipeline's cell is its median object-centre error on the units that both delivered. The ratio
+is the median per-unit ratio over all 58 HOI4D windows or 85 DexYCB views, with its 95% confidence interval, where a
+failure to deliver counts as an error and a failure of both as a tie.
 
 Ego4D has no ground-truth object poses, so the two timing rows measure speed only. The DexYCB error ratio is
 less certain than the HOI4D one (see [`docs/results.md`](docs/results.md)). HandReel is not the most
@@ -210,7 +231,7 @@ you use (SAM 2, SAM 3D, MoGe-2, CoTracker3, HaWoR, WiLoR, MANO, Hands23).
 The reconstruction builds on DO AS I DO, SAM 2, SAM 3D Objects, MoGe, HaWoR, WiLoR, CoTracker3, MANO and Hands23, and
 the physics code on MuJoCo and MuJoCo-Warp; `THIRD_PARTY_LICENSES.md` credits each with its licence.
 
-## Licence
+## License
 
 - The code is Apache-2.0 (`LICENSE`, `NOTICE`); `packages/alongray` and `packages/nullaudit` carry their own.
 - Derived data (`reproduce/heldout/`, `release/reference/`, `docs/assets/gallery.jpg`) and the default models are
