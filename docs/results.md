@@ -1,6 +1,6 @@
 # Results in the paper, with their conditions
 
-This page keeps the full statement of each result that the README's table summarises. HandReel replaces only the reconstruction stage of DO AS I DO, the first of its three stages (reconstruction, retargeting to a robot hand, and physics). Every comparison below is with that stage, except the full-pipeline sums of Table 5.
+This page keeps the full statement of each result that the README's table summarises. HandReel replaces only the reconstruction stage of DO AS I DO, the first of its three stages (reconstruction, retargeting to a robot hand, and physics). Every comparison with DO AS I DO below is with that stage, except the full-pipeline sums of Table 5.
 
 Selected results, in the words and with the status that the submitted paper gives each. [`docs/paper_exhibits.md`](paper_exhibits.md)
 maps each number to its table, figure or section; some rest on the paper's prose alone.

@@ -88,7 +88,7 @@ errors, that the script computes and compares every value.
 **Seeds.** The bootstrap is discrete, so an interval end can move at the second decimal from one seed to another.
 The printed intervals are those of seed 1, the registered seed. Do not replace them with another seed's.
 
-This recomputes the verdict from per-unit errors. It does not rerun either pipeline, the scorer, the QC decisions or
+This recomputes the verdict from per-unit errors. It does not rerun either reconstruction, the scorer, the QC decisions or
 the exclusions, and it does not show that the errors are correct. It does not recompute the sensitivity analyses
 that the supplement reports, such as the ratio when joint failures count against HandReel: their per-unit inputs
 are not here.
@@ -146,7 +146,7 @@ internal and are not in this release; the protocol and `e1-power-size.json`, cit
 - **Registered secondaries S3, S4 and S9.** Section 5 of the protocol registers eleven secondary analyses. The
   authors' outcomes record lists S3 (the F-5 metrics), S4 (metric-scale error) and S9 (the baseline's dense-frame
   score) as not reported, a deviation from the protocol. Omitting S3, S4 and S9 leaves the primary verdict
-  unchanged. Amendment A-N separately conditions a headline claim on S-N when either pipeline logs an NMS time-limit
+  unchanged. Amendment A-N separately conditions a headline claim on S-N when either reconstruction logs an NMS time-limit
   warning for any unit of that corpus. That is incomplete reporting, not an unshipped input.
 - **Printed and exact thresholds.** Section 6 of the protocol prints the size-calibrated DexYCB levels as 0.0180 and
   0.0380. The decisions used the full-precision values of `e1-power-size.json`, 0.017991... and 0.037981.... With

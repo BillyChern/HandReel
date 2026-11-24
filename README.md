@@ -144,7 +144,7 @@ coordinate convention. Your video's licence and attribution are yours to state.
 
 ## Results in the paper
 
-HandReel replaces only the reconstruction stage of DO AS I DO, the first of its three stages (reconstruction, retargeting to a robot hand, and physics). Every comparison below is with that stage.
+HandReel replaces only the reconstruction stage of DO AS I DO, the first of its three stages (reconstruction, retargeting to a robot hand, and physics). Every comparison with DO AS I DO below is with that stage.
 
 | Measured in the paper | DO AS I DO's reconstruction stage | HandReel | Ratio |
 |---|---|---|---|
