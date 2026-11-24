@@ -29,7 +29,7 @@
     <p class="affil"><span class="af"><sup>1</sup><a href="https://www.ri.cmu.edu/">Robotics Institute, Carnegie Mellon University</a>,</span><span class="af"><sup>2</sup><a href="https://intuition.dev/">Intuition</a></span></p>
     <p class="links"><span class="lbtn" role="link" aria-disabled="true" title="The arXiv link is coming soon"><svg class="ic-line" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M9 9l1 0"/><path d="M9 13l6 0"/><path d="M9 17l6 0"/></svg>arXiv (coming soon)</span> <a class="lbtn" href="#video"><svg class="ic-line" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4"/><path d="M3 8a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -8"/></svg>Video</a> <a class="lbtn" href="https://github.com/BillyChern/HandReel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a></p>
     <p class="subtitle">HandReel turns a video of a hand moving an object into one 3D mesh of the object and its position and rotation over time.</p>
-    <p class="subtitle-note">On 9 Ego4D segments, <span class="nobr">DO AS I DO</span>'s reconstruction stage restarted for every segment and took <strong>130&times;</strong> as long per segment as HandReel did in batches. On held-out HOI4D video, with the dataset's outline of the object in the first frame, HandReel's object-centre error was <strong>half</strong> of <span class="nobr">DO AS I DO</span>'s in the median segment.</p>
+    <p class="subtitle-note">On 9 Ego4D segments, <span class="nobr">DO AS I DO</span>'s reconstruction stage restarted for every segment and took <strong>130&times;</strong> as long per segment as HandReel did in batches. On held-out HOI4D video, with the dataset's outline of the object in the first frame, HandReel's object-centre error was <strong>half</strong> that of <span class="nobr">DO AS I DO</span>'s reconstruction stage in the median segment.</p>
   </div>
 
   <div class="wrap hero-viewer">
@@ -117,11 +117,11 @@
 <section class="block" id="comparison">
   <div class="wrap narrow">
     <h2>Comparison</h2>
-    <p>One selected DexYCB development clip, start to end: ground truth (green), DO AS I DO (orange) and HandReel (purple, estimated hand lighter), with each one's object-centre error over time below.</p>
+    <p>One selected DexYCB development clip, start to end: ground truth (green), DO AS I DO's reconstruction stage (orange) and HandReel (purple, estimated hand lighter), with each one's object-centre error over time below.</p>
   </div>
   <div class="wrap wide">
     <figure class="fig">
-      <img src="fig/fig3_strip.jpg" width="1520" height="639" alt="Six frames of one clip in three rows, ground truth, DO AS I DO and HandReel, each with the object outlined, above a plot of each one's object-centre error over time." loading="lazy">
+      <img src="fig/fig3_strip.jpg" width="1520" height="639" alt="Six frames of one clip in three rows, ground truth, DO AS I DO's reconstruction stage and HandReel, each with the object outlined, above a plot of each one's object-centre error over time." loading="lazy">
     </figure>
   </div>
 </section>
@@ -132,41 +132,43 @@
     <p>In our experiments on Ego4D, DO AS I DO's reconstruction stage took about 30&times; as long as HandReel when both processed one segment at a time, and 130&times; as long per segment when it restarted for every segment while HandReel processed segments in batches.</p>
     <figure class="fig chart">
 
-<svg class="plot plot-wide" viewBox="0 0 720 178" role="img" aria-labelledby="time-plot-t">
-<title id="time-plot-t">Reconstruction time per Ego4D segment, in seconds, as bars for DO AS I DO's reconstruction stage and for HandReel: both one segment at a time; and DO AS I DO restarting for every segment against HandReel processing segments in batches.</title>
+<svg class="plot plot-wide" viewBox="0 0 720 198" role="img" aria-labelledby="time-plot-t">
+<title id="time-plot-t">Reconstruction time per Ego4D segment, in seconds, as bars for DO AS I DO's reconstruction stage and for HandReel: both one segment at a time; and DO AS I DO's reconstruction stage restarting for every segment against HandReel processing segments in batches.</title>
 <text x="0" y="16" class="pl-group">One segment at a time (20 segments)</text>
-<text x="86" y="44" text-anchor="end" class="pl-lab">DO AS I DO</text>
-<rect x="96" y="28" width="476.2" height="22" class="pl-bar-them"/>
-<text x="580.2" y="44" class="pl-val">2,000 s</text>
-<text x="86" y="72" text-anchor="end" class="pl-lab">HandReel</text>
-<rect x="96" y="56" width="15.7" height="22" class="pl-bar-ours"/>
-<text x="119.7" y="72" class="pl-val">66 s</text>
-<text x="0" y="108" class="pl-group">DO AS I DO restarts for every segment (9 of 19 attempted segments that both completed)</text>
-<text x="86" y="136" text-anchor="end" class="pl-lab">DO AS I DO</text>
-<rect x="96" y="120" width="500.0" height="22" class="pl-bar-them"/>
-<text x="604.0" y="136" class="pl-val">2,100 s</text>
-<text x="86" y="164" text-anchor="end" class="pl-lab">HandReel</text>
-<rect x="96" y="148" width="4.0" height="22" class="pl-bar-ours"/>
-<text x="108.0" y="164" class="pl-val">17 s per segment, in batches</text>
+<text x="204" y="44" text-anchor="end" class="pl-lab">DO AS I DO's reconstruction</text>
+<rect x="214" y="28" width="417.1" height="22" class="pl-bar-them"/>
+<text x="639.1" y="44" class="pl-val">2,000 s</text>
+<text x="204" y="72" text-anchor="end" class="pl-lab">HandReel</text>
+<rect x="214" y="56" width="13.8" height="22" class="pl-bar-ours"/>
+<text x="235.8" y="72" class="pl-val">66 s</text>
+<text x="0" y="108" class="pl-group">DO AS I DO's reconstruction stage restarts for every segment</text>
+<text x="0" y="128" class="pl-group">(9 of 19 attempted segments that both completed)</text>
+<text x="204" y="156" text-anchor="end" class="pl-lab">DO AS I DO's reconstruction</text>
+<rect x="214" y="140" width="438.0" height="22" class="pl-bar-them"/>
+<text x="660.0" y="156" class="pl-val">2,100 s</text>
+<text x="204" y="184" text-anchor="end" class="pl-lab">HandReel</text>
+<rect x="214" y="168" width="3.5" height="22" class="pl-bar-ours"/>
+<text x="225.5" y="184" class="pl-val">17 s per segment, in batches</text>
 </svg>
-<svg class="plot plot-narrow" viewBox="0 0 300 248" role="img" aria-labelledby="time-plot-n">
-<title id="time-plot-n">Reconstruction time per Ego4D segment, in seconds, as bars for DO AS I DO's reconstruction stage and for HandReel: both one segment at a time; and DO AS I DO restarting for every segment against HandReel processing segments in batches.</title>
-<text x="0" y="14" class="pl-group">One segment at a time (20 segments)</text>
-<text x="0" y="34" class="pl-lab">DO AS I DO</text>
-<rect x="0" y="40" width="211.4" height="18" class="pl-bar-them"/>
-<text x="217.4" y="54" class="pl-val">2,000 s</text>
-<text x="0" y="74" class="pl-lab">HandReel</text>
-<rect x="0" y="80" width="7.0" height="18" class="pl-bar-ours"/>
-<text x="13.0" y="94" class="pl-val">66 s</text>
-<text x="0" y="120" class="pl-group">DO AS I DO restarts for every segment</text>
-<text x="0" y="138" class="pl-group">(9 of 19 attempted segments</text>
-<text x="0" y="156" class="pl-group">that both completed)</text>
-<text x="0" y="176" class="pl-lab">DO AS I DO</text>
-<rect x="0" y="182" width="222.0" height="18" class="pl-bar-them"/>
-<text x="228.0" y="196" class="pl-val">2,100 s</text>
-<text x="0" y="216" class="pl-lab">HandReel</text>
-<rect x="0" y="222" width="2.0" height="18" class="pl-bar-ours"/>
-<text x="8.0" y="236" class="pl-val">17 s per segment, in batches</text>
+<svg class="plot plot-narrow" viewBox="0 0 300 267" role="img" aria-labelledby="time-plot-n">
+<title id="time-plot-n">Reconstruction time per Ego4D segment, in seconds, as bars for DO AS I DO's reconstruction stage and for HandReel: both one segment at a time; and DO AS I DO's reconstruction stage restarting for every segment against HandReel processing segments in batches.</title>
+<text x="0" y="15" class="pl-group">One segment at a time (20 segments)</text>
+<text x="0" y="35" class="pl-lab">DO AS I DO's reconstruction</text>
+<rect x="0" y="41" width="211.4" height="18" class="pl-bar-them"/>
+<text x="217.4" y="55" class="pl-val">2,000 s</text>
+<text x="0" y="75" class="pl-lab">HandReel</text>
+<rect x="0" y="81" width="7.0" height="18" class="pl-bar-ours"/>
+<text x="13.0" y="95" class="pl-val">66 s</text>
+<text x="0" y="121" class="pl-group">DO AS I DO's reconstruction stage</text>
+<text x="0" y="139" class="pl-group">restarts for every segment</text>
+<text x="0" y="157" class="pl-group">(9 of 19 attempted segments</text>
+<text x="0" y="175" class="pl-group">that both completed)</text>
+<text x="0" y="195" class="pl-lab">DO AS I DO's reconstruction</text>
+<rect x="0" y="201" width="222.0" height="18" class="pl-bar-them"/>
+<text x="228.0" y="215" class="pl-val">2,100 s</text>
+<text x="0" y="235" class="pl-lab">HandReel</text>
+<rect x="0" y="241" width="2.0" height="18" class="pl-bar-ours"/>
+<text x="8.0" y="255" class="pl-val">17 s per segment, in batches</text>
 </svg>
 
       <figcaption>Seconds per Ego4D segment on one H100 GPU. Ego4D has no ground-truth object poses, so it measures speed only. The paper gives the full protocol.</figcaption>
