@@ -10,8 +10,10 @@ under its own terms; Ego4D identifiers are not redistributed here.
 
 ## Dataset frames in the README figure
 
-`docs/assets/gallery.jpg` is the only file of this release that shows dataset frames. It is not under the Apache-2.0
-licence of the code: its frames come from HOI4D and DexYCB, both CC BY-NC 4.0 (non-commercial use, attribution).
+`docs/assets/gallery.jpg` and `docs/assets/teaser.gif` are the only files of this release that show dataset frames. Neither
+is under the Apache-2.0 licence of the code. `docs/assets/teaser.gif`, the README animation, is a 17 s excerpt of the
+project-page video; its first 2.6 s show one DexYCB development clip (CC BY-NC 4.0, non-commercial use, attribution) next
+to HandReel's reconstruction, and the rest shows charts. For `docs/assets/gallery.jpg`: its frames come from HOI4D and DexYCB, both CC BY-NC 4.0 (non-commercial use, attribution).
 It shows six development clips, one frame per tile: five DexYCB frames and one HOI4D frame.
 
 - HOI4D (Liu et al., 2022, https://hoi4d.github.io/): one frame of one clip. CC BY-NC 4.0, as the footer of the

@@ -5,21 +5,25 @@
 
 <sup>1</sup>[Robotics Institute, Carnegie Mellon University](https://www.ri.cmu.edu/) &nbsp;&nbsp; <sup>2</sup>[Intuition](https://intuition.dev/)
 
-<a href='https://shichen.world/HandReel/'><img src='https://img.shields.io/badge/Project-Page-blue' alt='Project page'></a>
-<img src='https://img.shields.io/badge/arXiv-coming_soon-b31b1b' alt='arXiv: coming soon'>
+<a href='https://shichen.world/HandReel/'><img src='https://img.shields.io/badge/Project_Page-HandReel-1f6feb?style=for-the-badge&logo=googlechrome&logoColor=white' alt='Project page' height='40'></a>&nbsp;
+<a href='https://shichen.world/HandReel/#video'><img src='https://img.shields.io/badge/Video-5_min-d1242f?style=for-the-badge&logo=airplayvideo&logoColor=white' alt='Video (5 min)' height='40'></a>&nbsp;
+<img src='https://img.shields.io/badge/arXiv-coming_soon-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white' alt='arXiv: coming soon' height='40'>
+
 <a href='LICENSE'><img src='https://img.shields.io/badge/License-Apache_2.0-blue' alt='License: Apache 2.0'></a>
 
 </div>
+
+<p align='center'>
+<a href='https://shichen.world/HandReel/#video'><img src='docs/assets/teaser.gif' alt="Excerpt of the HandReel video: HandReel's 3D reconstruction of a hand-held clamp next to the input video, then the Ego4D reconstruction time per window, 2,100 s for DO AS I DO's reconstruction stage against 17 s for HandReel's share of a batch (130x), then the summary: 130x batched, 30x one window at a time, about half the error on held-out HOI4D" width='100%'></a>
+<br>
+<sub><b>Click the animation for the full narrated video (about 5 min) on the project page.</b> Silent 17 s excerpt of that video: HandReel's 3D reconstruction of a DexYCB development clip, the Ego4D reconstruction time per window (DO AS I DO's reconstruction stage restarts for every window; HandReel's time is its share of a batched run), and the summary. Frames from DexYCB (CC BY-NC 4.0); see <a href='DATA_NOTICES.md'><code>DATA_NOTICES.md</code></a>.</sub>
+</p>
 
 **TL;DR**: HandReel recovers a hand-held object's 3D mesh and 6-DoF motion from monocular video, 30-130x faster than DO AS I DO's reconstruction stage (30x one window at a time, 130x batched), with half its median object-centre error on held-out HOI4D.
 
 ## News
 
 - **2026-11-20**: Code released.
-
-![Six clips from DexYCB and HOI4D with HandReel's object mesh outlined in purple and the estimated hand in light purple](docs/assets/gallery.jpg)
-
-<sub>HandReel takes a video of a hand moving an object and returns one 3D mesh of the object and its position and rotation over time, together with the hand. Outlines: the reconstructed object (purple) and the estimated hand (light purple), drawn over one frame of each of six clips. Frames from HOI4D and DexYCB (CC BY-NC 4.0); see [`DATA_NOTICES.md`](DATA_NOTICES.md).</sub>
 
 ## Overview
 
@@ -234,7 +238,7 @@ the physics code on MuJoCo and MuJoCo-Warp; `THIRD_PARTY_LICENSES.md` credits ea
 ## License
 
 - The code is Apache-2.0 (`LICENSE`, `NOTICE`); `packages/alongray` and `packages/nullaudit` carry their own.
-- Derived data (`reproduce/heldout/`, `release/reference/`, `docs/assets/gallery.jpg`) and the default models are
+- Derived data (`reproduce/heldout/`, `release/reference/`, `docs/assets/gallery.jpg`, `docs/assets/teaser.gif`) and the default models are
   non-commercial where their upstream terms say so; as shipped, the pipeline and what it produces are for
   non-commercial research only. No weights, MANO files or datasets ship.
 - Details: [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md), [`DATA_NOTICES.md`](DATA_NOTICES.md) and

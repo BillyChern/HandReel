@@ -1,8 +1,8 @@
 # Licensing notes
 
 The full licence notes that the README summarises in its "Licence" section (moved here from the README on
-2026-11-21). Paths are relative to the repository root. The README picture, `docs/assets/gallery.jpg`, holds dataset
-frames under CC BY-NC 4.0, not Apache-2.0; `DATA_NOTICES.md` gives its terms.
+2026-11-21). Paths are relative to the repository root. The README animation, `docs/assets/teaser.gif`, and the picture
+`docs/assets/gallery.jpg` hold dataset frames under CC BY-NC 4.0, not Apache-2.0; `DATA_NOTICES.md` gives its terms.
 
 The code is Apache-2.0 (`LICENSE`, `NOTICE`). `packages/alongray` and `packages/nullaudit` carry their own `LICENSE` and
 `NOTICE`. **The derived data files are not Apache-2.0**: `reproduce/heldout/` (unit IDs derived from HOI4D and DexYCB, CC
