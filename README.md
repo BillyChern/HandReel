@@ -144,18 +144,20 @@ coordinate convention. Your video's licence and attribution are yours to state.
 
 ## Results in the paper
 
-| Measured in the paper | DO AS I DO | HandReel | Ratio |
+HandReel replaces only the reconstruction stage of DO AS I DO, the first of its three stages (reconstruction, retargeting to a robot hand, and physics). Every comparison below is with that stage.
+
+| Measured in the paper | DO AS I DO's reconstruction stage | HandReel | Ratio |
 |---|---|---|---|
 | Reconstruction time per window, both one window at a time (Ego4D, 20 windows) | about 2,000 s | 66 s | about 30x |
 | Reconstruction time per window, baseline restarting for every window against HandReel's batched runs (Ego4D, 9 windows) | 2,100 s | 17 s per-window share | 130x |
-| Object-centre error, HandReel over DO AS I DO, held-out HOI4D (58 windows) | | | 0.50 |
-| Object-centre error, HandReel over DO AS I DO, held-out DexYCB | | | 0.85 |
+| Object-centre error, HandReel over DO AS I DO's reconstruction stage, held-out HOI4D (58 windows) | | | 0.50 |
+| Object-centre error, HandReel over DO AS I DO's reconstruction stage, held-out DexYCB | | | 0.85 |
 
 Ego4D has no ground-truth object poses, so the two timing rows measure speed only. The DexYCB error ratio is
 less certain than the HOI4D one (see the linked page). HandReel is not the most
 accurate method in the paper's comparisons: on HO3D-v3, five published methods (HOLD, MagicHOI, AGILE, Open-CHOIR
 and 4D-HOF) report a lower Chamfer distance than the paper measured for HandReel, and on the 13 DexYCB views of
-objects without symmetry HandReel's rotation error was higher than DO AS I DO's.
+objects without symmetry HandReel's rotation error was higher than that of DO AS I DO's reconstruction stage.
 
 [`docs/results.md`](docs/results.md) states each result in full, with its conditions, and
 [`docs/paper_exhibits.md`](docs/paper_exhibits.md) maps each number to its table, figure or section. This release

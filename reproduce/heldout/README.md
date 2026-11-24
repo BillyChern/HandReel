@@ -14,7 +14,7 @@ registered: the freeze commit and its three tree ids that amendment A-F and the 
 authors' internal repository, not of this release's history), the file hashes, and the labels and branch names of
 internal records the rules cite (such as M341, s255, U-1 to U-8 or e1/unseal-prep), which are not released.
 
-This folder holds what this release includes from the paper's held-out test against DO AS I DO (Table 1; Secs. 5.1
+This folder holds what this release includes from the paper's held-out test against DO AS I DO's reconstruction stage (Table 1; Secs. 5.1
 and 5.2 of the submitted main paper), without dataset media or per-unit results: the registered protocol, the unit-ID
 lists, the thresholds that the analysis used and the QC rule's constants. **This release contains no per-unit error derived
 from HOI4D or DexYCB ground truth.** Regenerate the errors after acquiring the datasets
@@ -27,13 +27,13 @@ pose, per-unit error or model output.
 | `protocol/` | the pre-registration (2026-10-01) and every amendment its index lists (disk floor, no disk guards, A-F freeze, A-U, A-N, A-T, A-T2, A-V, A-W), and the freeze manifest that A-F records; edited for public release (above) | the authors' registered documents |
 | `units_hoi4d_72.json` | the 72 HOI4D test windows: unit and clip IDs, HOI4D sequence path, category, instance, start and stop frame, frame count, stride, cluster and stratum | the registered draw |
 | `units_dexycb_s08_108.json` | the 108 DexYCB subject-08 views (36 sequences x 3 cameras): unit and clip IDs, subject, sequence, camera serial, frame count, stride, cluster; and the six views the draw replaced | the registered draw |
-| `regenerate_unit_errors.py` | writes `unit_errors_est.json` (not shipped; regenerate after acquiring the datasets): one row per assigned unit (180) with its corpus, cluster and stratum from the unit lists, the two units amendments A-T2 and A-W remove, and, from your own results, whether it ran (DO AS I DO began an attempt on it; amendment A-V) and, for HandReel (estimated intrinsics) and DO AS I DO, whether it delivered and its mean unaligned object-centre error in mm. It also gives `processed_frames`, `complete_centres` (the registered fill of a frame without a usable pose) and `unit_centre_error_mm`, an averaging helper for completed rows that refuses a missing or repeated frame; it is not the registered scorer, which is not released | this release |
+| `regenerate_unit_errors.py` | writes `unit_errors_est.json` (not shipped; regenerate after acquiring the datasets): one row per assigned unit (180) with its corpus, cluster and stratum from the unit lists, the two units amendments A-T2 and A-W remove, and, from your own results, whether it ran (DO AS I DO's reconstruction stage began an attempt on it; amendment A-V) and, for HandReel (estimated intrinsics) and DO AS I DO's reconstruction stage, whether it delivered and its mean unaligned object-centre error in mm. It also gives `processed_frames`, `complete_centres` (the registered fill of a frame without a usable pose) and `unit_centre_error_mm`, an averaging helper for completed rows that refuses a missing or repeated frame; it is not the registered scorer, which is not released | this release |
 | `e1-power-size.json` | the size-calibrated one-sided thresholds per corpus (and the simulation rows they came from), read by `run/study/e1_stats.load_thresholds` | the registered power script's size-only run, byte for byte |
 | `qc_rule_constants.json` | the constants of the QC acceptance rule that HandReel ran with: five feature names, six logistic weights, the feature means and standard deviations, tau and the conformal threshold, unrounded, with the fit's counts and settings; a version-1 `fastdo.qc` rule file | the registered rule file (sha256 prefix `e564b52e92d3`), reduced to its constants by `derive_qc_rule_constants.py` (below) |
 
 ## Recompute the held-out values of Table 1
 
-First acquire HOI4D and DexYCB under their terms, run both pipelines on the units of the two lists, score each
+First acquire HOI4D and DexYCB under their terms, run both reconstructions on the units of the two lists, score each
 unit's mean unaligned object-centre error over its processed frames with ground truth (Sec. 5.1) after completing
 each method's poses by the registered rule (the script's docstring states it; averaging only the frames a method
 delivers gives a different number), and write one
@@ -50,18 +50,18 @@ it (`.gitignore` lists it). Without it, the second command prints `skipped: ...`
 
 With the file, the script prints six aggregate values per corpus, each beside `matches the reference` or
 `DIFFERS from the reference`, and exits 0 only if every value matches. On a file in which no unit of a corpus was
-delivered by both pipelines, three of the six (the complete-case ratio, the within-50 mm counts and the medians) do
+delivered by both reconstructions, three of the six (the complete-case ratio, the within-50 mm counts and the medians) do
 not exist and print as `unavailable`; an interval end past the range of a float prints as `above the float range`. The reference values are aggregate values of
 the authors' registered analysis. The submitted main paper prints four of the six:
 
 | script key | what it is | where the submitted paper prints it |
 |---|---|---|
 | `analysed` | analysed units over assigned units: 58/72 on HOI4D, 85/108 on DexYCB | Sec. 5.1 |
-| `delivered` | units that HandReel, DO AS I DO and both delivered: 58/49/49 on HOI4D, 58/69/48 on DexYCB | Sec. 5.2; Table 1, caption |
+| `delivered` | units that HandReel, DO AS I DO's reconstruction stage and both delivered: 58/49/49 on HOI4D, 58/69/48 on DexYCB | Sec. 5.2; Table 1, caption |
 | `mitt` | the exponentiated median of the failure-coded paired log error ratios, with its two-sided 95% bootstrap interval, where a failure to deliver counts as an error and a joint failure as a tie, and the verdict: 0.50 [0.33, 0.63] on HOI4D, 0.85 [0.58, 1.00] on DexYCB, both non-inferior | Table 1 |
-| `median_mm` | the median error in mm over the units that both pipelines delivered, HandReel/DO AS I DO: 56.8/101.3 on HOI4D, 76.6/112.5 on DexYCB | Table 1 |
-| `complete_case` | the error ratio and its interval on the units that both pipelines delivered, with estimated camera intrinsics, on 49 HOI4D windows and 48 DexYCB views | not in the main paper; the supplement's detailed table of the held-out test reports it |
-| `within_50mm` | among units both pipelines delivered, the count with mean centre error at most 50 mm, separately for each pipeline | not in the submitted paper; the script keeps the registered analysis's counts as its reference |
+| `median_mm` | the median error in mm over the units that both reconstructions delivered, HandReel/DO AS I DO's reconstruction stage: 56.8/101.3 on HOI4D, 76.6/112.5 on DexYCB | Table 1 |
+| `complete_case` | the error ratio and its interval on the units that both reconstructions delivered, with estimated camera intrinsics, on 49 HOI4D windows and 48 DexYCB views | not in the main paper; the supplement's detailed table of the held-out test reports it |
+| `within_50mm` | among units both reconstructions delivered, the count with mean centre error at most 50 mm, separately for each reconstruction | not in the submitted paper; the script keeps the registered analysis's counts as its reference |
 
 Table 1 marks the DexYCB rows: that verdict is not robust if joint failures count against HandReel, and the authors
 partly used this subject in development. The script prints `NI` for DexYCB and does not compute that mark.
@@ -73,12 +73,12 @@ registered ones.
 The analysis is `run/study/e1_stats.summarise`, unchanged (median paired log-ratio with the pre-declared failure
 values, stratified cluster bootstrap with B = 10,000 and seed 1, Holm over the two corpora on the calibrated
 thresholds), and `run/paper/e1_table.py` formats the numbers. It runs on the analysed units: the units that ran,
-without the two DexYCB units that amendments A-T2 and A-W remove from both pipelines (INFRA-UNRESOLVED; `removed`
+without the two DexYCB units that amendments A-T2 and A-W remove from both reconstructions (INFRA-UNRESOLVED; `removed`
 in the score file). On HOI4D 58 of 72 assigned units ran and 58 are analysed; on DexYCB 87 of 108 ran (80.56%) and
 85 are analysed after the two removals. Before reporting the primary results for 58 HOI4D windows and 85 DexYCB
-views, the script checks that DO AS I DO started at least 80% of the assigned units in each corpus, counting both
+views, the script checks that DO AS I DO's reconstruction stage started at least 80% of the assigned units in each corpus, counting both
 excluded DexYCB timeouts as starts. If you call summarise directly, check completeness against the full assignment
-and pass only runs with no recorded removal to the function. `--json <file>` also writes the values. In this study a unit ran when DO AS I DO
+and pass only runs with no recorded removal to the function. `--json <file>` also writes the values. In this study a unit ran when DO AS I DO's reconstruction stage
 began an attempt on it (amendment A-V): the 35 units on which the baseline refused to start count as not run,
 although HandReel processed them. The reference values that the submitted
 paper prints are those of its Table 1 and Secs. 5.1 and 5.2 (recheck them against the published version).
